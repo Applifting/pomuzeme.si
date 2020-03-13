@@ -1,4 +1,62 @@
 @import 'bulma/bulma';
 @import 'bulma-divider/dist/css/bulma-divider';
 @import '_layout';
-@import 'header';
+
+section.hero {
+  margin-top: 92px;
+
+  color: #141e32;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #FFFBF2;
+
+  * {
+    text-align: left;
+  }
+
+  .title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 120%;
+
+    margin-bottom: 40px;
+  }
+
+  #virus {
+    position: absolute;
+    top: 0px;
+  }
+
+  .subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: normal;
+    font-size: 20px;
+  }
+
+  #chci-pomahat {
+    width: 280px;
+    height: 64px;
+    border-radius: 100px;
+
+    margin-top: 50px;
+
+    font-family: 'Montserrat', sans-serif;
+    background-color: #64cce3;
+
+    text-transform: uppercase;
+
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  #organizace {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+
+    .logo {
+      width: 100px;
+    }
+  }
+}
+
+section.introduction {
+  background: #FBF2D9;
+}
