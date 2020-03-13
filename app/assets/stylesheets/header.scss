@@ -1,19 +1,49 @@
-header {
-  font-family: 'Gilroy-Light', sans-serif;
+section.hero {
   color: #141e32;
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #FFFBF2;
+
+  * {
+    text-align: left;
+  }
 
   .title {
-    padding-top: 100px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 120%;
+
+    margin-bottom: 40px;
+  }
+
+  #virus {
+    position: absolute;
+    top: 0px;
   }
 
   .subtitle {
-    padding-top: 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: normal;
+    font-size: 20px;
   }
 
   #chci-pomahat {
-    margin-top: 105px;
-    padding-left: 50px;
-    padding-right: 50px;
-    font-family: 'Roboto', sans-serif;
+    width: 280px;
+    height: 64px;
+    border-radius: 100px;
+
+    margin-top: 50px;
+
+    font-family: 'Montserrat', sans-serif;
+    background-color: #64cce3;
+
+    text-transform: uppercase;
+  }
+
+  #organizace {
+    font-family: 'Source Sans Pro', sans-serif;
+
+    .logo {
+      width: 100px;
+    }
   }
 }

@@ -1,13 +1,37 @@
-<header>
-  <div class="container has-text-centered">
-    <h1 class="title is-size-1 has-text-weight-medium">
-      Koronavirus: Spolu to dáme
-    </h1>
-    <p class="subtitle">
-      Dobrovolníky dostaneme tam, kde jsou třeba.
-    </p>
-    <button id="chci-pomahat" class="button is-link">
-      Chci pomáhat
-    </button>
+<section class="hero">
+  <div class="hero-body container">
+    <div class="columns">
+      <div class="column has-text-centered">
+        <h1 class="title">
+          <div style="color: #d48d22">Koronavirus?!</div>
+          Spolu to dáme
+          <img id="virus" src="<%= asset_path "virus.svg" %>" />
+        </h1>
+        <h2 class="subtitle">
+          Dobrovolníky dostaneme tam, kde jsou třeba.
+        </h2>
+        <button id="chci-pomahat" class="button is-link is-pulled-left">
+          Chci pomáhat
+        </button>
+      </div>
+      <div class="column has-text-centered">
+        <img src="<%= asset_path "hero.svg" %>" />
+      </div>
+    </div>
   </div>
-</header>
+  <div id="organizace" class="hero-body container">
+    <div class="columns is-vcentered">
+      <div class="column is-narrow">Organizace, které pomáhají</div>
+      <div class="column logo"><img src="<%= asset_path "org.svg" %>" /></div>
+      <div class="column logo"><img src="<%= asset_path "org.svg" %>" /></div>
+      <div class="column logo"><img src="<%= asset_path "org.svg" %>" /></div>
+      <div class="column logo"><img src="<%= asset_path "org.svg" %>" /></div>
+      <div class="column logo"><img src="<%= asset_path "org.svg" %>" /></div>
+      <div class="column is-narrow">a 54 dalších…</div>
+    </div>
+  </div>
+</section>
+
+<section class="introduction">
+
+</section>
