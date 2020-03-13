@@ -6,5 +6,92 @@
     <p class="subtitle">
       My first website with <strong>Bulma</strong>!
     </p>
+
+    <button class="button is-link modal-button" data-target="registration" aria-haspopup="true">
+      Chci pomáhat
+    </button>
   </div>
 </section>
+
+<div id="registration" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <form id="registration-form">
+        <div class="field">
+          <label class="label">Jméno</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="Jméno">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Přijmení</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="Přijmení">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Telefonní číslo</label>
+          <div class="field-body">
+            <div class="field is-expanded">
+              <div class="field has-addons">
+                <p class="control">
+                  <a class="button is-static">
+                    +420
+                  </a>
+                </p>
+                <p class="control is-expanded">
+                  <input class="input" type="tel" placeholder="Telefonní číslo">
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Adresa a číslo popisné</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="Adresa a číslo popisné">
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-body">
+            <div class="field">
+              <label class="label">Město</label>
+              <p class="control is-expanded">
+                <input class="input" type="text" placeholder="Město">
+              </p>
+            </div>
+            <div class="field">
+              <label class="label">PSČ</label>
+              <p class="control is-expanded">
+                <input class="input is-success" type="email" placeholder="PSČ">
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input type="checkbox">
+            Souhlasím se zpracováním osobních údajů
+          </label>
+        </div>
+
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-link">Zaregistrovat se</button>
+          </div>
+        </div>
+      </form>
+    </section>
+    <footer class="modal-card-foot">
+    </footer>
+  </div>
+</div>
