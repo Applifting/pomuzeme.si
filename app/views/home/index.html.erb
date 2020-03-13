@@ -10,6 +10,9 @@
     <button class="button is-link modal-button" data-target="registration" aria-haspopup="true">
       Chci pomáhat
     </button>
+
+    <%= link_to 'set', test_set_home_index_path, method: :post, remote: :true %>
+    <%= link_to 'test', test_post_home_index_path, method: :post, remote: :true %>
   </div>
 </section>
 
@@ -20,23 +23,23 @@
       <button class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
-      <form id="registration-form">
+      <%= form_for Volunteer.new, id: 'registration-form', url: register_volunteer_path, remote: true do |form| %>
         <div class="field">
-          <label class="label">Jméno</label>
+          <%= form.label :first_name, class: 'label' %>
           <div class="control">
-            <input class="input" type="text" placeholder="Jméno">
+            <%= form.text_field :first_name, class: 'input', placeholder: Volunteer.human_attribute_name(:first_name), required: true %>
           </div>
         </div>
 
         <div class="field">
-          <label class="label">Přijmení</label>
+          <%= form.label :last_name, class: 'label' %>
           <div class="control">
-            <input class="input" type="text" placeholder="Přijmení">
+            <%= form.text_field :last_name, class: 'input', placeholder: Volunteer.human_attribute_name(:last_name), required: true %>
           </div>
         </div>
 
         <div class="field">
-          <label class="label">Telefonní číslo</label>
+          <%= form.label :phone, class: 'label' %>
           <div class="field-body">
             <div class="field is-expanded">
               <div class="field has-addons">
@@ -46,7 +49,7 @@
                   </a>
                 </p>
                 <p class="control is-expanded">
-                  <input class="input" type="tel" placeholder="Telefonní číslo">
+                  <%= form.telephone_field :phone, class: 'input', placeholder: Volunteer.human_attribute_name(:phone), required: true %>
                 </p>
               </div>
             </div>
@@ -54,24 +57,25 @@
         </div>
 
         <div class="field">
-          <label class="label">Adresa a číslo popisné</label>
+          <%= form.label :street, class: 'label' %>
           <div class="control">
-            <input class="input" type="text" placeholder="Adresa a číslo popisné">
+            <%= form.telephone_field :street, class: 'input', placeholder: Volunteer.human_attribute_name(:street), required: true %>
           </div>
         </div>
 
         <div class="field">
           <div class="field-body">
             <div class="field">
-              <label class="label">Město</label>
+              <%= form.label :city, class: 'label' %>
               <p class="control is-expanded">
-                <input class="input" type="text" placeholder="Město">
+                <%= form.text_field :city, class: 'input', placeholder: Volunteer.human_attribute_name(:city), required: true %>
+
               </p>
             </div>
             <div class="field">
-              <label class="label">PSČ</label>
+              <%= form.label :zipcode, class: 'label' %>
               <p class="control is-expanded">
-                <input class="input is-success" type="email" placeholder="PSČ">
+                <%= form.text_field :zipcode, class: 'input', placeholder: Volunteer.human_attribute_name(:zipcode), required: true %>
               </p>
             </div>
           </div>
@@ -80,16 +84,17 @@
         <div class="field">
           <label class="checkbox">
             <input type="checkbox">
+
             Souhlasím se zpracováním osobních údajů
           </label>
         </div>
 
         <div class="field is-grouped">
           <div class="control">
-            <button class="button is-link">Zaregistrovat se</button>
+            <%= form.submit 'Zaregistrovat se', class: 'button is-link' %>
           </div>
         </div>
-      </form>
+      <% end %>
     </section>
     <footer class="modal-card-foot">
     </footer>
