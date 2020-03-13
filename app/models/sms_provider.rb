@@ -3,7 +3,7 @@ class SmsProvider
   TWILIO_SENDER_ALPHANUMERIC = 'Pomuzeme.si'.freeze
 
   def initialize
-    unless ENV['SMS_MOCK']
+    unless ENV['SMS_MOCK'] == 'true'
       @client = Twilio::REST::Client.new(ENV['TWILIO_SID'], ENV['TWILIO_TOKEN'])
     end
   end
