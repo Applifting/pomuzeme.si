@@ -1,0 +1,11 @@
+stages:
+- deploy
+
+deploy:
+  stage: deploy
+  image: ruby:2.6
+  only:
+    - master
+  script:
+  - gem install dpl
+  - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY --skip_cleanup
