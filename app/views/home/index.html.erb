@@ -1,24 +1,115 @@
-<section class="section">
-  <div class="container">
-    <h1 class="title">
-      Hello World
-    </h1>
-    <p class="subtitle">
-      My first website with <strong>Bulma</strong>!
-    </p>
-
-    <button class="button is-link modal-button" data-target="registration" aria-haspopup="true">
-      Chci pomáhat
-    </button>
-
-    <button class="button is-link modal-button" data-target="confirmation" aria-haspopup="true">
-      Potvrdit
-    </button>
-
-    <%= link_to 'set', test_set_home_index_path, method: :post, remote: :true %>
-    <%= link_to 'test', test_post_home_index_path, method: :post, remote: :true %>
+<section class="hero">
+  <div class="hero-body container">
+    <div class="columns">
+      <div class="column has-text-centered">
+        <h1 class="title">
+          <div style="color: #d48d22">Koronavirus?!</div>
+          Spolu to dáme
+          <img id="virus" src="<%= asset_path "virus.svg" %>" />
+        </h1>
+        <h2 class="subtitle">
+          Dobrovolníky dostaneme tam, kde jsou třeba.
+        </h2>
+        <button id="chci-pomahat" class="button is-link is-pulled-left">
+          Chci pomáhat
+        </button>
+      </div>
+      <div class="column has-text-centered">
+        <img src="<%= asset_path "hero.svg" %>" />
+      </div>
+    </div>
   </div>
+  </header>
+
+  <div id="organizace" class="hero-body container">
+    <div class="columns is-vcentered">
+      <div class="column is-narrow">Organizace, které pomáhají</div>
+      <div class="column logo"><img src="<%= asset_path "org.svg" %>" /></div>
+      <div class="column logo"><img src="<%= asset_path "org.svg" %>" /></div>
+      <div class="column logo"><img src="<%= asset_path "org.svg" %>" /></div>
+      <div class="column logo"><img src="<%= asset_path "org.svg" %>" /></div>
+      <div class="column logo"><img src="<%= asset_path "org.svg" %>" /></div>
+      <div class="column is-narrow">a 54 dalších…</div>
+    </div>
+  </div>
+  <img id="divider" src="<%= asset_path "divider.svg" %>" />
 </section>
+
+<section class="introduction">
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-one-third">
+          <h4 class="title body is-4">Proč Pomůžeme.si?</h4>
+          <p class="subtitle body is-6">
+            Spojujeme ty, kteří kvůli koronaviru potřebují pomoc, s těmi, kdo ji nabízí.
+            Spolupracujeme s nejrůznějšími organizacemi, které sdružují dobrovolníky.
+            A zároveň je sami hledáme. Pomoct můžete i vy.
+          </p>
+        </div>
+        <div class="column is-one-third">
+          <img src="<%= asset_path "illustration.svg" %>" />
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section class="introduction guide">
+  <img class="divider" id="divider" src="<%= asset_path "divider.svg" %>" />
+  <section class="section">
+    <div class="container has-text-centered">
+      <h4 class="title body is-4">Jak to celé funguje?</h4>
+      <div class="columns is-centered is-vcentered">
+        <div class="column">
+        </div>
+        <div class="column is-one-quarter">
+          <img src="<%= asset_path "hiw-laptop.svg" %>" style="vertical-align: middle;"/>
+          <p class="subtitle body is-6">
+            Zaregistrujete se jako dobrovolník
+          </p>
+        </div>
+        <div class="column" style="vertical-align: middle;">
+          <img src="<%= asset_path "arrow.svg" %>" />
+        </div>
+        <div class="column is-one-quarter">
+          <img src="<%= asset_path "hiw-phone.svg" %>" />
+          <p class="subtitle body is-6">
+            Budou vás kontaktovat dobročinné organizace z okolí
+          </p>
+        </div>
+        <div class="column">
+          <img src="<%= asset_path "arrow.svg" %>" />
+        </div>
+        <div class="column is-one-quarter">
+          <img src="<%= asset_path "hiw-handshake.svg" %>" />
+          <p class="subtitle body is-6">
+            Společně se domluvíte na konkrétní pomoci potřebným
+          </p>
+        </div>
+        <div class="column">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container has-text-centered">
+      <button id="chci-pomahat-2" class="button is-link">
+        Chci pomáhat
+      </button>
+    </div>
+    <section>
+
+      <section class="section">
+        <div class="container has-text-centered">
+          <h4 class="title body is-4" style="color: #50350D; font-size: 22px;">Jste dobročinná organizace a chcete se připojit k naší iniciativě?</h4>
+          <p class="subtitle body is-6">
+            Kontaktujte nás na e-mailu <a href = "mailto: pomuzemesi@applifting.cz">pomuzemesi@applifting.cz</a>
+          </p>
+        </div>
+      </section>
+    </section>
 
 <div id="registration" class="modal">
   <div class="modal-background"></div>

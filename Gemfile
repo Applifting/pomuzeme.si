@@ -30,6 +30,17 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'httparty'
 
+# cloudflare - heroku integration according to https://www.viget.com/articles/heroku-cloudflare-the-right-way/
+gem 'rack-attack'
+gem 'cloudflare-rails'
+
+gem 'newrelic_rpm'
+
+gem 'sentry-raven'
+
+# heroku metrics
+gem "barnes"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
