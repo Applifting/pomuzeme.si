@@ -97,12 +97,16 @@
           </div>
         </div>
 
-        <div class="field">
-          <label class="checkbox">
-            <input type="checkbox">
 
-            Souhlasím se zpracováním osobních údajů
-          </label>
+        <div class="field">
+          <%= form.check_box :terms_of_service %>
+          <%= form.label :terms_of_service, 'Souhlasím se zpracováním osobních údajů' %>
+        </div>
+
+        <div class="field">
+
+          <%= form.check_box :age_confirmed %>
+          <%= form.label :age_confirmed, 'Prohlašuji, že jsem osoba starší 18 let' %>
         </div>
 
         <div class="field is-grouped">
