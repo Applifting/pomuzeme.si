@@ -19,3 +19,6 @@ require("bulma");
 
 import $ from 'jquery';
 global.$ = jQuery;
+
+require.context('../images', true)
+

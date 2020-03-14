@@ -7,7 +7,7 @@
       My first website with <strong>Bulma</strong>!
     </p>
 
-    <button class="button is-link modal-button" data-target="registration" aria-haspopup="true">
+    <button class="button is-link modal-button" data-target="registration2" aria-haspopup="true">
       Chci pomáhat
     </button>
 
@@ -19,6 +19,8 @@
     <%= link_to 'test', test_post_home_index_path, method: :post, remote: :true %>
   </div>
 </section>
+
+<%= render 'home/modals/registration' %>
 
 <div id="registration" class="modal">
   <div class="modal-background"></div>

@@ -1,0 +1,78 @@
+<div id="registration2" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="modal-left">
+        <p class="modal-thanks">Patří vám velké díky!</p>
+        <p class="modal-explain">Děkujeme, že se chcete přidat k iniciativě Pomůžeme.si...</p>
+        <%= image_tag asset_pack_path('media/images/one-hand.svg'), class: 'one-hand' %>
+      </div>
+
+      <div class="modal-right">
+        <button class="modal-close" aria-label="close"></button>
+        <p class="modal-header">Vyplňte potřebné údaje </p>
+
+        <%= form_with model: Volunteer.new, id: 'registration-form', url: register_volunteer_path, remote: true do |form| %>
+
+          <div class="control">
+            <%= form.text_field :first_name, class: 'input', required: true %>
+            <%= form.label :first_name, class: 'label' %>
+          </div>
+
+          <div class="control">
+            <%= form.text_field :last_name, class: 'input', required: true %>
+
+            <%= form.label :last_name, class: 'label' %>
+          </div>
+
+
+          <div class="control">
+            <%= form.telephone_field :phone, value: '+420', class: 'input', required: true %>
+            <%= form.label :phone, class: 'label' %>
+          </div>
+
+          <div class="control">
+            <%= form.text_field :email, class: 'input', required: true %>
+            <%= form.label :email, class: 'label' %>
+          </div>
+
+          <p class="modal-address">
+            Adresa <%= image_tag asset_pack_path('media/images/tooltip.svg'), class: 'tooltip' %>
+          </p>
+
+          <div class="control">
+            <%= form.text_field :street, class: 'input', required: true %>
+
+            <%= form.label :street, class: 'label' %>
+          </div>
+
+              <div class="control">
+                <%= form.text_field :city, class: 'input', required: true %>
+                <%= form.label :city, class: 'label' %>
+              </div>
+              <div class="control">
+                <%= form.text_field :zipcode, class: 'input', required: true %>
+                <%= form.label :zipcode, class: 'label' %>
+              </div>
+
+          <div class="field">
+
+            <label class="agreement-text">
+              <input type="checkbox">
+              Souhlasím se zpracováním osobních údajů
+            </label>
+          </div>
+
+            <div class="control">
+              <%= form.submit 'Zaregistrovat se', class: 'btn' %>
+            </div>
+        <% end %>
+
+      </div>
+
+    </section>
+  </div>
+</div>

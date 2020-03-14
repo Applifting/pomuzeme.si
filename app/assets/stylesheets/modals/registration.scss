@@ -1,0 +1,132 @@
+.modal-left {
+  /* 01 Left side */
+
+
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  width: 50%;
+  height: 664px;
+
+
+  /* BG / 1 */
+
+  background: #FFFBF2;
+}
+
+.modal-right {
+  /* 02 Form */
+
+
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 50%;
+  height: 664px;
+
+
+  background: #FFFFFF;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+#registration2 {
+  .modal-card {
+    position: relative;
+    width: 960px;
+    height: 664px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+}
+
+.modal-thanks {
+  position: absolute;
+  width: 277px;
+  height: 42px;
+  left: calc(50% - 277px/2 + 0.5px);
+  top: 64px;
+
+  /* Headings/h4 */
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 160%;
+  /* identical to box height, or 42px */
+
+  text-align: center;
+
+  /* Orange 1 */
+
+  color: #D48D22;
+}
+
+.modal-explain {
+  /* Subtitle */
+
+
+  position: absolute;
+  width: 307px;
+  height: 60px;
+  left: calc(50% - 307px/2 + 0.5px);
+  top: 130px;
+
+  /* Headlines / Headline 20 */
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 150%;
+  /* or 30px */
+
+  text-align: center;
+
+  /* Black / 80% */
+
+  color: #656565;
+}
+
+.one-hand {
+  position: absolute;
+  width: 314px;
+  height: 408px;
+  left: calc(50% - 314px/2 - 11px);
+  bottom: -16px;
+}
+
+#registration-form {
+  width: 22rem;
+  max-width: 22rem;
+  margin-left: 4rem;
+}
+
+
+.agreement-text {
+  /* Souhlasím se zpracováním osobních údajů */
+
+  left: 36px;
+  top: 2px;
+
+  /* Bodies/Body1 */
+
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 150%;
+  /* identical to box height, or 27px */
+
+  /* Black / 80% */
+
+  color: #656565;
+}
+
+.modal-address {
+
+}
