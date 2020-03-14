@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :home, only: :index
   root 'home#index'
 
+  post '/api/sms_callback', to: 'callback#sms'
+
 end
