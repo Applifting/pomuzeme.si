@@ -1,5 +1,7 @@
+var registrationModal = $('#registration');
 var confirmationModal = $('#confirmation');
 var confirmationErrors = $('#confirmation-errors-list');
+var thankYouModal = $('#thank-you');
 
 // clear old errors
 confirmationErrors.empty();
@@ -8,6 +10,18 @@ confirmationErrors.empty();
 confirmationModal.toggleClass('is-active');
 $('html').toggleClass('is-clipped');
 
-// notify success
+// clear values from confirmation modal
+$('#volunteer_first_name').val('')
+$('#volunteer_last_name').val('')
+$('#volunteer_phone').val('')
+$('#volunteer_email').val('')
+$('#volunteer_streed').val('')
+$('#volunteer_city').val('')
+$('#volunteer_zipcode').val('')
+$('#volunteer_terms_of_service').prop('checked', false)
+$('#volunteer_age_confirmed').prop('checked', false)
 
-alert('somebody change this!!!"')
+// notify success
+// toggle confirmation modal
+thankYouModal.toggleClass('is-active');
+$('html').toggleClass('is-clipped');
