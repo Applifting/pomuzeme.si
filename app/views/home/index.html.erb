@@ -23,6 +23,11 @@
       <button class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
+      <div class="registration-errors">
+        <ul id="registration-errors-list">
+
+        </ul>
+      </div>
       <%= form_for Volunteer.new, id: 'registration-form', url: register_volunteer_path, remote: true do |form| %>
         <div class="field">
           <%= form.label :first_name, class: 'label' %>
@@ -53,6 +58,13 @@
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= form.label :email, class: 'label' %>
+          <div class="control">
+            <%= form.telephone_field :email, class: 'input', placeholder: Volunteer.human_attribute_name(:email), required: true %>
           </div>
         </div>
 

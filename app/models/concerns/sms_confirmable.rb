@@ -2,8 +2,8 @@ module SmsConfirmable
   extend ActiveSupport::Concern
 
   included do
-    scope :confirmed, -> { where(confirmed_at: nil) }
-    scope :unconfirmed, -> { where.not(confirmed_at: nil) }
+    scope :confirmed, -> { where.not(confirmed_at: nil) }
+    scope :unconfirmed, -> { where(confirmed_at: nil) }
   end
 
   CONFIRMATION_CODE_VALIDITY = 10

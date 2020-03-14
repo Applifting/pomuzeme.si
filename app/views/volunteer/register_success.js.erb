@@ -1,0 +1,11 @@
+var registrationModal = $('#registration');
+var registrationErrors = $('#registration-errors-list');
+
+// clear old errors
+registrationErrors.empty();
+
+// hide registration modal
+registrationModal.toggleClass('is-active');
+$('html').toggleClass('is-clipped');
+
+// TODO: toggle confirmation modal

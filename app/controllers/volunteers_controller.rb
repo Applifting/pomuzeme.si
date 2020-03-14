@@ -1,8 +1,11 @@
 class VolunteersController < ApplicationController
   def register
-    volunteer = Volunteer.new volunteer_params
-    # TODO: validate, save and render JS response
-    # Save current volunteer into session
+    volunteer = Volunteer.new(volunteer_params).with_existing_record
+    if volunteer.valid?
+      render 'volunteer/register_success', locals: { volunteer: volunteer }
+    else
+      render 'volunteer/register_error', locals: { volunteer: volunteer }
+    end
   end
 
   def confirm
