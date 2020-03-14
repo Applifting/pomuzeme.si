@@ -22,8 +22,8 @@ module SmsConfirmable
   end
 
   def obtain_confirmation_code
-    # TODO: regenerate confirmation code and send new SMS
     regenerate_confirmation_code!
+    SmsProvider.new.send_verification_code confirmation_code, phone
   end
 
   private

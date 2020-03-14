@@ -69,6 +69,7 @@ cs:
         too_short: je příliš krátký/á/é (min. %{count} znaků)
         wrong_length: nemá správnou délku (očekáváno %{count} znaků)
         invalid_zipcode: nebylo rozpoznano.
+        volunteer_not_found: Dobrovolnik nebyl nalezen.
       template:
         body: 'Následující pole obsahují chybně vyplněné údaje: '
         header:

@@ -2,14 +2,21 @@ class VolunteersController < ApplicationController
   def register
     volunteer = Volunteer.new(volunteer_params).with_existing_record
     if volunteer.valid?
-      render 'volunteer/register_success', locals: { volunteer: volunteer }
+      save_and_send_code volunteer
+      render 'volunteer/register_success'
     else
       render 'volunteer/register_error', locals: { volunteer: volunteer }
     end
   end
 
   def confirm
-    # Load current volunteer from session and validate code
+    volunteer = Volunteer.find_by id: session[:volunteer]
+    return render 'volunteer/confirm_error', locals: { error: I18n.t('activerecord.errors.messages.volunteer_not_found') } if volunteer.nil?
+
+    volunteer.confirm_with(confirm_params[:confirmation_code])
+    return render 'volunteer/confirm_error', locals: { volunteer: volunteer } if volunteer.errors.any?
+
+    render 'volunteer/confirm_success'
   end
 
   private
@@ -20,5 +27,11 @@ class VolunteersController < ApplicationController
 
   def confirm_params
     params.permit :confirmation_code
+  end
+
+  def save_and_send_code(volunteer)
+    volunteer.save!
+    volunteer.obtain_confirmation_code
+    session[:volunteer] = volunteer.id
   end
 end

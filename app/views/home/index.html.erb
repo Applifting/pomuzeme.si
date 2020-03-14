@@ -11,6 +11,10 @@
       Chci pomáhat
     </button>
 
+    <button class="button is-link modal-button" data-target="confirmation" aria-haspopup="true">
+      Potvrdit
+    </button>
+
     <%= link_to 'set', test_set_home_index_path, method: :post, remote: :true %>
     <%= link_to 'test', test_post_home_index_path, method: :post, remote: :true %>
   </div>
@@ -28,7 +32,7 @@
 
         </ul>
       </div>
-      <%= form_for Volunteer.new, id: 'registration-form', url: register_volunteer_path, remote: true do |form| %>
+      <%= form_with model: Volunteer.new, id: 'registration-form', url: register_volunteer_path, remote: true do |form| %>
         <div class="field">
           <%= form.label :first_name, class: 'label' %>
           <div class="control">
@@ -104,6 +108,39 @@
         <div class="field is-grouped">
           <div class="control">
             <%= form.submit 'Zaregistrovat se', class: 'button is-link' %>
+          </div>
+        </div>
+      <% end %>
+    </section>
+    <footer class="modal-card-foot">
+    </footer>
+  </div>
+</div>
+
+<div id="confirmation" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="confirmation-errors">
+        <ul id="confirmation-errors-list">
+
+        </ul>
+      </div>
+      <%= form_with id: 'confirmation-form', url: confirm_volunteer_path, remote: true do |form| %>
+        <div class="field">
+          <%= form.label :confirmation_code, class: 'label' %>
+          <div class="control">
+            <%= form.text_field :confirmation_code, class: 'input', required: true %>
+          </div>
+        </div>
+
+
+        <div class="field is-grouped">
+          <div class="control">
+            <%= form.submit 'Potvrdit kod', class: 'button is-link' %>
           </div>
         </div>
       <% end %>

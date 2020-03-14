@@ -1,0 +1,11 @@
+var confirmationErrors = $('#confirmation-errors-list');
+
+// clear old errors
+confirmationErrors.empty();
+<% if defined? error %>
+  confirmationErrors.append('<li><%= error %></li>')
+<% else %>
+  <% volunteer.errors.full_messages.each do |message| %>
+    confirmationErrors.append('<li><%= message %></li>')
+  <% end %>
+<% end %>
