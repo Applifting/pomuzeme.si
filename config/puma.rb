@@ -39,6 +39,6 @@ preload_app!
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
 
-before_fork do
+on_worker_boot do
   Barnes.start
 end
