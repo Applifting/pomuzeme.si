@@ -59,4 +59,64 @@ section.hero {
 
 section.introduction {
   background: #FBF2D9;
+
+  .title.body {
+    padding-top: 50px;
+    padding-bottom: 10px;
+    color: #d48d22;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 150%;
+  }
+
+  .subtitle.body {
+    line-height: 120%;
+    padding-top: 10px;
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 160%;
+  }
+}
+
+section.introduction.guide {
+  background: #FFFBF2;
+
+  .title.body {
+    padding-top: 50px;
+    padding-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+    color: #d48d22;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 150%;
+  }
+
+  .subtitle.body {
+    line-height: 120%;
+    padding-top: 10px;
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 160%;
+  }
+
+  img.divider {
+    transform: rotate(180deg);
+  }
+
+  #chci-pomahat-2 {
+    width: 280px;
+    height: 64px;
+    border-radius: 100px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #64cce3;
+    text-transform: uppercase;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  }
 }
