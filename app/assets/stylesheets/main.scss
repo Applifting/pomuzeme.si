@@ -105,7 +105,7 @@ section.introduction.guide {
     line-height: 160%;
   }
 
-  img.divider {
+  #divider-upside-down {
     transform: rotate(180deg);
   }
 
@@ -121,7 +121,11 @@ section.introduction.guide {
 }
 
 #footer-divider {
-  height: 90px;
+  background-color: #FBF2D9;
+
+  img {
+    background-color: #FFFBF2;
+  }
 }
 
 .position-relative {
