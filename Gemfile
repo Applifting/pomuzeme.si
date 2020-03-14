@@ -28,7 +28,18 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
-gem 'twilio-ruby'
+gem 'httparty'
+
+# cloudflare - heroku integration according to https://www.viget.com/articles/heroku-cloudflare-the-right-way/
+gem 'rack-attack'
+gem 'cloudflare-rails'
+
+gem 'newrelic_rpm'
+
+gem 'sentry-raven'
+
+# heroku metrics
+gem "barnes"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

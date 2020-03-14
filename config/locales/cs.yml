@@ -81,6 +81,10 @@ cs:
       models:
         volunteer:
           attributes:
+            base:
+              sms_not_working: 'Overovaci kod nebylo mozne odeslat. Zkuste to prosim za chvilku.'
+              age_confirmed_required: 'Pro registraci je potreba byt starsi 18 let.'
+              terms_of_service_required: 'Pro registraci je potreba souhlasit se zpracovanim udaju.'
             phone:
               improbable_phone: neni spravne
             confirmation_code:
