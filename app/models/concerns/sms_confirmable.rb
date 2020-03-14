@@ -23,7 +23,7 @@ module SmsConfirmable
 
   def obtain_confirmation_code
     regenerate_confirmation_code!
-    SmsProvider.new.send_verification_code confirmation_code, phone
+    Sms::Manager.new.send_verification_code confirmation_code, phone
   end
 
   private
