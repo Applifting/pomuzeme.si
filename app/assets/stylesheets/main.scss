@@ -121,7 +121,11 @@ section.introduction.guide {
 }
 
 #footer-divider {
-  height: 90px;
+  background-color: #FBF2D9;
+
+  img {
+    background-color: #FFFBF2;
+  }
 }
 
 .position-relative {

@@ -110,10 +110,14 @@
     </div>
   </section>
 
-  <img id="divider" src="<%= asset_path "divider.svg" %>" />
+  <div id="footer-divider">
+    <img src="<%= asset_path "divider.svg" %>" />
+  </div>
+
 </section>
 
-<footer class="footer">
+
+<footer class="section footer">
   <div class="columns is-centered">
     <div class="column is-one-quarter padding-top-2rem padding-bottop-2rem">
       <h5 class="title is-5">Co je vlastně Pomůžeme.si?</h5>
@@ -124,11 +128,11 @@
     <div class="is-divider-vertical"></div>
     <div class="column is-one-quarter padding-top-2rem padding-bottop-2rem position-relative">
       <img id="rocket" src="<%= asset_path "applifting-rocket.svg" %>" />
-      <h5 class="title is-5">Kdo za projektem stojí?</h5>
-      <p>
+      <h5 class="title is-5 position-relative">Kdo za projektem stojí?</h5>
+      <p class="position-relative">
         Applifting je softwarové studio z pražského Karlína, které už 5 let dělá věci jinak. Je nás přes 90 a fungujeme bez manažerů. Nejraději vyrábíme aplikace, které lidem zjednodušují život. Vyvinuli jsme třeba systém pro rychlejší mezinárodní výměnu orgánů k transplantaci. Nebo zabezpečení bankovní aplikace, kterou používají miliony uživatelů napříč Evropou.
       </p>
-      <div class="tile is-vertical">
+      <div class="tile is-vertical position-relative">
         <div class="columns is-0 is-mobile is-vcentered">
           <div class="column is-0">
             <figure class="image is-16x16 is-5by4">
@@ -140,7 +144,7 @@
           </div>
         </div>
       </div>
-      <div class="tile is-vertical">
+      <div class="tile is-vertical position-relative">
         <div class="columns is-0 is-mobile is-vcentered">
           <div class="column is-0">
             <figure class="image is-16x16 is-5by4">
@@ -152,7 +156,7 @@
           </div>
         </div>
       </div>
-      <div class="tile is-vertical">
+      <div class="tile is-vertical position-relative">
         <div class="columns is-0 is-mobile is-vcentered">
           <div class="column is-0">
             <figure class="image is-16x16 is-5by4">
