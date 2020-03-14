@@ -1,0 +1,30 @@
+<div id="confirmation" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="confirmation-errors">
+        <ul id="confirmation-errors-list">
+
+        </ul>
+      </div>
+      <%= form_with id: 'confirmation-form', url: confirm_volunteer_path, remote: true do |form| %>
+        <div class="field">
+          <%= form.label :confirmation_code, class: 'label' %>
+          <div class="control">
+            <%= form.text_field :confirmation_code, class: 'input', required: true %>
+          </div>
+        </div>
+
+
+        <div class="field is-grouped">
+          <div class="control">
+            <%= form.submit 'Potvrdit kod', class: 'button is-link' %>
+          </div>
+        </div>
+      <% end %>
+    </section>
+  </div>
+</div>
