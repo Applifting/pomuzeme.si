@@ -19,3 +19,8 @@ module PomuzemeSi
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
 end
+
+
+Raven.configure do |config|
+  config.current_environment = ENV['ENV_FLAVOR'] || 'development'
+end
