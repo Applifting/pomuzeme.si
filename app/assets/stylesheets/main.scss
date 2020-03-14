@@ -124,6 +124,10 @@ section.introduction.guide {
   height: 90px;
 }
 
+.position-relative {
+  position: relative;
+}
+
 footer {
   font-family: 'Source Sans Pro', sans-serif;
   font-style: normal;
@@ -170,5 +174,10 @@ footer {
 
   a {
     color: #64CCE3;
+  }
+
+  #rocket {
+    position: absolute;
+    left: 60%;
   }
 }
