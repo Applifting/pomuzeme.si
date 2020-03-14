@@ -1,58 +1,111 @@
-<header>
-  <div class="container has-text-centered">
-    <h1 class="title is-size-1 has-text-weight-medium">
-      Koronavirus: Spolu to dáme
-    </h1>
-    <p class="subtitle">
-      Dobrovolníky dostaneme tam, kde jsou třeba.
-    </p>
-    <button id="chci-pomahat" class="button is-link">
-      Chci pomáhat
-    </button>
+<section class="hero">
+  <div class="hero-body container">
+    <div class="columns">
+      <div class="column has-text-centered">
+        <h1 class="title">
+          <div style="color: #d48d22">Koronavirus?!</div>
+          Spolu to dáme
+          <img id="virus" src="<%= asset_path "virus.svg" %>" />
+        </h1>
+        <h2 class="subtitle">
+          Dobrovolníky dostaneme tam, kde jsou třeba.
+        </h2>
+        <button id="chci-pomahat" class="button is-link is-pulled-left">
+          Chci pomáhat
+        </button>
+      </div>
+      <div class="column has-text-centered">
+        <img src="<%= asset_path "hero.svg" %>" />
+      </div>
+    </div>
   </div>
 </header>
 
-<body>
-  <section class="section has-margin-3">
-    <div class="container">
-      <h4 class="title body is-4">Proč Pomůžeme.si?</h4>
-      <p class="subtitle is-6">
-        Spojujeme ty, kteří kvůli koronaviru potřebují pomoci, s těmi, kdo ji nabízí. 
-        Spolupracujeme s nejrůznějšími organizacemi, které sdružují dobrovolníky. 
-        A zároveň je sami hledáme. Pomoct můžete i vy.
-      </p>
+  <div id="organizace" class="hero-body container">
+    <div class="columns is-vcentered">
+      <div class="column is-narrow">Organizace, které pomáhají</div>
+      <div class="column logo"><img src="<%= asset_path "org.svg" %>" /></div>
+      <div class="column logo"><img src="<%= asset_path "org.svg" %>" /></div>
+      <div class="column logo"><img src="<%= asset_path "org.svg" %>" /></div>
+      <div class="column logo"><img src="<%= asset_path "org.svg" %>" /></div>
+      <div class="column logo"><img src="<%= asset_path "org.svg" %>" /></div>
+      <div class="column is-narrow">a 54 dalších…</div>
     </div>
-  </section>
+  </div>
+  <img id="divider" src="<%= asset_path "divider.svg" %>" />
+</section>
 
-  <section class="section has-margin-3">
-    <div class="container has-text-centered">
-      <h4 class="title body is-4">Jak to celé funguje?</h4>
-      <p class="subtitle is-6">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-      </p>
-    </div>
-  </section>
-
-  <section class="section has-margin-3">
-    <div class="container has-text-centered">
-      <p class="subtitle body is-6">
-        Jste dobročinná organizace a chcete se připojit k naší iniciativě? Kontaktujte nás na e-mailu 
-        <a href = "mailto: info@pomahame.si">info@pomahame.si</a>
-      </p>
-    </div>
-  </section>
-
+<section class="introduction">
   <section class="section">
-    <div class="container margin-left-50 has-text-centered">
-      <h4 class="title body is-4">Přidejte se a pomáhejte!</h4>
-      <p class="subtitle is-6">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-      </p>
-      <button id="chci-pomahat-2" class="button is-link">
-      Chci pomáhat
-      </button>
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-one-third">
+          <h4 class="title body is-4">Proč Pomůžeme.si?</h4>
+          <p class="subtitle body is-6">
+            Spojujeme ty, kteří kvůli koronaviru potřebují pomoci, s těmi, kdo ji nabízí. 
+            Spolupracujeme s nejrůznějšími organizacemi, které sdružují dobrovolníky. 
+            A zároveň je sami hledáme. Pomoct můžete i vy.
+          </p>
+        </div>
+        <div class="column is-one-third">
+          <img src="<%= asset_path "illustration.svg" %>" />
+        </div>
+      </div>
     </div>
-  <section>
-</body>
+  </section>
+</section>
+
+<section class="introduction guide">
+  <img class="divider" id="divider" src="<%= asset_path "divider.svg" %>" />
+    <section class="section">
+      <div class="container has-text-centered">
+      <h4 class="title body is-4">Jak to celé funguje?</h4>
+        <div class="columns is-centered is-vcentered">
+          <div class="column is-one-fifth">
+            <img src="<%= asset_path "hiw-laptop.svg" %>" style="vertical-align: middle;"/>
+            <p class="subtitle body is-6">
+              Zaregistrujete se jako dobrovolník
+            </p>
+          </div>
+          <div class="column is-one-fifth" style="vertical-align: middle;">
+            <img src="<%= asset_path "arrow.svg" %>" />
+          </div>
+          <div class="column is-one-fifth">
+            <img src="<%= asset_path "hiw-phone.svg" %>" />
+            <p class="subtitle body is-6">
+              Budou vás kontaktovat dobročinné organizace z okolí
+            </p>
+          </div>
+          <div class="column is-one-fifth">
+            <img src="<%= asset_path "arrow.svg" %>" />
+          </div>
+          <div class="column is-one-fifth">
+            <img src="<%= asset_path "hiw-handshake.svg" %>" />
+            <p class="subtitle body is-6">
+              Společně se domluvíte na konkrétní pomoci potřebným
+            </p>
+          </div> 
+          <div class="column is-one-half">
+            <img src="<%= asset_path "hiw-group.svg" %>" />
+          </div> 
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container has-text-centered">
+        <button id="chci-pomahat-2" class="button is-link">
+        Chci pomáhat
+        </button>
+      </div>
+    <section>
+
+    <section class="section">
+      <div class="container has-text-centered">
+        <h4 class="title body is-4" style="color: #50350D; font-size: 22px;">Jste dobročinná organizace a chcete se připojit k naší iniciativě?</h4>
+        <p class="subtitle body is-6">
+          Kontaktujte nás na e-mailu <a href = "mailto: info@pomahame.si">info@pomahame.si</a>
+        </p>
+      </div>
+    </section>
+</section>
