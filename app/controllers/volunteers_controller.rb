@@ -18,6 +18,16 @@ class VolunteersController < ApplicationController
     render 'volunteer/confirm_success'
   end
 
+  def resend
+    volunteer = Volunteer.find_by id: session[:volunteer]
+    return render 'volunteer/confirm_error', locals: { error: I18n.t('activerecord.errors.messages.volunteer_not_found') } if volunteer.nil?
+
+    resend_code volunteer
+    return render 'volunteer/confirm_error', locals: { volunteer: volunteer } if volunteer.errors.any?
+
+    render 'volunteer/confirm_resended'
+  end
+
   private
 
   def volunteer_params
@@ -33,11 +43,21 @@ class VolunteersController < ApplicationController
   end
 
   def save_and_send_code(volunteer)
-    ActiveRecord::Base.transaction do
-      volunteer.save!
-      volunteer.obtain_confirmation_code
-      session[:volunteer] = volunteer.id
+    with_captured_exception volunteer do |safe_volunteer|
+      safe_volunteer.save!
+      safe_volunteer.obtain_confirmation_code
+      session[:volunteer] = safe_volunteer.id
       true
+    end
+  end
+
+  def resend_code(volunteer)
+    with_captured_exception volunteer, &:obtain_confirmation_code
+  end
+
+  def with_captured_exception(volunteer)
+    ActiveRecord::Base.transaction do
+      yield volunteer
     rescue StandardError
       volunteer.errors.add(:base, :sms_not_working)
       raise ActiveRecord::Rollback

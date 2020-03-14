@@ -1,0 +1,6 @@
+var confirmationErrors = $('#confirmation-errors-list');
+
+// clear old errors
+confirmationErrors.empty();
+// TODO: add to appropriate place
+confirmationErrors.append('<li><%= I18n.t('activerecord.messages.sms_resended') %></li>')
