@@ -1,40 +1,35 @@
 # pomuzeme.si
 
-An open source platform which aims to simplify and streamline the coordination of volunteers.Through the platform, local organizations are able to reach volunteers in the area where assistance is needed. This project originated as a voluntary initiative in connection with the COVID-19 infection.
-
-## Authors
-
-Authors of this platform are awesome guys from [Applifting](www.applifting.io) and lot of volunteers who offered help. 
-Thank you all for yours contributions :heart:
+An open-source platform which aims to simplify and streamline the coordination of volunteers. Through the platform, local organizations can reach volunteers in the area where assistance is needed. This project originated as a voluntary initiative in connection with the COVID-19 infection.
 
 ## Getting Started
 
-The application is a MVC monolith written in the RubyOnRails framework. On Frontend we are using common "bootstrap" based frameworks such as Bulma or Materialize design.
+The application is an MVC monolith written in the RubyOnRails framework. On Frontend we are using common "bootstrap" based frameworks such as Bulma or Materialize design.
 
 ### Local development environment
 
 #### Required software
 
-  1. Ruby 2.6.3
-  2. NodeJS
-  3. yarn (`sudo npm install -g yarn`)
-  3. PostgreSQL
-  4. Redis
+1. Ruby 2.6.3
+2. NodeJS
+3. yarn (`sudo npm install -g yarn`)
+4. PostgreSQL
+5. Redis
 
 #### Steps to get it running
 
-  1. `git@github.com:Applifting/pomuzeme.si.git && pomuzeme.si`
-  2. `bundle install`
-  3. `rake db:create && rake db:migrate` Note: avoid `db:setup` as there is an `db:create` hook that is required,
-      in order to have postgres extension.
-  4. `yarn install`
-  6. `rails server`
+1. `git@github.com:Applifting/pomuzeme.si.git && pomuzeme.si`
+2. `bundle install`
+3. `rake db:create && rake db:migrate` Note: avoid `db:setup` as there is an `db:create` hook that is required,
+   in order to have postgres extension.
+4. `yarn install`
+5. `rails server`
 
 ## Contribution
 
 In case you decide to contribute in this project, we will be very happy and we appreciate your help. Feel free to:
 
-1. Check out open [issues](https://github.com/Applifting/pomuzeme.si/issues)
+1. Check out open [issues](https://github.com/Applifting/pomuzeme.si/issues). Ideally chose the ones that are labeled as `ready for dev`
 2. Assign your self to selected issue
 3. Write estimate delivery time into issue comment (preferably with ping to [@snopedom](https://github.com/snopedom)
 4. Create new branch from `master` where work will be done
@@ -42,11 +37,11 @@ In case you decide to contribute in this project, we will be very happy and we a
 6. Wait for review and PR approval (PR should be approved by 2 other developers, at least one from Applifting)
 7. After merge work is DONE! Thank you! :heart:
 
-If you have any questions about development or issue description, feel free to ask author of issue in comments.
+If you have any questions about development or issue description, feel free to ask the author of the issue in comments.
 
 ## Deployment
 
-In this moment application is deployed on Heroku cloud service. We have two environments, `staging` and `production`.
+At this moment application is deployed on Heroku cloud service. We have two environments, `staging` and `production`.
 
 **Deployment to staging** - [staging.pomuzemesi.cz](staging.pomuzemesi.cz)
 
@@ -54,11 +49,17 @@ Staging deployment is realised by automatic deploy hook which is triggered when 
 
 **Deployment to production** - [www.pomuzemesi.cz](pomuzemesi.cz)
 
-Production deployment is done by authorized developers from Applifting. Deploys are made regularly, each time a new functionality is created. If you need to put something into production contact: 
+Production deployment is done by authorized developers from Applifting. Deploys are made regularly, each time a new functionality is created. If you need to put something into production contact:
 
-**Dominik Snopek** - *Development coordinator* - dominik.snopek@applifting.cz
+[**Dominik Snopek**](https://github.com/snopedom) - _Development coordinator_ - dominik.snopek@applifting.cz
 
-**Martin Hanzík** - *DevOps* - martin.hanzik@applifting.cz
+[**Martin Hanzík**](https://github.com/martinhanzik) - _DevOps_ - martin.hanzik@applifting.cz
+
+## Original Authors
+
+Authors of this platform are awesome guys and girls from [Applifting](www.applifting.io). We could not do it without our Contributors that are listed below. Thanks from the bottom of our hearts! :heart:
+
+## Contributors
 
 ## License
 
