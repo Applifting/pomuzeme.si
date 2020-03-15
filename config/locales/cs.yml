@@ -35,13 +35,14 @@ cs:
       volunteer: Dobrovolnik
     attributes:
       volunteer:
-        first_name: Jmeno
-        last_name: Prijmeni
-        street: Ulice a cislo domu
-        city: Mesto
-        zipcode: PSC
-        phone: Telefonni cislo
+        first_name: Jméno
+        last_name: Příjmení
+        street: Ulice a číslo domu
+        city: Město
+        zipcode: PSČ
+        phone: Telefonní číslo
         email: e-mail
+        confirmation_code: Ověřovací kód
     errors:
       format: "%{attribute} %{message}"
       messages:
@@ -68,7 +69,6 @@ cs:
         too_long: je příliš dlouhý/á/é (max. %{count} znaků)
         too_short: je příliš krátký/á/é (min. %{count} znaků)
         wrong_length: nemá správnou délku (očekáváno %{count} znaků)
-        invalid_zipcode: nebylo rozpoznano.
         volunteer_not_found: Dobrovolnik nebyl nalezen.
       template:
         body: 'Následující pole obsahují chybně vyplněné údaje: '
@@ -82,14 +82,18 @@ cs:
         volunteer:
           attributes:
             base:
-              sms_not_working: 'Overovaci kod nebylo mozne odeslat. Zkuste to prosim za chvilku.'
-              age_confirmed_required: 'Pro registraci je potreba byt starsi 18 let.'
-              terms_of_service_required: 'Pro registraci je potreba souhlasit se zpracovanim udaju.'
+              sms_not_working: 'Ověřovací kód nebylo možné odeslat. Zkuste to prosím za chvilku.'
+              age_confirmed_required: 'Pro registraci je potřeba být starší 18 let.'
+              terms_of_service_required: 'Pro registraci je potřeba souhlasit se zpracováním údajů.'
             phone:
-              improbable_phone: neni spravne
+              improbable_phone: není správně
             confirmation_code:
               not_matching: 'se neshoduje'
-              expired: 'vyprsel'
-              confirmed: 'je jiz potvrzeny'
+              expired: 'vypršel'
+              confirmed: 'je již potvrzený'
     messages:
-      sms_resended: Vas kod byl zmenen a SMS je na ceste.
+      sms_resended: Váš kód byl změněn a SMS je na cestě.
+
+  errors:
+    messages:
+      invalid_zipcode: nebylo rozpoznano.
