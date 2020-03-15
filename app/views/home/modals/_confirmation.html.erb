@@ -1,0 +1,31 @@
+<div id="confirmation" class="modal">
+  <div class="modal-content-custom">
+
+    <%= image_tag asset_path('close.svg'), class: 'close modal-close'  %>
+
+    <section class="modal-card-body">
+      <h3>Děkujeme za registraci</h3>
+      <p>
+        Na telefonní číslo jsme vám odeslali ověřovací kód. Vyplňte jej níže.
+      </p>
+      <%= form_with id: 'confirmation-form', url: confirm_volunteer_path, remote: true do |form| %>
+        <div class="input-field">
+          <%= form.text_field :confirmation_code, class: 'validate', required: true %>
+          <%= form.label :confirmation_code %>
+        </div>
+
+        <div class="confirmation-errors">
+          <ul id="confirmation-errors-list" class="error-list">
+
+          </ul>
+        </div>
+
+        <p class="smaller">
+          Nepřišel vám ověřovací kód? Zkusit znovu
+        </p>
+
+        <%= form.submit 'Dokončit registraci', class: 'form-button' %>
+      <% end %>
+    </section>
+  </div>
+</div>

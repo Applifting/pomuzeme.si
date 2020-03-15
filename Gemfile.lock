@@ -237,6 +237,7 @@ DEPENDENCIES
   puma (~> 4.1)
   rack-attack
   rails (~> 6.0.2, >= 6.0.2.1)
+  rubocop
   rails_autoscale_agent
   sass-rails (>= 6)
   selenium-webdriver
