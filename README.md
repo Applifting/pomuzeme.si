@@ -55,12 +55,12 @@ Production deployment is done by authorized developers from Applifting. Deploys 
 
 [**Martin Hanzík**](https://github.com/martinhanzik) - _DevOps_ - martin.hanzik@applifting.cz
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
 ## Original Authors
 
 Authors of this platform are awesome guys and girls from [Applifting](www.applifting.io). We could not do it without our Contributors that are listed below. Thanks from the bottom of our hearts! :heart:
 
 ## Contributors
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
