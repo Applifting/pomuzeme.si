@@ -1,0 +1,42 @@
+#confirmation {
+  max-width: 640px;
+
+  .modal-content-custom {
+
+    .modal-card-body {
+      padding: 48px 64px 64px;
+      text-align: center;
+
+      @include sm {
+        padding: 32px 24px;
+      }
+
+      h3 {
+        margin: 0 0 8px;
+      }
+
+      p {
+        font-size: 18px;
+        line-height: 150%;
+        color: #8C8C8C;
+        max-width: 380px;
+        margin: 0 auto 40px;
+
+        &.smaller {
+          font-size: 14px;
+          line-height: 160%;
+        }
+
+        @include lg {
+          font-size: 14px;
+          line-height: 160%;
+        }
+      }
+
+      .input-field {
+        margin: 60px auto 40px;
+        max-width: 250px;
+      }
+    }
+  }
+}

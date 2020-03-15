@@ -1,0 +1,24 @@
+var confirmationModal = M.Modal.getInstance(document.getElementById('confirmation'));
+var confirmationErrors = $('#confirmation-errors-list');
+var thankYouModal = M.Modal.getInstance(document.getElementById('thank-you'));
+
+// clear old errors
+confirmationErrors.empty();
+
+// close confirmation modal
+confirmationModal.close();
+
+// clear values from confirmation modal
+$('#volunteer_first_name').val('')
+$('#volunteer_last_name').val('')
+$('#volunteer_phone').val('')
+$('#volunteer_email').val('')
+$('#volunteer_street').val('')
+$('#volunteer_city').val('')
+$('#volunteer_zipcode').val('')
+$('#volunteer_terms_of_service').prop('checked', false)
+$('#volunteer_age_confirmed').prop('checked', false)
+
+// notify success
+// toggle confirmation modal
+thankYouModal.open();

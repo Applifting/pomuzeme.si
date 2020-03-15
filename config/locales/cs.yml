@@ -1,0 +1,95 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+cs:
+  activerecord:
+    models:
+      volunteer: Dobrovolnik
+    attributes:
+      volunteer:
+        first_name: Jmeno
+        last_name: Prijmeni
+        street: Ulice a cislo domu
+        city: Mesto
+        zipcode: PSC
+        phone: Telefonni cislo
+        email: e-mail
+    errors:
+      format: "%{attribute} %{message}"
+      messages:
+        accepted: musí být potvrzeno
+        blank: je povinná položka
+        confirmation: nebylo potvrzeno
+        empty: nesmí být prázdný/á/é
+        equal_to: musí být rovno %{count}
+        even: musí být sudé číslo
+        exclusion: je vyhrazeno pro jiný účel
+        greater_than: musí být větší než %{count}
+        greater_than_or_equal_to: musí být větší nebo rovno %{count}
+        inclusion: není v seznamu povolených hodnot
+        invalid: není platná hodnota
+        less_than: musí být méně než %{count}
+        less_than_or_equal_to: musí být méně nebo rovno %{count}
+        not_a_number: není číslo
+        not_an_integer: musí být celé číslo
+        odd: musí být liché číslo
+        other_than: musí být rozdílný/á/é od %{count}
+        present: musí být prázdný/á/é
+        required: musí existovat
+        taken: již databáze obsahuje
+        too_long: je příliš dlouhý/á/é (max. %{count} znaků)
+        too_short: je příliš krátký/á/é (min. %{count} znaků)
+        wrong_length: nemá správnou délku (očekáváno %{count} znaků)
+        invalid_zipcode: nebylo rozpoznano.
+        volunteer_not_found: Dobrovolnik nebyl nalezen.
+      template:
+        body: 'Následující pole obsahují chybně vyplněné údaje: '
+        header:
+          one: Při ukládání objektu %{model} došlo k chybám a nebylo jej možné uložit
+          few: Při ukládání objektu %{model} došlo ke %{count} chybám a nebylo možné
+            jej uložit
+          other: Při ukládání objektu %{model} došlo ke %{count} chybám a nebylo možné
+            jej uložit
+      models:
+        volunteer:
+          attributes:
+            base:
+              sms_not_working: 'Overovaci kod nebylo mozne odeslat. Zkuste to prosim za chvilku.'
+              age_confirmed_required: 'Pro registraci je potreba byt starsi 18 let.'
+              terms_of_service_required: 'Pro registraci je potreba souhlasit se zpracovanim udaju.'
+            phone:
+              improbable_phone: neni spravne
+            confirmation_code:
+              not_matching: 'se neshoduje'
+              expired: 'vyprsel'
+              confirmed: 'je jiz potvrzeny'
+    messages:
+      sms_resended: Vas kod byl zmenen a SMS je na ceste.

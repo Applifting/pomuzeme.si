@@ -1,0 +1,10 @@
+var registrationModal = $('#registration');
+var registrationErrors = $('#registration-errors-list');
+
+// clear old errors
+registrationErrors.empty();
+
+// add new volunteer errors
+<% volunteer.errors.full_messages.each do |message| %>
+  registrationErrors.append('<li><%= message %></li>')
+<% end %>

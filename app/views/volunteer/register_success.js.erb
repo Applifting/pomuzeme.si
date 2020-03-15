@@ -1,0 +1,13 @@
+var registrationModal = M.Modal.getInstance(document.getElementById('registration'));
+var registrationErrors = $('#registration-errors-list');
+var confirmationModal = M.Modal.getInstance(document.getElementById('confirmation'));
+
+
+// clear old errors
+registrationErrors.empty();
+
+// hide registration modal
+registrationModal.close();
+
+// toggle confirmation modal
+confirmationModal.open();

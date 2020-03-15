@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'httparty'
+
 # cloudflare - heroku integration according to https://www.viget.com/articles/heroku-cloudflare-the-right-way/
 gem 'rack-attack'
 gem 'cloudflare-rails'
@@ -67,3 +69,11 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+# Validations
+gem 'validates_zipcode'
+gem 'phony_rails'
+
+# Code quality
+gem 'rubocop'
