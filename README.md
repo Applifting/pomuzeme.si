@@ -29,7 +29,7 @@ The application is an MVC monolith written in the RubyOnRails framework. On Fron
 
 In case you decide to contribute in this project, we will be very happy and we appreciate your help. Feel free to:
 
-1. Check out open [issues](https://github.com/Applifting/pomuzeme.si/issues). Ideally chose the ones that are labeled as `ready for dev`
+1. Check out open [issues](https://github.com/Applifting/pomuzeme.si/issues). Ideally, choose from the ones that are labeled as `ready for dev`
 2. Assign your self to selected issue
 3. Write estimate delivery time into issue comment (preferably with ping to [@snopedom](https://github.com/snopedom)
 4. Create new branch from `master` where work will be done
