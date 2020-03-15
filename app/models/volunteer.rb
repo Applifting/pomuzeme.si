@@ -12,6 +12,6 @@ class Volunteer < ApplicationRecord
 
   def with_existing_record
     # TODO: handle update of existing values except identifiers
-    Volunteer.unconfirmed.where(phone: normalized_phone, email: self.email).take || self
+    Volunteer.unconfirmed.where(phone: normalized_phone).take || self
   end
 end

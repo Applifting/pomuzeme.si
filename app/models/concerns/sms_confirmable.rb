@@ -6,8 +6,10 @@ module SmsConfirmable
     scope :unconfirmed, -> { where(confirmed_at: nil) }
   end
 
-  CONFIRMATION_CODE_VALIDITY = 10
+  CONFIRMATION_CODE_VALIDITY = 10 # minutes
   CONFIRMATION_CODE_LENGTH = 4
+  CONFIRMATION_CODE_REPEAT_BREAK = 30 # seconds
+
 
   def confirmed?
     !confirmed_at.nil?
@@ -22,6 +24,9 @@ module SmsConfirmable
   end
 
   def obtain_confirmation_code
+    raise StandardError, 'Token already generated' unless confirmed_at.nil?
+    raise StandardError, 'Token regenerated too early' unless can_obtain_code?
+
     regenerate_confirmation_code!
     Sms::Manager.new.send_verification_code confirmation_code, phone
   end
@@ -39,5 +44,10 @@ module SmsConfirmable
   def random_code
     charset = Array 0..9 # optionally concat with letter array
     Array.new(CONFIRMATION_CODE_LENGTH) { charset.sample }.join
+  end
+
+  def can_obtain_code?
+    code_generated_before = Time.now - (confirmation_valid_to - CONFIRMATION_CODE_VALIDITY.minutes)
+    confirmation_code.nil? || (code_generated_before > CONFIRMATION_CODE_REPEAT_BREAK.seconds)
   end
 end
