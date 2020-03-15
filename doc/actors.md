@@ -43,6 +43,8 @@ The main functionalities for the Coordinator:
 
 Superadmins are people who operate `pomuzeme.si`. They are responsible for adding and managing Relief organizations and complaints from volunteers.
 
+Functionalities:
+
 - Add new relief organizations
 - Add coordinators under organizations
 - Curate volunteer data, opt out volunteers
