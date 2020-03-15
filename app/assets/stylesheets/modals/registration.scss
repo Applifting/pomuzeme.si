@@ -1,43 +1,9 @@
-#registration, #confirmation, #thank-you {
-  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  width: 100%;
+#registration {
   max-width: 960px;
-  max-height: 90vh;
-  max-height: 90%;
-
-  @include lg {
-    max-width: 480px;
-  }
-
-  h2 {
-    font-weight: 600;
-    font-size: 26px;
-    line-height: 160%;
-    font-family: $title-font;
-    color: $heading-color;
-  }
-
-  h3 {
-    font-weight: bold;
-    font-size: 22px;
-    line-height: 160%;
-    font-family: $title-font;
-  }
 
   .modal-content-custom {
 
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      left: auto;
-      bottom: auto;
-      background-color: transparent;
-    }
-
     .modal-card-body {
-      padding: 0;
       display: flex;
 
       @include lg {
@@ -111,28 +77,4 @@
       }
     }
   }
-}
-
-.agreement-text {
-  /* Souhlasím se zpracováním osobních údajů */
-
-  left: 36px;
-  top: 2px;
-
-  /* Bodies/Body1 */
-
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 150%;
-  /* identical to box height, or 27px */
-
-  /* Black / 80% */
-
-  color: #656565;
-}
-
-.modal-address {
-
 }

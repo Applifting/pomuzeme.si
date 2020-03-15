@@ -1,0 +1,42 @@
+#registration, #confirmation, #thank-you {
+  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 100%;
+  max-height: 90vh;
+  max-height: 90%;
+
+  @include lg {
+    max-width: 480px;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 160%;
+    font-family: $title-font;
+    color: $heading-color;
+  }
+
+  h3 {
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 160%;
+    font-family: $title-font;
+  }
+
+  .modal-content-custom {
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      left: auto;
+      bottom: auto;
+      background-color: transparent;
+    }
+
+    .modal-card-body {
+      padding: 0;
+    }
+  }
+}

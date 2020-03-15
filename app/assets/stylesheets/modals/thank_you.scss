@@ -1,0 +1,33 @@
+#thank-you {
+  max-width: 640px;
+
+  .modal-content-custom {
+
+    .modal-card-body {
+      padding: 48px 64px 64px;
+      text-align: center;
+
+      @include sm {
+        padding: 32px 24px;
+      }
+
+      img {
+        position: relative;
+        left: 12px;
+        margin-top: 29px;
+      }
+
+      h3 {
+        margin: 32px 0 16px;
+      }
+
+      p {
+        font-size: 20px;
+        line-height: 160%;
+        color: #8C8C8C;
+        max-width: 380px;
+        margin: 0 auto;
+      }
+    }
+  }
+}
