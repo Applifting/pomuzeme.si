@@ -21,7 +21,7 @@
         </div>
 
         <p class="smaller">
-          Nepřišel vám ověřovací kód? Zkusit znovu
+          Nepřišel vám ověřovací kód? <%= link_to 'Zkusit znovu', resend_volunteer_path, remote: true, method: :post  %>
         </p>
 
         <%= form.submit 'Dokončit registraci', class: 'form-button' %>
