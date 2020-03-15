@@ -4,7 +4,6 @@
 
 section.hero {
   margin-top: 92px;
-
   color: #141e32;
   background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #FFFBF2;
 
@@ -106,7 +105,7 @@ section.introduction.guide {
     line-height: 160%;
   }
 
-  img.divider {
+  #divider-upside-down {
     transform: rotate(180deg);
   }
 
@@ -118,5 +117,71 @@ section.introduction.guide {
     background-color: #64cce3;
     text-transform: uppercase;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+#footer-divider {
+  background-color: #FBF2D9;
+
+  img {
+    background-color: #FFFBF2;
+  }
+}
+
+.position-relative {
+  position: relative;
+}
+
+footer {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 150%;
+  color: #50350D;
+
+  &.footer {
+    background-color: #FBF2D9;
+    padding-bottom: 1.5rem;
+  }
+
+  .title {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 160%;
+    color: #D48D22;
+  }
+
+  .is-divider-vertical::before {
+    border-left: 1px solid #CFBDA2;
+  }
+
+  .padding-top-2rem {
+    padding-top: 2rem;
+  }
+
+  .padding-bottop-2rem {
+    padding-bottom: 2rem;
+  }
+
+  .line-heigth-200per {
+    line-height: 200%;
+  }
+
+  .level {
+    .level-item {
+      color: #3F3F3F;
+    }
+  }
+
+  a {
+    color: #64CCE3;
+  }
+
+  #rocket {
+    position: absolute;
+    left: 60%;
   }
 }
