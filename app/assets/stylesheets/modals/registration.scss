@@ -1,111 +1,117 @@
-.modal-left {
-  /* 01 Left side */
+#registration, #confirmation, #thank-you {
+  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 960px;
+  max-height: 90vh;
+  max-height: 90%;
 
-
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  bottom: 0px;
-  width: 50%;
-  height: 664px;
-
-
-  /* BG / 1 */
-
-  background: #FFFBF2;
-}
-
-.modal-right {
-  /* 02 Form */
-
-
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  width: 50%;
-  height: 664px;
-
-
-  background: #FFFFFF;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-#registration2 {
-  .modal-card {
-    position: relative;
-    width: 960px;
-    height: 664px;
-
-    background: #FFFFFF;
-    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+  @include lg {
+    max-width: 480px;
   }
 
+  h2 {
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 160%;
+    font-family: $title-font;
+    color: $heading-color;
+  }
+
+  h3 {
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 160%;
+    font-family: $title-font;
+  }
+
+  .modal-content-custom {
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      left: auto;
+      bottom: auto;
+      background-color: transparent;
+    }
+
+    .modal-card-body {
+      padding: 0;
+      display: flex;
+
+      @include lg {
+        display: block;
+      }
+    }
+
+    .modal-left {
+      background: #FFFBF2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 64px 32px 0;
+      width: 50%;
+      text-align: center;
+
+      @include lg {
+        display: none;
+      }
+
+      .modal-thanks {
+        font-family: Montserrat;
+        font-weight: 600;
+        font-size: 26px;
+        color: #D48D22;
+        padding-bottom: 24px;
+        line-height: 160%;
+      }
+
+      .modal-explain {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 150%;
+        color: #656565;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+
+      .illustration {
+        position: relative;
+
+        .background {
+          position: absolute;
+          top: -74px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .one-hand {
+          vertical-align: bottom;
+          position: relative;
+        }
+      }
+    }
+
+
+    .modal-right {
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 48px 64px 64px;
+      width: 50%;
+
+      @include lg {
+        width: 100%;
+        box-shadow: none;
+      }
+
+      @include sm {
+        padding: 32px 24px;
+      }
+    }
+  }
 }
-
-.modal-thanks {
-  position: absolute;
-  width: 277px;
-  height: 42px;
-  left: calc(50% - 277px/2 + 0.5px);
-  top: 64px;
-
-  /* Headings/h4 */
-
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 26px;
-  line-height: 160%;
-  /* identical to box height, or 42px */
-
-  text-align: center;
-
-  /* Orange 1 */
-
-  color: #D48D22;
-}
-
-.modal-explain {
-  /* Subtitle */
-
-
-  position: absolute;
-  width: 307px;
-  height: 60px;
-  left: calc(50% - 307px/2 + 0.5px);
-  top: 130px;
-
-  /* Headlines / Headline 20 */
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 150%;
-  /* or 30px */
-
-  text-align: center;
-
-  /* Black / 80% */
-
-  color: #656565;
-}
-
-.one-hand {
-  position: absolute;
-  width: 314px;
-  height: 408px;
-  left: calc(50% - 314px/2 - 11px);
-  bottom: -16px;
-}
-
-#registration-form {
-  width: 22rem;
-  max-width: 22rem;
-  margin-left: 4rem;
-}
-
 
 .agreement-text {
   /* Souhlasím se zpracováním osobních údajů */

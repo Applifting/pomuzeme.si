@@ -1,9 +1,8 @@
 <div id="confirmation" class="modal">
-  <div class="modal-background"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <button class="delete" aria-label="close"></button>
-    </header>
+  <div class="modal-content-custom">
+
+    <%= image_tag asset_path('close.svg'), class: 'close modal-close'  %>
+
     <section class="modal-card-body">
       <div class="confirmation-errors">
         <ul id="confirmation-errors-list">

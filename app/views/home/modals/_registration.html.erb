@@ -1,102 +1,82 @@
 <div id="registration" class="modal">
-  <div class="modal-background"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <button class="delete" aria-label="close"></button>
-    </header>
+  <div class="modal-content-custom">
+
+    <%= image_tag asset_path('close.svg'), class: 'close modal-close'  %>
+
     <section class="modal-card-body">
-      <div class="registration-errors">
-        <ul id="registration-errors-list">
 
-        </ul>
+      <div class="modal-left">
+        <div>
+          <p class="modal-thanks">Patří vám velké díky!</p>
+          <p class="modal-explain">Je skvělé, že chcete pomáhat. Jedeme v tom společně. Pomůžeme.si.</p>
+        </div>
+        <div class="illustration">
+          <%= image_tag asset_path('registration-background.svg'), class: 'background' %>
+          <%= image_tag asset_pack_path('media/images/one-hand.svg'), class: 'one-hand' %>
+        </div>
       </div>
-      <%= form_with model: Volunteer.new, id: 'registration-form', url: register_volunteer_path, remote: true do |form| %>
-        <div class="field">
-          <%= form.label :first_name, class: 'label' %>
-          <div class="control">
-            <%= form.text_field :first_name, class: 'input', placeholder: Volunteer.human_attribute_name(:first_name), required: true %>
-          </div>
-        </div>
 
-        <div class="field">
-          <%= form.label :last_name, class: 'label' %>
-          <div class="control">
-            <%= form.text_field :last_name, class: 'input', placeholder: Volunteer.human_attribute_name(:last_name), required: true %>
-          </div>
-        </div>
+      <div class="modal-right">
+        <h3>Vyplňte potřebné údaje</h3>
+        <div class="registration-errors">
+          <ul id="registration-errors-list">
 
-        <div class="field">
-          <%= form.label :phone, class: 'label' %>
-          <div class="field-body">
-            <div class="field is-expanded">
-              <div class="field has-addons">
-                <p class="control">
-                  <a class="button is-static">
-                    +420
-                  </a>
-                </p>
-                <p class="control is-expanded">
-                  <%= form.telephone_field :phone, class: 'input', placeholder: Volunteer.human_attribute_name(:phone), required: true %>
-                </p>
-              </div>
+          </ul>
+        </div>
+        <%= form_with model: Volunteer.new, id: 'registration-form', url: register_volunteer_path, remote: true do |form| %>
+          <div class="input-field">
+            <%= form.text_field :first_name, class: 'validate', required: true %>
+            <%= form.label :first_name %>
+          </div>
+
+          <div class="input-field">
+            <%= form.text_field :last_name, class: 'validate', required: true %>
+            <%= form.label :last_name %>
+          </div>
+
+          <div>+420</div>
+
+          <div class="input-field">
+            <%= form.telephone_field :phone, class: 'validate', required: true %>
+            <%= form.label :phone %>
+          </div>
+
+          <div class="input-field">
+            <%= form.text_field :email, class: 'validate', required: true %>
+            <%= form.label :email %>
+          </div>
+
+          <div class="input-field">
+            <%= form.text_field :street, class: 'validate', required: true %>
+            <%= form.label :street %>
+          </div>
+
+          <div class="input-field">
+            <%= form.text_field :city, class: 'validate', required: true %>
+            <%= form.label :city %>
+          </div>
+
+          <div class="input-field">
+            <%= form.text_field :zipcode, class: 'validate', required: true %>
+            <%= form.label :zipcode %>
+          </div>
+
+          <label>
+            <%= form.check_box :terms_of_service %>
+            <span>Souhlasím se zpracováním osobních údajů</span>
+          </label>
+          <label>
+            <%= form.check_box :age_confirmed %>
+            <span>Prohlašuji, že jsem osoba starší 18 let</span>
+          </label>
+
+          <div class="field is-grouped">
+            <div class="control">
+              <%= form.submit 'Zaregistrovat se', class: 'form-button' %>
             </div>
           </div>
-        </div>
-
-        <div class="field">
-          <%= form.label :email, class: 'label' %>
-          <div class="control">
-            <%= form.telephone_field :email, class: 'input', placeholder: Volunteer.human_attribute_name(:email), required: true %>
-          </div>
-        </div>
-
-        <div class="field">
-          <%= form.label :street, class: 'label' %>
-          <div class="control">
-            <%= form.telephone_field :street, class: 'input', placeholder: Volunteer.human_attribute_name(:street), required: true %>
-          </div>
-        </div>
-
-        <div class="field">
-          <div class="field-body">
-            <div class="field">
-              <%= form.label :city, class: 'label' %>
-              <p class="control is-expanded">
-                <%= form.text_field :city, class: 'input', placeholder: Volunteer.human_attribute_name(:city), required: true %>
-
-              </p>
-            </div>
-            <div class="field">
-              <%= form.label :zipcode, class: 'label' %>
-              <p class="control is-expanded">
-                <%= form.text_field :zipcode, class: 'input', placeholder: Volunteer.human_attribute_name(:zipcode), required: true %>
-              </p>
-            </div>
-          </div>
-          <div class="column">
-          </div>
-        </div>
-
-
-        <div class="field">
-          <%= form.check_box :terms_of_service %>
-          <%= form.label :terms_of_service, 'Souhlasím se zpracováním osobních údajů' %>
-        </div>
-
-        <div class="field">
-
-          <%= form.check_box :age_confirmed %>
-          <%= form.label :age_confirmed, 'Prohlašuji, že jsem osoba starší 18 let' %>
-        </div>
-
-        <div class="field is-grouped">
-          <div class="control">
-            <%= form.submit 'Zaregistrovat se', class: 'button is-link' %>
-          </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </section>
-    <footer class="modal-card-foot">
-    </footer>
   </div>
 </div>

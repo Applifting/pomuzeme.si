@@ -4,11 +4,10 @@
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
-    "jquery": "^3.3.1",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
-    "bulma": "^0.8.0",
-    "bulma-divider": "^0.2.0",
+    "jquery": "^3.3.1",
+    "materialize-css": "^1.0.0-rc.2",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",

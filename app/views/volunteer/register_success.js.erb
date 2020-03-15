@@ -1,14 +1,13 @@
-var registrationModal = $('#registration');
+var registrationModal = M.Modal.getInstance(document.getElementById('registration'));
 var registrationErrors = $('#registration-errors-list');
-var confirmationModal = $('#confirmation');
+var confirmationModal = M.Modal.getInstance(document.getElementById('confirmation'));
+
 
 // clear old errors
 registrationErrors.empty();
 
 // hide registration modal
-registrationModal.toggleClass('is-active');
-$('html').toggleClass('is-clipped');
+registrationModal.close();
 
 // toggle confirmation modal
-confirmationModal.toggleClass('is-active');
-$('html').toggleClass('is-clipped');
+confirmationModal.open();
