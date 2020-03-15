@@ -2,8 +2,8 @@ class Sms::Provider
 
   include HTTParty
 
-  base_uri ENV['SMS_BASE_URL']
-  default_params apit: ENV['SMS_API_KEY']
+  base_uri ENV['NETHOST_BASE_URL']
+  default_params apit: ENV['NETHOST_API_KEY']
 
   def send_msg(phone, text, msg_id = nil, attempt = 0)
     if ENV['SMS_MOCK'] == 'true'
