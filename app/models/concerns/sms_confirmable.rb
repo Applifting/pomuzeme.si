@@ -47,7 +47,10 @@ module SmsConfirmable
   end
 
   def can_obtain_code?
-    code_generated_before = Time.now - (confirmation_valid_to - CONFIRMATION_CODE_VALIDITY.minutes)
     confirmation_code.nil? || (code_generated_before > CONFIRMATION_CODE_REPEAT_BREAK.seconds)
+  end
+
+  def code_generated_before
+    Time.now - (confirmation_valid_to - CONFIRMATION_CODE_VALIDITY.minutes)
   end
 end
