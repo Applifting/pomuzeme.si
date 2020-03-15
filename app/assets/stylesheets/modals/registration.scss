@@ -75,6 +75,54 @@
       @include sm {
         padding: 32px 24px;
       }
+
+      h3 {
+        margin-bottom: 24px;
+      }
+
+      .phone-row {
+        display: flex;
+
+        .phone-prefix {
+          border-bottom: 1px solid #9e9e9e;
+          margin: 14.5px 0 22.5px;
+          padding: 0 14px;
+          line-height: 43.5px;
+        }
+
+        .input-field {
+          flex-grow: 1;
+        }
+      }
+
+      .address-title {
+        display: flex;
+        align-items: center;
+
+        img {
+          margin-left: 6px;
+        }
+      }
+
+      .checkbox-row {
+        margin: 30px 0;
+      }
+
+      .address-row {
+        display: flex;
+
+        .input-field {
+          &:first-child {
+            flex-grow: 1;
+          }
+
+          &:last-child {
+            width: 128px;
+            flex-shrink: 0;
+            margin-left: 24px;
+          }
+        }
+      }
     }
   }
 }

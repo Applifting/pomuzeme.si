@@ -18,11 +18,6 @@
 
       <div class="modal-right">
         <h3>Vyplňte potřebné údaje</h3>
-        <div class="registration-errors">
-          <ul id="registration-errors-list">
-
-          </ul>
-        </div>
         <%= form_with model: Volunteer.new, id: 'registration-form', url: register_volunteer_path, remote: true do |form| %>
           <div class="input-field">
             <%= form.text_field :first_name, class: 'validate', required: true %>
@@ -34,11 +29,13 @@
             <%= form.label :last_name %>
           </div>
 
-          <div>+420</div>
+          <div class="phone-row">
+            <div class="phone-prefix">+420</div>
 
-          <div class="input-field">
-            <%= form.telephone_field :phone, class: 'validate', required: true %>
-            <%= form.label :phone %>
+            <div class="input-field">
+              <%= form.telephone_field :phone, class: 'validate', required: true %>
+              <%= form.label :phone %>
+            </div>
           </div>
 
           <div class="input-field">
@@ -46,29 +43,52 @@
             <%= form.label :email %>
           </div>
 
+          <div class="address-title">
+            <span>Adresa</span>
+
+            <img
+              src="<%= asset_pack_path('media/images/tooltip.svg') %>"
+              class="tooltipped"
+              data-position="top"
+              data-tooltip="Díky adrese vás propojíme právě s těmi dobročinnými organizacemi, které se nacházejí ve vaší lokalitě."
+            />
+          </div>
+
           <div class="input-field">
             <%= form.text_field :street, class: 'validate', required: true %>
             <%= form.label :street %>
           </div>
 
-          <div class="input-field">
-            <%= form.text_field :city, class: 'validate', required: true %>
-            <%= form.label :city %>
+          <div class="address-row">
+            <div class="input-field">
+              <%= form.text_field :city, class: 'validate', required: true %>
+              <%= form.label :city %>
+            </div>
+
+            <div class="input-field">
+              <%= form.text_field :zipcode, class: 'validate', required: true %>
+              <%= form.label :zipcode %>
+            </div>
           </div>
 
-          <div class="input-field">
-            <%= form.text_field :zipcode, class: 'validate', required: true %>
-            <%= form.label :zipcode %>
+          <div class="checkbox-row">
+            <label>
+              <%= form.check_box :terms_of_service %>
+              <span>Souhlasím se zpracováním osobních údajů</span>
+            </label>
+          </div>
+          <div class="checkbox-row">
+            <label>
+              <%= form.check_box :age_confirmed %>
+              <span>Prohlašuji, že jsem osoba starší 18 let</span>
+            </label>
           </div>
 
-          <label>
-            <%= form.check_box :terms_of_service %>
-            <span>Souhlasím se zpracováním osobních údajů</span>
-          </label>
-          <label>
-            <%= form.check_box :age_confirmed %>
-            <span>Prohlašuji, že jsem osoba starší 18 let</span>
-          </label>
+          <div class="registration-errors">
+            <ul id="registration-errors-list" class="error-list">
+
+            </ul>
+          </div>
 
           <%= form.submit 'Zaregistrovat se', class: 'form-button' %>
         <% end %>
