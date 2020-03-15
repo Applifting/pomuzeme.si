@@ -85,9 +85,13 @@
 
         .phone-prefix {
           border-bottom: 1px solid #9e9e9e;
-          margin: 14.5px 0 22.5px;
+          margin: 14px 0 22px;
           padding: 0 14px;
           line-height: 43.5px;
+
+          @include custom(991) {
+            margin-top: 13px;
+          }
         }
 
         .input-field {
