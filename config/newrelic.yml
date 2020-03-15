@@ -11,9 +11,6 @@
 # https://docs.newrelic.com/docs/agents/ruby-agent/installation-configuration/ruby-agent-configuration
 
 common: &default_settings
-  # Required license key associated with your New Relic account.
-  license_key: e841602dbc5401e9e1563a550176c42c78abNRAL
-
   # Your application name. Renaming here affects where data displays in New
   # Relic.  For more details, see https://docs.newrelic.com/docs/apm/new-relic-apm/maintenance/renaming-applications
   app_name: Pomuzeme.Si
