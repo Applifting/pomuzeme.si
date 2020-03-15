@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resource :volunteer, only: [] do
     post :register, on: :collection
     post :confirm, on: :collection
+    post :resend, on: :collection
   end
   root 'home#index'
 

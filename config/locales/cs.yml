@@ -91,3 +91,5 @@ cs:
               not_matching: 'se neshoduje'
               expired: 'vyprsel'
               confirmed: 'je jiz potvrzeny'
+    messages:
+      sms_resended: Vas kod byl zmenen a SMS je na ceste.
