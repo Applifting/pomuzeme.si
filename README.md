@@ -27,7 +27,7 @@ The application is an MVC monolith written in the RubyOnRails framework. On Fron
 
 ## Contribution
 
-In case you decide to contribute in this project, we will be very happy and we appreciate your help. Feel free to:
+In case you decide to contribute to this project, we will be very happy and we appreciate your help. Feel free to:
 
 1. Check out open [issues](https://github.com/Applifting/pomuzeme.si/issues). Ideally, choose from the ones that are labeled as `ready for dev`. If you are going to contribute code, read our [architecture guideline](./doc/architecture.md).
 2. Assign your self to the selected issue
@@ -49,7 +49,7 @@ Staging deployment is realised by automatic deploy hook which is triggered when 
 
 **Deployment to production** - [www.pomuzemesi.cz](https://pomuzemesi.cz)
 
-Production deployment is done by authorized developers from Applifting. Deploys are made regularly, each time a new functionality is created. If you need to put something into production contact:
+Production deployment is done by authorized developers from Applifting. Deploys are made regularly, each time new functionality is created. If you need to put something into production contact:
 
 [**Dominik Snopek**](https://github.com/snopedom) - _Development coordinator_ - dominik.snopek@applifting.cz
 
