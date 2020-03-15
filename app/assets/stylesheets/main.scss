@@ -7,7 +7,6 @@ body {
   background-color: $background-light;
   color: $text-color;
   font-family: $main-font;
-  overflow-x: hidden;
 }
 
 img {
@@ -20,6 +19,7 @@ img {
   box-sizing: border-box;
   padding: 0 32px;
   margin: 0 auto;
+  overflow-x: hidden;
 
   @include lg {
     padding: 0 24px;
