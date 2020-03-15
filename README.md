@@ -18,7 +18,7 @@ The application is an MVC monolith written in the RubyOnRails framework. On Fron
 
 #### Steps to get it running
 
-1. `git@github.com:Applifting/pomuzeme.si.git && pomuzeme.si`
+1. `git clone git@github.com:Applifting/pomuzeme.si.git && pomuzeme.si`
 2. `bundle install`
 3. `rake db:create && rake db:migrate` Note: avoid `db:setup` as there is an `db:create` hook that is required,
    in order to have postgres extension.
@@ -31,7 +31,7 @@ In case you decide to contribute in this project, we will be very happy and we a
 
 1. Check out open [issues](https://github.com/Applifting/pomuzeme.si/issues). Ideally, choose from the ones that are labeled as `ready for dev`. If you are going to contribute code, read our [architecture guideline](./doc/architecture.md).
 2. Assign your self to the selected issue
-3. Write estimate delivery time into issue comment (preferably with ping to [@snopedom](https://github.com/snopedom)
+3. Write estimate delivery time into issue comment (preferably with ping to [@snopedom](https://github.com/snopedom))
 4. Create a new branch from `master` where work will be done
 5. After work is done please create new pull request into `master`
 6. Wait for review and PR approval (PR should be approved by 2 other developers, at least one from Applifting)
