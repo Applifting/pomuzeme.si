@@ -29,10 +29,10 @@ The application is an MVC monolith written in the RubyOnRails framework. On Fron
 
 In case you decide to contribute in this project, we will be very happy and we appreciate your help. Feel free to:
 
-1. Check out open [issues](https://github.com/Applifting/pomuzeme.si/issues). Ideally, choose from the ones that are labeled as `ready for dev`
-2. Assign your self to selected issue
+1. Check out open [issues](https://github.com/Applifting/pomuzeme.si/issues). Ideally, choose from the ones that are labeled as `ready for dev`. If you are going to contribute code, read our [architecture guideline](./doc/architecture.md).
+2. Assign your self to the selected issue
 3. Write estimate delivery time into issue comment (preferably with ping to [@snopedom](https://github.com/snopedom)
-4. Create new branch from `master` where work will be done
+4. Create a new branch from `master` where work will be done
 5. After work is done please create new pull request into `master`
 6. Wait for review and PR approval (PR should be approved by 2 other developers, at least one from Applifting)
 7. After merge work is DONE! Thank you! :heart:
