@@ -43,11 +43,11 @@ If you have any questions about development or issue description, feel free to a
 
 At this moment application is deployed on Heroku cloud service. We have two environments, `staging` and `production`.
 
-**Deployment to staging** - [staging.pomuzemesi.cz](staging.pomuzemesi.cz)
+**Deployment to staging** - [staging.pomuzemesi.cz](https://staging.pomuzemesi.cz)
 
 Staging deployment is realised by automatic deploy hook which is triggered when code into `master` is merged (pushed).
 
-**Deployment to production** - [www.pomuzemesi.cz](pomuzemesi.cz)
+**Deployment to production** - [www.pomuzemesi.cz](https://pomuzemesi.cz)
 
 Production deployment is done by authorized developers from Applifting. Deploys are made regularly, each time a new functionality is created. If you need to put something into production contact:
 
@@ -59,7 +59,7 @@ Production deployment is done by authorized developers from Applifting. Deploys 
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
-## Original Authors
+## Authors
 
 Authors of this platform are awesome guys and girls from [Applifting](www.applifting.io). We could not do it without our Contributors that are listed below. Thanks from the bottom of our hearts! :heart:
 
