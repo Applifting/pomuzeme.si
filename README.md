@@ -4,7 +4,7 @@ An open source platform which aims to simplify and streamline the coordination o
 
 ## Authors
 
-Authors of this platform are awesome guys from [Applifting](www.applifting.io) and lot of volunteers who offered help. 
+Authors of this platform are awesome guys from [Applifting](https://www.applifting.io) and lot of volunteers who offered help.
 Thank you all for yours contributions :heart:
 
 ## Getting Started
@@ -48,11 +48,11 @@ If you have any questions about development or issue description, feel free to a
 
 In this moment application is deployed on Heroku cloud service. We have two environments, `staging` and `production`.
 
-**Deployment to staging** - [staging.pomuzemesi.cz](staging.pomuzemesi.cz)
+**Deployment to staging** - [staging.pomuzemesi.cz](https://staging.pomuzemesi.cz)
 
 Staging deployment is realised by automatic deploy hook which is triggered when code into `master` is merged (pushed).
 
-**Deployment to production** - [www.pomuzemesi.cz](pomuzemesi.cz)
+**Deployment to production** - [www.pomuzemesi.cz](https://pomuzemesi.cz)
 
 Production deployment is done by authorized developers from Applifting. Deploys are made regularly, each time a new functionality is created. If you need to put something into production contact: 
 
