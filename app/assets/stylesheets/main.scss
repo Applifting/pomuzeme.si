@@ -260,6 +260,20 @@ h4 {
         padding-top: 16px;
       }
     }
+
+    &.big-text {
+      width: 100%;
+      padding-left: 0 !important;
+      text-align: center;
+
+      @include sm {
+        padding-top: 32px;
+      }
+    }
+  }
+
+  .png-monstrum {
+    height: 50px;
   }
 }
 
