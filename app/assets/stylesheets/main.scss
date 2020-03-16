@@ -555,3 +555,15 @@ h4 {
     }
   }
 }
+
+.geolocation-search {
+  tab-index: 0;
+  display: block;
+  opacity: 1;
+  transform: scaleX(1) scaleY(1);
+  width: 352px;
+  left: 0px;
+  top: 46px;
+  max-height: 250px;
+  transform-origin: 0px 0px;
+}
