@@ -37,7 +37,7 @@ cs:
       volunteer:
         first_name: Jméno
         last_name: Příjmení
-        street_search: Vyhledejte vaší adresu
+        street_search: Vyhledejte vaši adresu
         phone: Telefonní číslo
         email: E-mail
         confirmation_code: Ověřovací kód
