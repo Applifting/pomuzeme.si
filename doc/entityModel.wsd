@@ -128,7 +128,7 @@ Entity(user, "Users"){
  ' Devise
 }
 
-Entity(user, "UserRoles"){
+Entity(user_roles, "UserRoles"){
   not_null(user_id) ID
   not_null(role_id) ID
   not_null(resource_type) STRING
@@ -152,6 +152,10 @@ not_null(receive_id) INTEGER
 organization_group 	o-- organization
 (organization_group, organization) .- organization_in_organization_group
 user o-- organization
+(user, organization) .- user_roles
+volunteer o-- volunteer_label
+(volunteer, volunteer_label) .- assigned_volunteer_label
+
 
 
 @enduml
