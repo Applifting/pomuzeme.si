@@ -2,7 +2,7 @@ class Organisation < ApplicationRecord
   resourcify
 
   validates :name, presence: true
-  validates :abbreviation, presence: true, length: { is: 3 }
+  validates :abbreviation, presence: true, length: { is: 4 }
   validates :contact_person, presence: true
   validates :contact_person_email, presence: true
   validates :contact_person_email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { contact_person_email&.present? }

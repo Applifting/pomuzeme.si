@@ -49,7 +49,7 @@ cs:
         confirmed?: Potvrzen?
       organisation:
         name: Název
-        abbrevation: Zkratka
+        abbreviation: Zkratka
         business_id_number: IČO
         contact_person: Kontantní osoba
         contact_person_phone: Kontantní telefon
