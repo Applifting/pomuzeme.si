@@ -18,7 +18,7 @@ The application is an MVC monolith written in the RubyOnRails framework. On Fron
 
 #### Steps to get it running
 
-1. `git clone git@github.com:Applifting/pomuzeme.si.git && pomuzeme.si`
+1. `git clone git@github.com:Applifting/pomuzeme.si.git && cd pomuzeme.si`
 2. `bundle install`
 3. `rake db:create && rake db:migrate` Note: avoid `db:setup` as there is an `db:create` hook that is required,
    in order to have postgres extension.

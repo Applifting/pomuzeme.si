@@ -1,7 +1,7 @@
 <div id="registration" class="modal">
   <div class="modal-content-custom">
 
-    <%= image_tag asset_path('close.svg'), class: 'close modal-close'  %>
+    <%= image_tag asset_path('close.svg'), class: 'close modal-close' %>
 
     <section class="modal-card-body">
 
@@ -51,25 +51,23 @@
               class="tooltipped"
               data-position="top"
               data-tooltip="Díky adrese vás propojíme právě s těmi dobročinnými organizacemi, které se nacházejí ve vaší lokalitě."
-            />
+              />
           </div>
 
           <div class="input-field">
-            <%= form.text_field :street, class: 'validate', required: true %>
-            <%= form.label :street %>
+            <%= form.text_field :street_search, class: 'validate autocomplete', required: true %>
+            <ul id="searchResult" class="autocomplete-content dropdown-content geolocation-search"></ul>
+            <%= form.label :street_search %>
           </div>
 
-          <div class="address-row">
-            <div class="input-field">
-              <%= form.text_field :city, class: 'validate', required: true %>
-              <%= form.label :city %>
-            </div>
-
-            <div class="input-field">
-              <%= form.text_field :zipcode, class: 'validate', required: true %>
-              <%= form.label :zipcode %>
-            </div>
-          </div>
+          <%= form.hidden_field :street %>
+          <%= form.hidden_field :street_number %>
+          <%= form.hidden_field :city %>
+          <%= form.hidden_field :city_part %>
+          <%= form.hidden_field :geo_entry_id %>
+          <%= form.hidden_field :geo_unit_id %>
+          <%= form.hidden_field :geo_coord_x %>
+          <%= form.hidden_field :geo_coord_y %>
 
           <div class="checkbox-row">
             <label>

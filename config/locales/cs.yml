@@ -37,12 +37,11 @@ cs:
       volunteer:
         first_name: Jméno
         last_name: Příjmení
-        street: Ulice a číslo domu
-        city: Město
-        zipcode: PSČ
+        street_search: Vyhledejte vaší adresu
         phone: Telefonní číslo
-        email: e-mail
+        email: E-mail
         confirmation_code: Ověřovací kód
+        geolocation_err: Nepřesná adresa.
     errors:
       format: "%{attribute} %{message}"
       messages:
