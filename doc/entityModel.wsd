@@ -1,0 +1,157 @@
+@startuml
+
+' uncomment the line below if you're using computer with a retina display
+' skinparam dpi 300
+!define Entity(name,desc) class name as "desc" << (E,#FFAAAA) >>
+' we use bold for primary key
+' green color for unique
+' and underscore for not_null
+!define primary_key(x) <b>x</b>
+!define not_null(x) <u>x</u>
+' other tags available:
+' <i></i>
+' <back:COLOR></color>, where color is a color name or html color code
+' (#FFAACC)
+' see: http://plantuml.com/classes.html#More
+hide methods
+hide stereotypes
+' entities
+
+Entity(volunteer, "Volunteer"){
+  not_null(first_name) STRING
+  not_null(last_name) STRING
+  not_null(phone) STRING
+  not_null(street) STRING
+  not_null(city) STRING
+  not_null(zip) STRING
+  not_null(email) STRING
+  confirmation_code STRING
+  confirmation_valid_to DATETIME
+  confirmed_at DATETIME
+}
+
+Entity(volunteer_label, "Volunteer Label"){
+  not_null(name) STRING
+  not_null(description) STRING
+  organization_id ID
+  organization_group_id ID
+}
+
+
+
+Entity(volunteer_state, "Volunteer State"){
+  not_null(name) STRING
+  not_null(description) STRING
+  organization_id ID
+  not_null(is_considered_as_verified) bool default false
+}
+
+Entity(assigned_volunteer_state, "Assigned Volunteer State"){
+  not_null(state_id) ID
+  not_null(organization_id) ID
+  not_null(volunteer_id) ID
+  not_null(added_by) ID
+  not_null(is_current_state) bool default false
+  'TODO nebude potrebovat to delat skrze organization group id
+}
+
+
+
+Entity(assigned_volunteer_label, "Assigned Volunteer label"){
+  not_null(label_id) ID
+  not_null(volunteer_id) ID
+  not_null(added_by) ID
+}
+
+Entity(address, "Address"){
+  not_null(street) STRING
+  not_null(city) STRING
+  not_null(postal_code) STRING
+  not_null(country_code) "ISO 3166-1 alpha 2 code" 
+  not_null(coordinate) GEO_POINT
+}
+
+
+Entity(request, "Request"){
+  not_null(text) max 160 STRING
+  not_null(required_volunteer_count) INTEGER
+  not_null(address_id) ID
+  not_null(subscriber) STRING 
+  not_null(subscriber_phone) STRING 
+  not_null(coordinator_id) ID 
+  not_null(state) ENUM[open|closed|]
+  not_null(is_published) bool default false
+}
+' TODO TOM on state, WTF is prislibeno?
+
+Entity(requested_volunteer, "Requested Volunteer"){
+  not_null(volunteer_id) ID
+  not_null(request_id) ID
+  not_null(state) ENUM[pending|notified|accepted|rejected|manually_added|removed]
+  last_notified_at DATETIME
+  last_accepted_at DATETIME
+  last_rejected_at DATETIME
+  last_removed_at DATETIME
+}
+
+' TODO: Mozna eventy
+
+
+Entity(organization, "Organization") {
+  not_null(name) STRING
+  not_null(abbrerviation) STRING
+  business_id_number STRING
+  not_null(contact_person) STRING 
+  not_null(contact_person_phone) STRING 
+  not_null(contact_person_email) STRING
+}
+
+
+
+Entity(organization_group, "Organization Group") {
+  not_null(name) STRING
+
+}
+
+Entity(volunteer_in_organization_group, "Volunteer In Organization Group"){
+  not_null(organization_group_id) ID
+  not_null(volunteer_id) ID
+  not_null(is_exclusive) bool default false
+}
+
+Entity(organization_in_organization_group, "Organization In Organization Group"){
+  not_null(organization_group_id) ID
+  not_null(organization_id) ID
+}
+
+Entity(user, "Users"){
+ ' Devise
+}
+
+Entity(user, "UserRoles"){
+  not_null(user_id) ID
+  not_null(role_id) ID
+  not_null(resource_type) STRING
+  not_null(resource_id) ID
+}
+
+Entity(roles, "Roles") {
+  not_null(name) ENUM[coordinator|superadmin]
+}
+
+
+
+
+Entity(transactions, "Transactions") {
+primary_key(id) INTEGER
+not_null(amount) INTEGER
+not_null(sender_id) INTEGER
+not_null(receive_id) INTEGER
+}
+' relationships
+organization_group 	o-- organization
+(organization_group, organization) .- organization_in_organization_group
+user o-- organization
+
+
+@enduml
