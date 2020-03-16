@@ -4,6 +4,8 @@ ActiveAdmin.register Organisation do
 
   decorate_with OrganisationDecorator
 
+  scope_to :current_user, association_method: :coordinating_organisations, unless: -> { current_user.has_role?(:super_admin) }
+
   index do
     column :name
     column :abbrevation

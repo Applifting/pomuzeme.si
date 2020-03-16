@@ -4,4 +4,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, 
          :recoverable, :rememberable, :validatable
+
+  def coordinating_organisations
+    Organisation.with_role(:coordinator, self)
+  end
 end
