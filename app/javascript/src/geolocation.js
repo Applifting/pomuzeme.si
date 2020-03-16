@@ -41,7 +41,11 @@ $(document).ready(function () {
                             // Vytvoření objektu s adresním místem
                             var res = GetAddressFormat(item);
 
-                            var dropdownVal = [item.obec_nazev, item.cast_obce_nazev, item.ulice_nazev, item.cislo].join(', ')
+                            var locArr = [item.obec_nazev, item.cast_obce_nazev, item.ulice_nazev, item.cislo]
+                            locArr = locArr.filter(function (v) {
+                                return v !== null
+                            });
+                            var dropdownVal = locArr.join(', ');
 
                             suggestionArray.push({
                                 value: res.placeholder, // Kompletní text zvoleného územního celku
