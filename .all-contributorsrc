@@ -13,6 +13,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "landovsky",
+      "name": "landovsky",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/435847?v=4",
+      "profile": "https://github.com/landovsky",
+      "contributions": [
+        "ideas",
+        "projectManagement",
+        "business"
+      ]
     }
   ],
   "contributorsPerLine": 7,
