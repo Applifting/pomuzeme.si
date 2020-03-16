@@ -101,6 +101,15 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "adelkahomolova",
+      "name": "Adela Homolova",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/53510747?v=4",
+      "profile": "https://github.com/adelkahomolova",
+      "contributions": [
+        "content"
+      ]
     }
   ],
   "contributorsPerLine": 7,
