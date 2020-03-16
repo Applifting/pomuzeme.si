@@ -71,6 +71,10 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     arbre (1.2.1)
       activesupport (>= 3.0.0)
+    arctic_admin (3.0.0)
+      activeadmin (~> 2.0)
+      font-awesome-sass (~> 5.6.1)
+      jquery-rails
     ast (2.4.0)
     barnes (0.0.8)
       multi_json (~> 1)
@@ -106,6 +110,8 @@ GEM
     faraday (1.0.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.12.2)
+    font-awesome-sass (5.6.1)
+      sassc (>= 1.11)
     formtastic (3.1.5)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.6.0)
@@ -314,6 +320,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  arctic_admin
   barnes
   bootsnap (>= 1.4.2)
   byebug
