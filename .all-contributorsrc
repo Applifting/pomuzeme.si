@@ -55,6 +55,15 @@
         "code",
         "review"
       ]
+    },
+    {
+      "login": "vlnevyhosteny",
+      "name": "vnevyhosteny",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/15954946?v=4",
+      "profile": "https://github.com/vlnevyhosteny",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
