@@ -1,6 +1,6 @@
 # pomuzeme.si
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 An open-source platform which aims to simplify and streamline the coordination of volunteers. Through the platform, local organizations can reach volunteers in the area where assistance is needed. This project originated as a voluntary initiative in connection with the COVID-19 infection.
@@ -77,6 +77,7 @@ Authors of this platform are awesome guys and girls from [Applifting](www.applif
     <td align="center"><a href="https://github.com/landovsky"><img src="https://avatars1.githubusercontent.com/u/435847?v=4" width="100px;" alt=""/><br /><sub><b>landovsky</b></sub></a><br /><a href="#ideas-landovsky" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-landovsky" title="Project Management">📆</a> <a href="#business-landovsky" title="Business development">💼</a></td>
     <td align="center"><a href="https://github.com/arthurwozniak"><img src="https://avatars1.githubusercontent.com/u/1984961?v=4" width="100px;" alt=""/><br /><sub><b>Kamil Hanus</b></sub></a><br /><a href="https://github.com/Applifting/pomuzeme.si/commits?author=arthurwozniak" title="Code">💻</a> <a href="https://github.com/Applifting/pomuzeme.si/pulls?q=is%3Apr+reviewed-by%3Aarthurwozniak" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/martinhanzik"><img src="https://avatars2.githubusercontent.com/u/107980?v=4" width="100px;" alt=""/><br /><sub><b>Martin Hanzík</b></sub></a><br /><a href="#infra-martinhanzik" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/Applifting/pomuzeme.si/commits?author=martinhanzik" title="Code">💻</a> <a href="https://github.com/Applifting/pomuzeme.si/pulls?q=is%3Apr+reviewed-by%3Amartinhanzik" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://github.com/pavelc"><img src="https://avatars0.githubusercontent.com/u/306990?v=4" width="100px;" alt=""/><br /><sub><b>pavelc</b></sub></a><br /><a href="https://github.com/Applifting/pomuzeme.si/commits?author=pavelc" title="Code">💻</a> <a href="https://github.com/Applifting/pomuzeme.si/pulls?q=is%3Apr+reviewed-by%3Apavelc" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 
