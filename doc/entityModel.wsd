@@ -161,7 +161,7 @@ volunteer *- address
 volunteer *-- assigned_volunteer_state
 volunteer_state <- assigned_volunteer_state
 organization *- volunteer_state
-volunteer_in_organization_group o- volunteer
-organization <- volunteer_in_organization_group
+volunteer_in_organization_group -o volunteer
+organization_group <- volunteer_in_organization_group
 
 @enduml
