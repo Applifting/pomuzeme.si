@@ -20,27 +20,27 @@
         <h3>Vyplňte potřebné údaje</h3>
         <%= form_with model: Volunteer.new, id: 'registration-form', url: register_volunteer_path, remote: true do |form| %>
           <div class="input-field">
-            <%= form.text_field :first_name, class: 'validate', required: true %>
-            <%= form.label :first_name %>
+            <%= form.text_field :first_name, class: 'validate', required: true, ariaRequired: true %>
+            <%= form.label :first_name, "Jméno *" %>
           </div>
 
           <div class="input-field">
-            <%= form.text_field :last_name, class: 'validate', required: true %>
-            <%= form.label :last_name %>
+            <%= form.text_field :last_name, class: 'validate', required: true, ariaRequired: true %>
+            <%= form.label :last_name, "Přijmení *" %>
           </div>
 
           <div class="phone-row">
             <div class="phone-prefix">+420</div>
 
             <div class="input-field">
-              <%= form.telephone_field :phone, class: 'validate', required: true %>
-              <%= form.label :phone %>
+              <%= form.telephone_field :phone, class: 'validate', required: true, ariaRequired: true %>
+              <%= form.label :phone, "Mobil *" %>
             </div>
           </div>
 
           <div class="input-field">
-            <%= form.text_field :email, class: 'validate', required: false %>
-            <%= form.label :email %>
+            <%= form.text_field :email, class: 'validate', required: false, ariaRequired: true %>
+            <%= form.label :email, "Email *" %>
           </div>
 
           <div class="address-title">
@@ -55,8 +55,8 @@
           </div>
 
           <div class="input-field">
-            <%= form.text_field :street_search, class: 'validate autocomplete', required: true %>
-            <%= form.label :street_search %>
+            <%= form.text_field :street_search, class: 'validate autocomplete', required: true, ariaRequired: true %>
+            <%= form.label :street_search, "Vyhledejte vaší adresu *"  %>
           </div>
 
           <%= form.hidden_field :street %>
