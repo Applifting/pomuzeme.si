@@ -1,6 +1,6 @@
 # pomuzeme.si
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 An open-source platform which aims to simplify and streamline the coordination of volunteers. Through the platform, local organizations can reach volunteers in the area where assistance is needed. This project originated as a voluntary initiative in connection with the COVID-19 infection.
@@ -75,6 +75,7 @@ Authors of this platform are awesome guys and girls from [Applifting](www.applif
   <tr>
     <td align="center"><a href="http://www.applifting.cz"><img src="https://avatars2.githubusercontent.com/u/10887101?v=4" width="100px;" alt=""/><br /><sub><b>Dominik Snopek</b></sub></a><br /><a href="https://github.com/Applifting/pomuzeme.si/commits?author=snopedom" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/landovsky"><img src="https://avatars1.githubusercontent.com/u/435847?v=4" width="100px;" alt=""/><br /><sub><b>landovsky</b></sub></a><br /><a href="#ideas-landovsky" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-landovsky" title="Project Management">📆</a> <a href="#business-landovsky" title="Business development">💼</a></td>
+    <td align="center"><a href="https://github.com/arthurwozniak"><img src="https://avatars1.githubusercontent.com/u/1984961?v=4" width="100px;" alt=""/><br /><sub><b>Kamil Hanus</b></sub></a><br /><a href="https://github.com/Applifting/pomuzeme.si/commits?author=arthurwozniak" title="Code">💻</a> <a href="https://github.com/Applifting/pomuzeme.si/pulls?q=is%3Apr+reviewed-by%3Aarthurwozniak" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 
