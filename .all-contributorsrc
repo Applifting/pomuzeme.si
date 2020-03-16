@@ -45,6 +45,16 @@
         "code",
         "review"
       ]
+    },
+    {
+      "login": "pavelc",
+      "name": "pavelc",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/306990?v=4",
+      "profile": "https://github.com/pavelc",
+      "contributions": [
+        "code",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
