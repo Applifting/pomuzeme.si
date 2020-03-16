@@ -1,6 +1,9 @@
 # pomuzeme.si
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 An open-source platform which aims to simplify and streamline the coordination of volunteers. Through the platform, local organizations can reach volunteers in the area where assistance is needed. This project originated as a voluntary initiative in connection with the COVID-19 infection.
@@ -32,7 +35,7 @@ The application is an MVC monolith written in the RubyOnRails framework. On Fron
 
 In case you decide to contribute in this project, we will be very happy and we appreciate your help. Feel free to:
 
-1. Check out open [issues](https://github.com/Applifting/pomuzeme.si/issues). Ideally, choose from the ones that are labeled as `ready for dev`. If you are going to contribute code, read our [architecture guideline](./doc/architecture.md).
+1. Check out open [issues](https://github.com/Applifting/pomuzeme.si/issues). Ideally, choose from the ones that are labeled as `ready for dev`. If you are going to contribute code, read our [contribution guide](./doc/contributing.md).
 2. Assign your self to the selected issue
 3. Write estimate delivery time into issue comment (preferably with ping to [@snopedom](https://github.com/snopedom))
 4. Create a new branch from `master` where work will be done
@@ -91,4 +94,5 @@ Authors of this platform are awesome guys and girls from [Applifting](www.applif
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
