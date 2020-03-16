@@ -69,7 +69,11 @@ Entity(address, "Address"){
   not_null(postal_code) STRING
   not_null(country_code) "ISO 3166-1 alpha 2 code" 
   not_null(coordinate) GEO_POINT
+  not_null(addressable_id) ID
+  not_null(addressable_type) STRING
 }
+
+
 
 
 Entity(request, "Request"){
@@ -78,7 +82,8 @@ Entity(request, "Request"){
   not_null(address_id) ID
   not_null(subscriber) STRING 
   not_null(subscriber_phone) STRING 
-  not_null(coordinator_id) ID 
+  not_null(coordinator_id) ID
+  not_null(organization_id) ID
   not_null(state) ENUM[open|closed|]
   not_null(is_published) bool default false
 }
@@ -124,38 +129,39 @@ Entity(organization_in_organization_group, "Organization In Organization Group")
   not_null(organization_id) ID
 }
 
-Entity(user, "Users"){
+Entity(user, "User"){
  ' Devise
 }
 
-Entity(user_roles, "UserRoles"){
+Entity(user_role, "UserRole"){
   not_null(user_id) ID
   not_null(role_id) ID
   not_null(resource_type) STRING
   not_null(resource_id) ID
 }
 
-Entity(roles, "Roles") {
+Entity(role, "Role") {
   not_null(name) ENUM[coordinator|superadmin]
 }
 
 
-
-
-Entity(transactions, "Transactions") {
-primary_key(id) INTEGER
-not_null(amount) INTEGER
-not_null(sender_id) INTEGER
-not_null(receive_id) INTEGER
-}
 ' relationships
 organization_group 	o-- organization
 (organization_group, organization) .- organization_in_organization_group
 user o-- organization
-(user, organization) .- user_roles
+(user, organization) .- user_role
+user_role -> role
 volunteer o-- volunteer_label
 (volunteer, volunteer_label) .- assigned_volunteer_label
-
-
+organization *-- request
+request -> user
+request  o-- volunteer
+(request, volunteer) .- requested_volunteer
+volunteer *- address
+volunteer *-- assigned_volunteer_state
+volunteer_state <- assigned_volunteer_state
+organization *- volunteer_state
+volunteer_in_organization_group o- volunteer
+organization <- volunteer_in_organization_group
 
 @enduml
