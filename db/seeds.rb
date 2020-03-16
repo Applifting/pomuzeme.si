@@ -1,23 +1,23 @@
 return unless Rails.env.development?
 
 # create super admin
-SeedHelper.create_super_admin email: 'admin@example.com', password: 'password'
+SeedHelper.create_super_admin email: 'admin@example.com', password: 'password', first_name: 'Awesome', last_name: 'Admin'
 
 # seed organisations
 organisation1 = SeedHelper.create_organisation name: 'Oblastni charita',
-                                               abbrevation: 'OCH',
+                                               abbreviation: 'OCH',
                                                contact_person: 'reditelka pobocky',
                                                contact_person_phone: '+420222444333',
                                                contact_person_email: 'area@charita.cz'
 
 organisation2 = SeedHelper.create_organisation name: 'Spolek dobrovolniku',
-                                               abbrevation: 'SDO',
+                                               abbreviation: 'SDO',
                                                contact_person: 'pan Novak',
                                                contact_person_phone: '+420222444322',
                                                contact_person_email: 'novak@gmail.com'
 
-SeedHelper.create_coordinator(email: 'coordinator@example.com', password: 'password', organisation: organisation1)
-SeedHelper.create_coordinator(email: 'coordinator2@example.com', password: 'password', organisation: organisation2)
+SeedHelper.create_coordinator(email: 'coordinator@example.com', password: 'password', organisation: organisation1, first_name: 'Pavel', last_name: 'Pomahac')
+SeedHelper.create_coordinator(email: 'coordinator2@example.com', password: 'password', organisation: organisation2, first_name: 'Josef', last_name: 'Novak')
 
 
 # Create sample volunteers

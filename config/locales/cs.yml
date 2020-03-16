@@ -105,6 +105,10 @@ cs:
               not_matching: 'se neshoduje'
               expired: 'vypršel'
               confirmed: 'je již potvrzený'
+        organisation:
+          attributes:
+            contact_person_phone:
+              improbable_phone: není správně
     messages:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
 

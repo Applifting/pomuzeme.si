@@ -11,7 +11,6 @@ class Volunteer < ApplicationRecord
   validates :zipcode, zipcode: { country_code: :cs }, if: -> { zipcode&.present? } # skip if not present to overcome multiple validation errors
 
   def with_existing_record
-    # TODO: handle update of existing values except identifiers
     Volunteer.unconfirmed.where(phone: normalized_phone).take || self
   end
 end

@@ -6,9 +6,11 @@ ActiveAdmin.register Organisation do
 
   scope_to :current_user, association_method: :coordinating_organisations, unless: -> { current_user.has_role?(:super_admin) }
 
+  permit_params :name, :abbreviation, :business_id_number, :contact_person, :contact_person_email, :contact_person_phone
+
   index do
     column :name
-    column :abbrevation
+    column :abbreviation
     column :business_id_number
     column :contact_person
     column :contact_person_phone
