@@ -13,11 +13,11 @@ build-image:
     - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE:latest .
     - docker push $CI_REGISTRY_IMAGE:latest
 
-deploy-staging:
-  stage: deploy
-  image: ruby:2.6
-  only:
-    - master
-  script:
-  - gem install dpl
-  - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY --skip_cleanup
+# deploy-staging:
+#   stage: deploy
+#   image: ruby:2.6
+#   only:
+#     - master
+#   script:
+#   - gem install dpl
+#   - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY --skip_cleanup

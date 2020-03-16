@@ -7,7 +7,7 @@ body {
   background-color: $background-light;
   color: $text-color;
   font-family: $main-font;
-  overflow-x: hidden;
+  font-weight: $main-font-weight;
 }
 
 img {
@@ -20,6 +20,7 @@ img {
   box-sizing: border-box;
   padding: 0 32px;
   margin: 0 auto;
+  overflow-x: hidden;
 
   @include lg {
     padding: 0 24px;
@@ -241,6 +242,10 @@ h4 {
     flex-direction: column;
   }
 
+  .org-logo {
+    padding: 24px;
+  }
+
   .text {
     font-size: 18px;
     line-height: 150%;
@@ -258,6 +263,16 @@ h4 {
 
       @include sm {
         padding-top: 16px;
+      }
+    }
+
+    &.big-text {
+      width: 100%;
+      padding-left: 0 !important;
+      text-align: center;
+
+      @include sm {
+        padding-top: 32px;
       }
     }
   }
@@ -544,4 +559,16 @@ h4 {
       line-height: 150%;
     }
   }
+}
+
+.geolocation-search {
+  tab-index: 0;
+  display: block;
+  opacity: 1;
+  transform: scaleX(1) scaleY(1);
+  width: 352px;
+  left: 0px;
+  top: 46px;
+  max-height: 250px;
+  transform-origin: 0px 0px;
 }
