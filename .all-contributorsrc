@@ -91,6 +91,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "igneus",
+      "name": "Jakub Pavlík",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/53101?v=4",
+      "profile": "http://igneus.github.com",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
