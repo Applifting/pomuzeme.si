@@ -12,4 +12,10 @@ Rails.application.routes.draw do
     post :resend, on: :collection
   end
   root 'home#index'
+
+  namespace :api do
+    namespace :v1 do
+      post '/geo/fulltext', to: 'geolocation#fulltext'
+    end
+  end
 end
