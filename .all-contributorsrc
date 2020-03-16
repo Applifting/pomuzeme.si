@@ -34,6 +34,17 @@
         "code",
         "review"
       ]
+    },
+    {
+      "login": "martinhanzik",
+      "name": "Martin Hanzík",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/107980?v=4",
+      "profile": "https://github.com/martinhanzik",
+      "contributions": [
+        "infra",
+        "code",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
