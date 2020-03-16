@@ -1,5 +1,3 @@
-require('jquery/dist/jquery.min');
-
 var suggestionArray = [];
 var suggestionSelKey = "";
 var currentRequest = null;
@@ -92,8 +90,6 @@ function onSelect(element) {
 
     // Funkce pro dotažení geometrie
     getGeometryByCode(result)
-
-    console.log(result)
 
     $("#searchResult").empty();
     $("#volunteer_street_search").val(result.dropdownVal);
