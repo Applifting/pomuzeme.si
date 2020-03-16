@@ -85,4 +85,10 @@ gem 'devise'
 gem 'cancancan'
 
 # role management
-gem "rolify"
+gem 'rolify'
+
+# active admin
+gem 'activeadmin'
+
+# localisation
+gem 'rails-i18n'
