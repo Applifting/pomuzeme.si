@@ -21,9 +21,6 @@ Entity(volunteer, "Volunteer"){
   not_null(first_name) STRING
   not_null(last_name) STRING
   not_null(phone) STRING
-  not_null(street) STRING
-  not_null(city) STRING
-  not_null(zip) STRING
   not_null(email) STRING
   confirmation_code STRING
   confirmation_valid_to DATETIME
@@ -65,10 +62,15 @@ Entity(assigned_volunteer_label, "Assigned Volunteer label"){
 
 Entity(address, "Address"){
   not_null(street) STRING
+  not_null(street_number) STRING
   not_null(city) STRING
+  not_null(city_part) STRING
+  not_null(geo_entry_id) STRING
+  not_null(geo_unit_id) STRING
+  not_null(geo_coord_x) FLOAT
+  not_null(geo_coord_y) FLOAT
   not_null(postal_code) STRING
   not_null(country_code) "ISO 3166-1 alpha 2 code" 
-  not_null(coordinate) GEO_POINT
   not_null(addressable_id) ID
   not_null(addressable_type) STRING
 }
