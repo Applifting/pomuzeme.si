@@ -13,4 +13,13 @@ ActiveAdmin.register Volunteer do
     end
     actions
   end
+
+  csv do
+    column :first_name
+    column :last_name
+    column :phone
+    column :email
+    column :street
+    column :city
+  end
 end

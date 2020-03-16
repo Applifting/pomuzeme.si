@@ -5,7 +5,7 @@ module Abilities
       can %i[index read], Organisation
       can :update, Organisation, id: Organisation.with_role(:coordinator, user).pluck(:id)
       can %i[index read], User
-      can %i[index read], Volunteer
+      can %i[index read download], Volunteer
       cannot %i[index read], Volunteer, confirmed_at: nil
     end
   end
