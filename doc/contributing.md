@@ -2,19 +2,13 @@
 
 Before you contribute some code, please review the following aspects of this project:
 
-## Architecture
-
----
-
-Pomuzeme.si - consists of two modules - landing page and administration interface
-
-### Business logic
+## Business logic
 
 Business logic is written into service objects. One service class per use case. Service classes are grouped by modules.
 
 We use the pattern as described in this [guide](https://www.toptal.com/ruby-on-rails/rails-service-objects-tutorial)
 
-### Technologies and libraries
+## Technologies and libraries
 
 **Following libraries and technologies are used:**
 
@@ -26,3 +20,11 @@ We use the pattern as described in this [guide](https://www.toptal.com/ruby-on-r
 - [ActiveAdmin](https://github.com/activeadmin/activeadmin) for scaffolding controllers
 - Postgres with postgis extension. Use [activerecord-postgis-adapter](https://github.com/rgeo/activerecord-postgis-adapter)
 - Google geolocation api - need to find appropriate gem, maybe [geocoder](https://github.com/alexreisner/geocoder)
+
+## Definition of Done
+
+This is the minimal definition of done that every code contribution must adhere to
+
+- Documentation exists on the level of Service objects
+- Entity model is updated if you've done a change in entities
+-
