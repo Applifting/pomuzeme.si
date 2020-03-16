@@ -77,3 +77,12 @@ gem 'phony_rails'
 
 # Code quality
 gem 'rubocop'
+
+# authentication
+gem 'devise'
+
+# authorization
+gem 'cancancan'
+
+# role management
+gem "rolify"
