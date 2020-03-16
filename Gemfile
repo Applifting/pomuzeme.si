@@ -89,8 +89,9 @@ gem 'rolify'
 
 # active admin
 gem 'activeadmin'
-# active admin theme
 gem 'arctic_admin'
+gem 'draper'
 
 # localisation
 gem 'rails-i18n'
+gem 'devise-i18n'

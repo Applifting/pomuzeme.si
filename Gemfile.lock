@@ -53,6 +53,10 @@ GEM
       globalid (>= 0.3.6)
     activemodel (6.0.2.1)
       activesupport (= 6.0.2.1)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (6.0.2.1)
       activemodel (= 6.0.2.1)
       activesupport (= 6.0.2.1)
@@ -106,6 +110,14 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.9.0)
+      devise (>= 4.7.1)
+    draper (3.1.0)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
+      activemodel-serializers-xml (>= 1.0)
+      activesupport (>= 5.0)
+      request_store (>= 1.0)
     erubi (1.9.0)
     faraday (1.0.0)
       multipart-post (>= 1.2, < 3)
@@ -239,6 +251,8 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (1.7.0)
+    request_store (1.4.1)
+      rack (>= 1.4)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -328,6 +342,8 @@ DEPENDENCIES
   capybara (>= 2.15)
   cloudflare-rails
   devise
+  devise-i18n
+  draper
   httparty
   jbuilder (~> 2.7)
   listen (>= 3.0.5, < 3.2)
