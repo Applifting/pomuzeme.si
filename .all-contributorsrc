@@ -64,6 +64,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "klaravytiskova",
+      "name": "klaravytiskova",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/62238792?v=4",
+      "profile": "https://github.com/klaravytiskova",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
