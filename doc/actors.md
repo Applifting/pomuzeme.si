@@ -17,7 +17,7 @@ Their mainly want to:
 
 ## Volunteer
 
-Voltuneer is someone who registered at the pomuzeme.si website and successfully verified their mobile number.
+Voltuneer is someone who registered at the pomuzeme.si website and successfully verified their mobile number or registered through organisation's channel for this organisation.
 
 The main functionalities for the Volunteer:
 
