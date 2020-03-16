@@ -1,6 +1,6 @@
 # pomuzeme.si
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 An open-source platform which aims to simplify and streamline the coordination of volunteers. Through the platform, local organizations can reach volunteers in the area where assistance is needed. This project originated as a voluntary initiative in connection with the COVID-19 infection.
@@ -79,6 +79,7 @@ Authors of this platform are awesome guys and girls from [Applifting](www.applif
     <td align="center"><a href="https://github.com/martinhanzik"><img src="https://avatars2.githubusercontent.com/u/107980?v=4" width="100px;" alt=""/><br /><sub><b>Martin Hanzík</b></sub></a><br /><a href="#infra-martinhanzik" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/Applifting/pomuzeme.si/commits?author=martinhanzik" title="Code">💻</a> <a href="https://github.com/Applifting/pomuzeme.si/pulls?q=is%3Apr+reviewed-by%3Amartinhanzik" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/pavelc"><img src="https://avatars0.githubusercontent.com/u/306990?v=4" width="100px;" alt=""/><br /><sub><b>pavelc</b></sub></a><br /><a href="https://github.com/Applifting/pomuzeme.si/commits?author=pavelc" title="Code">💻</a> <a href="https://github.com/Applifting/pomuzeme.si/pulls?q=is%3Apr+reviewed-by%3Apavelc" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/vlnevyhosteny"><img src="https://avatars3.githubusercontent.com/u/15954946?v=4" width="100px;" alt=""/><br /><sub><b>vnevyhosteny</b></sub></a><br /><a href="https://github.com/Applifting/pomuzeme.si/commits?author=vlnevyhosteny" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/klaravytiskova"><img src="https://avatars2.githubusercontent.com/u/62238792?v=4" width="100px;" alt=""/><br /><sub><b>klaravytiskova</b></sub></a><br /><a href="https://github.com/Applifting/pomuzeme.si/issues?q=author%3Aklaravytiskova" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
