@@ -1,6 +1,6 @@
 # pomuzeme.si
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 An open-source platform which aims to simplify and streamline the coordination of volunteers. Through the platform, local organizations can reach volunteers in the area where assistance is needed. This project originated as a voluntary initiative in connection with the COVID-19 infection.
@@ -83,6 +83,7 @@ Authors of this platform are awesome guys and girls from [Applifting](www.applif
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/davidvobecky"><img src="https://avatars3.githubusercontent.com/u/62207599?v=4" width="100px;" alt=""/><br /><sub><b>davidvobecky</b></sub></a><br /><a href="#design-davidvobecky" title="Design">🎨</a></td>
+    <td align="center"><a href="https://github.com/vaclavpavlicek"><img src="https://avatars3.githubusercontent.com/u/6002134?v=4" width="100px;" alt=""/><br /><sub><b>Vaclav Pavlicek</b></sub></a><br /><a href="https://github.com/Applifting/pomuzeme.si/commits?author=vaclavpavlicek" title="Code">💻</a></td>
   </tr>
 </table>
 
