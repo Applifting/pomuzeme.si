@@ -105,6 +105,9 @@ Entity(requested_volunteer, "Requested Volunteer"){
 Entity(organization, "Organization") {
   not_null(name) STRING
   not_null(abbrerviation) STRING
+  ' TODO: The slug can be the same as the abbrev or name
+  not_null(slug) STRING 
+
   business_id_number STRING
   not_null(contact_person) STRING 
   not_null(contact_person_phone) STRING 
@@ -115,7 +118,7 @@ Entity(organization, "Organization") {
 
 Entity(organization_group, "Organization Group") {
   not_null(name) STRING
-
+  not_null(slug) STRING 
 }
 
 Entity(volunteer_in_organization_group, "Volunteer In Organization Group"){
