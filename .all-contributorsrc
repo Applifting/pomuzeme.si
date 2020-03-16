@@ -1,0 +1,121 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "snopedom",
+      "name": "Dominik Snopek",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/10887101?v=4",
+      "profile": "http://www.applifting.cz",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "landovsky",
+      "name": "landovsky",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/435847?v=4",
+      "profile": "https://github.com/landovsky",
+      "contributions": [
+        "ideas",
+        "projectManagement",
+        "business"
+      ]
+    },
+    {
+      "login": "arthurwozniak",
+      "name": "Kamil Hanus",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1984961?v=4",
+      "profile": "https://github.com/arthurwozniak",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    },
+    {
+      "login": "martinhanzik",
+      "name": "Martin Hanzík",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/107980?v=4",
+      "profile": "https://github.com/martinhanzik",
+      "contributions": [
+        "infra",
+        "code",
+        "review"
+      ]
+    },
+    {
+      "login": "pavelc",
+      "name": "pavelc",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/306990?v=4",
+      "profile": "https://github.com/pavelc",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    },
+    {
+      "login": "vlnevyhosteny",
+      "name": "vnevyhosteny",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/15954946?v=4",
+      "profile": "https://github.com/vlnevyhosteny",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "klaravytiskova",
+      "name": "klaravytiskova",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/62238792?v=4",
+      "profile": "https://github.com/klaravytiskova",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "davidvobecky",
+      "name": "davidvobecky",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/62207599?v=4",
+      "profile": "https://github.com/davidvobecky",
+      "contributions": [
+        "design"
+      ]
+    },
+    {
+      "login": "vaclavpavlicek",
+      "name": "Vaclav Pavlicek",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/6002134?v=4",
+      "profile": "https://github.com/vaclavpavlicek",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "igneus",
+      "name": "Jakub Pavlík",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/53101?v=4",
+      "profile": "http://igneus.github.com",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    },
+    {
+      "login": "adelkahomolova",
+      "name": "Adela Homolova",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/53510747?v=4",
+      "profile": "https://github.com/adelkahomolova",
+      "contributions": [
+        "content"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "pomuzeme.si",
+  "projectOwner": "Applifting",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
