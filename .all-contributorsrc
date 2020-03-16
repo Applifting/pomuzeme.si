@@ -110,6 +110,16 @@
       "contributions": [
         "content"
       ]
+    },
+    {
+      "login": "janzikan",
+      "name": "Jan Zikan",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1512987?v=4",
+      "profile": "http://www.sorcerer.cz",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
