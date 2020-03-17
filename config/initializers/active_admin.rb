@@ -1,3 +1,6 @@
+# require custom Arbre components from app/components/
+Dir[Rails.root.join('app/components/*.rb')].each { |f| require f }
+
 ActiveAdmin.setup do |config|
   # == Site Title
   #

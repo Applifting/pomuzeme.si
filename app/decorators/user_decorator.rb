@@ -1,4 +1,7 @@
 class UserDecorator < ApplicationDecorator
+
+  # decorates_association :roles
+
   delegate_all
 
   def full_name

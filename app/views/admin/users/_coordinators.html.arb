@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+div class: 'title h4' do
+  span 'Role'
+  span modal_link('', create_role_admin_user_path(resource), class: 'action add')
+end
+
+resource.roles.includes(:resource).coordinator.for_model(:Organisation).tap do |roles_with_organisation|
+  next if roles_with_organisation.blank?
+
+  table_for roles_with_organisation.map(&:decorate) do
+    column 'Organizace', &:resource
+    column 'Akce', class: 'centered', &:actions
+  end
+end

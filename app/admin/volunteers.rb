@@ -1,5 +1,10 @@
 ActiveAdmin.register Volunteer do
+
   decorate_with VolunteerDecorator
+
+  scope :all, default: true
+  scope :unconfirmed, if: -> { current_user.admin? }
+  scope :confirmed, if: -> { current_user.admin? }
 
   index do
     id_column

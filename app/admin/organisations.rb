@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Organisation do
   decorate_with OrganisationDecorator
 

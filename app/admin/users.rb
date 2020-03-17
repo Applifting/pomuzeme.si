@@ -17,7 +17,45 @@ ActiveAdmin.register User do
     actions
   end
 
-  # TODO: add possibility to assign coordinator role on show page
+  show do
+    modal_window
+
+    panel resource.full_name do
+      attributes_table_for resource do
+        row :first_name
+        row :last_name
+        row :email
+        row :created_at
+        row :updated_at
+      end
+    end
+    panel nil, style: 'width: 580px' do
+      render partial: 'coordinators'
+    end
+    active_admin_comments
+  end
+
+  member_action :new_role, method: :get do
+    @user = resource
+    @available_roles = Role.includes(:resource).coordinator.for_model(:Organisation).where.not(id: @user.roles.includes(:resource).coordinator.for_model(:Organisation))
+    render 'admin/modal/open', locals: { template: 'admin/users/new_role' }
+  end
+
+  member_action :create_role, method: :post do
+    role = Role.find_by_id params['role_id']
+    user = User.find_by_id params['user_id']
+    user.grant role.name, role.resource
+
+    render 'admin/modal/close'
+  end
+
+  member_action :destroy_role, method: :post do
+    role = Role.find_by_id params['role_id']
+    user = User.find_by_id params['user_id']
+    user.remove_role role.name, role.resource
+
+    render head: :ok
+  end
 
   filter :email
   filter :current_sign_in_at
