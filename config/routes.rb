@@ -19,5 +19,6 @@ Rails.application.routes.draw do
       post '/geo/fulltext', to: 'geolocation#fulltext'
     end
   end
+  post '/api/sms_callback', to: 'callback#sms'
 
 end
