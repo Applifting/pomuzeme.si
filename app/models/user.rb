@@ -29,6 +29,9 @@ class User < ApplicationRecord
     cached_roles_name.include? role_name
   end
 
-  # make it concern, think about more clever way
-  def users_in_organisations; end
+  def coordinators_in_organisations
+    User.joins(:roles).where(roles: { name: :coordinator,
+                                      resource_type: :Organisation,
+                                      resource_id: coordinating_organisation_ids })
+  end
 end
