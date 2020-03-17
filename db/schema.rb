@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_16_153958) do
+ActiveRecord::Schema.define(version: 2020_03_17_102156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2020_03_16_153958) do
     t.string "geo_unit_id", null: false
     t.float "geo_coord_x", null: false
     t.float "geo_coord_y", null: false
+    t.text "description"
     t.index ["phone"], name: "index_volunteers_on_phone"
   end
 
