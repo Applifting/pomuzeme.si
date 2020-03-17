@@ -89,6 +89,7 @@
           </div>
 
           <%= form.submit 'Zaregistrovat se', class: 'form-button' %>
+          <%= recaptcha_v3(action: 'login') %>
         <% end %>
       </div>
     </section>
