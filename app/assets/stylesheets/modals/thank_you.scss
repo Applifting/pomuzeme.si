@@ -11,7 +11,7 @@
         padding: 32px 24px;
       }
 
-      img {
+      .success-image {
         position: relative;
         left: 12px;
         margin-top: 29px;
@@ -26,7 +26,46 @@
         line-height: 160%;
         color: #8C8C8C;
         max-width: 380px;
-        margin: 0 auto 20px;
+        margin: 0 auto 42px;
+      }
+
+      .social-text {
+        font-size: 18px;
+        line-height: 150%;
+        color: #3F3F3F;
+        margin: 48px auto 40px;
+        max-width: 100%;
+      }
+
+      .social-sites {
+        display: flex;
+        justify-content: center;
+
+        .site {
+          margin: 0 32px;
+
+          .circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 32px;
+            background-color: $primary-button-color;
+            position: relative;
+
+            img {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            }
+          }
+
+          .label {
+            font-size: 14px;
+            line-height: 21px;
+            color: rgba(48, 47, 50, 0.75);
+            margin-top: 8px;
+          }
+        }
       }
     }
   }
