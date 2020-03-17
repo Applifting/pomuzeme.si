@@ -35,3 +35,4 @@ This is the minimal definition of done that every code contribution must adhere 
 - Documentation exists on the level of Service objects
 - [Entity model](./entityModel.wsd) is updated if a change to the entities was made
 - Tests are written at least on the service object level
+- Please, **where viable, include screenshot or gif or video recording of your functionality in the PR** so that PO can determine quickly if this fulfills the business requirements
