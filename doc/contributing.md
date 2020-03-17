@@ -2,7 +2,7 @@
 
 Before you contribute some code, please review the following aspects of this project:
 
-- See [High level MVP defintion](https://docs.google.com/document/d/1dJ2tcwCXUh4Cpj0-J5-EJHFuHmrdADM57vt0fHdPcfI/edit#heading=h.hk64tiarsl4z ) fro what we are trying to build.
+- See [High-level MVP defintion](https://docs.google.com/document/d/1dJ2tcwCXUh4Cpj0-J5-EJHFuHmrdADM57vt0fHdPcfI/edit#heading=h.hk64tiarsl4z ) that specifies what we are trying to build.
 - See [actors](./actors.md) of this system
 - See [entity model](./entityModel.wsd) this is a desired state to which we should converge. Attributes that are not important for business are left out. (if you think they should be there, open a PR)
 
