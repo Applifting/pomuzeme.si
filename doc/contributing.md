@@ -2,8 +2,11 @@
 
 Before you contribute some code, please review the following aspects of this project:
 
+- See [High-level MVP defintion](https://docs.google.com/document/d/1dJ2tcwCXUh4Cpj0-J5-EJHFuHmrdADM57vt0fHdPcfI/edit#heading=h.hk64tiarsl4z ) that specifies what we are trying to build.
 - See [actors](./actors.md) of this system
 - See [entity model](./entityModel.wsd) this is a desired state to which we should converge. Attributes that are not important for business are left out. (if you think they should be there, open a PR)
+
+**[JOIN OUR SLACK, where we coordinate development.](https://join.slack.com/t/pomuzemesi/shared_invite/zt-ct442m1c-lXFlSXDmWgVxcdh9CTXjGg)**
 
 ## Business logic
 
@@ -34,3 +37,4 @@ This is the minimal definition of done that every code contribution must adhere 
 - Documentation exists on the level of Service objects
 - [Entity model](./entityModel.wsd) is updated if a change to the entities was made
 - Tests are written at least on the service object level
+- Please, **where viable, include screenshot or gif or video recording of your functionality in the PR** so that PO can determine quickly if this fulfills the business requirements
