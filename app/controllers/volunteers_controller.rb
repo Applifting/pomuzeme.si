@@ -6,7 +6,7 @@ class VolunteersController < ApplicationController
     else
       render 'volunteer/register_error', locals: {volunteer: volunteer}
     end
-  endż
+  end
 
   def confirm
     volunteer = Volunteer.find_by id: session[:volunteer]
