@@ -1,13 +1,12 @@
 class VolunteersController < ApplicationController
   def register
-    puts params
-    v = Volunteer.new(volunteer_params).with_existing_record
-    if resolve_recaptcha(v) && v.valid? && agreements_granted?(v) && save_and_send_code(v)
+    volunteer = Volunteer.new(volunteer_params).with_existing_record
+    if resolve_recaptcha(volunteer) && volunteer.valid? && agreements_granted?(volunteer) && save_and_send_code(volunteer)
       render 'volunteer/register_success'
     else
-      render 'volunteer/register_error', locals: {volunteer: v}
+      render 'volunteer/register_error', locals: {volunteer: volunteer}
     end
-  end
+  endż
 
   def confirm
     volunteer = Volunteer.find_by id: session[:volunteer]
