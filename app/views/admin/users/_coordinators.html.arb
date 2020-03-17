@@ -2,7 +2,7 @@
 
 div class: 'title h4' do
   span 'Role'
-  span modal_link('', create_role_admin_user_path(resource), class: 'action add')
+  span modal_link('', new_role_admin_user_path(resource), class: 'action add')
 end
 
 resource.roles.includes(:resource).coordinator.for_model(:Organisation).tap do |roles_with_organisation|
