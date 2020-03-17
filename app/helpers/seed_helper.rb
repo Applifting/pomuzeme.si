@@ -46,9 +46,15 @@ module SeedHelper
                                   last_name: args[:last_name],
                                   zipcode: args[:zipcode],
                                   city: args[:city],
+                                  city_part: args[:city],
                                   street: args[:street],
+                                  street_number: args[:street],
                                   phone: args[:phone],
-                                  email: args[:email]
+                                  email: args[:email],
+                                  geo_entry_id: 42, #fake data below, maybe make robust later
+                                  geo_unit_id: 42,
+                                  geo_coord_x: 42,
+                                  geo_coord_y: 42
       volunteer.save!
     end
   end

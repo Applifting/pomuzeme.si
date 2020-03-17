@@ -18,7 +18,7 @@ class Volunteer < ApplicationRecord
 
   def location
     unless street && street_number && city && city_part && geo_entry_id && geo_unit_id && geo_coord_x && geo_coord_y
-      errors[:geolocation_err] << ' Prosíme vyberte celou adresu i s číslem popisným'
+      errors[:geolocation_err] << ' Prosíme vyberte celou adresu i s číslem popisným' # i18n pls
     end
   end
 end
