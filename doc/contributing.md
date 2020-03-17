@@ -6,6 +6,8 @@ Before you contribute some code, please review the following aspects of this pro
 - See [actors](./actors.md) of this system
 - See [entity model](./entityModel.wsd) this is a desired state to which we should converge. Attributes that are not important for business are left out. (if you think they should be there, open a PR)
 
+**[JOIN OUR SLACK, where we coordinate development.](https://join.slack.com/t/pomuzemesi/shared_invite/zt-ct442m1c-lXFlSXDmWgVxcdh9CTXjGg)**
+
 ## Business logic
 
 Business logic is written into service objects. One service class per use case. Service classes are grouped by modules.
