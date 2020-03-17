@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_17_102156) do
+ActiveRecord::Schema.define(version: 2020_03_17_140512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -29,6 +30,23 @@ ActiveRecord::Schema.define(version: 2020_03_17_102156) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
+  create_table "addresses", force: :cascade do |t|
+    t.string "addressable_type", null: false
+    t.bigint "addressable_id", null: false
+    t.string "street", null: false
+    t.string "street_number", null: false
+    t.string "city", null: false
+    t.string "city_part", null: false
+    t.string "geo_entry_id", null: false
+    t.string "geo_unit_id", null: false
+    t.geometry "geo_cord", limit: {:srid=>0, :type=>"st_point"}, null: false
+    t.string "postal_code", null: false
+    t.string "country_code", limit: 2, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
+  end
+
   create_table "organisations", force: :cascade do |t|
     t.string "name", null: false
     t.string "abbreviation", null: false
@@ -38,6 +56,29 @@ ActiveRecord::Schema.define(version: 2020_03_17_102156) do
     t.string "contact_person_email", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.string "text", limit: 160, null: false
+    t.integer "required_volunteer_count", null: false
+    t.string "subscriber", null: false
+    t.string "subscriber_phone", null: false
+    t.bigint "created_by_id", null: false
+    t.bigint "coordinator_id"
+    t.bigint "organisation_id", null: false
+    t.string "status", default: "new", null: false
+    t.datetime "fulfillment_date", null: false
+    t.string "closed_note"
+    t.datetime "closed_at"
+    t.string "closed_status"
+    t.bigint "closed_by_id"
+    t.boolean "is_published", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["closed_by_id"], name: "index_requests_on_closed_by_id"
+    t.index ["coordinator_id"], name: "index_requests_on_coordinator_id"
+    t.index ["created_by_id"], name: "index_requests_on_created_by_id"
+    t.index ["organisation_id"], name: "index_requests_on_organisation_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -95,4 +136,8 @@ ActiveRecord::Schema.define(version: 2020_03_17_102156) do
     t.index ["phone"], name: "index_volunteers_on_phone"
   end
 
+  add_foreign_key "requests", "organisations"
+  add_foreign_key "requests", "users", column: "closed_by_id"
+  add_foreign_key "requests", "users", column: "coordinator_id"
+  add_foreign_key "requests", "users", column: "created_by_id"
 end

@@ -22,7 +22,7 @@ organisation3 = SeedHelper.create_organisation name: 'Spolek dobrovolniku 2',
                                                contact_person_phone: '+420222444323',
                                                contact_person_email: 'novak@gmail.com'
 
-SeedHelper.create_coordinator(email: 'coordinator@example.com', password: 'password', organisation: organisation1, first_name: 'Pavel', last_name: 'Pomahac')
+coordinator1 = SeedHelper.create_coordinator(email: 'coordinator@example.com', password: 'password', organisation: organisation1, first_name: 'Pavel', last_name: 'Pomahac')
 SeedHelper.create_coordinator(email: 'coordinator2@example.com', password: 'password', organisation: organisation2, first_name: 'Josef', last_name: 'Novak')
 SeedHelper.create_coordinator(email: 'coordinator3@example.com', password: 'password', organisation: organisation1, first_name: 'Josef', last_name: 'Novak')
 
@@ -36,3 +36,14 @@ SeedHelper.create_volunteer(first_name: 'Petra', last_name: 'Mala', zipcode: '77
   identifier = '%03d' % i
   SeedHelper.create_volunteer(first_name: 'Volunteer', last_name: identifier, zipcode: '77900', city: 'Olomouc', street: '17. listopadu 1192', phone: '+420603225' + identifier, email: 'volunteer@007.cz')
 end
+
+# seed requests
+SeedHelper.create_request(text: 'Humble request', required_volunteer_count: 2, subscriber: 'Jiri Novak', subscriber_phone: '+420777666555', created_by: coordinator1, organisation: organisation1,
+                          fulfillment_date: 10.days.from_now, street: 'Street', street_number: '10', city: 'City', city_part: 'City Part', geo_coord_x: 80, geo_coord_y: 80, postal_code: '55002',
+                          country_code: 'CZ')
+SeedHelper.create_request(text: 'Public request', required_volunteer_count: 2, subscriber: 'Jiri Novak', subscriber_phone: '+420777666555', created_by: coordinator1, organisation: organisation1,
+                          fulfillment_date: 10.days.from_now, street: 'Street', street_number: '10', city: 'City', city_part: 'City Part', geo_coord_x: 80, geo_coord_y: 80, postal_code: '55002',
+                          country_code: 'CZ', is_published: true)
+SeedHelper.create_request(text: 'Closed request', required_volunteer_count: 2, subscriber: 'Jiri Novak', subscriber_phone: '+420777666555', created_by: coordinator1, organisation: organisation1,
+                          fulfillment_date: 10.days.from_now, street: 'Street', street_number: '10', city: 'City', city_part: 'City Part', geo_coord_x: 80, geo_coord_y: 80, postal_code: '55002',
+                          country_code: 'CZ', status: 'closed', closed_note: 'Done', closed_at: 1.day.ago, closed_status: 'fulfilled', closed_by: coordinator1)

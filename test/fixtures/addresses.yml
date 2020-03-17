@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  street: MyString
+  street_number: MyString
+  city: MyString
+  city_part: MyString
+  geo_entry_id: MyString
+  geo_unit_id: MyString
+  geo_coord_x: 1.5
+  geo_coord_y: 1.5
+  postal_code: MyString
+  country_code: MyString
+
+two:
+  street: MyString
+  street_number: MyString
+  city: MyString
+  city_part: MyString
+  geo_entry_id: MyString
+  geo_unit_id: MyString
+  geo_coord_x: 1.5
+  geo_coord_y: 1.5
+  postal_code: MyString
+  country_code: MyString

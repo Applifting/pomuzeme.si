@@ -60,6 +60,9 @@ GEM
     activerecord (6.0.2.1)
       activemodel (= 6.0.2.1)
       activesupport (= 6.0.2.1)
+    activerecord-postgis-adapter (6.0.0)
+      activerecord (~> 6.0)
+      rgeo-activerecord (~> 6.0)
     activestorage (6.0.2.1)
       actionpack (= 6.0.2.1)
       activejob (= 6.0.2.1)
@@ -266,6 +269,10 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.4)
+    rgeo (2.1.1)
+    rgeo-activerecord (6.2.1)
+      activerecord (>= 5.0)
+      rgeo (>= 1.0.0)
     rolify (5.2.0)
     rspec-core (3.9.1)
       rspec-support (~> 3.9.1)
@@ -363,6 +370,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  activerecord-postgis-adapter
   arctic_admin
   barnes
   bootsnap (>= 1.4.2)

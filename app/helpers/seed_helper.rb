@@ -58,4 +58,38 @@ module SeedHelper
       volunteer.save!
     end
   end
+
+  def self.create_request(**args)
+    Request.find_or_initialize_by(text: args[:text], subscriber: args[:subscriber]).tap do |request|
+      next if request.persisted?
+
+      address = { street: args[:street],
+                  street_number: args[:street_number],
+                  city: args[:city],
+                  city_part: args[:city_part],
+                  geo_entry_id: 42,
+                  geo_unit_id: 42,
+                  geo_cord: RGeo::Geographic.spherical_factory(srid: 4326).point(args[:geo_coord_x], args[:geo_coord_y]),
+                  postal_code: args[:postal_code],
+                  country_code: args[:country_code] }
+
+      request.assign_attributes text: args[:text],
+                                required_volunteer_count: args[:required_volunteer_count],
+                                subscriber: args[:subscriber],
+                                subscriber_phone: args[:subscriber_phone],
+                                created_by: args[:created_by],
+                                coordinator: args[:coordinator],
+                                organisation: args[:organisation],
+                                status: args[:status],
+                                fulfillment_date: args[:fulfillment_date],
+                                closed_note: args[:closed_note],
+                                closed_at: args[:closed_at],
+                                closed_status: args[:closed_status],
+                                closed_by: args[:closed_by],
+                                is_published: args[:is_published],
+                                address_attributes: address
+
+      request.save!
+    end
+  end
 end
