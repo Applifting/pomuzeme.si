@@ -43,6 +43,7 @@ cs:
         confirmation_code: Ověřovací kód
         geolocation_err: Nepřesná adresa.
         recaptcha: Oveření recaptcha
+        description: Jak můžete pomoci?
     errors:
       format: "%{attribute} %{message}"
       messages:
