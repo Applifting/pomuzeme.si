@@ -84,7 +84,8 @@ Entity(request, "Request"){
   not_null(address_id) ID
   not_null(subscriber) STRING 
   not_null(subscriber_phone) STRING 
-  not_null(coordinator_id) ID
+  not_null(created_by_id) ID
+  coordinator_id ID
   not_null(organization_id) ID
   ' When the request shall be fullfilled, can be null
   fullfillment_date DATETIME
