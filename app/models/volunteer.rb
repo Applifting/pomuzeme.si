@@ -7,7 +7,7 @@ class Volunteer < ApplicationRecord
 
   validates :first_name, :last_name, :phone, presence: true
   validates :phone, phony_plausible: true, uniqueness: true
-  validates :email, format: {with: URI::MailTo::EMAIL_REGEXP}, if: -> { email&.present? }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { email&.present? }
   validate :location
 
   def with_existing_record
