@@ -8,3 +8,7 @@ registrationErrors.empty();
 <% volunteer.errors.full_messages.each do |message| %>
   registrationErrors.append('<li><%= message %></li>')
 <% end %>
+
+<% address.errors.full_messages.each do |message| %>
+registrationErrors.append('<li><%= message %></li>')
+<% end %>

@@ -41,6 +41,7 @@ cs:
         phone: Telefonní číslo
         email: E-mail
         confirmation_code: Ověřovací kód
+      address:
         geolocation_err: Nepřesná adresa.
     errors:
       format: "%{attribute} %{message}"

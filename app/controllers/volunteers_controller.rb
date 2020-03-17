@@ -1,10 +1,12 @@
 class VolunteersController < ApplicationController
   def register
     volunteer = Volunteer.new(volunteer_params).with_existing_record
-    if volunteer.valid? && agreements_granted?(volunteer) && save_and_send_code(volunteer)
+    address = Address.new(address_params.merge(addressable: volunteer))
+
+    if volunteer.valid? && address.valid? && agreements_granted?(volunteer) && save_and_send_code(volunteer)
       render 'volunteer/register_success'
     else
-      render 'volunteer/register_error', locals: {volunteer: volunteer}
+      render 'volunteer/register_error', locals: {volunteer: volunteer, address: address}
     end
   end
 
@@ -32,9 +34,12 @@ class VolunteersController < ApplicationController
   private
 
   def volunteer_params
+    params.require(:volunteer).permit(:first_name, :last_name, :phone, :email)
+  end
+
+  def address_params
     params.require(:volunteer).permit(
-        :first_name, :last_name, :street, :city, :street_number,
-        :city_part, :geo_entry_id, :geo_unit_id, :geo_coord_x, :geo_coord_y, :phone, :email
+        :street, :city, :street_number, :city_part, :geo_entry_id, :geo_unit_id, :geo_coord_x, :geo_coord_y
     )
   end
 
