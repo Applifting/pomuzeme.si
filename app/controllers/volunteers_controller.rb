@@ -1,10 +1,11 @@
 class VolunteersController < ApplicationController
   def register
-    volunteer = Volunteer.new(volunteer_params).with_existing_record
-    if volunteer.valid? && agreements_granted?(volunteer) && save_and_send_code(volunteer)
+    puts params
+    v = Volunteer.new(volunteer_params).with_existing_record
+    if resolve_recaptcha(v) && v.valid? && agreements_granted?(v) && save_and_send_code(v)
       render 'volunteer/register_success'
     else
-      render 'volunteer/register_error', locals: {volunteer: volunteer}
+      render 'volunteer/register_error', locals: {volunteer: v}
     end
   end
 
@@ -73,5 +74,16 @@ class VolunteersController < ApplicationController
     volunteer.errors.add(:base, :age_confirmed_required) if agreements_params[:age_confirmed] != '1'
 
     volunteer.errors.empty?
+  end
+
+  def resolve_recaptcha(volunteer)
+    score_threshold = ENV['RECAPTCHA_THRESHOLD']&.to_f
+    if score_threshold.present?
+      recaptcha = verify_recaptcha(action: 'login', minimum_score: score_threshold)
+      volunteer.errors[:recaptcha] << 'je neplatné' unless recaptcha
+      recaptcha
+    else
+      true
+    end
   end
 end
