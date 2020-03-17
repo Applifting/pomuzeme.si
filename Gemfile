@@ -63,6 +63,14 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+
+  # Support for testing
+  gem 'rspec-rails', '~> 3.9'
+  gem 'factory_bot_rails', '~> 5.1'
+  # More performant tests
+  gem 'test-prof', '~> 0.10'
+  # One liner matchers
+  gem 'shoulda-matchers', '~> 4.3'
 end
 
 group :production do
