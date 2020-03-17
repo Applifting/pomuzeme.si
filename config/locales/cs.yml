@@ -40,8 +40,11 @@ cs:
       volunteer:
         first_name: Jméno
         last_name: Příjmení
+        full_name: Jméno a příjmení
         street_search: Vyhledejte vaší adresu
+        street: Ulice
         city: Město
+        city_part: Městská část
         zipcode: PSČ
         phone: Telefonní číslo
         email: E-mail

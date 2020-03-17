@@ -2,9 +2,16 @@ ActiveAdmin.register Volunteer do
 
   decorate_with VolunteerDecorator
 
+  # Scopes
   scope :all, default: true
   scope :unconfirmed, if: -> { current_user.admin? }
   scope :confirmed, if: -> { current_user.admin? }
+
+  # Filters
+  filter :phone
+  filter :street
+  filter :city_part
+  filter :city
 
   index do
     id_column
@@ -13,6 +20,7 @@ ActiveAdmin.register Volunteer do
     column :email
     column :street
     column :city
+    column :city_part
     if current_user.admin?
       column :confirmed?
     end
