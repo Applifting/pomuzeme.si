@@ -3,8 +3,8 @@ module Abilities
     def add_coordinator_ability(user)
       can :read, ActiveAdmin::Page, name: 'Dashboard'
       can %i[index read], Organisation
-      can :update, Organisation, id: Organisation.with_role(:coordinator, user).pluck(:id)
-      can %i[index read], User
+      can :update, Organisation, id: user.coordinating_organisations
+      can %i[index read], User, id: user.coordinating_organisations
       can %i[index read download], Volunteer
       cannot %i[index read], Volunteer, confirmed_at: nil
     end

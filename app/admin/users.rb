@@ -6,7 +6,6 @@ ActiveAdmin.register User do
   permit_params :email, :password, :password_confirmation, :first_name, :last_name
 
   index do
-    selectable_column
     id_column
     column :first_name
     column :last_name
@@ -17,6 +16,8 @@ ActiveAdmin.register User do
     end
     actions
   end
+
+  # TODO: add possibility to assign coordinator role on show page
 
   filter :email
   filter :current_sign_in_at

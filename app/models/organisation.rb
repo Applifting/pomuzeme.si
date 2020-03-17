@@ -1,6 +1,14 @@
 class Organisation < ApplicationRecord
   resourcify
 
+  # Associations
+  has_many :coordinators,
+           -> { where(roles: { name: :coordinator }) },
+           class_name: :User,
+           through: :roles,
+           source: :users
+
+  # Validations
   validates :name, presence: true
   validates :abbreviation, presence: true, length: { is: 4 }
   validates :contact_person, presence: true
