@@ -17,6 +17,10 @@ module PomuzemeSi
     # the framework and any gems in your application.
 
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
+    config.generators do |g|
+      g.test_framework :rspec
+    end
   end
 end
 
