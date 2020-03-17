@@ -7,6 +7,7 @@ body {
   background-color: $background-light;
   color: $text-color;
   font-family: $main-font;
+  font-weight: $main-font-weight;
 }
 
 img {
@@ -241,6 +242,10 @@ h4 {
     flex-direction: column;
   }
 
+  .org-logo {
+    padding: 24px;
+  }
+
   .text {
     font-size: 18px;
     line-height: 150%;
@@ -270,10 +275,6 @@ h4 {
         padding-top: 32px;
       }
     }
-  }
-
-  .png-monstrum {
-    height: 50px;
   }
 }
 
@@ -558,4 +559,16 @@ h4 {
       line-height: 150%;
     }
   }
+}
+
+.geolocation-search {
+  tab-index: 0;
+  display: block;
+  opacity: 1;
+  transform: scaleX(1) scaleY(1);
+  width: 352px;
+  left: 0px;
+  top: 46px;
+  max-height: 250px;
+  transform-origin: 0px 0px;
 }

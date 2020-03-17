@@ -16,4 +16,10 @@ Rails.application.routes.draw do
   end
   root 'home#index'
 
+  namespace :api do
+    namespace :v1 do
+      post '/geo/fulltext', to: 'geolocation#fulltext'
+    end
+  end
+
 end

@@ -40,13 +40,14 @@ cs:
       volunteer:
         first_name: Jméno
         last_name: Příjmení
-        street: Ulice a číslo domu
+        street_search: Vyhledejte vaší adresu
         city: Město
         zipcode: PSČ
         phone: Telefonní číslo
-        email: e-mail
+        email: E-mail
         confirmation_code: Ověřovací kód
         confirmed?: Potvrzen?
+        geolocation_err: Nepřesná adresa.
       organisation:
         name: Název
         abbreviation: Zkratka
@@ -59,7 +60,6 @@ cs:
       user:
         first_name: Jméno
         last_name: Příjmení
-
     errors:
       format: "%{attribute} %{message}"
       messages:

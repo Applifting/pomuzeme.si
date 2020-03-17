@@ -5,12 +5,20 @@ class Volunteer < ApplicationRecord
   phony_normalize :phone, default_country_code: 'CZ'
   phony_normalized_method :phone, default_country_code: 'CZ'
 
-  validates :first_name, :last_name, :city, :zipcode, :phone, presence: true
+  validates :first_name, :last_name, :phone, presence: true
   validates :phone, phony_plausible: true, uniqueness: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { email&.present? }
-  validates :zipcode, zipcode: { country_code: :cs }, if: -> { zipcode&.present? } # skip if not present to overcome multiple validation errors
+  validates :email, format: {with: URI::MailTo::EMAIL_REGEXP}, if: -> { email&.present? }
+  validate :location
 
   def with_existing_record
     Volunteer.unconfirmed.where(phone: normalized_phone).take || self
+  end
+
+  private
+
+  def location
+    unless street && street_number && city && city_part && geo_entry_id && geo_unit_id && geo_coord_x && geo_coord_y
+      errors[:geolocation_err] << ' Prosíme vyberte celou adresu i s číslem popisným'
+    end
   end
 end
