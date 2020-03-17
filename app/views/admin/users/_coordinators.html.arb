@@ -10,6 +10,7 @@ resource.roles.includes(:resource).coordinator.for_model(:Organisation).tap do |
 
   table_for roles_with_organisation.map(&:decorate) do
     column 'Organizace', &:resource
+    # TODO: implement role revokation
     column 'Akce', class: 'centered', &:actions
   end
 end
