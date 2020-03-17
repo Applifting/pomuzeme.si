@@ -104,7 +104,7 @@ Entity(request, "Request"){
   closed_note STRING
   closed_at DATETIME
   closed_by_id ID
-  not_null(is_published) bool default false
+  not_null(state_last_updated_at) DATETIME
 }
 ' TODO TOM on state, WTF is prislibeno?
 
