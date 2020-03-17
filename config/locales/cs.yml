@@ -48,6 +48,8 @@ cs:
         confirmation_code: Ověřovací kód
         confirmed?: Potvrzen?
         geolocation_err: Nepřesná adresa.
+        recaptcha: Oveření recaptcha
+        description: Jak můžete pomoci?
       organisation:
         name: Název
         abbreviation: Zkratka

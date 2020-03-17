@@ -69,6 +69,11 @@
           <%= form.hidden_field :geo_coord_x %>
           <%= form.hidden_field :geo_coord_y %>
 
+          <div class="input-field">
+            <%= form.text_area :description, class: 'validate', required: false %>
+            <%= form.label :description %>
+          </div>
+
           <div class="checkbox-row">
             <label>
               <%= form.check_box :terms_of_service %>
@@ -89,6 +94,7 @@
           </div>
 
           <%= form.submit 'Zaregistrovat se', class: 'form-button' %>
+          <%= recaptcha_v3(action: 'login') %>
         <% end %>
       </div>
     </section>
