@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   height: 0vh;
-  background-color: red;
+  background-color: transparent;
   overflow: hidden;
   transition: background-color 0.25s ease;
   z-index: 9999;
