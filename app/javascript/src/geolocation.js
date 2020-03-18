@@ -35,7 +35,21 @@ $(document).ready(function () {
 
                         dropdownObject = [];
 
-                        data.forEach(function (item, i) {
+                        // Deduplikace podle více ID
+                        const dedupedData = [];
+                        for (const elem of data) {
+                            if (
+                              !dedupedData.some(
+                                val =>
+                                  val.okres_kod === elem.okres_kod &&
+                                  val.obec_kod === elem.obec_kod &&
+                                  val.cast_obce_kod === elem.cast_obce_kod
+                              )
+                            )
+                              dedupedData.push(elem);
+                          }
+
+                        dedupedData.forEach(function (item, i) {
                             // Vytvoření objektu s adresním místem
                             var res = GetAddressFormat(item);
 
