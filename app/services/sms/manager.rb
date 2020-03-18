@@ -1,5 +1,4 @@
 class Sms::Manager < Sms::Provider
-
   def initialize
     super
   end
@@ -10,5 +9,4 @@ class Sms::Manager < Sms::Provider
 
     send_msg(parsed_phone, msg)
   end
-
 end
