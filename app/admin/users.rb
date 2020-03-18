@@ -30,7 +30,7 @@ ActiveAdmin.register User do
       end
     end
     panel nil, style: 'width: 580px' do
-      render partial: 'coordinators'
+      render partial: 'roles'
     end
     active_admin_comments
   end
@@ -42,6 +42,7 @@ ActiveAdmin.register User do
   end
 
   member_action :create_role, method: :post do
+    # TODO: verify cancancan is used here
     role = Role.find_by_id params['role_id']
     user = User.find_by_id params['user_id']
     user.grant role.name, role.resource
@@ -50,11 +51,12 @@ ActiveAdmin.register User do
   end
 
   member_action :destroy_role, method: :post do
+    # TODO: verify cancancan is used here
     role = Role.find_by_id params['role_id']
-    user = User.find_by_id params['user_id']
+    user = User.find_by_id params['id']
     user.remove_role role.name, role.resource
 
-    render head: :ok
+    render 'admin/modal/close'
   end
 
   filter :email
