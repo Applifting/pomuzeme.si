@@ -64,6 +64,10 @@ cs:
       user:
         first_name: Jméno
         last_name: Příjmení
+      address:
+        full_address: Adresa
+        created_at: Vytvořeno
+        updated_at: Upraveno
     errors:
       format: "%{attribute} %{message}"
       messages:

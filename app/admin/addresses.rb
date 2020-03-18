@@ -1,25 +1,20 @@
 ActiveAdmin.register Address do
 
+  actions :all, :except => [:edit, :destroy, :new]
+
   decorate_with AddressDecorator
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :street, :street_number, :city, :city_part, :geo_entry_id, :geo_unit_id, :coordinate, :postal_code, :country_code, :addressable_type, :addressable_id
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:street, :street_number, :city, :city_part, :geo_entry_id, :geo_unit_id, :coordinate, :postal_code, :country_code, :addressable_type, :addressable_id]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  index do
+    id_column
+    column :full_address
+    if current_user.admin?
+      column :created_at
+      column :updated_at
+    end
+    actions
+  end
 
   show do
-    modal_window
-
     panel resource do
       attributes_table_for resource do
         row :id

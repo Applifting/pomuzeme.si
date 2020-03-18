@@ -9,4 +9,8 @@ class AddressDecorator < ApplicationDecorator
     object.coordinate.x
   end
 
+  def full_address
+    [object.street, object.street_number, object.city, object.city_part].reject(&:blank?).join ', '
+  end
+
 end
