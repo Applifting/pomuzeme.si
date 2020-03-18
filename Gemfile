@@ -107,6 +107,3 @@ gem 'draper'
 # localisation
 gem 'rails-i18n'
 gem 'devise-i18n'
-
-# Location transformations
-gem 'jtsk'
