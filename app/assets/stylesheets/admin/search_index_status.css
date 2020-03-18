@@ -1,0 +1,13 @@
+.search_index .status_tag.healthy {
+  background-color: green;
+}
+
+.search_index .status_tag.failing {
+  background-color: red;
+}
+
+.search_index .status_tag.not_running {
+  background-color: orange;
+}
+
+

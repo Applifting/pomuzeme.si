@@ -89,5 +89,24 @@ gem 'phony_rails'
 # Code quality
 gem 'rubocop'
 
+# authentication
+gem 'devise'
+
+# authorization
+gem 'cancancan'
+
+
+# role management
+gem 'rolify'
+
+# active admin
+gem 'activeadmin'
+gem 'arctic_admin'
+gem 'draper'
+
+# localisation
+gem 'rails-i18n'
+gem 'devise-i18n'
+
 # Location transformations
 gem 'jtsk'
