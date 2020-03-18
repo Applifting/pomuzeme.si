@@ -44,17 +44,17 @@ module SeedHelper
 
       volunteer.assign_attributes first_name: args[:first_name],
                                   last_name: args[:last_name],
-                                  zipcode: args[:zipcode],
-                                  city: args[:city],
-                                  city_part: args[:city],
-                                  street: args[:street],
-                                  street_number: args[:street],
                                   phone: args[:phone],
-                                  email: args[:email],
-                                  geo_entry_id: 42, #fake data below, maybe make robust later
-                                  geo_unit_id: 42,
-                                  geo_coord_x: 42,
-                                  geo_coord_y: 42
+                                  email: args[:email]
+
+      volunteer.addresses.build city: args[:city],
+                                city_part: args[:city],
+                                street: args[:street],
+                                street_number: args[:street],
+                                postal_code: args[:zipcode],
+                                geo_entry_id: 42, #fake data below, maybe make robust later
+                                geo_unit_id: 42,
+                                coordinate: Geography::Point.from_coordinates(latitude: 50.0941253, longitude: 14.4548767)
       volunteer.save!
     end
   end
@@ -69,7 +69,7 @@ module SeedHelper
                   city_part: args[:city_part],
                   geo_entry_id: 42,
                   geo_unit_id: 42,
-                  geo_cord: RGeo::Geographic.spherical_factory(srid: 4326).point(args[:geo_coord_x], args[:geo_coord_y]),
+                  coordinate: Geography::Point.from_coordinates(latitude: args[:geo_coord_y], longitude: args[:geo_coord_x]),
                   postal_code: args[:postal_code],
                   country_code: args[:country_code] }
 

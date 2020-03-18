@@ -2,7 +2,6 @@
 
 class Request < ApplicationRecord
   phony_normalize :subscriber_phone, default_country_code: 'CZ'
-  phony_normalized_method :subscriber_phone, default_country_code: 'CZ'
 
   belongs_to :created_by, class_name: 'User'
   belongs_to :closed_by, class_name: 'User', optional: true
@@ -23,7 +22,7 @@ class Request < ApplicationRecord
   validates :is_published, inclusion: { in: [true, false] }
   validates :subscriber_phone, phony_plausible: true
   validates_length_of :text, maximum: 160
-  validates_presence_of :text, :required_volunteer_count, :subscriber, :subscriber_phone, :fulfillment_date
+  validates_presence_of :text, :required_volunteer_count, :subscriber, :subscriber_phone, :fulfillment_date, :address
   validates_associated :address
 
   accepts_nested_attributes_for :address

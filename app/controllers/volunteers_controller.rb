@@ -1,19 +1,21 @@
 class VolunteersController < ApplicationController
   def register
     volunteer = Volunteer.new(volunteer_params).with_existing_record
+    address = volunteer.addresses.build address_with_coordinate
+
     if resolve_recaptcha(volunteer) && volunteer.valid? && agreements_granted?(volunteer) && save_and_send_code(volunteer)
       render 'volunteer/register_success'
     else
-      render 'volunteer/register_error', locals: {volunteer: volunteer}
+      render 'volunteer/register_error', locals: { volunteer: volunteer, address: address }
     end
   end
 
   def confirm
     volunteer = Volunteer.find_by id: session[:volunteer]
-    return render 'volunteer/confirm_error', locals: {error: I18n.t('activerecord.errors.messages.volunteer_not_found')} if volunteer.nil?
+    return render 'volunteer/confirm_error', locals: { error: I18n.t('activerecord.errors.messages.volunteer_not_found') } if volunteer.nil?
 
     volunteer.confirm_with(confirm_params[:confirmation_code])
-    return render 'volunteer/confirm_error', locals: {volunteer: volunteer} if volunteer.errors.any?
+    return render 'volunteer/confirm_error', locals: { volunteer: volunteer } if volunteer.errors.any?
 
     session[:volunteer] = nil
     render 'volunteer/confirm_success'
@@ -21,10 +23,10 @@ class VolunteersController < ApplicationController
 
   def resend
     volunteer = Volunteer.find_by id: session[:volunteer]
-    return render 'volunteer/confirm_error', locals: {error: I18n.t('activerecord.errors.messages.volunteer_not_found')} if volunteer.nil?
+    return render 'volunteer/confirm_error', locals: { error: I18n.t('activerecord.errors.messages.volunteer_not_found') } if volunteer.nil?
 
     resend_code volunteer
-    return render 'volunteer/confirm_error', locals: {volunteer: volunteer} if volunteer.errors.any?
+    return render 'volunteer/confirm_error', locals: { volunteer: volunteer } if volunteer.errors.any?
 
     render 'volunteer/confirm_resended'
   end
@@ -32,10 +34,19 @@ class VolunteersController < ApplicationController
   private
 
   def volunteer_params
+    params.require(:volunteer).permit(:first_name, :last_name, :phone, :email, :description)
+  end
+
+  def address_params
     params.require(:volunteer).permit(
-        :first_name, :last_name, :street, :city, :street_number,
-        :city_part, :geo_entry_id, :geo_unit_id, :geo_coord_x, :geo_coord_y, :phone, :email, :description
+        :street, :city, :street_number, :city_part, :geo_entry_id, :geo_unit_id, :geo_coord_x, :geo_coord_y
     )
+  end
+
+  def address_with_coordinate
+    coordinate = Geography::Point.from_s_jtsk x: address_params[:geo_coord_x].to_d,
+                                              y: address_params[:geo_coord_y].to_d
+    address_params.except(:geo_coord_x, :geo_coord_y).merge coordinate: coordinate
   end
 
   def confirm_params
@@ -79,7 +90,7 @@ class VolunteersController < ApplicationController
     score_threshold = ENV['RECAPTCHA_THRESHOLD']&.to_f
     if score_threshold.present?
       recaptcha = verify_recaptcha(action: 'login', minimum_score: score_threshold)
-      volunteer.errors[:recaptcha] << 'je neplatné' unless recaptcha
+      volunteer.errors[:base] << I18n.t('activerecord.errors.models.volunteer.attributes.base.recaptcha_not_valid') unless recaptcha
       recaptcha
     else
       true

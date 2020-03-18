@@ -50,8 +50,7 @@ cs:
         email: E-mail
         confirmation_code: Ověřovací kód
         confirmed?: Potvrzen?
-        geolocation_err: Nepřesná adresa.
-        recaptcha: Oveření recaptcha
+        addresses: Adresy
         description: Jak můžete pomoci?
       organisation:
         name: Název
@@ -107,6 +106,7 @@ cs:
               sms_not_working: 'Ověřovací kód nebylo možné odeslat. Zkuste to prosím za chvilku.'
               age_confirmed_required: 'Pro registraci je potřeba být starší 18 let.'
               terms_of_service_required: 'Pro registraci je potřeba souhlasit se zpracováním údajů.'
+              recaptcha_not_valid: 'Oveření recaptcha je neplatné.'
             phone:
               improbable_phone: není správně
             confirmation_code:
@@ -117,6 +117,9 @@ cs:
           attributes:
             contact_person_phone:
               improbable_phone: není správně
+        address:
+          base:
+            inaccurate_address: Nepřesná adresa. Prosíme vyberte celou adresu i s číslem popisným
     messages:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
 
