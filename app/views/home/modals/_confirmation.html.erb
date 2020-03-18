@@ -10,7 +10,7 @@
       </p>
       <%= form_with id: 'confirmation-form', url: confirm_volunteer_path, remote: true do |form| %>
         <div class="input-field">
-          <%= form.number_field :confirmation_code, class: 'validate', required: true, max: 9999 %>
+          <%= form.number_field :confirmation_code, id: 'validation-code', class: 'validate', required: true, max: 9999, 'data-length': 4 %>
           <%= form.label :confirmation_code, I18n.t('activerecord.attributes.volunteer.confirmation_code') %>
         </div>
 
