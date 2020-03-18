@@ -1,0 +1,47 @@
+.tags_group {
+  padding-bottom: 10px;
+}
+
+.tag {
+  border: solid 1px transparent;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 3px 5px 2px 5px;
+}
+
+span.tag {
+  color: #fff;
+  background: #cacaca;
+  font-size: 0.8em;
+}
+
+.tag.inline {
+  padding: 4px;
+  vertical-align: super;
+  /*font-size: 10px;*/
+}
+
+.tag.action:hover {
+  border: solid 1px gray;
+}
+
+.tag.action:active {
+  border: solid 1px black;
+}
+
+.tag a {
+  color: #fff;
+}
+
+.tag.smaller {
+  font-size: 0.6em;
+}
+
+.tag.tiny {
+  font-size: 0.4em;
+}
+
+.tag.yes {
+  background-color: green;
+}

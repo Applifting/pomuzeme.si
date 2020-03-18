@@ -32,18 +32,39 @@
 cs:
   activerecord:
     models:
-      volunteer: Dobrovolnik
+      volunteer: Dobrovolník
+      organisation: Organizace
+      user: Uživatel
+      comment: Komentář
     attributes:
       volunteer:
         first_name: Jméno
         last_name: Příjmení
+        full_name: Jméno a příjmení
         street_search: Vyhledejte vaší adresu
+        street: Ulice
+        city: Město
+        city_part: Městská část
+        zipcode: PSČ
         phone: Telefonní číslo
         email: E-mail
         confirmation_code: Ověřovací kód
+        confirmed?: Potvrzen?
         geolocation_err: Nepřesná adresa.
         recaptcha: Oveření recaptcha
         description: Jak můžete pomoci?
+      organisation:
+        name: Název
+        abbreviation: Zkratka
+        business_id_number: IČO
+        contact_person: Kontantní osoba
+        contact_person_phone: Kontantní telefon
+        contact_person_email: Kontantní email
+        created_at: Vytvořeno
+        updated_at: Upraveno
+      user:
+        first_name: Jméno
+        last_name: Příjmení
     errors:
       format: "%{attribute} %{message}"
       messages:
@@ -92,6 +113,10 @@ cs:
               not_matching: 'se neshoduje'
               expired: 'vypršel'
               confirmed: 'je již potvrzený'
+        organisation:
+          attributes:
+            contact_person_phone:
+              improbable_phone: není správně
     messages:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
 

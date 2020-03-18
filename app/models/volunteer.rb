@@ -11,7 +11,6 @@ class Volunteer < ApplicationRecord
   validate :location
 
   def with_existing_record
-    # TODO: handle update of existing values except identifiers
     Volunteer.unconfirmed.where(phone: normalized_phone).take || self
   end
 
