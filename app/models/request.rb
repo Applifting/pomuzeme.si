@@ -10,14 +10,8 @@ class Request < ApplicationRecord
 
   has_one :address, as: :addressable, dependent: :destroy
 
-  enum status: { new: 'new',
-                 searching_capacity: 'searching_capacity',
-                 pending_confirmation: 'pending_confirmation',
-                 help_coordinated: 'help_coordinated',
-                 closed: 'closed' }, _suffix: true
-  enum closed_status: { fulfilled: 'fulfilled',
-                        failed: 'failed',
-                        irrelevant: 'irrelevant' }, _suffix: true
+  enum status: Enums::RequestStatuses.to_hash, _suffix: true
+  enum closed_status: Enums::RequestClosedStatuses.to_hash, _suffix: true
 
   validates :is_published, inclusion: { in: [true, false] }
   validates :subscriber_phone, phony_plausible: true
