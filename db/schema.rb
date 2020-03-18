@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_17_102156) do
+ActiveRecord::Schema.define(version: 2020_03_18_025505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 2020_03_17_102156) do
     t.string "city_part", null: false
     t.string "geo_entry_id", null: false
     t.string "geo_unit_id", null: false
-    t.float "geo_coord_x", null: false
-    t.float "geo_coord_y", null: false
+    t.float "geo_coord_x"
+    t.float "geo_coord_y"
     t.text "description"
     t.index ["phone"], name: "index_volunteers_on_phone"
   end

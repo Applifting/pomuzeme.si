@@ -35,3 +35,6 @@ Style/HashTransformKeys:
 
 Style/HashTransformValues:
   Enabled: true
+
+Style/NumericLiterals:
+  Enabled: false
