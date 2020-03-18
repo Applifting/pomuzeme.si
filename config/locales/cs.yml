@@ -41,7 +41,7 @@ cs:
         first_name: Jméno
         last_name: Příjmení
         full_name: Jméno a příjmení
-        street_search: Vyhledejte vaší adresu
+        street_search: Vyhledejte vaši adresu
         street: Ulice
         city: Město
         city_part: Městská část
@@ -93,26 +93,28 @@ cs:
         wrong_length: nemá správnou délku (očekáváno %{count} znaků)
         volunteer_not_found: Dobrovolnik nebyl nalezen.
       template:
-        body: 'Následující pole obsahují chybně vyplněné údaje: '
+        body: "Následující pole obsahují chybně vyplněné údaje: "
         header:
           one: Při ukládání objektu %{model} došlo k chybám a nebylo jej možné uložit
-          few: Při ukládání objektu %{model} došlo ke %{count} chybám a nebylo možné
+          few:
+            Při ukládání objektu %{model} došlo ke %{count} chybám a nebylo možné
             jej uložit
-          other: Při ukládání objektu %{model} došlo ke %{count} chybám a nebylo možné
+          other:
+            Při ukládání objektu %{model} došlo ke %{count} chybám a nebylo možné
             jej uložit
       models:
         volunteer:
           attributes:
             base:
-              sms_not_working: 'Ověřovací kód nebylo možné odeslat. Zkuste to prosím za chvilku.'
-              age_confirmed_required: 'Pro registraci je potřeba být starší 18 let.'
-              terms_of_service_required: 'Pro registraci je potřeba souhlasit se zpracováním údajů.'
+              sms_not_working: "Ověřovací kód nebylo možné odeslat. Zkuste to prosím za chvilku."
+              age_confirmed_required: "Pro registraci je potřeba být starší 18 let."
+              terms_of_service_required: "Pro registraci je potřeba souhlasit se zpracováním údajů."
             phone:
               improbable_phone: není správně
             confirmation_code:
-              not_matching: 'se neshoduje'
-              expired: 'vypršel'
-              confirmed: 'je již potvrzený'
+              not_matching: "se neshoduje"
+              expired: "vypršel"
+              confirmed: "je již potvrzený"
         organisation:
           attributes:
             contact_person_phone:
