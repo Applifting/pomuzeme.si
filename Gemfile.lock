@@ -45,6 +45,9 @@ GEM
     activerecord (6.0.2.1)
       activemodel (= 6.0.2.1)
       activesupport (= 6.0.2.1)
+    activerecord-postgis-adapter (6.0.0)
+      activerecord (~> 6.0)
+      rgeo-activerecord (~> 6.0)
     activestorage (6.0.2.1)
       actionpack (= 6.0.2.1)
       activejob (= 6.0.2.1)
@@ -95,6 +98,7 @@ GEM
     jaro_winkler (1.5.4)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
+    jtsk (0.0.4)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -175,6 +179,10 @@ GEM
       ffi (~> 1.0)
     regexp_parser (1.7.0)
     rexml (3.2.4)
+    rgeo (2.1.1)
+    rgeo-activerecord (6.2.1)
+      activerecord (>= 5.0)
+      rgeo (>= 1.0.0)
     rubocop (0.80.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -248,6 +256,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-postgis-adapter
   barnes
   bootsnap (>= 1.4.2)
   byebug
@@ -255,6 +264,7 @@ DEPENDENCIES
   cloudflare-rails
   httparty
   jbuilder (~> 2.7)
+  jtsk
   listen (>= 3.0.5, < 3.2)
   newrelic_rpm
   pg (>= 0.18, < 2.0)

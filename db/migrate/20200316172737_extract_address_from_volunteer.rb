@@ -1,16 +1,17 @@
+# frozen_string_literal: true
+
 class ExtractAddressFromVolunteer < ActiveRecord::Migration[6.0]
   def change
     create_table :addresses do |t|
-      t.string :street, null: false
+      t.string :street, null: true
       t.string :street_number, null: false
       t.string :city, null: false
       t.string :city_part, null: false
       t.string :geo_entry_id, null: false
       t.string :geo_unit_id, null: false
-      t.string :geo_coord_x, null: false
-      t.string :geo_coord_y, null: false
+      t.st_point :coordinate, srid: 4326
       t.string :postal_code, null: true
-      t.string :country_code, null: false
+      t.string :country_code, null: false, limit: 3
       t.references :addressable, polymorphic: true
 
       t.timestamps
@@ -18,9 +19,8 @@ class ExtractAddressFromVolunteer < ActiveRecord::Migration[6.0]
 
     Volunteer.all.each do |v|
       Address.create!(addressable: v, street: v.street, street_number: v.street_number, city: v.city,
-                                city_part: v.city_part, geo_entry_id: v.geo_entry_id, geo_unit_id: v.geo_unit_id,
-                                geo_coord_x: v.geo_coord_x, geo_coord_y: v.geo_coord_y, country_code: 'cz'
-      )
+                      city_part: v.city_part, postal_code: v.zipcode, geo_entry_id: v.geo_entry_id, geo_unit_id: v.geo_unit_id,
+                      coordinate: Geography::Point.from_s_jtsk(x: v.geo_coord_x, y: v.geo_coord_y), country_code: 'cz')
     end
 
     remove_column :volunteers, :street

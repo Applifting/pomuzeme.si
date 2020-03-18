@@ -14,18 +14,18 @@ ActiveRecord::Schema.define(version: 2020_03_16_172737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "addresses", force: :cascade do |t|
-    t.string "street", null: false
+    t.string "street"
     t.string "street_number", null: false
     t.string "city", null: false
     t.string "city_part", null: false
     t.string "geo_entry_id", null: false
     t.string "geo_unit_id", null: false
-    t.string "geo_coord_x", null: false
-    t.string "geo_coord_y", null: false
+    t.geometry "coordinate", limit: {:srid=>4326, :type=>"st_point"}
     t.string "postal_code"
-    t.string "country_code", null: false
+    t.string "country_code", limit: 3, null: false
     t.string "addressable_type"
     t.bigint "addressable_id"
     t.datetime "created_at", precision: 6, null: false

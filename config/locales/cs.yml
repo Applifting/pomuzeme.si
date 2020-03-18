@@ -41,8 +41,7 @@ cs:
         phone: Telefonní číslo
         email: E-mail
         confirmation_code: Ověřovací kód
-      address:
-        geolocation_err: Nepřesná adresa.
+        addresses: Adresy
     errors:
       format: "%{attribute} %{message}"
       messages:
@@ -91,6 +90,9 @@ cs:
               not_matching: 'se neshoduje'
               expired: 'vypršel'
               confirmed: 'je již potvrzený'
+        address:
+          base:
+            inaccurate_address: Nepřesná adresa. Prosíme vyberte celou adresu i s číslem popisným
     messages:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
 
