@@ -1,19 +1,19 @@
 class VolunteersController < ApplicationController
   def register
     volunteer = Volunteer.new(volunteer_params).with_existing_record
-    if volunteer.valid? && agreements_granted?(volunteer) && save_and_send_code(volunteer)
+    if resolve_recaptcha(volunteer) && volunteer.valid? && agreements_granted?(volunteer) && save_and_send_code(volunteer)
       render 'volunteer/register_success'
     else
-      render 'volunteer/register_error', locals: {volunteer: volunteer}
+      render 'volunteer/register_error', locals: { volunteer: volunteer }
     end
   end
 
   def confirm
     volunteer = Volunteer.find_by id: session[:volunteer]
-    return render 'volunteer/confirm_error', locals: {error: I18n.t('activerecord.errors.messages.volunteer_not_found')} if volunteer.nil?
+    return render 'volunteer/confirm_error', locals: { error: I18n.t('activerecord.errors.messages.volunteer_not_found') } if volunteer.nil?
 
     volunteer.confirm_with(confirm_params[:confirmation_code])
-    return render 'volunteer/confirm_error', locals: {volunteer: volunteer} if volunteer.errors.any?
+    return render 'volunteer/confirm_error', locals: { volunteer: volunteer } if volunteer.errors.any?
 
     session[:volunteer] = nil
     render 'volunteer/confirm_success'
@@ -21,10 +21,10 @@ class VolunteersController < ApplicationController
 
   def resend
     volunteer = Volunteer.find_by id: session[:volunteer]
-    return render 'volunteer/confirm_error', locals: {error: I18n.t('activerecord.errors.messages.volunteer_not_found')} if volunteer.nil?
+    return render 'volunteer/confirm_error', locals: { error: I18n.t('activerecord.errors.messages.volunteer_not_found') } if volunteer.nil?
 
     resend_code volunteer
-    return render 'volunteer/confirm_error', locals: {volunteer: volunteer} if volunteer.errors.any?
+    return render 'volunteer/confirm_error', locals: { volunteer: volunteer } if volunteer.errors.any?
 
     render 'volunteer/confirm_resended'
   end
@@ -33,8 +33,8 @@ class VolunteersController < ApplicationController
 
   def volunteer_params
     params.require(:volunteer).permit(
-        :first_name, :last_name, :street, :city, :street_number,
-        :city_part, :geo_entry_id, :geo_unit_id, :geo_coord_x, :geo_coord_y, :phone, :email
+      :first_name, :last_name, :street, :city, :street_number,
+      :city_part, :geo_entry_id, :geo_unit_id, :geo_coord_x, :geo_coord_y, :phone, :email, :description
     )
   end
 
@@ -73,5 +73,18 @@ class VolunteersController < ApplicationController
     volunteer.errors.add(:base, :age_confirmed_required) if agreements_params[:age_confirmed] != '1'
 
     volunteer.errors.empty?
+  end
+
+  def resolve_recaptcha(_volunteer)
+    # TEMPORARY DISABLED
+    # score_threshold = ENV['RECAPTCHA_THRESHOLD']&.to_f
+    # if score_threshold.present?
+    #  recaptcha = verify_recaptcha(action: 'login', minimum_score: score_threshold)
+    #  volunteer.errors[:recaptcha] << 'je neplatné' unless recaptcha
+    #  recaptcha
+    # else
+    #  true
+    # end
+    true
   end
 end

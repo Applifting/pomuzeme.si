@@ -1,0 +1,2 @@
+module VolunteerHelper
+end

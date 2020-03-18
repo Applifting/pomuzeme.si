@@ -1,0 +1,23 @@
+.green {
+  background-color: green !important;
+}
+
+.red {
+  background-color: red !important;
+}
+
+.pale-green {
+  background-color: paleGreen;
+}
+
+.yes {
+  background-color: green;
+}
+
+p.red {
+  color: red;
+}
+
+a:hover {
+  color: red;
+}

@@ -39,7 +39,8 @@ $(document).ready(function () {
                             // Vytvoření objektu s adresním místem
                             var res = GetAddressFormat(item);
 
-                            var locArr = [item.obec_nazev, item.cast_obce_nazev, item.ulice_nazev, item.cislo]
+                            var parsedDistrict = item.okres_nazev && 'okr. ' + String(item.okres_nazev);
+                            var locArr = [item.obec_nazev, item.cast_obce_nazev, item.ulice_nazev, item.cislo, parsedDistrict]
                             locArr = locArr.filter(function (v) {
                                 return v !== null
                             });

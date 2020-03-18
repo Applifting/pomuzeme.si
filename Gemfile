@@ -39,11 +39,13 @@ gem 'newrelic_rpm'
 gem 'sentry-raven'
 
 # heroku metrics
-gem "barnes"
+gem 'barnes'
+
+gem 'recaptcha'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
@@ -61,6 +63,14 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+
+  # Support for testing
+  gem 'rspec-rails', '~> 3.9'
+  gem 'factory_bot_rails', '~> 5.1'
+  # More performant tests
+  gem 'test-prof', '~> 0.10'
+  # One liner matchers
+  gem 'shoulda-matchers', '~> 4.3'
 end
 
 group :production do
@@ -68,8 +78,7 @@ group :production do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Validations
 gem 'validates_zipcode'
@@ -77,3 +86,22 @@ gem 'phony_rails'
 
 # Code quality
 gem 'rubocop'
+
+# authentication
+gem 'devise'
+
+# authorization
+gem 'cancancan'
+
+
+# role management
+gem 'rolify'
+
+# active admin
+gem 'activeadmin'
+gem 'arctic_admin'
+gem 'draper'
+
+# localisation
+gem 'rails-i18n'
+gem 'devise-i18n'
