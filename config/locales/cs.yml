@@ -42,7 +42,6 @@ cs:
         email: E-mail
         confirmation_code: Ověřovací kód
         addresses: Adresy
-        recaptcha: Oveření recaptcha
         description: Jak můžete pomoci?
     errors:
       format: "%{attribute} %{message}"
@@ -86,6 +85,7 @@ cs:
               sms_not_working: 'Ověřovací kód nebylo možné odeslat. Zkuste to prosím za chvilku.'
               age_confirmed_required: 'Pro registraci je potřeba být starší 18 let.'
               terms_of_service_required: 'Pro registraci je potřeba souhlasit se zpracováním údajů.'
+              recaptcha_not_valid: 'Oveření recaptcha je neplatné.'
             phone:
               improbable_phone: není správně
             confirmation_code:

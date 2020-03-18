@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_16_172737) do
+ActiveRecord::Schema.define(version: 2020_03_17_102156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2020_03_16_172737) do
     t.string "confirmation_code"
     t.datetime "confirmation_valid_to"
     t.datetime "confirmed_at"
+    t.text "description"
     t.index ["phone"], name: "index_volunteers_on_phone"
   end
 

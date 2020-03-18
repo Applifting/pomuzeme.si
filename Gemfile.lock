@@ -84,7 +84,13 @@ GEM
       rails (>= 5.0, < 6.1.0)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
+    diff-lcs (1.3)
     erubi (1.9.0)
+    factory_bot (5.1.0)
+      activesupport (>= 4.2.0)
+    factory_bot_rails (5.1.0)
+      factory_bot (~> 5.1.0)
+      railties (>= 4.2.0)
     faraday (1.0.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.12.2)
@@ -98,6 +104,7 @@ GEM
     jaro_winkler (1.5.4)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
+    json (2.3.0)
     jtsk (0.0.4)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -177,12 +184,31 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    recaptcha (5.4.0)
+      json
     regexp_parser (1.7.0)
     rexml (3.2.4)
     rgeo (2.1.1)
     rgeo-activerecord (6.2.1)
       activerecord (>= 5.0)
       rgeo (>= 1.0.0)
+    rspec-core (3.9.1)
+      rspec-support (~> 3.9.1)
+    rspec-expectations (3.9.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-mocks (3.9.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-rails (3.9.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.9.0)
+      rspec-expectations (~> 3.9.0)
+      rspec-mocks (~> 3.9.0)
+      rspec-support (~> 3.9.0)
+    rspec-support (3.9.2)
     rubocop (0.80.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -209,6 +235,8 @@ GEM
       rubyzip (>= 1.2.2)
     sentry-raven (3.0.0)
       faraday (>= 1.0)
+    shoulda-matchers (4.3.0)
+      activesupport (>= 4.2.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -221,6 +249,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     statsd-ruby (1.4.0)
+    test-prof (0.10.0)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -262,6 +291,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   cloudflare-rails
+  factory_bot_rails (~> 5.1)
   httparty
   jbuilder (~> 2.7)
   jtsk
@@ -273,12 +303,16 @@ DEPENDENCIES
   rack-attack
   rails (~> 6.0.2, >= 6.0.2.1)
   rails_autoscale_agent
+  recaptcha
+  rspec-rails (~> 3.9)
   rubocop
   sass-rails (>= 6)
   selenium-webdriver
   sentry-raven
+  shoulda-matchers (~> 4.3)
   spring
   spring-watcher-listen (~> 2.0.0)
+  test-prof (~> 0.10)
   turbolinks (~> 5)
   tzinfo-data
   validates_zipcode
