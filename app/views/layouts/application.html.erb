@@ -5,26 +5,53 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
+  <meta charset="utf-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta property="title" content="Pomůžeme.si | Koronavirus?! Spolu to dáme">
   <meta name="description" content="Pomáháme dostat dobrovolníky tam, kde jsou třeba.">
 
+  <meta property="og:url" content="https://pomuzeme.si/">
+  <meta property="og:type" content="website">
   <meta property="og:title" content="Pomůžeme.si | Koronavirus?! Spolu to dáme">
   <meta property="og:description" content="Pomáháme dostat dobrovolníky tam, kde jsou třeba.">
-  <meta property="og:image" content="thumbnail.png">
+  <meta property="og:image" content="https://pomuzemesi.cz/thumbnail.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="320">
   <meta property="og:image:height" content="320">
 
+  <meta property="twitter:card" content="summary">
+  <meta property="twitter:site" content="@applifting_cz">
+  <meta property="twitter:title" content="Pomůžeme.si | Koronavirus?! Spolu to dáme">
+  <meta property="twitter:image" content="https://pomuzeme.si/thumbnail.png">
+
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
 
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <%= yield %>
 
 <% ga_measure_id = ENV['GA_MEASURE_ID'] %>

@@ -1,5 +1,4 @@
 class Sms::Provider
-
   include HTTParty
 
   base_uri ENV['NETHOST_BASE_URL']
@@ -11,7 +10,7 @@ class Sms::Provider
     else
       msg_id ||= SecureRandom.hex(16)
 
-      response = self.class.get('/v1/', {query: {chlg: msg_id, rcpt: phone, msgbd: text}})
+      response = self.class.get('/v1/', { query: { chlg: msg_id, rcpt: phone, msgbd: text } })
 
       # If request returns no success code try it again after one second
       if response.code > 299 && attempt < 1
@@ -20,5 +19,4 @@ class Sms::Provider
       end
     end
   end
-
 end

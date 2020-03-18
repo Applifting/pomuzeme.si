@@ -11,10 +11,9 @@ class Volunteer < ApplicationRecord
   # Validations
   validates :first_name, :last_name, :phone, presence: true
   validates :phone, phony_plausible: true, uniqueness: true
-  validates :email, format: {with: URI::MailTo::EMAIL_REGEXP}, if: -> { email&.present? }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { email&.present? }
 
   def with_existing_record
-    # TODO: handle update of existing values except identifiers
     Volunteer.unconfirmed.where(phone: normalized_phone).take || self
   end
 end

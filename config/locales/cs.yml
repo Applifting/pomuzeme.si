@@ -42,6 +42,8 @@ cs:
         email: E-mail
         confirmation_code: Ověřovací kód
         addresses: Adresy
+        recaptcha: Oveření recaptcha
+        description: Jak můžete pomoci?
     errors:
       format: "%{attribute} %{message}"
       messages:

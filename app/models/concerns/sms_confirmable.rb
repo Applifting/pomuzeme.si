@@ -10,14 +10,13 @@ module SmsConfirmable
   CONFIRMATION_CODE_LENGTH = 4
   CONFIRMATION_CODE_REPEAT_BREAK = 30 # seconds
 
-
   def confirmed?
     !confirmed_at.nil?
   end
 
   def confirm_with(sms_confirmation_code)
     return errors.add(:confirmation_code, :confirmed) if confirmed?
-    return errors.add(:confirmation_code, :not_matching) if sms_confirmation_code != self.confirmation_code
+    return errors.add(:confirmation_code, :not_matching) if sms_confirmation_code != confirmation_code
     return errors.add(:confirmation_code, :expired) if Time.now > confirmation_valid_to
 
     confirm!

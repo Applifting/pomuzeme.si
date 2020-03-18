@@ -4,9 +4,28 @@
     <%= image_tag asset_path('close.svg'), class: 'close modal-close'  %>
 
     <section class="modal-card-body">
-      <%= image_tag asset_path('thank-you.svg') %>
+      <%= image_tag asset_path('thank-you.svg'), class: 'success-image' %>
       <h3>Děkujeme za registraci</h3>
-      <p>Nyní na vás mají kontakt dobročinné organizace z vašeho blízkého okolí. Mějte trpělivost a některá z nich se vám ozve.</p>
+      <p>Nyní na vás mají kontakt dobročinné organizace z&nbsp;vašeho blízkého okolí. Mějte trpělivost a některá z&nbsp;nich se vám ozve.</p>
+
+      <div class="divider"></div>
+
+      <p class="social-text">Mezitím můžete pomoct i tím, že iniciativu budete sdílet!</p>
+
+      <div class="social-sites">
+        <a class="site" href="https://www.facebook.com/sharer/sharer.php?u=pomuzemesi.cz" target="_blank">
+          <div class="circle">
+            <%= image_tag asset_path('social-facebook.svg')  %>
+          </div>
+          <div class="label">Facebook</div>
+        </a>
+        <a class="site" href="http://twitter.com/share?url=https://pomuzemesi.cz" target="_blank">
+          <div class="circle">
+            <%= image_tag asset_path('social-twitter.svg')  %>
+          </div>
+          <div class="label">Twitter</div>
+        </a>
+      </div>
     </section>
   </div>
 </div>
