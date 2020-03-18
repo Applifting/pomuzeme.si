@@ -36,6 +36,7 @@ cs:
       organisation: Organizace
       user: Uživatel
       comment: Komentář
+      request: Žádost
     attributes:
       volunteer:
         first_name: Jméno
@@ -66,6 +67,23 @@ cs:
         last_name: Příjmení
       address:
         full_address: Adresa
+        created_at: Vytvořeno
+        updated_at: Upraveno
+      request:
+        text: Popis
+        required_volunteer_count: Počet potřebných dobrovolníků
+        subscriber: Kontaktní osoba
+        subscriber_phone: Telefonní číslo
+        created_by: Vytvořeno
+        coordinator: Koordinátor
+        organisation: Organizace
+        status: Stav
+        fulfillment_date: Deadline
+        closed_note: Pozmánka k ukončení
+        closed_at: Ukočeno
+        closed_status: Důvod ukončení
+        closed_by: Ukočeno
+        is_published: Veřejné
         created_at: Vytvořeno
         updated_at: Upraveno
     errors:

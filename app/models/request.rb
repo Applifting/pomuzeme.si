@@ -23,12 +23,20 @@ class Request < ApplicationRecord
 
   delegate :country_code, to: :address
 
-  before_validation :prepare_default
+  scope :only_private, -> { where(is_published: false) }
+  scope :only_public, -> { where(is_published: true) }
+
+  after_initialize :initialize_defaults
+
+  def to_s
+    "#{text} ~ #{organisation}"
+  end
 
   private
 
-  def prepare_default
+  def initialize_defaults
     self.is_published ||= false
     self.status ||= 'new'
+    self.address ||= build_address
   end
 end
