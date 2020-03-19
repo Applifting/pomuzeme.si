@@ -18,10 +18,10 @@ describe Organisation do
 
   describe '#to_s' do
     subject(:organisation) { create(:organisation) }
-
-    it 'returns expected string' do
-      expected_string = "#{organisation.name} ~ #{organisation.abbreviation}"
-      expect(organisation.to_s).to eql(expected_string)
+    let(:expected_result) do
+      "#{organisation.name} ~ #{organisation.abbreviation}"
     end
+
+    it { expect(organisation.to_s).to eql(expected_result) }
   end
 end
