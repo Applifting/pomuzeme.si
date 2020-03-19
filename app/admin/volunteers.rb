@@ -1,5 +1,4 @@
 ActiveAdmin.register Volunteer do
-
   decorate_with VolunteerDecorator
 
   # Scopes
@@ -13,7 +12,14 @@ ActiveAdmin.register Volunteer do
   filter :city_part
   filter :city
 
+  # Action buttons
+  action_item :start_onboarding, only: %i[show] do
+    link_to 'Kontaktovat', new_admin_group_volunteer_path(volunteer: resource), style: 'background-color: green'
+  end
+
   index do
+    modal_window
+
     id_column
     column :full_name
     column :phone
@@ -21,9 +27,7 @@ ActiveAdmin.register Volunteer do
     column :street
     column :city
     column :city_part
-    if current_user.admin?
-      column :confirmed?
-    end
+    column :confirmed? if current_user.admin?
     actions
   end
 

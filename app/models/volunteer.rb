@@ -1,6 +1,10 @@
 class Volunteer < ApplicationRecord
   include SmsConfirmable
 
+  # Associations
+  has_many :group_volunteers
+  has_many :groups, through: :group_volunteers
+
   # normalize phone format and add default czech prefix if missings
   phony_normalize :phone, default_country_code: 'CZ'
   phony_normalized_method :phone, default_country_code: 'CZ'

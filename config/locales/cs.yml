@@ -58,6 +58,7 @@ cs:
       group:
         name: Název
         slug: Kód
+        channel_description: Krátký popis na web
         created_at: Vytvořeno
         updated_at: Upraveno
       organisation:

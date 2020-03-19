@@ -14,7 +14,7 @@ class Role < ApplicationRecord
   scopify
 
   scope :coordinator, -> { where(name: :coordinator) }
-  scope :for_model, -> (resource_class) { where(roles: { resource_type: resource_class }) }
+  scope :for_model, ->(resource_class) { where(roles: { resource_type: resource_class }) }
 
   def to_s
     "#{name} ~ #{resource}"
