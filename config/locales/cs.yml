@@ -122,6 +122,9 @@ cs:
     messages:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
 
+  sms:
+    welcome: Vitej na palube, pomuzeme si. Brzy te bude kontaktovat neziskova organizace v miste tveho bydliste, ktera te zapoji do deni.
+
   errors:
     messages:
       invalid_zipcode: nebylo rozpoznano.

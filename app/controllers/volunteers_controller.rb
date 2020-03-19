@@ -15,6 +15,8 @@ class VolunteersController < ApplicationController
     volunteer.confirm_with(confirm_params[:confirmation_code])
     return render 'volunteer/confirm_error', locals: { volunteer: volunteer } if volunteer.errors.any?
 
+    Sms::Manager.new.send_welcome_msg(volunteer.phone)
+
     session[:volunteer] = nil
     render 'volunteer/confirm_success'
   end
