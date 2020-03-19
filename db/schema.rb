@@ -50,15 +50,6 @@ ActiveRecord::Schema.define(version: 2020_03_19_205044) do
     t.text "channel_description"
   end
 
-  create_table "labels", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.bigint "organisation_group_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["organisation_group_id"], name: "index_labels_on_organisation_group_id"
-  end
-
   create_table "organisation_groups", force: :cascade do |t|
     t.bigint "group_id", null: false
     t.bigint "organisation_id", null: false
