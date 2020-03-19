@@ -8,6 +8,7 @@ class Organisation < ApplicationRecord
            class_name: :User,
            through: :roles,
            source: :users
+  has_many :organisation_groups
 
   # Validations
   validates :name, presence: true
@@ -25,7 +26,6 @@ class Organisation < ApplicationRecord
   def to_s
     "#{name} ~ #{abbreviation}"
   end
-
 
   private
 

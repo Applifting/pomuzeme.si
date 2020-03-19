@@ -1,6 +1,6 @@
-class CreateOrganisationGroups < ActiveRecord::Migration[6.0]
+class CreateGroups < ActiveRecord::Migration[6.0]
   def change
-    create_table :organisation_groups do |t|
+    create_table :groups do |t|
       t.string :name, null: false
       t.string :slug, null: false
 

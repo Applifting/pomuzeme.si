@@ -1,8 +1,10 @@
 class OrganisationGroup < ApplicationRecord
   # Associations
-  has_many :organisations
+  belongs_to :group
+  belongs_to :organisation
+
+  delegate :name, to: :organisation, prefix: true
 
   # Validations
-  validates :name, presence: true, uniqueness: { scope: :id }
-  validates :slug, presence: true, uniqueness: true
+  validates :organisation, uniqueness: { scope: :group }
 end
