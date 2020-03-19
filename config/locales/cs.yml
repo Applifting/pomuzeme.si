@@ -36,6 +36,8 @@ cs:
       organisation: Organizace
       user: Uživatel
       comment: Komentář
+      group: Organizační skupina
+      roles: Role
     attributes:
       volunteer:
         first_name: Jméno
@@ -53,6 +55,11 @@ cs:
         geolocation_err: Nepřesná adresa.
         recaptcha: Oveření recaptcha
         description: Jak můžete pomoci?
+      group:
+        name: Název
+        slug: Kód
+        created_at: Vytvořeno
+        updated_at: Upraveno
       organisation:
         name: Název
         abbreviation: Zkratka
@@ -62,6 +69,8 @@ cs:
         contact_person_email: Kontantní email
         created_at: Vytvořeno
         updated_at: Upraveno
+      role:
+        name: Název
       user:
         first_name: Jméno
         last_name: Příjmení

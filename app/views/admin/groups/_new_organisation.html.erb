@@ -1,0 +1,13 @@
+<h3>Přidat organizaci do skupiny</h2>
+
+<div style="width: 400px">
+  <%= semantic_form_for @resource, remote: true, url: @url, method: (@resource.persisted? ? :patch : :post) do |f| %>
+    <%= f.inputs do %>
+      <%= f.input :organisation_id, as: :hidden, input_html: { value: @resource.organisation_id } %>
+      <%= f.input :organisation, as: :select, label: 'Organizace', collection: @available_organisations %>
+    <% end %>
+    <%= f.actions do %>
+      <%= f.action :submit, label: 'Uložit' %>
+    <% end %>
+  <% end %>
+</div>
