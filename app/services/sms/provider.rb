@@ -6,7 +6,7 @@ class Sms::Provider
 
   def send_msg(phone, text, msg_id = nil, attempt = 0)
     if ENV['SMS_MOCK'] == 'true'
-      puts "SMS verification for #{phone}, TEXT -> #{text}"
+      puts "SMS for #{phone}, TEXT -> #{text}"
     else
       msg_id ||= SecureRandom.hex(16)
 

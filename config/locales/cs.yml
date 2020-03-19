@@ -122,6 +122,10 @@ cs:
     messages:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
 
+  sms:
+    verification: "Overovaci kod pro overeni registrace na portalu pomuzeme.si je: %{code}"
+    welcome: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se ozve jedna z organizaci ve vasem okoli a zapoji vas do deni. Reknete o nas i pratelum? Pomuzeme.si
+
   errors:
     messages:
       invalid_zipcode: nebylo rozpoznano.
