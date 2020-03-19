@@ -16,6 +16,7 @@ ActiveAdmin.register Group do
     end
     panel nil, style: 'width: 580px' do
       render partial: 'organisations'
+      render partial: 'labels'
     end
     active_admin_comments
   end
