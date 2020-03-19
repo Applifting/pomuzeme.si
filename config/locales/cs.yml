@@ -123,7 +123,8 @@ cs:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
 
   sms:
-    welcome: Vitej na palube, pomuzeme si. Brzy te bude kontaktovat neziskova organizace v miste tveho bydliste, ktera te zapoji do deni.
+    verification: "Overovaci kod pro overeni registrace na portalu pomuzeme.si je: %{code}"
+    welcome: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se ozve jedna z organizaci ve vasem okoli a zapoji vas do deni. Reknete o nas i pratelum? Pomuzeme.si
 
   errors:
     messages:

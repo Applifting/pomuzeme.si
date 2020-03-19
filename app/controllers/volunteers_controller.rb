@@ -15,6 +15,8 @@ class VolunteersController < ApplicationController
     volunteer.confirm_with(confirm_params[:confirmation_code])
     return render 'volunteer/confirm_error', locals: { volunteer: volunteer } if volunteer.errors.any?
 
+    # TODO: We should not show any error to user if welcome SMS was not sent,
+    # but we should be able to identify SMS that were not sent.
     Sms::Manager.new.send_welcome_msg(volunteer.phone)
 
     session[:volunteer] = nil

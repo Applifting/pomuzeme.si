@@ -4,9 +4,7 @@ class Sms::Manager < Sms::Provider
   end
 
   def send_verification_code(code, phone)
-    # TODO: Add message to locales.
-    msg = "Overovaci kod pro overeni registrace na portalu pomuzeme.si je: #{code}"
-
+    msg = I18n.t('sms.verification', code: code)
     send_msg(phone_without_prefix(phone), msg)
   end
 
