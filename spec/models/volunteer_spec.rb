@@ -10,6 +10,15 @@ describe Volunteer do
 
     it { is_expected.not_to allow_values('foo', '1 b@example.c').for(:email) }
     it { is_expected.to allow_values('test@example.com', '').for(:email) }
+
+    it { expect(build(:volunteer, city: nil)).not_to be_valid}
+    it { expect(build(:volunteer, city_part: nil)).not_to be_valid}
+    it { expect(build(:volunteer, street: nil)).not_to be_valid}
+    it { expect(build(:volunteer, street_number: nil)).not_to be_valid}
+    it { expect(build(:volunteer, geo_entry_id: nil)).not_to be_valid}
+    it { expect(build(:volunteer, geo_unit_id: nil)).not_to be_valid}
+    it { expect(build(:volunteer, geo_coord_x: nil)).not_to be_valid}
+    it { expect(build(:volunteer, geo_coord_y: nil)).not_to be_valid}
   end
 
   describe '#with_existing_record' do
