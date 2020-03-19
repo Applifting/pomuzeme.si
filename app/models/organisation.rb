@@ -37,5 +37,3 @@ class Organisation < ApplicationRecord
     Role.create name: :coordinator, resource: self
   end
 end
-
-

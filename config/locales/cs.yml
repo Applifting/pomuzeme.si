@@ -36,6 +36,7 @@ cs:
       organisation: Organizace
       user: Uživatel
       comment: Komentář
+      organization_group: Organizační skupina
     attributes:
       volunteer:
         first_name: Jméno
@@ -62,6 +63,8 @@ cs:
         contact_person_email: Kontantní email
         created_at: Vytvořeno
         updated_at: Upraveno
+      organisation_group:
+        name: Název
       user:
         first_name: Jméno
         last_name: Příjmení
