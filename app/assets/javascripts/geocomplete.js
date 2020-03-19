@@ -59,3 +59,23 @@ function InitAutocomplete() {
     })
   })
 }
+
+function InitFilterAutocomplete() {
+    $(document).ready(function() {
+        var input = $(".geocomplete_filter")
+        var target = $("#" + input.data("target"))
+        var autocomplete = new google.maps.places.Autocomplete(input[0])
+        autocomplete.setTypes(["address"])
+        autocomplete.setComponentRestrictions({country: "cz"})
+        input[0].addEventListener('keypress', function keypressHandler(event) { handleAutocompleteKeypress(event, target) }, { passive: true })
+        input[0].addEventListener('blur', function blurHandler(event) { handleAutocompleteBlur(event, target) }, { passive: true })
+
+        autocomplete.addListener("place_changed", function() {
+            var place = autocomplete.getPlace()
+            var lat   = place.geometry.location.lat()
+            var lng   = place.geometry.location.lng()
+
+            $('#q_search_nearby').val(lat + '#' + lng)
+        })
+    })
+}

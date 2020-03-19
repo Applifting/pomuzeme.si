@@ -8,19 +8,26 @@ ActiveAdmin.register Volunteer do
   scope :confirmed, if: -> { current_user.admin? }
 
   # Filters
+  filter :first_name
+  filter :last_name
   filter :phone
-  filter :street
-  filter :city_part
-  filter :city
+  filter :email
+  filter :search_nearby, as: :hidden, label: 'Location'
+  filter :address_search_input, as: :address_search
 
   index do
+    javascript_for(*location_autocomplete(callback: 'InitFilterAutocomplete'))
+
     id_column
     column :full_name
     column :phone
     column :email
-    column :street
-    column :city
-    column :city_part
+    if params[:q] && params[:q][:search_nearby]
+      params[:order] = 'distance_meters_asc'
+
+      # we'll alias this column to `distance_meters` in our scope so it can be sorted by
+      column :distance, sortable: 'distance_meters', &:distance_in_km
+    end
     if current_user.admin?
       column :confirmed?
     end

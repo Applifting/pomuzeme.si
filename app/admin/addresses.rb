@@ -7,17 +7,26 @@ ActiveAdmin.register Address do
   permit_params :id, :street_number, :street, :city, :city_part, :postal_code, :country_code,
                 :latitude, :longitude, :geo_entry_id, :addressable_type, :addressable_id
 
-
-  # filter :address_nearby, as: :address_search
   filter :street_number
   filter :street
   filter :city
   filter :city_part
   filter :postal_code
+  filter :search_nearby, as: :hidden, label: 'Location'
+  filter :address_search_input, as: :address_search
 
   index do
+    javascript_for(*location_autocomplete(callback: 'InitFilterAutocomplete'))
+
     id_column
     column :full_address
+    if params[:q] && params[:q][:search_nearby]
+      params[:order] = 'distance_meters_asc'
+
+      # we'll alias this column to `distance_meters` in our scope so it can be sorted by
+      column :distance, sortable: 'distance_meters', &:distance_in_km
+    end
+
     if current_user.admin?
       column :created_at
       column :updated_at
@@ -56,7 +65,7 @@ ActiveAdmin.register Address do
     f.inputs do
       f.semantic_errors
       f.input :id, as: :hidden
-      custom_input :full_address, class: 'geocomplete', 'data-target' => 'company_location_location_id'
+      custom_input :full_address, class: 'geocomplete'
       f.input :street_number, as: :hidden
       f.input :street, as: :hidden
       f.input :city, as: :hidden

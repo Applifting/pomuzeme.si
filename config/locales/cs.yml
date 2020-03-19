@@ -46,6 +46,7 @@ cs:
         city: Město
         city_part: Městská část
         zipcode: PSČ
+        distance: Vzdalenost
         phone: Telefonní číslo
         email: E-mail
         confirmation_code: Ověřovací kód
@@ -66,6 +67,15 @@ cs:
         last_name: Příjmení
       address:
         full_address: Adresa
+        street_number: Cislo domu
+        street: Ulice
+        city: Mesto
+        city_part: Mestska cast
+        postal_code: PSC
+        geo_provider: Poskytovatel geodat
+        country_code: Kod statu
+        addressable_type: Model dat
+        addressable_id: ID dat
         created_at: Vytvořeno
         updated_at: Upraveno
     errors:

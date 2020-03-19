@@ -9,8 +9,8 @@ class AddressDecorator < ApplicationDecorator
     object.coordinate.x
   end
 
-  def full_address
-    [object.street_number, object.street, object.city, object.city_part, object.postal_code].reject(&:blank?).join ', '
+  def distance_in_km
+    (object.attributes['distance_meters'] / 1_000).round 2
   end
 
 end
