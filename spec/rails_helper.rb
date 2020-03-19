@@ -50,4 +50,5 @@ RSpec.configure do |config|
   I18n.locale = :en
 
   config.include FactoryBot::Syntax::Methods
+  config.include ActiveSupport::Testing::TimeHelpers
 end
