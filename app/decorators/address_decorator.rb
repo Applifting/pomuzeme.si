@@ -10,7 +10,7 @@ class AddressDecorator < ApplicationDecorator
   end
 
   def full_address
-    [object.street, object.street_number, object.city, object.city_part].reject(&:blank?).join ', '
+    [object.street_number, object.street, object.city, object.city_part, object.postal_code].reject(&:blank?).join ', '
   end
 
 end
