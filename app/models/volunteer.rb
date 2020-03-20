@@ -5,6 +5,8 @@ class Volunteer < ApplicationRecord
 
   # Associations
   has_many :addresses, as: :addressable
+  has_many :group_volunteers
+  has_many :groups, through: :group_volunteers
 
   # normalize phone format and add default czech prefix if missings
   phony_normalize :phone, default_country_code: 'CZ'

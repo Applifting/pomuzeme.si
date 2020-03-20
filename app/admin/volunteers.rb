@@ -1,5 +1,4 @@
 ActiveAdmin.register Volunteer do
-
   decorate_with VolunteerDecorator
 
   # Scopes

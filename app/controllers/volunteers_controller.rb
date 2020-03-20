@@ -1,9 +1,12 @@
 class VolunteersController < ApplicationController
+  before_action :partner_signup_group
+
   def register
     volunteer = Volunteer.new(volunteer_params).with_existing_record
     address = volunteer.addresses.build address_with_coordinate
 
     if resolve_recaptcha(volunteer) && volunteer.valid? && agreements_granted?(volunteer) && save_and_send_code(volunteer)
+      bind_volunteer_with_organisation_group(volunteer) if @partner_signup_group
       render 'volunteer/register_success'
     else
       render 'volunteer/register_error', locals: { volunteer: volunteer, address: address }
@@ -11,18 +14,23 @@ class VolunteersController < ApplicationController
   end
 
   def confirm
-    volunteer = Volunteer.find_by id: session[:volunteer]
+    volunteer = Volunteer.find_by id: session[:volunteer_id]
     return render 'volunteer/confirm_error', locals: { error: I18n.t('activerecord.errors.messages.volunteer_not_found') } if volunteer.nil?
 
     volunteer.confirm_with(confirm_params[:confirmation_code])
     return render 'volunteer/confirm_error', locals: { volunteer: volunteer } if volunteer.errors.any?
 
-    session[:volunteer] = nil
+    # TODO: We should not show any error to user if welcome SMS was not sent,
+    # but we should be able to identify SMS that were not sent.
+    Sms::Manager.new.send_welcome_msg(volunteer.phone)
+
+    session[:volunteer_id] = nil
+
     render 'volunteer/confirm_success'
   end
 
   def resend
-    volunteer = Volunteer.find_by id: session[:volunteer]
+    volunteer = Volunteer.find_by id: session[:volunteer_id]
     return render 'volunteer/confirm_error', locals: { error: I18n.t('activerecord.errors.messages.volunteer_not_found') } if volunteer.nil?
 
     resend_code volunteer
@@ -63,7 +71,7 @@ class VolunteersController < ApplicationController
     with_captured_exception volunteer do |safe_volunteer|
       safe_volunteer.save!
       safe_volunteer.obtain_confirmation_code
-      session[:volunteer] = safe_volunteer.id
+      session[:volunteer_id] = safe_volunteer.id
       true
     end
   end
@@ -76,9 +84,14 @@ class VolunteersController < ApplicationController
     ActiveRecord::Base.transaction do
       yield volunteer
     rescue StandardError
+      # TODO: sms_not_working is misleading and difficult to debug. There can be model validation issues raising errors.
       volunteer.errors.add(:base, :sms_not_working)
       raise ActiveRecord::Rollback
     end
+  end
+
+  def bind_volunteer_with_organisation_group(volunteer)
+    @partner_signup_group.add_exclusive_volunteer(volunteer)
   end
 
   def agreements_granted?(volunteer)
@@ -86,6 +99,10 @@ class VolunteersController < ApplicationController
     volunteer.errors.add(:base, :age_confirmed_required) if agreements_params[:age_confirmed] != '1'
 
     volunteer.errors.empty?
+  end
+
+  def partner_signup_group
+    @partner_signup_group = Group.find(session[:group_id]) if session[:group_id]
   end
 
   def resolve_recaptcha(_volunteer)

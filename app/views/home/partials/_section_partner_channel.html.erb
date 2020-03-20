@@ -1,0 +1,21 @@
+<section class="section-hero section">
+  <div class="hero-content">
+    <div class="column-left">
+      <h1>
+        <span class="lighter" style="color: #019de0">
+          <%= @partner_signup_group.name %>
+        </span>
+        <div style="font-size: 0.6em">Spolu to dáme</div>
+        <% if @partner_signup_group.channel_description %>
+          <p style="margin-top: 28px"><%= @partner_signup_group.channel_description.html_safe %></p>
+        <% end %>
+      </h1>
+      <button id="chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
+        Chci pomáhat
+      </button>
+    </div>
+    <div class="column-right">
+      <%= image_tag asset_path('hero.svg'), class: 'hero-image'  %>
+    </div>
+  </div>
+</section>

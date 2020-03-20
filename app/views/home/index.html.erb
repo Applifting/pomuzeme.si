@@ -1,10 +1,14 @@
 <%= render 'home/partials/main_header' %>
-<%= render 'home/partials/section_hero' %>
+<% if @partner_signup_group %>
+  <%= render 'home/partials/section_partner_channel' %>
+<% else %>
+  <%= render 'home/partials/section_hero' %>
+<% end %>
 <%= render 'home/partials/section_orgs' %>
 
 <%= render 'home/partials/section_intro' %>
 <%= render 'home/partials/section_guide' %>
-<%= render 'home/partials/section_contact' %>
+<%= render 'home/partials/section_contact' if @partner_signup_group.present? %>
 <%= render 'home/partials/main_footer' %>
 
 <%= render 'home/modals/registration' %>

@@ -14,6 +14,11 @@ Rails.application.routes.draw do
     post :resend, on: :collection
   end
   root 'home#index'
+  get '/:slug', param: :slug, to: 'home#partner_signup', slug: /(?!.*?admin).*/
+
+  namespace :docs do
+    get '/partner-kit', to: redirect { 'https://drive.google.com/drive/folders/1w9_PVRbZ9VvE10zY0sR26f6SlmLq0xZn' }
+  end
 
   namespace :api do
     namespace :v1 do

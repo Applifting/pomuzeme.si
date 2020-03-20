@@ -31,11 +31,25 @@
 
 cs:
   activerecord:
+    enums:
+      group_volunteer:
+        recruitment_statuses:
+          waiting_for_contact: čeká na kontakt
+          onboarding: probíhá nábor
+          active: dobrovolník aktivní
+          inactive: dobrovolník vyřazen
+        source:
+          migration: nahrání dat
+          channel: online kanál,
+          public_pool: veřejný seznam
     models:
       volunteer: Dobrovolník
       organisation: Organizace
       user: Uživatel
       comment: Komentář
+      group: Organizační skupina
+      group_volunteer: Nábor
+      roles: Role
     attributes:
       volunteer:
         first_name: Jméno
@@ -53,6 +67,22 @@ cs:
         addresses: Adresy
         confirmed?: Potvrzen?
         description: Jak můžete pomoci?
+      group:
+        name: Název
+        slug: Kód
+        channel_description: Krátký popis na web
+        created_at: Vytvořeno
+        updated_at: Upraveno
+      group_volunteer:
+        group: Skupina
+        coordinator_id: Koordinátor
+        recruitment_status: Stav náboru
+        source: Zdroj dobrovolníka
+        comments: Poznámky
+        volunteer: Dobrovolník
+        is_exclusive: Jen pro vás
+        created_at: Vytvořeno
+        updated_at: Upraveno
       organisation:
         name: Název
         abbreviation: Zkratka
@@ -62,6 +92,8 @@ cs:
         contact_person_email: Kontantní email
         created_at: Vytvořeno
         updated_at: Upraveno
+      role:
+        name: Název
       user:
         first_name: Jméno
         last_name: Příjmení
@@ -138,6 +170,10 @@ cs:
             inaccurate_address: Nepřesná adresa. Prosíme vyberte celou adresu i s číslem popisným
     messages:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
+
+  sms:
+    verification: "Overovaci kod pro overeni registrace na portalu pomuzeme.si je: %{code}"
+    welcome: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se ozve jedna z organizaci ve vasem okoli a zapoji vas do deni. Reknete o nas i pratelum? Pomuzeme.si
 
   errors:
     messages:

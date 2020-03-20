@@ -8,6 +8,7 @@ class Organisation < ApplicationRecord
            class_name: :User,
            through: :roles,
            source: :users
+  has_many :organisation_groups
 
   # Validations
   validates :name, presence: true
@@ -26,7 +27,6 @@ class Organisation < ApplicationRecord
     "#{name} ~ #{abbreviation}"
   end
 
-
   private
 
   def upcase_abbreviation
@@ -37,5 +37,3 @@ class Organisation < ApplicationRecord
     Role.create name: :coordinator, resource: self
   end
 end
-
-

@@ -35,7 +35,20 @@
 
       .input-field {
         margin: 60px auto 40px;
-        max-width: 250px;
+        max-width: 150px;
+
+        input, label {
+          text-align: center;
+        }
+
+        input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
       }
     }
   }

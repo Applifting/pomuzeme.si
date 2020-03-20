@@ -1,6 +1,6 @@
 # require custom Arbre components from app/components/
 Dir[Rails.root.join('app/components/active_admin/inputs/*.rb')].each { |f| require f }
-Dir[Rails.root.join('app/components/active_admin/views/*.rb')].each { |f| require f }
+Dir[Rails.root.join('app/components/active_admin/views/*.rb')].sort.each { |f| require f }
 
 ActiveAdmin.setup do |config|
   # == Site Title
@@ -8,7 +8,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Pomuzeme Si"
+  config.site_title = 'Pomuzeme Si'
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
@@ -138,7 +138,7 @@ ActiveAdmin.setup do |config|
   # config.comments_order = 'created_at ASC'
   #
   # You can disable the menu item for the comments index page:
-  # config.comments_menu = false
+  config.comments_menu = false
   #
   # You can customize the comment menu:
   # config.comments_menu = { parent: 'Admin', priority: 1 }
@@ -147,7 +147,7 @@ ActiveAdmin.setup do |config|
   #
   # Enable and disable Batch Actions
   #
-  config.batch_actions = true
+  config.batch_actions = false
 
   # == Controller Filters
   #
@@ -161,7 +161,7 @@ ActiveAdmin.setup do |config|
   # You can exclude possibly sensitive model attributes from being displayed,
   # added to forms, or exported by default by ActiveAdmin
   #
-  config.filter_attributes = [:encrypted_password, :password, :password_confirmation]
+  config.filter_attributes = %i[encrypted_password password password_confirmation]
 
   # == Localize Date/Time Format
   #
@@ -333,5 +333,4 @@ ActiveAdmin.setup do |config|
   meta_tags_options = { viewport: 'width=device-width, initial-scale=1' }
   config.meta_tags = meta_tags_options
   config.meta_tags_for_logged_out_pages = meta_tags_options
-
 end

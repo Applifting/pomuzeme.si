@@ -38,6 +38,16 @@ module SeedHelper
     end
   end
 
+  def self.create_group(organisation:, **args)
+    Group.find_or_initialize_by(slug: args[:slug]).tap do |group|
+      next if group.persisted?
+
+      group.assign_attributes args
+      group.save!
+      group.organisations << organisation
+    end
+  end
+
   def self.create_volunteer(**args)
     Volunteer.find_or_initialize_by(phone: args[:phone]).tap do |volunteer|
       next if volunteer.persisted?
