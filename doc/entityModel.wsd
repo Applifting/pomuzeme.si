@@ -30,29 +30,8 @@ Entity(volunteer, "Volunteer"){
 Entity(volunteer_label, "Volunteer Label"){
   not_null(name) STRING
   not_null(description) STRING
-  organization_id ID
   organization_group_id ID
 }
-
-
-
-Entity(volunteer_state, "Volunteer State"){
-  not_null(name) STRING
-  not_null(description) STRING
-  organization_id ID
-  not_null(is_considered_as_verified) bool default false
-}
-
-Entity(assigned_volunteer_state, "Assigned Volunteer State"){
-  not_null(state_id) ID
-  not_null(organization_id) ID
-  not_null(volunteer_id) ID
-  not_null(added_by) ID
-  not_null(is_current_state) bool default false
-  'TODO nebude potrebovat to delat skrze organization group id
-}
-
-
 
 Entity(assigned_volunteer_label, "Assigned Volunteer label"){
   not_null(label_id) ID
@@ -74,9 +53,6 @@ Entity(address, "Address"){
   not_null(addressable_id) ID
   not_null(addressable_type) STRING
 }
-
-
-
 
 Entity(request, "Request"){
   not_null(text) max 160 STRING
@@ -144,6 +120,10 @@ Entity(volunteer_in_organization_group, "Volunteer In Organization Group"){
   not_null(organization_group_id) ID
   not_null(volunteer_id) ID
   not_null(is_exclusive) bool default false
+  not_null(is_verified) bool default false
+  not_null(is_rejected) bool default false
+  created_by_id ID
+  comments STRING
 }
 
 Entity(organization_in_organization_group, "Organization In Organization Group"){
@@ -158,12 +138,12 @@ Entity(user, "User"){
 Entity(user_role, "UserRole"){
   not_null(user_id) ID
   not_null(role_id) ID
-  not_null(resource_type) STRING
-  not_null(resource_id) ID
 }
 
 Entity(role, "Role") {
   not_null(name) ENUM[coordinator|superadmin]
+  not_null(resource_type) STRING
+  not_null(resource_id) ID
 }
 
 
@@ -181,9 +161,6 @@ request  o-- volunteer
 (request, volunteer) .- requested_volunteer
 volunteer *- address
 request -> address
-volunteer *-- assigned_volunteer_state
-volunteer_state <- assigned_volunteer_state
-organization *- volunteer_state
 volunteer_in_organization_group -o volunteer
 organization_group <- volunteer_in_organization_group
 
