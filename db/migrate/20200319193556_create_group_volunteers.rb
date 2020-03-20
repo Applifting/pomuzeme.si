@@ -5,6 +5,7 @@ class CreateGroupVolunteers < ActiveRecord::Migration[6.0]
       t.references :volunteer, null: false, foreign_key: true
       t.integer :recruitment_status
       t.integer :source
+      t.boolean :is_exclusive, default: false
       t.bigint :coordinator_id, foreign_key: { to_table: :users }
       t.text :comments
 

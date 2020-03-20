@@ -25,6 +25,10 @@ class User < ApplicationRecord
     @cached_roles_name ||= roles_name.map &:to_sym
   end
 
+  def to_s
+    [first_name, last_name].compact.join(' ')
+  end
+
   def has_any_role?(role_name)
     cached_roles_name.include? role_name
   end

@@ -1,7 +1,10 @@
 class VolunteersController < ApplicationController
+  before_action :partner_signup_group
+
   def register
     volunteer = Volunteer.new(volunteer_params).with_existing_record
     if resolve_recaptcha(volunteer) && volunteer.valid? && agreements_granted?(volunteer) && save_and_send_code(volunteer)
+      bind_volunteer_with_organisation_group(volunteer) if @partner_signup_group
       render 'volunteer/register_success'
     else
       render 'volunteer/register_error', locals: { volunteer: volunteer }
@@ -20,6 +23,7 @@ class VolunteersController < ApplicationController
     Sms::Manager.new.send_welcome_msg(volunteer.phone)
 
     session[:volunteer_id] = nil
+
     render 'volunteer/confirm_success'
   end
 
@@ -67,9 +71,14 @@ class VolunteersController < ApplicationController
     ActiveRecord::Base.transaction do
       yield volunteer
     rescue StandardError
+      # TODO: sms_not_working is misleading and difficult to debug. There can be model validation issues raising errors.
       volunteer.errors.add(:base, :sms_not_working)
       raise ActiveRecord::Rollback
     end
+  end
+
+  def bind_volunteer_with_organisation_group(volunteer)
+    @partner_signup_group.add_exclusive_volunteer(volunteer)
   end
 
   def agreements_granted?(volunteer)
@@ -77,6 +86,12 @@ class VolunteersController < ApplicationController
     volunteer.errors.add(:base, :age_confirmed_required) if agreements_params[:age_confirmed] != '1'
 
     volunteer.errors.empty?
+  end
+
+  def partner_signup_group
+    return unless session[:group_id]
+
+    @partner_signup_group = Group.find(session[:group_id])
   end
 
   def resolve_recaptcha(_volunteer)

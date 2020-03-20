@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2020_03_19_205044) do
     t.bigint "volunteer_id", null: false
     t.integer "recruitment_status"
     t.integer "source"
+    t.boolean "is_exclusive", default: false
     t.bigint "coordinator_id"
     t.text "comments"
     t.datetime "created_at", precision: 6, null: false

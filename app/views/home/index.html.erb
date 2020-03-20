@@ -1,5 +1,5 @@
 <%= render 'home/partials/main_header' %>
-<% if @group %>
+<% if @partner_signup_group %>
   <%= render 'home/partials/section_partner_channel' %>
 <% else %>
   <%= render 'home/partials/section_hero' %>
@@ -8,7 +8,7 @@
 
 <%= render 'home/partials/section_intro' %>
 <%= render 'home/partials/section_guide' %>
-<%= render 'home/partials/section_contact' unless @group %>
+<%= render 'home/partials/section_contact' if @partner_signup_group.present? %>
 <%= render 'home/partials/main_footer' %>
 
 <%= render 'home/modals/registration' %>
