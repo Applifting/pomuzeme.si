@@ -1,21 +1,14 @@
-class Sms::Manager < Sms::Provider
-  def initialize
-    super
-  end
+class Sms::Manager
 
   def send_verification_code(code, phone)
     msg = I18n.t('sms.verification', code: code)
-    send_msg(phone_without_prefix(phone), msg)
+    #Sms::NetHost.new.send_msg(phone, msg)
+    Sms::O2Connector.new.send_msg(phone, msg)
   end
 
   def send_welcome_msg(phone)
     msg = I18n.t('sms.welcome')
-    send_msg(phone_without_prefix(phone), msg)
-  end
-
-  private
-
-  def phone_without_prefix(phone)
-    phone.sub('+', '')
+    #Sms::NetHost.new.send_msg(phone, msg)
+    Sms::O2Connector.new.send_msg(phone, msg)
   end
 end

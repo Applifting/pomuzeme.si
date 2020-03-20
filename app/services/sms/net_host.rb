@@ -1,4 +1,4 @@
-class Sms::Provider
+class Sms::NetHost
   include HTTParty
 
   base_uri ENV['NETHOST_BASE_URL']
@@ -9,6 +9,7 @@ class Sms::Provider
       puts "SMS for #{phone}, TEXT -> #{text}"
     else
       msg_id ||= SecureRandom.hex(16)
+      phone.sub!('+', '')
 
       response = self.class.get('/v1/', { query: { chlg: msg_id, rcpt: phone, msgbd: text } })
 
