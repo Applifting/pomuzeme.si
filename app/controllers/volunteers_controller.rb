@@ -9,7 +9,7 @@ class VolunteersController < ApplicationController
   end
 
   def confirm
-    volunteer = Volunteer.find_by id: session[:volunteer]
+    volunteer = Volunteer.find_by id: session[:volunteer_id]
     return render 'volunteer/confirm_error', locals: { error: I18n.t('activerecord.errors.messages.volunteer_not_found') } if volunteer.nil?
 
     volunteer.confirm_with(confirm_params[:confirmation_code])
@@ -19,12 +19,12 @@ class VolunteersController < ApplicationController
     # but we should be able to identify SMS that were not sent.
     Sms::Manager.new.send_welcome_msg(volunteer.phone)
 
-    session[:volunteer] = nil
+    session[:volunteer_id] = nil
     render 'volunteer/confirm_success'
   end
 
   def resend
-    volunteer = Volunteer.find_by id: session[:volunteer]
+    volunteer = Volunteer.find_by id: session[:volunteer_id]
     return render 'volunteer/confirm_error', locals: { error: I18n.t('activerecord.errors.messages.volunteer_not_found') } if volunteer.nil?
 
     resend_code volunteer
@@ -54,7 +54,7 @@ class VolunteersController < ApplicationController
     with_captured_exception volunteer do |safe_volunteer|
       safe_volunteer.save!
       safe_volunteer.obtain_confirmation_code
-      session[:volunteer] = safe_volunteer.id
+      session[:volunteer_id] = safe_volunteer.id
       true
     end
   end
