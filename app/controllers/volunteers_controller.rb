@@ -89,9 +89,7 @@ class VolunteersController < ApplicationController
   end
 
   def partner_signup_group
-    return unless session[:group_id]
-
-    @partner_signup_group = Group.find(session[:group_id])
+    @partner_signup_group = Group.find(session[:group_id]) if session[:group_id]
   end
 
   def resolve_recaptcha(_volunteer)
