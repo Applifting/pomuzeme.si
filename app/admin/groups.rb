@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Group do
-  permit_params :name, :slug
+  permit_params :name, :slug, :channel_description
 
   show do
     modal_window

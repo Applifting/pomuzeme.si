@@ -1,0 +1,25 @@
+<section class="section-hero section">
+  <div class="hero-content">
+    <div class="column-left">
+      <h1>
+        <span class="lighter">
+          <%= @partner_signup_group.name %>
+          <img id="virus" src="<%= asset_path "virus.svg" %>" />
+        </span>
+        <div>Spolu to dáme</div>
+        <% if @partner_signup_group.channel_description %>
+          <p style="margin-top: 28px"><%= @partner_signup_group.channel_description %></p>
+        <% end %>
+      </h1>
+      <p>
+        Pomáháme dostat dobrovolníky tam, kde jsou třeba.
+      </p>
+      <button id="chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
+        Chci pomáhat
+      </button>
+    </div>
+    <div class="column-right">
+      <%= image_tag asset_path('hero.svg'), class: 'hero-image'  %>
+    </div>
+  </div>
+</section>

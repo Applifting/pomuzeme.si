@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_19_121816) do
+ActiveRecord::Schema.define(version: 2020_03_19_205044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,11 +29,26 @@ ActiveRecord::Schema.define(version: 2020_03_19_121816) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
+  create_table "group_volunteers", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.bigint "volunteer_id", null: false
+    t.integer "recruitment_status"
+    t.integer "source"
+    t.boolean "is_exclusive", default: false
+    t.bigint "coordinator_id"
+    t.text "comments"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_volunteers_on_group_id"
+    t.index ["volunteer_id"], name: "index_group_volunteers_on_volunteer_id"
+  end
+
   create_table "groups", force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "channel_description"
   end
 
   create_table "organisation_groups", force: :cascade do |t|
@@ -110,6 +125,8 @@ ActiveRecord::Schema.define(version: 2020_03_19_121816) do
     t.index ["phone"], name: "index_volunteers_on_phone"
   end
 
+  add_foreign_key "group_volunteers", "groups"
+  add_foreign_key "group_volunteers", "volunteers"
   add_foreign_key "organisation_groups", "groups"
   add_foreign_key "organisation_groups", "organisations"
 end

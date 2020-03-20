@@ -38,6 +38,16 @@ module SeedHelper
     end
   end
 
+  def self.create_group(organisation:, **args)
+    Group.find_or_initialize_by(slug: args[:slug]).tap do |group|
+      next if group.persisted?
+
+      group.assign_attributes args
+      group.save!
+      group.organisations << organisation
+    end
+  end
+
   def self.create_volunteer(**args)
     Volunteer.find_or_initialize_by(phone: args[:phone]).tap do |volunteer|
       next if volunteer.persisted?
@@ -51,7 +61,7 @@ module SeedHelper
                                   street_number: args[:street],
                                   phone: args[:phone],
                                   email: args[:email],
-                                  geo_entry_id: 42, #fake data below, maybe make robust later
+                                  geo_entry_id: 42, # fake data below, maybe make robust later
                                   geo_unit_id: 42,
                                   geo_coord_x: 42,
                                   geo_coord_y: 42

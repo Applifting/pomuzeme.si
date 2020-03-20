@@ -31,12 +31,24 @@
 
 cs:
   activerecord:
+    enums:
+      group_volunteer:
+        recruitment_statuses:
+          waiting_for_contact: čeká na kontakt
+          onboarding: probíhá nábor
+          active: dobrovolník aktivní
+          inactive: dobrovolník vyřazen
+        source:
+          migration: nahrání dat
+          channel: online kanál,
+          public_pool: veřejný seznam
     models:
       volunteer: Dobrovolník
       organisation: Organizace
       user: Uživatel
       comment: Komentář
       group: Organizační skupina
+      group_volunteer: Nábor
       roles: Role
     attributes:
       volunteer:
@@ -58,6 +70,17 @@ cs:
       group:
         name: Název
         slug: Kód
+        channel_description: Krátký popis na web
+        created_at: Vytvořeno
+        updated_at: Upraveno
+      group_volunteer:
+        group: Skupina
+        coordinator: Koordinátor
+        recruitment_status: Stav náboru
+        source: Zdroj dobrovolníka
+        comments: Poznámky
+        volunteer: Dobrovolník
+        is_exclusive: Jen pro vás
         created_at: Vytvořeno
         updated_at: Upraveno
       organisation:
