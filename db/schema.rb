@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 2020_03_20_162412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -27,6 +28,24 @@ ActiveRecord::Schema.define(version: 2020_03_20_162412) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "street"
+    t.string "street_number", null: false
+    t.string "city", null: false
+    t.string "city_part", null: false
+    t.string "geo_entry_id", null: false
+    t.string "geo_unit_id", null: false
+    t.geometry "coordinate", limit: {:srid=>4326, :type=>"st_point"}
+    t.string "postal_code"
+    t.string "country_code", limit: 3, null: false
+    t.string "addressable_type"
+    t.bigint "addressable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "geo_provider"
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
   create_table "group_volunteers", force: :cascade do |t|
@@ -107,21 +126,12 @@ ActiveRecord::Schema.define(version: 2020_03_20_162412) do
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "phone", null: false
-    t.string "street", null: false
-    t.string "city", null: false
-    t.string "zipcode"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "email", null: false
     t.string "confirmation_code"
     t.datetime "confirmation_valid_to"
     t.datetime "confirmed_at"
-    t.string "street_number", null: false
-    t.string "city_part", null: false
-    t.string "geo_entry_id", null: false
-    t.string "geo_unit_id", null: false
-    t.float "geo_coord_x", null: false
-    t.float "geo_coord_y", null: false
     t.text "description"
     t.index ["phone"], name: "index_volunteers_on_phone"
   end
