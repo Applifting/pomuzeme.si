@@ -38,4 +38,9 @@ class User < ApplicationRecord
                                       resource_type: :Organisation,
                                       resource_id: coordinating_organisation_ids })
   end
+
+  def group_volunteers
+    GroupVolunteer.joins(group: :organisation_groups)
+                  .where(organisation_groups: { organisation_id: coordinating_organisation_ids })
+  end
 end

@@ -2,16 +2,20 @@
 
 div class: 'title h4' do
   span 'Role'
-  span modal_link('', new_role_admin_user_path(resource), class: 'action add')
+  span modal_link('', new_role_admin_user_path(resource), class: 'action add') if can?(:update, resource)
 end
 
 resource.roles.includes(:resource).coordinator.for_model(:Organisation).tap do |roles_with_organisation|
   next if roles_with_organisation.blank?
 
+  delete_link = proc do |role|
+    link_to I18n.t('active_admin.delete_model'), destroy_role_admin_user_path(resource, role_id: role.id), method: :post, remote: true
+  end
+
   table_for roles_with_organisation.map(&:decorate) do
     column 'Organizace', &:resource
     column 'Akce', class: 'centered' do |role|
-      link_to I18n.t('active_admin.delete_model'), destroy_role_admin_user_path(resource, role_id: role.id), method: :post, remote: true
+      delete_link[role] if can?(:delete, role)
     end
   end
 end

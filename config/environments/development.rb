@@ -1,3 +1,7 @@
+Rails.application.config.assets.configure do |env|
+  env.export_concurrent = false
+end
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
