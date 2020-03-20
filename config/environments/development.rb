@@ -20,7 +20,7 @@ Rails.application.configure do
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-        'Cache-Control' => "public, max-age=#{2.days.to_i}"
+      'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -63,7 +63,7 @@ Rails.application.configure do
   ENV['SMS_MOCK'] = 'true'
 
   # default mailer options
-  config.action_mailer.default_url_options = {host: 'localhost', port: 3000}
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # reCaptcha test keys, used only for local development only!
   ENV['RECAPTCHA_SITE_KEY'] = '6LeOIuIUAAAAAH6u8wyuF3c23kbXokZ-9t1ht_fW'
