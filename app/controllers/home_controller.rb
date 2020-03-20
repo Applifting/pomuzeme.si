@@ -8,7 +8,7 @@ class HomeController < ApplicationController
     @partner_signup_group = Group.find_by(slug: params[:slug])
 
     # TODO: best replace this by "partner not found" page, now just redirecting to root
-    return redirect_to(:root) if @partner_signup_group.blank?
+    not_found if @partner_signup_group.blank?
 
     session[:group_id] = @partner_signup_group.id
     render :index
