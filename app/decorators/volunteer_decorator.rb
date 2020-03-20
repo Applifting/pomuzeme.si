@@ -8,4 +8,8 @@ class VolunteerDecorator < ApplicationDecorator
   def full_name
     "#{object.first_name} #{object.last_name}"
   end
+
+  def distance_in_km
+    (object.attributes['distance_meters'] / 1_000).round 2
+  end
 end

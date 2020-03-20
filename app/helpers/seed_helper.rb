@@ -54,6 +54,7 @@ module SeedHelper
                                 postal_code: args[:zipcode],
                                 geo_entry_id: 42, #fake data below, maybe make robust later
                                 geo_unit_id: 42,
+                                geo_provider: Address.geo_providers[:cadstudio],
                                 coordinate: Geography::Point.from_coordinates(latitude: 50.0941253, longitude: 14.4548767)
       volunteer.save!
     end
