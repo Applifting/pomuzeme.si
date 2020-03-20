@@ -7,7 +7,9 @@
       <%= image_tag asset_path('thank-you.svg'), class: 'success-image' %>
       <h3>Děkujeme že chcete pomáhat</h3>
       <% if @partner_signup_group.present? %>
-        <p></p>
+        <p>
+          <%= @partner_signup_group&.thank_you&.html_safe %>
+        </p>
       <% else %>
         <p>Nyní na vás mají kontakt dobročinné organizace z&nbsp;vašeho blízkého okolí. Mějte trpělivost a některá z&nbsp;nich se vám ozve.</p>
       <% end %>
