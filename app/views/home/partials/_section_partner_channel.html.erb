@@ -2,18 +2,14 @@
   <div class="hero-content">
     <div class="column-left">
       <h1>
-        <span class="lighter">
+        <span class="lighter" style="color: #019de0">
           <%= @partner_signup_group.name %>
-          <img id="virus" src="<%= asset_path "virus.svg" %>" />
         </span>
-        <div>Spolu to dáme</div>
+        <div style="font-size: 0.6em">Spolu to dáme</div>
         <% if @partner_signup_group.channel_description %>
-          <p style="margin-top: 28px"><%= @partner_signup_group.channel_description %></p>
+          <p style="margin-top: 28px"><%= @partner_signup_group.channel_description.html_safe %></p>
         <% end %>
       </h1>
-      <p>
-        Pomáháme dostat dobrovolníky tam, kde jsou třeba.
-      </p>
       <button id="chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
         Chci pomáhat
       </button>
