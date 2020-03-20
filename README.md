@@ -1,7 +1,7 @@
 # pomuzeme.si
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 An open-source platform which aims to simplify and streamline the coordination of volunteers. Through the platform, local organizations can reach volunteers in the area where assistance is needed. This project originated as a voluntary initiative in connection with the COVID-19 infection.
@@ -93,6 +93,7 @@ Authors of this platform are awesome guys and girls from [Applifting](www.applif
   </tr>
   <tr>
     <td align="center"><a href="http://www.danielsenff.de"><img src="https://avatars2.githubusercontent.com/u/28617?v=4" width="100px;" alt=""/><br /><sub><b>Daniel Senff</b></sub></a><br /><a href="https://github.com/Applifting/pomuzeme.si/commits?author=Dahie" title="Code">💻</a> <a href="https://github.com/Applifting/pomuzeme.si/commits?author=Dahie" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/kirscfil"><img src="https://avatars0.githubusercontent.com/u/2674563?v=4" width="100px;" alt=""/><br /><sub><b>kirscfil</b></sub></a><br /><a href="#content-kirscfil" title="Content">🖋</a></td>
   </tr>
 </table>
 
