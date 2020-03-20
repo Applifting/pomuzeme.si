@@ -1,7 +1,7 @@
 return unless Rails.env.development?
 
 # create super admin
-SeedHelper.create_super_admin email: 'admin@example.com', password: 'password', first_name: 'Awesome', last_name: 'Admin'
+SeedHelper.create_super_admin email: 'admin@example.com', password: 'password', first_name: 'Iva', last_name: 'Červená'
 
 # seed organisations
 organisation1 = SeedHelper.create_organisation name: 'Oblastni charita',

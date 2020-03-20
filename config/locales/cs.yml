@@ -75,7 +75,7 @@ cs:
         updated_at: Upraveno
       group_volunteer:
         group: Skupina
-        coordinator: Koordinátor
+        coordinator_id: Koordinátor
         recruitment_status: Stav náboru
         source: Zdroj dobrovolníka
         comments: Poznámky
