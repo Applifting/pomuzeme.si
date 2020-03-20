@@ -149,6 +149,15 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "kirscfil",
+      "name": "kirscfil",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/2674563?v=4",
+      "profile": "https://github.com/kirscfil",
+      "contributions": [
+        "content"
+      ]
     }
   ],
   "contributorsPerLine": 7,
