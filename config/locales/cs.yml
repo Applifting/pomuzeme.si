@@ -66,28 +66,9 @@ cs:
         email: E-mail
         confirmation_code: Ověřovací kód
         addresses: Adresy
-        address: Adresa
-        confirmed?: Potvrzen?
-        description: Jak můžete pomoci?
-      volunteer:
-        first_name: Jméno
-        last_name: Příjmení
-        full_name: Jméno a příjmení
-        street_search: Vyhledejte vaši adresu
-        street: Ulice
-        city: Město
-        city_part: Městská část
         full_address: Adresa
-        zipcode: PSČ
-        phone: Telefonní číslo
-        email: E-mail
-        confirmation_code: Ověřovací kód
         confirmed?: Potvrzen?
-        geolocation_err: Nepřesná adresa.
-        recaptcha: Oveření recaptcha
         description: Jak můžete pomoci?
-        created_at: Vytovřen
-        updated_at: Upraven
       group:
         name: Název
         slug: Kód

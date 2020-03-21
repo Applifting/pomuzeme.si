@@ -27,7 +27,7 @@ ActiveAdmin.register Volunteer do
     column :full_name
     column :phone
     column :email
-    column :address
+    column :full_address
     if params[:q] && params[:q][:search_nearby]
       params[:order] = 'distance_meters_asc'
 

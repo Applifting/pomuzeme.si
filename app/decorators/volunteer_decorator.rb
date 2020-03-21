@@ -6,11 +6,11 @@ class VolunteerDecorator < ApplicationDecorator
   end
 
   def full_address
-    [full_street, [object.city_part, object.city].uniq, object.zipcode].flatten.compact.join(', ')
+    [full_street, [address.city_part, address.city].uniq, address.postal_code].flatten.compact.join(', ')
   end
 
   def full_street
-    [object.street, object.street_number].uniq.compact.join(' ')
+    [address.street, address.street_number].uniq.compact.join(' ')
   end
 
   def full_name
@@ -18,7 +18,7 @@ class VolunteerDecorator < ApplicationDecorator
   end
 
   def address
-    addresses[0]
+    @address ||= addresses[0]
   end
 
   def distance_in_km
