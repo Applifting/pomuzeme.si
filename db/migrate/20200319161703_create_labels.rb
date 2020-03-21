@@ -3,7 +3,7 @@ class CreateLabels < ActiveRecord::Migration[6.0]
     create_table :labels do |t|
       t.string :name
       t.string :description
-      t.references :organisation_group
+      t.references :group
 
       t.timestamps
     end

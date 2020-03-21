@@ -28,9 +28,10 @@ Entity(volunteer, "Volunteer"){
 }
 
 Entity(volunteer_label, "Volunteer Label"){
+  not_null(group_id) ID
   not_null(name) STRING
-  not_null(description) STRING
-  organization_group_id ID
+  description STRING
+
 }
 
 Entity(assigned_volunteer_label, "Assigned Volunteer label"){
@@ -49,7 +50,7 @@ Entity(address, "Address"){
   not_null(geo_coord_x) FLOAT
   not_null(geo_coord_y) FLOAT
   not_null(postal_code) STRING
-  not_null(country_code) "ISO 3166-1 alpha 2 code" 
+  not_null(country_code) "ISO 3166-1 alpha 2 code"
   not_null(addressable_id) ID
   not_null(addressable_type) STRING
 }
@@ -58,8 +59,8 @@ Entity(request, "Request"){
   not_null(text) max 160 STRING
   not_null(required_volunteer_count) INTEGER
   not_null(address_id) ID
-  not_null(subscriber) STRING 
-  not_null(subscriber_phone) STRING 
+  not_null(subscriber) STRING
+  not_null(subscriber_phone) STRING
   not_null(created_by_id) ID
   coordinator_id ID
   not_null(organization_id) ID
@@ -101,11 +102,11 @@ Entity(organization, "Organization") {
   not_null(name) STRING
   not_null(abbrerviation) STRING
   ' TODO: The slug can be the same as the abbrev or name
-  not_null(slug) STRING 
+  not_null(slug) STRING
 
   business_id_number STRING
-  not_null(contact_person) STRING 
-  not_null(contact_person_phone) STRING 
+  not_null(contact_person) STRING
+  not_null(contact_person_phone) STRING
   not_null(contact_person_email) STRING
 }
 
@@ -113,7 +114,7 @@ Entity(organization, "Organization") {
 
 Entity(organization_group, "Organization Group") {
   not_null(name) STRING
-  not_null(slug) STRING 
+  not_null(slug) STRING
 }
 
 Entity(volunteer_in_organization_group, "Volunteer In Organization Group"){
