@@ -1,5 +1,6 @@
 class Group < ApplicationRecord
   # Associations
+  has_many :labels
   has_many :organisation_groups
   has_many :organisations, through: :organisation_groups
   has_many :group_volunteers

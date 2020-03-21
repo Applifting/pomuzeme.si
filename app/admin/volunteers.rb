@@ -1,6 +1,8 @@
 ActiveAdmin.register Volunteer do
   decorate_with VolunteerDecorator
 
+  permit_params :description
+
   # Scopes
   # TODO: fix preloading
   # scope 'all', default: true do |_scope|
@@ -38,8 +40,18 @@ ActiveAdmin.register Volunteer do
     actions
   end
 
-  def scoped_collection
-    Volunteer.eager_load(:addresses)
+  show do
+    panel resource.full_name do
+      attributes_table_for resource do
+        row :full_name
+        row :phone
+        row :email
+        row :full_address
+        row :description
+        row :created_at
+        row :updated_at
+      end
+    end
   end
 
   csv do

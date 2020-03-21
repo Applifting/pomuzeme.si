@@ -3,6 +3,18 @@
 ActiveAdmin.register Group do
   permit_params :name, :slug, :channel_description, :thank_you
 
+  index do
+    para 'Organizační skupina zastřešuje vaše místní organizace, které mezi sebou sdílí dobrovolníky.'
+    para 'Do skupiny jsou napojeni dobrovolníci, kteří se zaregistrovali přes link vaší organizace (např. pomuzeme.si/clovek-v-tisni).'
+
+    id_column
+    column :name
+    column :slug
+    column :created_at
+    column :updated_at
+    actions
+  end
+
   show do
     modal_window
 
@@ -16,6 +28,7 @@ ActiveAdmin.register Group do
     end
     panel nil, style: 'width: 580px' do
       render partial: 'organisations'
+      render partial: 'labels'
     end
     active_admin_comments
   end

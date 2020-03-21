@@ -95,7 +95,6 @@ gem 'devise'
 # authorization
 gem 'cancancan'
 
-
 # role management
 gem 'rolify'
 

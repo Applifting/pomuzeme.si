@@ -9,6 +9,7 @@ class Organisation < ApplicationRecord
            through: :roles,
            source: :users
   has_many :organisation_groups
+  has_many :groups, through: :organisation_groups
 
   # Validations
   validates :name, presence: true

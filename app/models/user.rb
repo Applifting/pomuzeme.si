@@ -10,7 +10,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # Associations
-  has_many :organisations, through: :roles, as: :resource
   has_many :coordinating_organisations,
            -> { where(roles: { name: :coordinator }) },
            through: :roles,
@@ -37,5 +36,14 @@ class User < ApplicationRecord
     User.joins(:roles).where(roles: { name: :coordinator,
                                       resource_type: :Organisation,
                                       resource_id: coordinating_organisation_ids })
+  end
+
+  def coordinating_groups
+    Group.joins(:organisation_groups).where(organisation_groups: { organisation_id: coordinating_organisation_ids })
+  end
+
+  def group_volunteers
+    GroupVolunteer.joins(group: :organisation_groups)
+                  .where(organisation_groups: { organisation_id: coordinating_organisation_ids })
   end
 end
