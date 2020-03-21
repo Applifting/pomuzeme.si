@@ -59,6 +59,7 @@ cs:
         street: Ulice
         city: Město
         city_part: Městská část
+        full_address: Adresa
         zipcode: PSČ
         phone: Telefonní číslo
         email: E-mail
@@ -67,6 +68,8 @@ cs:
         geolocation_err: Nepřesná adresa.
         recaptcha: Oveření recaptcha
         description: Jak můžete pomoci?
+        created_at: Vytovřen
+        updated_at: Upraven
       group:
         name: Název
         slug: Kód
