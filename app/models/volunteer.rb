@@ -24,6 +24,11 @@ class Volunteer < ApplicationRecord
 
   attr_accessor :address_search_input
 
+  def verify!
+    update confirmed_at: Time.zone.now
+  end
+
+  private
 
   # Dirty ransack scopes
   def self.ransackable_scopes(_opts)

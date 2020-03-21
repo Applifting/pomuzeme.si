@@ -2,16 +2,15 @@
 
 div class: 'title h4' do
   span 'Štítky (např. dovednosti, preference, apod.)'
-  span link_to('', new_admin_label_volunteer_label_path(volunteer_id: resource.id), class: 'action add') # if can?(:manage, VolunteerLabel)
+  span link_to('', new_admin_volunteer_volunteer_label_path(volunteer_id: resource.id), class: 'action add') # if can?(:manage, VolunteerLabel)
 end
 
-table_for resource.labels do
+table_for resource.volunteer_labels do
   delete_link = proc do |label|
-    link_to I18n.t('active_admin.delete_model'), admin_label_volunteer_label_path(label.group_id, label.id), method: :delete
+    link_to I18n.t('active_admin.delete_model'), admin_volunteer_volunteer_label_path(label.volunteer_id, label.id), method: :delete
   end
 
   column :name
-  column :description
   column 'Akce', class: 'centered' do |label|
     delete_link[label] if can?(:manage, Label)
   end

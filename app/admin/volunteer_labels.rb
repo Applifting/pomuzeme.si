@@ -7,16 +7,31 @@ ActiveAdmin.register VolunteerLabel do
   controller do
     def create
       super do |success, failure|
-        success.html { redirect_to admin_volunteer_path(resource.group_id) }
+        success.html { redirect_to admin_volunteer_path(resource.volunteer_id) }
         failure.html { render :new }
       end
     end
 
     def destroy
       super do |success, failure|
-        success.html { redirect_to admin_volunteer_path(resource.group_id) }
+        success.html { redirect_to admin_volunteer_path(resource.volunteer_id) }
         failure.html { render :new }
       end
     end
+  end
+
+  form do |f|
+    # f.semantic_errors(*f.object.errors.keys)
+    labels = Label.where(group_id: current_user.coordinating_groups.pluck(:id))
+    taken_labels = VolunteerLabel.where(volunteer_id: params[:volunteer_id]).pluck(:label_id)
+
+    f.inputs do
+      f.input :label_id, as: :select,
+                         collection: labels,
+                         disabled: taken_labels
+      f.input :volunteer_id, as: :hidden, input_html: { value: params[:volunteer_id] }
+      f.input :created_by_id, as: :hidden, input_html: { value: current_user.id }
+    end
+    f.actions
   end
 end
