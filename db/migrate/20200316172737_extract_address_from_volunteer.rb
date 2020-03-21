@@ -11,6 +11,7 @@ class ExtractAddressFromVolunteer < ActiveRecord::Migration[6.0]
       t.string :city_part, null: false
       t.string :geo_entry_id, null: false
       t.string :geo_unit_id, null: false
+      t.string :geo_provider, null: false
       t.st_point :coordinate, srid: 4326
       t.string :postal_code, null: true
       t.string :country_code, null: false, limit: 3
@@ -22,7 +23,8 @@ class ExtractAddressFromVolunteer < ActiveRecord::Migration[6.0]
     Volunteer.all.each do |v|
       Address.create!(addressable: v, street: v.street, street_number: v.street_number, city: v.city,
                       city_part: v.city_part, postal_code: v.zipcode, geo_entry_id: v.geo_entry_id, geo_unit_id: v.geo_unit_id,
-                      coordinate: Geography::Point.from_s_jtsk(x: v.geo_coord_x, y: v.geo_coord_y), country_code: 'cz')
+                      coordinate: Geography::Point.from_s_jtsk(x: v.geo_coord_x, y: v.geo_coord_y), country_code: 'cz',
+                      geo_provider: 'cadstudio')
     end
 
     remove_column :volunteers, :street
