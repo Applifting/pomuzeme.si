@@ -65,6 +65,7 @@ cs:
         email: E-mail
         confirmation_code: Ověřovací kód
         addresses: Adresy
+        address: Adresa
         confirmed?: Potvrzen?
         description: Jak můžete pomoci?
       group:

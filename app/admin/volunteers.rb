@@ -2,6 +2,10 @@ ActiveAdmin.register Volunteer do
   decorate_with VolunteerDecorator
 
   # Scopes
+  # TODO: fix preloading
+  # scope 'all', default: true do |_scope|
+  #   Volunteer.preload(:addresses)
+  # end
   scope :all, default: true
   scope :unconfirmed, if: -> { current_user.admin? }
   scope :confirmed, if: -> { current_user.admin? }
@@ -21,6 +25,7 @@ ActiveAdmin.register Volunteer do
     column :full_name
     column :phone
     column :email
+    column :address
     if params[:q] && params[:q][:search_nearby]
       params[:order] = 'distance_meters_asc'
 
@@ -31,6 +36,10 @@ ActiveAdmin.register Volunteer do
       column :confirmed?
     end
     actions
+  end
+
+  def scoped_collection
+    Volunteer.eager_load(:addresses)
   end
 
   csv do
