@@ -21,7 +21,7 @@ class VolunteersController < ApplicationController
     # TODO: We should not show any error to user if welcome SMS was not sent,
     # but we should be able to identify SMS that were not sent.
     partner_group = volunteer.groups.take
-    Sms::Manager.new.send_welcome_msg(volunteer.phone, partner_group)
+    Sms::Manager.send_welcome_msg(volunteer.phone, partner_group)
 
     session[:volunteer_id] = nil
 
