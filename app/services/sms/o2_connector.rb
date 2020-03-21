@@ -4,7 +4,7 @@ class Sms::O2Connector
   base_uri ENV['O2_BASE_URL']
 
   def initialize
-    set_p12_cert!
+    set_p12_cert! unless ENV['SMS_MOCK'] == 'true'
   end
 
   def send_msg(phone, text, attempt = 0)
@@ -12,18 +12,18 @@ class Sms::O2Connector
       puts "SMS for #{phone}, TEXT -> #{text}"
     else
       query = {
-          action: 'send',
-          baID: 1_992_125,
-          fromNumber: '+420720002125',
-          toNumber: phone,
-          text: text,
-          deliveryReport: 'FALSE',
-          intruder: 'FALSE',
-          multipart: 'FALSE',
-          validityPeriod: 10_000,
-          priority: 1
+        action: 'send',
+        baID: 1_992_125,
+        fromNumber: '+420720002125',
+        toNumber: phone,
+        text: text,
+        deliveryReport: 'FALSE',
+        intruder: 'FALSE',
+        multipart: 'FALSE',
+        validityPeriod: 10_000,
+        priority: 1
       }
-      response = self.class.get('/smsconnector/getpost/GP', {query: query})
+      response = self.class.get('/smsconnector/getpost/GP', { query: query })
 
       # If request returns no success code try it again after one second
       if response.code > 299 && attempt < 1

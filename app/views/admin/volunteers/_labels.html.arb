@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 div class: 'title h4' do
-  span 'Štítky (např. dovednosti, preference, apod.)'
+  span 'Dovednosti, preference'
   span link_to('', new_admin_volunteer_volunteer_label_path(volunteer_id: resource.id), class: 'action add') # if can?(:manage, VolunteerLabel)
 end
 

@@ -15,6 +15,11 @@ ActiveAdmin.register Volunteer do
   # Filters
   filter :first_name
   filter :last_name
+  filter :volunteer_labels_label_id_in_all, label: 'Štítky',
+                                            as: :select, multiple: true,
+                                            collection: proc { OptionsHelper.wrap (Label.where(group_id: current_user.coordinating_groups).map { |i| [i.name, i.id] }), params, :volunteer_labels_label_id_in_all },
+                                            selected: 1,
+                                            input_html: { style: 'height: 100px' }
   filter :phone
   filter :email
   filter :search_nearby, as: :hidden, label: 'Location'
