@@ -22,10 +22,12 @@ class Sms::Manager
   def send_partner_welcome_msg(phone, group)
     msg = I18n.t('sms.welcome_channel', group_name: group.name, group_slug: group.slug)
 
-    sms_gateway(phone, msg)
+    sms_gateway(phone, replace_special_chars(msg))
   end
 
-  private
+  def replace_special_chars(text)
+    text.tr('ěščřžýáíéúůťďóňĚŠČŘŽÝÁÍÉÚŮŤĎÓŇ', 'escrzyaieuutdonESCRZYAIEUUTDON')
+  end
 
   def sms_gateway(phone, msg)
     # Sms::NetHost.new.send_msg(phone, msg)
