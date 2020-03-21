@@ -80,6 +80,10 @@ img {
   &.secondary {
     background-color: $secondary-button-color;
   }
+
+  &:disabled {
+    background: silver;
+  }
 }
 
 .wave {

@@ -2,12 +2,18 @@
 
 div class: 'title h4' do
   span 'Organizace ve skupině'
-  span link_to('', new_admin_group_organisation_group_path(group_id: resource.id), class: 'action add')
+  span link_to('', new_admin_group_organisation_group_path(group_id: resource.id), class: 'action add') if can?(:manage, Group)
 end
 
 table_for resource.organisation_groups do
+  delete_link = proc do |organisation_group|
+    link_to I18n.t('active_admin.delete_model'),
+            admin_group_organisation_group_path(organisation_group.group_id,
+                                                organisation_group.id), method: :delete
+  end
+
   column 'Organizace', &:organisation_name
   column 'Akce', class: 'centered' do |organisation_group|
-    link_to I18n.t('active_admin.delete_model'), admin_group_organisation_group_path(organisation_group.group_id, organisation_group.id), method: :delete
+    delete_link[organisation_group] if can?(:manage, :Group)
   end
 end
