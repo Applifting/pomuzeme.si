@@ -2,6 +2,8 @@
 
 class ExtractAddressFromVolunteer < ActiveRecord::Migration[6.0]
   def change
+    enable_extension 'postgis'
+
     create_table :addresses do |t|
       t.string :street, null: true
       t.string :street_number, null: false
