@@ -93,7 +93,7 @@
             </ul>
           </div>
 
-          <%= form.submit 'Zaregistrovat se', class: 'form-button' %>
+          <%= form.submit 'Zaregistrovat se', class: 'form-button', data: { disable_with: "Zaregistrovat se..." } %>
           <%= recaptcha_v3(action: 'login') %>
         <% end %>
       </div>
