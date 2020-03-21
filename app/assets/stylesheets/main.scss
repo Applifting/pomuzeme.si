@@ -349,9 +349,37 @@ h4 {
       }
     }
 
-    button {
+  }
 
+  .supporters-counts-wrapper {
+    display: flex;
+    font-family: $title-font;
+    margin-top: 32px;
+
+    .supporters-counts-item {
+      display: flex;
+      align-items: center;
+
+      &:first-of-type {
+        margin-right: 140px;
+      }
+
+      .count {
+        font-size: 64px;
+        line-height: 120%;
+        margin-right: 24px;
+      }
+
+      .count-label {
+        padding-left: 24px;
+        border-left: 1px solid $secondary-button-color;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 160%;
+        max-width: 200px;
+      }
     }
+
   }
 }
 
