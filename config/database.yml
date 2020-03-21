@@ -96,3 +96,4 @@ production:
   database: pomuzeme_si_production
   username: pomuzeme_si
   password: <%= ENV['POMUZEME_SI_DATABASE_PASSWORD'] %>
+  url: <%= ENV.fetch("DATABASE_URL", "").gsub(/postgres/, 'postgis') %>
