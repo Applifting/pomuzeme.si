@@ -5,6 +5,11 @@ var registrationErrors = $('#registration-errors-list');
 registrationErrors.empty();
 
 // add new volunteer errors
+<% volunteer.errors.delete :addresses %>
 <% volunteer.errors.full_messages.each do |message| %>
   registrationErrors.append('<li><%= message %></li>')
+<% end %>
+
+<% if address.errors.any? %>
+  registrationErrors.append('<li><%= I18n.t('activerecord.errors.models.address.base.inaccurate_address') %></li>')
 <% end %>

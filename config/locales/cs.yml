@@ -52,6 +52,23 @@ cs:
       roles: Role
       label: Štítek
     attributes:
+      volunteer:
+        first_name: Jméno
+        last_name: Příjmení
+        full_name: Jméno a příjmení
+        street_search: Vyhledejte vaši adresu
+        street: Ulice
+        city: Město
+        city_part: Městská část
+        zipcode: PSČ
+        distance: Vzdalenost
+        phone: Telefonní číslo
+        email: E-mail
+        confirmation_code: Ověřovací kód
+        addresses: Adresy
+        full_address: Adresa
+        confirmed?: Potvrzen?
+        description: Jak můžete pomoci?
       group:
         name: Název
         slug: Kód
@@ -85,25 +102,19 @@ cs:
       user:
         first_name: Jméno
         last_name: Příjmení
-      volunteer:
-        first_name: Jméno
-        last_name: Příjmení
-        full_name: Jméno a příjmení
-        street_search: Vyhledejte vaši adresu
-        street: Ulice
-        city: Město
-        city_part: Městská část
+      address:
         full_address: Adresa
-        zipcode: PSČ
-        phone: Telefonní číslo
-        email: E-mail
-        confirmation_code: Ověřovací kód
-        confirmed?: Potvrzen?
-        geolocation_err: Nepřesná adresa.
-        recaptcha: Oveření recaptcha
-        description: Jak můžete pomoci?
-        created_at: Vytovřen
-        updated_at: Upraven
+        street_number: Cislo domu
+        street: Ulice
+        city: Mesto
+        city_part: Mestska cast
+        postal_code: PSC
+        geo_provider: Poskytovatel geodat
+        country_code: Kod statu
+        addressable_type: Model dat
+        addressable_id: ID dat
+        created_at: Vytvořeno
+        updated_at: Upraveno
     errors:
       format: "%{attribute} %{message}"
       messages:
@@ -148,6 +159,7 @@ cs:
               sms_not_working: "Ověřovací kód nebylo možné odeslat. Zkuste to prosím za chvilku."
               age_confirmed_required: "Pro registraci je potřeba být starší 18 let."
               terms_of_service_required: "Pro registraci je potřeba souhlasit se zpracováním údajů."
+              recaptcha_not_valid: 'Oveření recaptcha je neplatné.'
             phone:
               improbable_phone: není správně
             confirmation_code:
@@ -158,6 +170,9 @@ cs:
           attributes:
             contact_person_phone:
               improbable_phone: není správně
+        address:
+          base:
+            inaccurate_address: Nepřesná adresa. Prosíme vyberte celou adresu i s číslem popisným
     messages:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
 

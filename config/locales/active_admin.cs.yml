@@ -111,3 +111,8 @@ cs:
       block: "Seznam"
       grid: "Tabulka"
       blog: "Blog"
+    search_status:
+      headline: "Stav hledani:"
+      current_scope: "Scope:"
+      current_filters: "Aktualni filtry:"
+      no_current_filters: "Zadne"

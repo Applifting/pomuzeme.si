@@ -4,24 +4,39 @@ ActiveAdmin.register Volunteer do
   permit_params :description
 
   # Scopes
+  # TODO: fix preloading
+  # scope 'all', default: true do |_scope|
+  #   Volunteer.preload(:addresses)
+  # end
   scope :all, default: true
   scope :unconfirmed, if: -> { current_user.admin? }
   scope :confirmed, if: -> { current_user.admin? }
 
   # Filters
+  filter :first_name
+  filter :last_name
   filter :phone
-  filter :street
-  filter :city_part
-  filter :city
-  filter :description
+  filter :email
+  filter :search_nearby, as: :hidden, label: 'Location'
+  filter :address_search_input, as: :address_search
 
   index do
+    javascript_for(*location_autocomplete(callback: 'InitFilterAutocomplete'))
+
     id_column
     column :full_name
     column :phone
     column :email
     column :full_address
-    column :confirmed? if current_user.admin?
+    if params[:q] && params[:q][:search_nearby]
+      params[:order] = 'distance_meters_asc'
+
+      # we'll alias this column to `distance_meters` in our scope so it can be sorted by
+      column :distance, sortable: 'distance_meters', &:distance_in_km
+    end
+    if current_user.admin?
+      column :confirmed?
+    end
     actions
   end
 
