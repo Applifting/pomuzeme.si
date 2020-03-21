@@ -52,6 +52,10 @@ ActiveAdmin.register Volunteer do
         row :updated_at
       end
     end
+
+    panel nil, style: 'width: 580px' do
+      render partial: 'labels'
+    end
   end
 
   csv do
