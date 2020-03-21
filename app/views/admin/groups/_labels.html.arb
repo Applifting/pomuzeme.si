@@ -2,7 +2,7 @@
 
 div class: 'title h4' do
   span 'Štítky'
-  span link_to('', new_admin_group_label_path(group_id: resource.id), class: 'action add') if can?(:view, Group)
+  span link_to('', new_admin_group_label_path(group_id: resource.id), class: 'action add') if can?(:manage, Label)
 end
 
 table_for resource.labels do
@@ -13,6 +13,6 @@ table_for resource.labels do
   column :name
   column :description
   column 'Akce', class: 'centered' do |label|
-    delete_link[label] if can?(:view, Group)
+    delete_link[label] if can?(:manage, Label)
   end
 end
