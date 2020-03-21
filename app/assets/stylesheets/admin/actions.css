@@ -1,0 +1,72 @@
+.action::after {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+}
+
+a.action {
+  color: #02c18cb3;
+  padding-right: 2px;
+}
+
+a.action:hover {
+  color: #02C18C;
+}
+
+a.action > span {
+  padding-right: 4px;
+  color: initial;
+}
+
+.action.delete::after {
+  color: inherit;
+  content: "\f1f8";
+  font-size: inherit;
+}
+a.action.delete:hover {
+  color: red;
+}
+
+.action.add::after {
+  content: "\f055";
+  color: inherit;
+  font-size: inherit;
+}
+
+.action.list:after {
+  content: "\f0c9";
+  font-size: inherit;
+  color: inherit;
+}
+
+.action.edit:after {
+  content: "\f044";
+  color: inherit;
+  font-size: inherit;
+  margin-top: 2px;
+}
+
+.action.info:after {
+  content: "\f059";
+  font-size: inherit;
+  color: gray;
+}
+
+.action.attachment:after {
+  content: "\f0c6";
+  font-size: inherit;
+  color: inherit;
+}
+
+.action.user:after {
+  content: "\f2bd";
+  font-size: inherit;
+  color: inherit;
+}
+
+.copy:after {
+  font-family: 'FontAwesome';
+  color: #02C18C;
+  position: relative;
+  left: 5px;
+  content: "\f0c5";
+}

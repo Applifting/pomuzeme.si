@@ -31,17 +31,72 @@
 
 cs:
   activerecord:
+    enums:
+      group_volunteer:
+        recruitment_statuses:
+          waiting_for_contact: čeká na kontakt
+          onboarding: probíhá nábor
+          active: dobrovolník aktivní
+          inactive: dobrovolník vyřazen
+        source:
+          migration: nahrání dat
+          channel: online kanál,
+          public_pool: veřejný seznam
     models:
-      volunteer: Dobrovolnik
+      volunteer: Dobrovolník
+      organisation: Organizace
+      user: Uživatel
+      comment: Komentář
+      group: Organizační skupina
+      group_volunteer: Nábor
+      roles: Role
     attributes:
       volunteer:
         first_name: Jméno
         last_name: Příjmení
-        street_search: Vyhledejte vaší adresu
+        full_name: Jméno a příjmení
+        street_search: Vyhledejte vaši adresu
+        street: Ulice
+        city: Město
+        city_part: Městská část
+        zipcode: PSČ
         phone: Telefonní číslo
         email: E-mail
         confirmation_code: Ověřovací kód
+        confirmed?: Potvrzen?
         geolocation_err: Nepřesná adresa.
+        recaptcha: Oveření recaptcha
+        description: Jak můžete pomoci?
+      group:
+        name: Název
+        slug: Kód
+        channel_description: Krátký popis na web
+        created_at: Vytvořeno
+        updated_at: Upraveno
+      group_volunteer:
+        group: Skupina
+        coordinator_id: Koordinátor
+        recruitment_status: Stav náboru
+        source: Zdroj dobrovolníka
+        comments: Poznámky
+        volunteer: Dobrovolník
+        is_exclusive: Jen pro vás
+        created_at: Vytvořeno
+        updated_at: Upraveno
+      organisation:
+        name: Název
+        abbreviation: Zkratka
+        business_id_number: IČO
+        contact_person: Kontantní osoba
+        contact_person_phone: Kontantní telefon
+        contact_person_email: Kontantní email
+        created_at: Vytvořeno
+        updated_at: Upraveno
+      role:
+        name: Název
+      user:
+        first_name: Jméno
+        last_name: Příjmení
     errors:
       format: "%{attribute} %{message}"
       messages:
@@ -70,28 +125,38 @@ cs:
         wrong_length: nemá správnou délku (očekáváno %{count} znaků)
         volunteer_not_found: Dobrovolnik nebyl nalezen.
       template:
-        body: 'Následující pole obsahují chybně vyplněné údaje: '
+        body: "Následující pole obsahují chybně vyplněné údaje: "
         header:
           one: Při ukládání objektu %{model} došlo k chybám a nebylo jej možné uložit
-          few: Při ukládání objektu %{model} došlo ke %{count} chybám a nebylo možné
+          few:
+            Při ukládání objektu %{model} došlo ke %{count} chybám a nebylo možné
             jej uložit
-          other: Při ukládání objektu %{model} došlo ke %{count} chybám a nebylo možné
+          other:
+            Při ukládání objektu %{model} došlo ke %{count} chybám a nebylo možné
             jej uložit
       models:
         volunteer:
           attributes:
             base:
-              sms_not_working: 'Ověřovací kód nebylo možné odeslat. Zkuste to prosím za chvilku.'
-              age_confirmed_required: 'Pro registraci je potřeba být starší 18 let.'
-              terms_of_service_required: 'Pro registraci je potřeba souhlasit se zpracováním údajů.'
+              sms_not_working: "Ověřovací kód nebylo možné odeslat. Zkuste to prosím za chvilku."
+              age_confirmed_required: "Pro registraci je potřeba být starší 18 let."
+              terms_of_service_required: "Pro registraci je potřeba souhlasit se zpracováním údajů."
             phone:
               improbable_phone: není správně
             confirmation_code:
-              not_matching: 'se neshoduje'
-              expired: 'vypršel'
-              confirmed: 'je již potvrzený'
+              not_matching: "se neshoduje"
+              expired: "vypršel"
+              confirmed: "je již potvrzený"
+        organisation:
+          attributes:
+            contact_person_phone:
+              improbable_phone: není správně
     messages:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
+
+  sms:
+    verification: "Overovaci kod pro overeni registrace na portalu pomuzeme.si je: %{code}"
+    welcome: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se ozve jedna z organizaci ve vasem okoli a zapoji vas do deni. Reknete o nas i pratelum? Pomuzeme.si
 
   errors:
     messages:

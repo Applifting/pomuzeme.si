@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-
 
   resources :home, only: :index do
     post :test_post, on: :collection
@@ -13,6 +14,11 @@ Rails.application.routes.draw do
     post :resend, on: :collection
   end
   root 'home#index'
+  get '/:slug', param: :slug, to: 'home#partner_signup', slug: /(?!.*?admin).*/
+
+  namespace :docs do
+    get '/partner-kit', to: redirect { 'https://drive.google.com/drive/folders/1w9_PVRbZ9VvE10zY0sR26f6SlmLq0xZn' }
+  end
 
   namespace :api do
     namespace :v1 do
@@ -20,5 +26,4 @@ Rails.application.routes.draw do
     end
   end
   post '/api/sms_callback', to: 'callback#sms'
-
 end

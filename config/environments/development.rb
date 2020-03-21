@@ -61,4 +61,11 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   ENV['SMS_MOCK'] = 'true'
+
+  # default mailer options
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # reCaptcha test keys, used only for local development only!
+  ENV['RECAPTCHA_SITE_KEY'] = '6LeOIuIUAAAAAH6u8wyuF3c23kbXokZ-9t1ht_fW'
+  ENV['RECAPTCHA_SECRET_KEY'] = '6LeOIuIUAAAAAJ-NRQaBIdCw9qMuOkKVsoewf2ow'
 end

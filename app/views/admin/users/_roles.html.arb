@@ -1,0 +1,17 @@
+# frozen_string_literal: true
+
+div class: 'title h4' do
+  span 'Role'
+  span modal_link('', new_role_admin_user_path(resource), class: 'action add')
+end
+
+resource.roles.includes(:resource).coordinator.for_model(:Organisation).tap do |roles_with_organisation|
+  next if roles_with_organisation.blank?
+
+  table_for roles_with_organisation.map(&:decorate) do
+    column 'Organizace', &:resource
+    column 'Akce', class: 'centered' do |role|
+      link_to I18n.t('active_admin.delete_model'), destroy_role_admin_user_path(resource, role_id: role.id), method: :post, remote: true
+    end
+  end
+end
