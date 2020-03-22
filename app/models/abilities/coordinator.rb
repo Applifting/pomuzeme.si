@@ -15,15 +15,18 @@ module Abilities
       # TODO: Tom: I doubt this works, abilitites need automated tests
       can :manage, Label, group_id: user.coordinating_groups.pluck(:id)
       can :manage, VolunteerLabel
+
       can :manage, Request, id: user.coordinator_organisation_requests
 
       can_manage_recruitment user
     end
 
     def can_manage_recruitment(user)
-      can :create, [GroupVolunteer]
-      cannot :create, Recruitment
       can %i[index read update], [Recruitment, GroupVolunteer, GroupVolunteerDecorator], group_id: user.organisation_group.id
+      cannot :create, Recruitment
+
+      can :create, [GroupVolunteer]
+      can :manage, [GroupVolunteer, GroupVolunteerDecorator], id: user.group_volunteers.pluck(:id)
       cannot :destroy, [GroupVolunteer, GroupVolunteerDecorator]
     end
   end
