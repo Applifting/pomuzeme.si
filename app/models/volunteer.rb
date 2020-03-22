@@ -1,5 +1,6 @@
 class Volunteer < ApplicationRecord
   include SmsConfirmable
+  include Ransackers::VolunteerRansacker
 
   NEAREST_ADDRESSES_SQL = 'CROSS JOIN (SELECT ST_SetSRID(ST_MakePoint(%{longitude}, %{latitude}), 4326)::geography AS ref_geom) AS r'.freeze
 
