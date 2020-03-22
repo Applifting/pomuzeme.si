@@ -58,12 +58,11 @@ Entity(address, "Address"){
 Entity(request, "Request"){
   not_null(text) max 160 STRING
   not_null(required_volunteer_count) INTEGER
-  not_null(address_id) ID
   not_null(subscriber) STRING
   not_null(subscriber_phone) STRING
   not_null(created_by_id) ID
   coordinator_id ID
-  not_null(organization_id) ID
+  not_null(organisation_id) ID
   ' When the request shall be fullfilled, can be null
   fullfillment_date DATETIME
   ' States of the reuqest
@@ -98,7 +97,7 @@ Entity(requested_volunteer, "Requested Volunteer"){
 ' TODO: Mozna eventy
 
 
-Entity(organization, "Organization") {
+Entity(organisation, "Organisation") {
   not_null(name) STRING
   not_null(abbrerviation) STRING
   ' TODO: The slug can be the same as the abbrev or name
@@ -112,13 +111,13 @@ Entity(organization, "Organization") {
 
 
 
-Entity(organization_group, "Organization Group") {
+Entity(organisation_group, "Organisation Group") {
   not_null(name) STRING
   not_null(slug) STRING
 }
 
-Entity(volunteer_in_organization_group, "Volunteer In Organization Group"){
-  not_null(organization_group_id) ID
+Entity(volunteer_in_organisation_group, "Volunteer In Organisation Group"){
+  not_null(organisation_group_id) ID
   not_null(volunteer_id) ID
   not_null(is_exclusive) bool default false
   not_null(is_verified) bool default false
@@ -127,9 +126,9 @@ Entity(volunteer_in_organization_group, "Volunteer In Organization Group"){
   comments STRING
 }
 
-Entity(organization_in_organization_group, "Organization In Organization Group"){
-  not_null(organization_group_id) ID
-  not_null(organization_id) ID
+Entity(organisation_in_organisation_group, "Organisation In Organisation Group"){
+  not_null(organisation_group_id) ID
+  not_null(organisation_id) ID
 }
 
 Entity(user, "User"){
@@ -149,14 +148,14 @@ Entity(role, "Role") {
 
 
 ' relationships
-organization_group 	o-- organization
-(organization_group, organization) .- organization_in_organization_group
-user o-- organization
-(user, organization) .- user_role
+organisation_group 	o-- organisation
+(organisation_group, organisation) .- organisation_in_organisation_group
+user o-- organisation
+(user, organisation) .- user_role
 user_role -> role
 volunteer o-- volunteer_label
 (volunteer, volunteer_label) .- assigned_volunteer_label
-organization *-- request
+organisation *-- request
 request -> user
 request  o-- volunteer
 (request, volunteer) .- requested_volunteer
