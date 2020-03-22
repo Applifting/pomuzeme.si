@@ -21,8 +21,7 @@ ActiveAdmin.register VolunteerLabel do
   end
 
   form do |f|
-    # f.semantic_errors(*f.object.errors.keys)
-    labels = Label.where(group_id: current_user.coordinating_groups.pluck(:id))
+    labels = Label.managable_by current_user
     taken_labels = VolunteerLabel.where(volunteer_id: params[:volunteer_id]).pluck(:label_id)
 
     f.inputs do

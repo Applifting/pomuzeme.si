@@ -19,4 +19,12 @@ ActiveAdmin.register Label do
       end
     end
   end
+
+  form do |f|
+    f.inputs 'Nový štítek' do
+      f.input :name
+      f.input :description
+    end
+    f.actions
+  end
 end

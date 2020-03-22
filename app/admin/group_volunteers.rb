@@ -6,10 +6,13 @@ ActiveAdmin.register GroupVolunteer do
   permit_params :recruitment_status, :coordinator_id, :comments
 
   form do |f|
-    volunteer = resource.volunteer.decorate
+    unless object.new_record?
+      volunteer = resource.volunteer.decorate
 
-    para [volunteer.full_name, volunteer.phone].join(', ')
-    para volunteer.full_address
+      para [volunteer.full_name, volunteer.phone].join(', ')
+      para volunteer.full_address
+      para volunteer.description
+    end
 
     f.input :recruitment_status, as: :select, collection: enum_options_for_select(GroupVolunteer, :recruitment_status)
     f.input :coordinator_id, as: :select, collection: User.all
