@@ -3,8 +3,8 @@ ActiveAdmin.register Volunteer do
 
   permit_params :description, :first_name, :last_name, :phone, :email
 
-  scope :all, default: true do |_scope|
-    Volunteer.includes(:addresses).available_for(current_user.organisation_group.id)
+  scope :all, default: true do |scope|
+    Volunteer.includes(:addresses).available_for(current_user.organisation_group.id).merge(scope)
   end
   scope :unconfirmed, if: -> { current_user.admin? }
   scope :confirmed, if: -> { current_user.admin? }
