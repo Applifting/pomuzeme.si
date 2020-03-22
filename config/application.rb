@@ -16,10 +16,12 @@ module PomuzemeSi
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    config.time_zone = ENV.fetch('TZ_ISO', 'Europe/Prague')
+
     config.i18n.default_locale = :cs
-    config.i18n.available_locales = [
-      :cs,
-      :en
+    config.i18n.available_locales = %i[
+      cs
+      en
     ]
 
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
