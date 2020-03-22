@@ -14,6 +14,7 @@ end
 if recruitment.present?
   attributes_table_for recruitment do
     row :recruitment_status
+    row :source
     row :coordinator
     row :comments
   end
