@@ -8,7 +8,7 @@ module Abilities
       can %i[read download], [Volunteer, VolunteerDecorator]
       cannot %i[read], Volunteer, confirmed_at: nil
       can %i[read], [Group], id: user.coordinating_groups.pluck(:id)
-      can :manage, Label # , group_id: user.coordinating_groups.pluck(:id)
+      can :manage, Label, group_id: user.coordinating_groups.pluck(:id)
       can :manage, VolunteerLabel
       can :manage, [GroupVolunteer, GroupVolunteerDecorator], id: user.group_volunteers.pluck(:id)
       cannot :destroy, [GroupVolunteer, GroupVolunteerDecorator]
