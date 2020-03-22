@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Request do
+ActiveAdmin.register Request, as: 'OrganisationRequest' do
   decorate_with RequestDecorator
   config.sort_order = 'state_asc'
 
@@ -21,7 +21,29 @@ ActiveAdmin.register Request do
     column :fullfilment_date
     column :coordinator
     column :state
+    column :volunteers_count do |resource|
+      "#{resource.requested_volunteers.accepted.count} / #{resource.required_volunteer_count}"
+    end
     column :state_last_updated_at
+    actions
+  end
+
+  show do
+    panel resource.text do
+      attributes_table_for resource do
+        row :id
+        row :text
+        row :required_volunteer_count
+        row :fullfilment_date
+        row :coordinator
+        row :state
+        row :state_last_updated_at
+      end
+    end
+    panel nil, style: 'width: 580px' do
+      render partial: 'volunteers'
+    end
+    active_admin_comments
   end
 
   form do |f|
