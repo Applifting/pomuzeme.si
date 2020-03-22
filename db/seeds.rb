@@ -38,6 +38,11 @@ SeedHelper.create_volunteer(first_name: 'Marie', last_name: 'Laskava', zipcode: 
 SeedHelper.create_volunteer(first_name: 'Teodor', last_name: 'Dobry', zipcode: '77900', city: 'Olomouc', street: '17. listopadu 1192', phone: '+420455888333', email: 'teo@dobry.cz')
 SeedHelper.create_volunteer(first_name: 'Petra', last_name: 'Mala', zipcode: '77900', city: 'Olomouc', street: '17. listopadu 1192', phone: '+420603225444', email: 'petra@mala.cz')
 
+SeedHelper.create_request(organisation: organisation1, text: 'Potřebujeme 5 dobrovolníků', required_volunteer_count: 5, subscriber: 'Subscriber', subscriber_phone: '+420 555 555 555', creator: User.first, state_last_updated_at: DateTime.now)
+SeedHelper.create_request(organisation: organisation1, text: 'Potřebujeme 10 dobrovolníků', required_volunteer_count: 10, subscriber: 'Subscriber', subscriber_phone: '+420 555 555 555', creator: User.first, state_last_updated_at: DateTime.now, state: :pending_confirmation)
+SeedHelper.create_request(organisation: organisation1, text: 'Potřebujeme 8 dobrovolníků', required_volunteer_count: 8, subscriber: 'Subscriber', subscriber_phone: '+420 555 555 555', creator: User.first, state_last_updated_at: DateTime.now)
+SeedHelper.create_request(organisation: organisation2, text: 'Potřebujeme 5 dobrovolníků', required_volunteer_count: 5, subscriber: 'Subscriber', subscriber_phone: '+420 555 555 555', creator: User.first, state_last_updated_at: DateTime.now)
+
 (1..50).each do |i|
   identifier = '%03d' % i
   SeedHelper.create_volunteer(first_name: 'Volunteer', last_name: identifier, zipcode: '77900', city: 'Olomouc', street: '17. listopadu 1192', phone: '+420603225' + identifier, email: 'volunteer@007.cz')

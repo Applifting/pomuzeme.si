@@ -69,4 +69,9 @@ module SeedHelper
       volunteer.save!
     end
   end
+
+  def self.create_request(**args)
+    request = Request.new(args)
+    request.save!
+  end
 end

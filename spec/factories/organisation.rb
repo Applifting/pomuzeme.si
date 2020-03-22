@@ -4,8 +4,8 @@ FactoryBot.define do
   factory :organisation do
     name { 'Fiendisch Organization for World Larceny' }
     abbreviation { 'FOWL' }
-    contact_person { 'Steelbeak' }
-    contact_person_email { 'steelbeak@example.com' }
-    contact_person_phone { '+420 777 777 777' }
+    contact_person { FFaker::Name.name }
+    contact_person_email { FFaker::Internet.email }
+    contact_person_phone { "+420#{rand(111111111...999999999)}" }
   end
 end
