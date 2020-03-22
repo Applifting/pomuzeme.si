@@ -354,7 +354,18 @@ h4 {
     }
 
   }
+
+}
+
+.section-counts {
+  padding-top: 0;
+
+  > * {
+    overflow-x: unset;
+  }
+
   .counts-header {
+    margin-top: 0;
     @include md {
       text-align: center;
     }
@@ -429,8 +440,6 @@ h4 {
         }
       }
     }
-
-
   }
 }
 
