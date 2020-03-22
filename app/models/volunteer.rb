@@ -11,6 +11,8 @@ class Volunteer < ApplicationRecord
   has_many :groups, through: :group_volunteers
   has_many :volunteer_labels
   has_many :labels, through: :volunteer_labels
+  has_many :requested_volunteers
+  has_many :requests, through: :requested_volunteers
 
   # normalize phone format and add default czech prefix if missings
   phony_normalize :phone, default_country_code: 'CZ'

@@ -99,11 +99,25 @@ ActiveRecord::Schema.define(version: 2020_03_23_085947) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "requested_volunteers", force: :cascade do |t|
+    t.bigint "volunteer_id", null: false
+    t.bigint "request_id", null: false
+    t.integer "state", default: 1, null: false
+    t.datetime "last_notified_at"
+    t.datetime "last_accepted_at"
+    t.datetime "last_rejected_at"
+    t.datetime "last_removed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["request_id"], name: "index_requested_volunteers_on_request_id"
+    t.index ["volunteer_id"], name: "index_requested_volunteers_on_volunteer_id"
+  end
+
   create_table "requests", force: :cascade do |t|
     t.bigint "created_by_id", null: false
     t.bigint "closed_by_id"
     t.bigint "coordinator_id"
-    t.bigint "organisation_id"
+    t.bigint "organisation_id", null: false
     t.integer "required_volunteer_count", null: false
     t.integer "state", default: 1, null: false
     t.integer "closed_state"
@@ -184,4 +198,6 @@ ActiveRecord::Schema.define(version: 2020_03_23_085947) do
   add_foreign_key "volunteer_labels", "labels"
   add_foreign_key "volunteer_labels", "users", column: "created_by_id"
   add_foreign_key "volunteer_labels", "volunteers"
+  add_foreign_key "requested_volunteers", "requests"
+  add_foreign_key "requested_volunteers", "volunteers"
 end
