@@ -73,6 +73,8 @@ group :test do
   gem 'test-prof', '~> 0.10'
   # One liner matchers
   gem 'shoulda-matchers', '~> 4.3'
+  # Fake data
+  gem 'ffaker', '~> 2.14'
 end
 
 group :production do

@@ -49,6 +49,7 @@ RSpec.configure do |config|
   I18n.enforce_available_locales = false
   I18n.locale = :en
 
+  config.include ActiveSupport::Testing::TimeHelpers
   config.include FactoryBot::Syntax::Methods
   config.include ActiveSupport::Testing::TimeHelpers
 end

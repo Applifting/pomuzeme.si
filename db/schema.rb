@@ -99,6 +99,29 @@ ActiveRecord::Schema.define(version: 2020_03_21_111028) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "requests", force: :cascade do |t|
+    t.bigint "created_by_id", null: false
+    t.bigint "closed_by_id"
+    t.bigint "coordinator_id"
+    t.bigint "organisation_id"
+    t.integer "required_volunteer_count", null: false
+    t.integer "state", default: 1, null: false
+    t.integer "closed_state"
+    t.string "text", limit: 160, null: false
+    t.string "subscriber", limit: 150, null: false
+    t.string "subscriber_phone", limit: 20, null: false
+    t.string "closed_note", limit: 500
+    t.datetime "fullfillment_date"
+    t.datetime "closed_at"
+    t.datetime "state_last_updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["closed_by_id"], name: "index_requests_on_closed_by_id"
+    t.index ["coordinator_id"], name: "index_requests_on_coordinator_id"
+    t.index ["created_by_id"], name: "index_requests_on_created_by_id"
+    t.index ["organisation_id"], name: "index_requests_on_organisation_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
