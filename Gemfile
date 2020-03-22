@@ -101,6 +101,7 @@ gem 'cancancan'
 gem 'rolify'
 
 # active admin
+gem 'active_admin-humanized_enum'
 gem 'activeadmin'
 gem 'arctic_admin'
 gem 'draper'

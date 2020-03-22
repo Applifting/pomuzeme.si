@@ -5,19 +5,22 @@ ActiveAdmin.register GroupVolunteer do
 
   belongs_to :volunteer
 
-  permit_params :comments, :coordinator_id, :group_id, :recruitment_status
+  permit_params :comments, :coordinator_id, :group_id, :recruitment_status, :source
 
   controller do
     def create
       auth_error = proc { |operation, klass| CanCan::AccessDenied.new(I18n.t('errors.authorisation.resource'), operation, klass) }
 
-      # # Is there a GroupVolunteer record for the volunteer that does not belong to the user's org group?
-      # intouchible_volunteer = GroupVolunteer.where(volunteer_id: params[:id]).where.not(group_id: current_user.organisation_group.id)
-      # raise auth_error[:read, Volunteer] if intouchible_volunteer.present?
-
       # Is current user part of the submitted organisation_group?
       raise auth_error[:read, Group] if params[:group_volunteer][:group_id].to_i != current_user.organisation_group.id
 
+      super do |success, failure|
+        success.html { redirect_to admin_volunteer_path(params[:volunteer_id]) }
+        failure.html { render :new }
+      end
+    end
+
+    def update
       super do |success, failure|
         success.html { redirect_to admin_volunteer_path(params[:volunteer_id]) }
         failure.html { render :new }
@@ -48,7 +51,8 @@ ActiveAdmin.register GroupVolunteer do
       f.input :group_id, as: :hidden, input_html: { value: object.new_record? ? current_user.organisation_group.id : resource.group_id }
       f.input :recruitment_status, as: :select,
                                    selected: recruitment_status,
-                                   collection: enum_options_for_select(GroupVolunteer, :recruitment_status)
+                                   collection: enum_options_for_select(GroupVolunteer, :recruitment_statuses)
+      f.input(:source, as: :hidden, input_html: { value: GroupVolunteer::SRC_PUBLIC_POOL }) if object.new_record?
       f.input :coordinator_id, as: :select, collection: [[current_user.decorate.full_name, current_user.id]], select: 1
       f.input :comments, as: :text, hint: 'Poznámky k náboru'
     end

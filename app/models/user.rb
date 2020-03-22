@@ -36,6 +36,7 @@ class User < ApplicationRecord
   def to_s
     [first_name, last_name].compact.join(' ')
   end
+  alias title to_s
 
   def organisation_group
     coordinating_groups.take

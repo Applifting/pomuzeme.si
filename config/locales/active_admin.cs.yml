@@ -110,6 +110,10 @@ cs:
         sign_in_with_omniauth_provider: "Přihlásit se přes %{provider}"
     access_denied:
       message: "Nemáte oprávnění k provedení této akce."
+    scopes:
+      all: vše
+      in_progress: otevřené
+      closed: uzavřené
     index_list:
       table: "Tabulka"
       block: "Seznam"

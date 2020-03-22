@@ -29,9 +29,6 @@ class Volunteer < ApplicationRecord
   scope :with_labels, ->(label_ids) { joins(:volunteer_labels).where(volunteer_labels: { label_id: label_ids }).distinct }
   scope :available_for, ->(group_id) { left_joins(:group_volunteers).where(format(AVAILABLE_VOLUNTEERS_CONDITIONS, group_id: group_id)) }
 
-  ### TODO
-  scope :in_recruitment_with, -> { joins(:group_volunteers).where(group_volunteers: { recruitment_status: GroupVolunteer::IN_RECRUITMENT }) }
-
   attr_accessor :address_search_input
 
   def verify!

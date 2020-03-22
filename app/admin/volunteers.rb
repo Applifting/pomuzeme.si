@@ -21,6 +21,16 @@ ActiveAdmin.register Volunteer do
   filter :search_nearby, as: :hidden, label: 'Location'
   filter :address_search_input, as: :address_search, label: 'Vzdálenost od adresy'
 
+  controller do
+    def show
+      auth_error       = proc { |operation, klass| CanCan::AccessDenied.new(I18n.t('errors.authorisation.resource'), operation, klass) }
+      hidden_volunteer = GroupVolunteer.where(volunteer_id: params[:id]).where.not(group_id: current_user.organisation_group.id)
+      raise auth_error[:read, Volunteer] if hidden_volunteer.present?
+
+      super
+    end
+  end
+
   index do
     javascript_for(*location_autocomplete(callback: 'InitFilterAutocomplete'))
 
@@ -53,7 +63,6 @@ ActiveAdmin.register Volunteer do
     end
 
     panel nil, style: 'width: 580px' do
-      a 'Začít nábor', href: new_admin_volunteer_group_volunteer_path(resource), class: 'button primary'
       render partial: 'recruitment'
       render partial: 'labels'
     end

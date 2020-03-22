@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |error|
     Raven.capture_exception error
-    redirect_to request.referrer, alert: I18n.t('errors.authorisation.resource', action: error.action, subject: error.subject)
+    redirect = request.referrer || '/admin'
+    redirect_to redirect, alert: I18n.t('errors.authorisation.resource', action: error.action, subject: error.subject)
   end
 end
