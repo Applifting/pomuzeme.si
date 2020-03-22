@@ -17,7 +17,7 @@ ActiveAdmin.register Volunteer do
   filter :last_name
   filter :has_labels, label: 'Štítky',
                       as: :select, multiple: true,
-                      collection: proc { OptionsHelper.wrap (Label.managable_by(current_user).map { |i| [i.name, i.id] }), params, :has_labels },
+                      collection: proc { OptionsWrapper.wrap (Label.managable_by(current_user).map { |i| [i.name, i.id] }), params, :has_labels },
                       selected: 1,
                       input_html: { style: 'height: 100px' }
   filter :phone

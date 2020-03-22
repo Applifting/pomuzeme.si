@@ -4,7 +4,7 @@ class Sms::O2Connector
   base_uri ENV['O2_BASE_URL']
 
   def initialize
-    set_p12_cert! unless ENV['SMS_MOCK'] == 'true'
+    set_p12_cert! if ENV['SMS_MOCK'] != 'true'
   end
 
   def send_msg(phone, text, attempt = 0)

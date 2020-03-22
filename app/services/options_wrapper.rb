@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class OptionsHelper
+class OptionsWrapper
   include ActionView::Helpers::FormOptionsHelper
 
   attr_reader :collection, :params, :query, :model, :method
