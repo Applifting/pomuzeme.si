@@ -3,6 +3,7 @@ class Volunteer < ApplicationRecord
   include Ransackers::VolunteerRansacker
 
   NEAREST_ADDRESSES_SQL = 'CROSS JOIN (SELECT ST_SetSRID(ST_MakePoint(%{longitude}, %{latitude}), 4326)::geography AS ref_geom) AS r'.freeze
+  AVAILABLE_VOLUNTEERS_CONDITIONS = 'group_volunteers.id is null OR group_volunteers.is_exclusive = false OR (group_volunteers.is_exclusive = true and group_volunteers.group_id = %{group_id})'.freeze
 
   # Associations
   has_many :addresses, as: :addressable
@@ -26,6 +27,7 @@ class Volunteer < ApplicationRecord
                                                       .select('volunteers.*', 'ST_Distance(addresses.coordinate, ref_geom) as distance_meters')
                                    }
   scope :with_labels, ->(label_ids) { joins(:volunteer_labels).where(volunteer_labels: { label_id: label_ids }).distinct }
+  scope :available_for, ->(group_id) { left_joins(:group_volunteers).where(format(AVAILABLE_VOLUNTEERS_CONDITIONS, group_id: group_id)) }
 
   ### TODO
   scope :in_recruitment_with, -> { joins(:group_volunteers).where(group_volunteers: { recruitment_status: GroupVolunteer::IN_RECRUITMENT }) }

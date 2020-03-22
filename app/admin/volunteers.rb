@@ -3,7 +3,9 @@ ActiveAdmin.register Volunteer do
 
   permit_params :description, :first_name, :last_name, :phone, :email
 
-  scope :all, default: true
+  scope :all, default: true do |_scope|
+    Volunteer.includes(:addresses).available_for(current_user.organisation_group.id)
+  end
   scope :unconfirmed, if: -> { current_user.admin? }
   scope :confirmed, if: -> { current_user.admin? }
 
@@ -18,12 +20,6 @@ ActiveAdmin.register Volunteer do
   filter :email
   filter :search_nearby, as: :hidden, label: 'Location'
   filter :address_search_input, as: :address_search, label: 'Vzdálenost od adresy'
-
-  controller do
-    def scoped_collection
-      super.includes(:addresses)
-    end
-  end
 
   index do
     javascript_for(*location_autocomplete(callback: 'InitFilterAutocomplete'))
