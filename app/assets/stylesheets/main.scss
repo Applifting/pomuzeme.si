@@ -576,3 +576,8 @@ h4 {
   max-height: 250px;
   transform-origin: 0px 0px;
 }
+
+// Somebody please explain how to fix this
+.pac-container {
+  z-index: 9999;
+}
