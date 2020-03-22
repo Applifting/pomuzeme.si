@@ -14,6 +14,7 @@ module Abilities
       # TODO: Tom: I doubt this works, abilitites need automated tests
       can :manage, Label, group_id: user.coordinating_groups.pluck(:id)
       can :manage, VolunteerLabel
+      can :manage, Request, id: user.coordinator_organisation_requests
       can :manage, [GroupVolunteer, GroupVolunteerDecorator], id: user.group_volunteers.pluck(:id)
       cannot :destroy, [GroupVolunteer, GroupVolunteerDecorator]
     end
