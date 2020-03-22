@@ -51,6 +51,7 @@ cs:
       group_volunteer: Nábor
       roles: Role
       label: Štítek
+      volunteer_label: Štítek
     attributes:
       volunteer:
         first_name: Jméno
@@ -69,6 +70,8 @@ cs:
         full_address: Adresa
         confirmed?: Potvrzen?
         description: Jak můžete pomoci?
+        created_at: Vytvořen
+        updated_at: Upraven
       group:
         name: Název
         slug: Kód
@@ -115,6 +118,8 @@ cs:
         addressable_id: ID dat
         created_at: Vytvořeno
         updated_at: Upraveno
+      volunteer_label:
+        label: Štítek
     errors:
       format: "%{attribute} %{message}"
       messages:

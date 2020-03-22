@@ -31,6 +31,10 @@ cs:
         ends_with: "Končí na"
         greater_than: "Větší než"
         less_than: "Menší než"
+    search_status:
+      headline: Výsledky hledání
+      current_scope: scope
+      current_filters: filtry
     status_tag:
       "yes": "Ano"
       "no": "Ne"

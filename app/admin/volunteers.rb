@@ -15,6 +15,11 @@ ActiveAdmin.register Volunteer do
   # Filters
   filter :first_name
   filter :last_name
+  filter :has_labels, label: 'Štítky',
+                      as: :select, multiple: true,
+                      collection: proc { OptionsWrapper.wrap (Label.managable_by(current_user).map { |i| [i.name, i.id] }), params, :has_labels },
+                      selected: 1,
+                      input_html: { style: 'height: 100px' }
   filter :phone
   filter :email
   filter :search_nearby, as: :hidden, label: 'Location'
@@ -34,9 +39,7 @@ ActiveAdmin.register Volunteer do
       # we'll alias this column to `distance_meters` in our scope so it can be sorted by
       column :distance, sortable: 'distance_meters', &:distance_in_km
     end
-    if current_user.admin?
-      column :confirmed?
-    end
+    column :confirmed? if current_user.admin?
     actions
   end
 
@@ -51,6 +54,10 @@ ActiveAdmin.register Volunteer do
         row :created_at
         row :updated_at
       end
+    end
+
+    panel nil, style: 'width: 580px' do
+      render partial: 'labels'
     end
   end
 

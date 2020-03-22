@@ -16,6 +16,8 @@ class User < ApplicationRecord
            source: :resource,
            source_type: :Organisation
 
+  has_many :coordinating_groups, through: :coordinating_organisations, source: :groups
+
   # Validations
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -36,10 +38,6 @@ class User < ApplicationRecord
     User.joins(:roles).where(roles: { name: :coordinator,
                                       resource_type: :Organisation,
                                       resource_id: coordinating_organisation_ids })
-  end
-
-  def coordinating_groups
-    Group.joins(:organisation_groups).where(organisation_groups: { organisation_id: coordinating_organisation_ids })
   end
 
   def group_volunteers

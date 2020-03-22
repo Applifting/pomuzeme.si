@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_20_162412) do
+ActiveRecord::Schema.define(version: 2020_03_21_111028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,15 @@ ActiveRecord::Schema.define(version: 2020_03_20_162412) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  create_table "volunteer_labels", force: :cascade do |t|
+    t.bigint "volunteer_id", null: false
+    t.bigint "label_id", null: false
+    t.bigint "created_by_id", null: false
+    t.index ["created_by_id"], name: "index_volunteer_labels_on_created_by_id"
+    t.index ["label_id"], name: "index_volunteer_labels_on_label_id"
+    t.index ["volunteer_id"], name: "index_volunteer_labels_on_volunteer_id"
+  end
+
   create_table "volunteers", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
@@ -149,4 +158,7 @@ ActiveRecord::Schema.define(version: 2020_03_20_162412) do
   add_foreign_key "group_volunteers", "volunteers"
   add_foreign_key "organisation_groups", "groups"
   add_foreign_key "organisation_groups", "organisations"
+  add_foreign_key "volunteer_labels", "labels"
+  add_foreign_key "volunteer_labels", "users", column: "created_by_id"
+  add_foreign_key "volunteer_labels", "volunteers"
 end
