@@ -5,6 +5,37 @@ ActiveAdmin.register User do
 
   permit_params :email, :password, :password_confirmation, :first_name, :last_name
 
+  # Filters
+  filter :email
+  filter :current_sign_in_at
+  filter :sign_in_count
+  filter :created_at
+
+  # Member actions
+  member_action :new_role, method: :get do
+    @user = resource
+    @available_roles = Role.includes(:resource).coordinator.for_model(:Organisation).where.not(id: @user.roles.includes(:resource).coordinator.for_model(:Organisation))
+    render 'admin/modal/open', locals: { template: 'admin/users/new_role' }
+  end
+
+  member_action :create_role, method: :post do
+    # TODO: verify cancancan is used here
+    role = Role.find_by_id params['role_id']
+    user = User.find_by_id params['user_id']
+    user.grant role.name, role.resource
+
+    render 'admin/modal/close'
+  end
+
+  member_action :destroy_role, method: :post do
+    # TODO: verify cancancan is used here
+    role = Role.find_by_id params['role_id']
+    user = User.find_by_id params['id']
+    user.remove_role role.name, role.resource
+
+    render 'admin/modal/close'
+  end
+
   index do
     id_column
     column :first_name
@@ -34,35 +65,6 @@ ActiveAdmin.register User do
     end
     active_admin_comments
   end
-
-  member_action :new_role, method: :get do
-    @user = resource
-    @available_roles = Role.includes(:resource).coordinator.for_model(:Organisation).where.not(id: @user.roles.includes(:resource).coordinator.for_model(:Organisation))
-    render 'admin/modal/open', locals: { template: 'admin/users/new_role' }
-  end
-
-  member_action :create_role, method: :post do
-    # TODO: verify cancancan is used here
-    role = Role.find_by_id params['role_id']
-    user = User.find_by_id params['user_id']
-    user.grant role.name, role.resource
-
-    render 'admin/modal/close'
-  end
-
-  member_action :destroy_role, method: :post do
-    # TODO: verify cancancan is used here
-    role = Role.find_by_id params['role_id']
-    user = User.find_by_id params['id']
-    user.remove_role role.name, role.resource
-
-    render 'admin/modal/close'
-  end
-
-  filter :email
-  filter :current_sign_in_at
-  filter :sign_in_count
-  filter :created_at
 
   form do |f|
     f.inputs do

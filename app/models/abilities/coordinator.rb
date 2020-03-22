@@ -5,6 +5,7 @@ module Abilities
       can %i[index read], Organisation
       can :update, Organisation, id: user.coordinating_organisations.pluck(:id)
       can %i[read], [User, UserDecorator], id: user.coordinators_in_organisations.pluck(:id)
+
       can %i[read download], [Volunteer, VolunteerDecorator]
       cannot %i[read], Volunteer, confirmed_at: nil
 
@@ -15,7 +16,14 @@ module Abilities
       can :manage, Label, group_id: user.coordinating_groups.pluck(:id)
       can :manage, VolunteerLabel
       can :manage, Request, id: user.coordinator_organisation_requests
-      can :manage, [GroupVolunteer, GroupVolunteerDecorator], id: user.group_volunteers.pluck(:id)
+
+      can_manage_recruitment user
+    end
+
+    def can_manage_recruitment(user)
+      can :create, [GroupVolunteer]
+      cannot :create, Recruitment
+      can %i[index read update], [Recruitment, GroupVolunteer, GroupVolunteerDecorator], group_id: user.organisation_group.id
       cannot :destroy, [GroupVolunteer, GroupVolunteerDecorator]
     end
   end

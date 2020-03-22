@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+div class: 'title h4' do
+  span 'Nábor'
+  add_link = new_admin_volunteer_group_volunteer_path(resource)
+  span link_to('', add_link, class: 'action add') if can?(:manage, GroupVolunteer)
+end
+
+attributes_table_for resource do
+  # delete_link = proc do |label|
+  #   link_to I18n.t('active_admin.delete_model'), admin_volunteer_volunteer_label_path(label.volunteer_id, label.id), method: :delete
+  # end
+
+  row :name
+  # column 'Akce', class: 'centered' do |label|
+  #   delete_link[label] if can?(:manage, VolunteerLabel)
+  # end
+end

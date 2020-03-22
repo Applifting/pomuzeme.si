@@ -4,9 +4,8 @@ class Organisation < ApplicationRecord
   resourcify
 
   # Associations
-  has_many :roles
   has_many :coordinators,
-           -> { where(roles: { name: :coordinator }) },
+           -> { joins(:roles).where(roles: { name: :coordinator }) },
            class_name: :User,
            through: :roles,
            source: :users

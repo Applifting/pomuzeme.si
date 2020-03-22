@@ -57,6 +57,8 @@ ActiveAdmin.register Volunteer do
     end
 
     panel nil, style: 'width: 580px' do
+      a 'Začít nábor', href: new_admin_volunteer_group_volunteer_path(resource), class: 'button primary'
+      render partial: 'recruitment'
       render partial: 'labels'
     end
   end

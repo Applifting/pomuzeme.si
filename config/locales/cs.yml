@@ -49,6 +49,7 @@ cs:
       comment: Komentář
       group: Organizační skupina
       group_volunteer: Nábor
+      recruitment: Nábor
       roles: Role
       label: Štítek
       volunteer_label: Štítek
@@ -205,3 +206,5 @@ cs:
   errors:
     messages:
       invalid_zipcode: nebylo rozpoznano.
+    authorisation:
+      resource: "K této položce nemáte oprávnění [%{action}: %{subject}]."

@@ -14,8 +14,13 @@
   background-color: green;
 }
 
-p.red {
-  color: red;
+p {
+  &.red {
+    color: red;
+  }
+  &.small {
+    font-size: 12px;
+  }
 }
 
 a:hover {
