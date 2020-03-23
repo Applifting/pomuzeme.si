@@ -53,11 +53,10 @@ class VolunteersController < ApplicationController
   end
 
   def address_with_coordinate
-    coordinate = Geography::Point.from_s_jtsk x: address_params[:geo_coord_x].to_d,
-                                              y: address_params[:geo_coord_y].to_d
-    # TODO: change provider after switch to google places API
+    coordinate = Geography::Point.from_coordinates latitude: address_params[:geo_coord_y].to_d,
+                                                   longitude: address_params[:geo_coord_x].to_d
     address_params.except(:geo_coord_x, :geo_coord_y).merge(coordinate: coordinate,
-                                                            geo_provider: 'cadstudio')
+                                                            geo_provider: 'google_places')
   end
 
   def confirm_params
