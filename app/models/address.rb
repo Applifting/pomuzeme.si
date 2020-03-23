@@ -34,6 +34,10 @@ class Address < ApplicationRecord
     [street_number, street, city, city_part, postal_code].compact.join ', '
   end
 
+  def only_address_errors?
+    errors.keys.map(&:to_s).none? { |key| key.start_with? 'addressable' }
+  end
+
   private
 
   def initialize_defaults
