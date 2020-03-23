@@ -19,5 +19,7 @@ ActiveAdmin.register Recruitment do
     column :comments
     column :created_at
     column :updated_at
+
+    actions if current_user.admin?
   end
 end
