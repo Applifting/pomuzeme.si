@@ -12,14 +12,17 @@ class DataImportService
 
   def create_model
     raw_lines.map do |line|
-      volunteer = create_instance(Volunteer, line) do |data|
-        data
-      end
+      volunteer = create_volunteer(line).save
     end
   end
 
-  def find_address(string)
-    Geocoder.
+  def create_volunteer(line)
+    address = nil
+    volunteer = create_instance(Volunteer, line) do |data|
+      address = Address.new_from_string(data['address'])
+      data.except('address')
+    end
+    volunteer.tap { |v| v.addresses << address }
   end
 
   def create_instance(klass, item)
