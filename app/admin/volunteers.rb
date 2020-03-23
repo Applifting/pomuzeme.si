@@ -12,18 +12,32 @@ ActiveAdmin.register Volunteer do
   # Filters
   filter :full_name_cont, label: 'Jméno / příjmení'
   filter :has_labels, label: 'Štítky',
-                      as: :select, multiple: true,
-                      collection: proc { OptionsWrapper.wrap (Label.managable_by(current_user).map { |i| [i.name, i.id] }), params, :has_labels },
-                      selected: 1,
-                      input_html: { style: 'height: 100px' }
+         as: :select, multiple: true,
+         collection: proc { OptionsWrapper.wrap (Label.managable_by(current_user).map { |i| [i.name, i.id] }), params, :has_labels },
+         selected: 1,
+         input_html: { style: 'height: 100px' }
   filter :phone
   filter :email
   filter :search_nearby, as: :hidden, label: 'Location'
   filter :address_search_input, as: :address_search, label: 'Vzdálenost od adresy'
 
+  config.batch_actions = true
+
+  # Form args has to be inside lambda due to calling of current_user
+  form_lambda = -> { { request: current_user.coordinator_organisation_requests.assignable.collect { |request| [request.title, request.id] } } }
+
+  batch_action :assign_request, form: form_lambda do |ids, inputs|
+    request = Request.find(inputs[:request])
+    Admin::Requests::VolunteerAssigner.new(current_user, request, Volunteer.where(id: ids)).perform
+    redirect_to admin_organisation_request_path request
+  rescue StandardError => e
+    redirect_to admin_volunteers_path, alert: e.message
+  end
+
   index do
     javascript_for(*location_autocomplete(callback: 'InitFilterAutocomplete'))
 
+    selectable_column
     id_column
     column :full_name
     column :phone

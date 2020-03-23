@@ -31,9 +31,9 @@ SeedHelper.create_group organisation: organisation3,
                                                dětem a dospělým, seniorům i lidem v různých životních krizích.
                                                Jsme jeden z nejvýznamnějších poskytovatelů sociálních služeb v ČR a jednička ve speciálním školství."
 
-SeedHelper.create_coordinator(email: 'coordinator@example.com', password: 'password', organisation: organisation1, first_name: 'Pavel', last_name: 'Pomahac')
-SeedHelper.create_coordinator(email: 'coordinator2@example.com', password: 'password', organisation: organisation2, first_name: 'Josef', last_name: 'Novak')
-SeedHelper.create_coordinator(email: 'coordinator3@example.com', password: 'password', organisation: organisation1, first_name: 'Josef', last_name: 'Novak')
+coordinator1 = SeedHelper.create_coordinator(email: 'coordinator@example.com', password: 'password', organisation: organisation1, first_name: 'Pavel', last_name: 'Pomahac')
+coordinator2 = SeedHelper.create_coordinator(email: 'coordinator2@example.com', password: 'password', organisation: organisation2, first_name: 'Josef', last_name: 'Novak')
+coordinator3 = SeedHelper.create_coordinator(email: 'coordinator3@example.com', password: 'password', organisation: organisation1, first_name: 'Josef', last_name: 'Novak')
 admin.grant :coordinator, organisation1
 
 # Create sample volunteers

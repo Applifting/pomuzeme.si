@@ -5,7 +5,7 @@ div class: 'title h4' do
   span link_to('', new_admin_organisation_request_requested_volunteer_path(organisation_request_id: resource.id), class: 'action add') if can?(:manage, Request)
 end
 
-table_for resource.requested_volunteers.order(:state) do
+table_for resource.requested_volunteers.includes(:volunteer).order(:state).map(&:decorate) do
   delete_link = proc do |volunteer|
     link_to I18n.t('active_admin.delete_model'), admin_organisation_request_requested_volunteer_path(volunteer.request.id, volunteer.id), method: :delete
   end
@@ -13,7 +13,5 @@ table_for resource.requested_volunteers.order(:state) do
   column :first_name
   column :last_name
   column :state
-  column 'Akce', class: 'centered' do |label|
-    delete_link[label] if can?(:manage, Request)
-  end
+  column 'Akce', class: 'centered', &:actions
 end
