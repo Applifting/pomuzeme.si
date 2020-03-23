@@ -8,9 +8,11 @@ class ApplicationController < ActionController::Base
     redirect_to request.referrer, alert: 'Tato položka se používá. Pokud jí potřebujete smazat, napište na info@pomuzeme.si'
   end
 
-  rescue_from CanCan::AccessDenied do |error|
+  rescue_from AuthorisationError do |error|
     Raven.capture_exception error
     redirect = request.referrer || '/admin'
-    redirect_to redirect, alert: I18n.t('errors.authorisation.resource', action: error.action, subject: error.subject)
+    redirect_to redirect, alert: I18n.t("errors.authorisation.#{error.message}",
+                                        action: error.action,
+                                        subject: error.subject)
   end
 end

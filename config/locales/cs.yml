@@ -216,4 +216,4 @@ cs:
     messages:
       invalid_zipcode: nebylo rozpoznano.
     authorisation:
-      resource: "K této položce nemáte oprávnění [%{action}: %{subject}]."
+      not_authorised_for_resource: "K této položce nemáte oprávnění [%{action}: %{subject}]."

@@ -9,10 +9,8 @@ ActiveAdmin.register GroupVolunteer do
 
   controller do
     def create
-      auth_error = proc { |operation, klass| CanCan::AccessDenied.new(I18n.t('errors.authorisation.resource'), operation, klass) }
-
       # Is current user part of the submitted organisation_group?
-      raise auth_error[:read, Group] if params[:group_volunteer][:group_id].to_i != current_user.organisation_group.id
+      raise AuthorisationError.new(:read, Group) if params[:group_volunteer][:group_id].to_i != current_user.organisation_group.id
 
       super do |success, failure|
         success.html { redirect_to admin_volunteer_path(params[:volunteer_id]) }

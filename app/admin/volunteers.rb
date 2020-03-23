@@ -23,9 +23,10 @@ ActiveAdmin.register Volunteer do
 
   controller do
     def show
-      auth_error       = proc { |operation, klass| CanCan::AccessDenied.new(I18n.t('errors.authorisation.resource'), operation, klass) }
-      hidden_volunteer = GroupVolunteer.where(volunteer_id: params[:id]).where.not(group_id: current_user.organisation_group.id)
-      raise auth_error[:read, Volunteer] if hidden_volunteer.present?
+      hidden_volunteer = GroupVolunteer.where(volunteer_id: params[:id])
+                                       .where.not(group_id: current_user.organisation_group.id)
+                                       .take
+      raise AuthorisationError.new(:read, hidden_volunteer) if hidden_volunteer.present?
 
       super
     end
