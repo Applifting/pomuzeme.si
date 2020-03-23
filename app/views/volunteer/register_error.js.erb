@@ -10,6 +10,6 @@ registrationErrors.empty();
   registrationErrors.append('<li><%= message %></li>')
 <% end %>
 
-<% if address.errors.any? %>
+<% if address.only_address_errors? %>
   registrationErrors.append('<li><%= I18n.t('activerecord.errors.models.address.base.inaccurate_address') %></li>')
 <% end %>
