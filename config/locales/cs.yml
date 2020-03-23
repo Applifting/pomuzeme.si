@@ -54,6 +54,7 @@ cs:
       label: Štítek
       volunteer_label: Štítek
       request: Požadavek
+      organisation_request: Požadavek
     attributes:
       volunteer:
         first_name: Jméno
@@ -146,6 +147,12 @@ cs:
         state_last_updated_at: Stav naposledy aktualizován
         subscriber: Odběratel
         subscriber_phone: Telefon odběratele
+        states:
+          created: Vytvoreno
+          searching_capacity: Naplnovani kapacity
+          pending_confirmation: Potvrzovani dobrovolniku
+          help_coordinated: Uskutecneno
+          closed: Uzavreno
     errors:
       format: "%{attribute} %{message}"
       messages:

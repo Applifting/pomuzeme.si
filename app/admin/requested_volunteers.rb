@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register RequestedVolunteer do
+  decorate_with RequestedVolunteerDecorator
   belongs_to :organisation_request
   permit_params :request_id, :volunteer_id, :state
 
@@ -11,6 +12,20 @@ ActiveAdmin.register RequestedVolunteer do
     f.input :volunteer, label: 'Dobrovolník' unless resource.persisted?
     f.input :state, label: 'Stav', as: :select, collection: RequestedVolunteer.states.keys, include_blank: false
     f.actions
+  end
+
+  show do
+    panel resource do
+      attributes_table_for resource do
+        row :volunteer
+        row :request
+        row :state
+        row :created_at
+        row :updated_at
+      end
+    end
+
+    active_admin_comments
   end
 
   controller do

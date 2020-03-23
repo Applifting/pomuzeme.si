@@ -21,8 +21,8 @@ ActiveAdmin.register Volunteer do
   filter :search_nearby, as: :hidden, label: 'Location'
   filter :address_search_input, as: :address_search, label: 'Vzdálenost od adresy'
 
+  # Batch actions
   config.batch_actions = true
-
   # Form args has to be inside lambda due to calling of current_user
   form_lambda = -> { { request: current_user.coordinator_organisation_requests.assignable.collect { |request| [request.title, request.id] } } }
 

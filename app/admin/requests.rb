@@ -18,7 +18,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     id_column
     column :text
     column :required_volunteer_count
-    column :fullfilment_date
+    column :fullfillment_date
     column :coordinator
     column :state
     column :volunteers_count do |resource|
@@ -34,7 +34,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
         row :id
         row :text
         row :required_volunteer_count
-        row :fullfilment_date
+        row :fullfillment_date
         row :coordinator
         row :state
         row :state_last_updated_at

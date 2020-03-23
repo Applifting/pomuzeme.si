@@ -2,7 +2,7 @@ class RequestedVolunteerDecorator < ApplicationDecorator
   delegate_all
 
   def actions
-    [button_edit, button_delete].compact.join(' | ').html_safe
+    [button_edit].compact.join(' | ').html_safe
   end
 
   def button_edit
