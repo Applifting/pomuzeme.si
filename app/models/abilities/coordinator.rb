@@ -6,7 +6,7 @@ module Abilities
       can :update, Organisation, id: user.coordinating_organisations.pluck(:id)
       can %i[read], [User, UserDecorator], id: user.coordinators_in_organisations.pluck(:id)
 
-      can %i[read download], [Volunteer, VolunteerDecorator]
+      can %i[read download], [Volunteer, VolunteerDecorator], id: Volunteer.available_for(user.organisation_group.id).pluck(:id)
       cannot %i[read], Volunteer, confirmed_at: nil
 
       # TODO: Tom: I doubt this works, abilitites need automated tests

@@ -21,17 +21,6 @@ ActiveAdmin.register Volunteer do
   filter :search_nearby, as: :hidden, label: 'Location'
   filter :address_search_input, as: :address_search, label: 'Vzdálenost od adresy'
 
-  controller do
-    def show
-      hidden_volunteer = GroupVolunteer.where(volunteer_id: params[:id])
-                                       .where.not(group_id: current_user.organisation_group.id)
-                                       .take
-      raise AuthorisationError.new(:read, hidden_volunteer) if hidden_volunteer.present?
-
-      super
-    end
-  end
-
   index do
     javascript_for(*location_autocomplete(callback: 'InitFilterAutocomplete'))
 
