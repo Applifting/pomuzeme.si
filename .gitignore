@@ -35,3 +35,6 @@ yarn-debug.log*
 
 # ignore Webstorm Config
 /.idea
+
+# ignore .local files
+/.local

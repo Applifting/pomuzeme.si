@@ -1,9 +1,9 @@
 return unless Rails.env.development?
 
 # create super admin
-SeedHelper.create_super_admin email: 'admin@example.com', password: 'password', first_name: 'Iva', last_name: 'Červená'
+admin = SeedHelper.create_super_admin email: 'admin@example.com', password: 'password', first_name: 'Iva', last_name: 'Červená'
 
-# seed organisations
+# seed groups and organisations
 organisation1 = SeedHelper.create_organisation name: 'Oblastni charita',
                                                abbreviation: 'OBCH',
                                                contact_person: 'reditelka pobocky',
@@ -22,16 +22,19 @@ organisation3 = SeedHelper.create_organisation name: 'Diakonie',
                                                contact_person_phone: '+420222444323',
                                                contact_person_email: 'novak@gmail.com'
 
-group = SeedHelper.create_group organisation: organisation3,
-                                name: 'Diakonie',
-                                slug: 'diakonie',
-                                channel_description: "Už 30 let pomáháme
-                                dětem a dospělým, seniorům i lidem v různých životních krizích.
-                                Jsme jeden z nejvýznamnějších poskytovatelů sociálních služeb v ČR a jednička ve speciálním školství."
+SeedHelper.create_group organisation: organisation1, name: 'Oblastni charita GRP', slug: 'oblastni-charita'
+SeedHelper.create_group organisation: organisation2, name: 'Spolek dobrovolniku GRP', slug: 'spolek-dobrovolniku'
+SeedHelper.create_group organisation: organisation3,
+                        name: 'Diakonie',
+                        slug: 'diakonie',
+                        channel_description: "Už 30 let pomáháme
+                                               dětem a dospělým, seniorům i lidem v různých životních krizích.
+                                               Jsme jeden z nejvýznamnějších poskytovatelů sociálních služeb v ČR a jednička ve speciálním školství."
 
 SeedHelper.create_coordinator(email: 'coordinator@example.com', password: 'password', organisation: organisation1, first_name: 'Pavel', last_name: 'Pomahac')
 SeedHelper.create_coordinator(email: 'coordinator2@example.com', password: 'password', organisation: organisation2, first_name: 'Josef', last_name: 'Novak')
 SeedHelper.create_coordinator(email: 'coordinator3@example.com', password: 'password', organisation: organisation1, first_name: 'Josef', last_name: 'Novak')
+admin.grant :coordinator, organisation1
 
 # Create sample volunteers
 SeedHelper.create_volunteer(first_name: 'Marie', last_name: 'Laskava', zipcode: '77900', city: 'Olomouc', street: '17. listopadu 1192', phone: '+420777666555', email: 'marie@laskava.cz')
