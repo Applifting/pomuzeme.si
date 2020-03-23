@@ -26,11 +26,20 @@ class User < ApplicationRecord
   validates :last_name, presence: true
 
   def cached_roles_name
-    @cached_roles_name ||= roles_name.map &:to_sym
+    @cached_roles_name ||= roles_name.map(&:to_sym)
+  end
+
+  def organisation_colleagues
+    coordinating_organisations.map(&:coordinators).flatten
   end
 
   def to_s
     [first_name, last_name].compact.join(' ')
+  end
+  alias title to_s
+
+  def organisation_group
+    coordinating_groups.take
   end
 
   def has_any_role?(role_name)

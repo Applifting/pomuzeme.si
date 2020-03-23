@@ -55,14 +55,15 @@ module SeedHelper
       volunteer.assign_attributes first_name: args[:first_name],
                                   last_name: args[:last_name],
                                   phone: args[:phone],
-                                  email: args[:email]
+                                  email: args[:email],
+                                  confirmed_at: Time.zone.now
 
       volunteer.addresses.build city: args[:city],
                                 city_part: args[:city],
                                 street: args[:street],
                                 street_number: args[:street],
                                 postal_code: args[:zipcode],
-                                geo_entry_id: 42, #fake data below, maybe make robust later
+                                geo_entry_id: 42, # fake data below, maybe make robust later
                                 geo_unit_id: 42,
                                 geo_provider: Address.geo_providers[:cadstudio],
                                 coordinate: Geography::Point.from_coordinates(latitude: 50.0941253, longitude: 14.4548767)

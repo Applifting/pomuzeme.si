@@ -34,10 +34,10 @@ cs:
     enums:
       group_volunteer:
         recruitment_statuses:
-          waiting_for_contact: čeká na kontakt
-          onboarding: probíhá nábor
-          active: dobrovolník aktivní
-          inactive: dobrovolník vyřazen
+          waiting_for_contact: Čeká na kontakt
+          onboarding: Probíhá nábor
+          active: Dobrovolník aktivní
+          inactive: Dobrovolník vyřazen
         source:
           migration: nahrání dat
           channel: online kanál,
@@ -49,6 +49,7 @@ cs:
       comment: Komentář
       group: Organizační skupina
       group_volunteer: Nábor
+      recruitment: Nábor
       roles: Role
       label: Štítek
       volunteer_label: Štítek
@@ -70,7 +71,7 @@ cs:
         addresses: Adresy
         full_address: Adresa
         confirmed?: Potvrzen?
-        description: Jak můžete pomoci?
+        description: Jak může pomoci
         created_at: Vytvořen
         updated_at: Upraven
       group:
@@ -81,7 +82,7 @@ cs:
         updated_at: Upraveno
       group_volunteer:
         group: Skupina
-        coordinator_id: Koordinátor
+        coordinator: Koordinátor
         recruitment_status: Stav náboru
         source: Zdroj dobrovolníka
         comments: Poznámky
@@ -89,6 +90,15 @@ cs:
         is_exclusive: Jen pro vás
         created_at: Vytvořeno
         updated_at: Upraveno
+        recruitment_statuses:
+          waiting_for_contact: Čeká na kontakt
+          onboarding: Probíhá nábor
+          active: Dobrovolník aktivní
+          inactive: Dobrovolník vyřazen
+        sources:
+          channel: Vlastní nábor
+          public_pool: pomuzeme.si
+          migration: Import
       label:
         name: Název
         description: Popis
@@ -205,3 +215,5 @@ cs:
   errors:
     messages:
       invalid_zipcode: nebylo rozpoznano.
+    authorisation:
+      not_authorised_for_resource: "K této položce nemáte oprávnění [%{action}: %{subject}]."

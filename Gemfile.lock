@@ -37,6 +37,13 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_admin-humanized_enum (0.1.1)
+      active_record-humanized_enum
+      activeadmin (>= 1.0.0.pre1)
+    active_record-humanized_enum (0.1.2)
+      activesupport
+      i18n
+      railties
     activeadmin (2.6.1)
       arbre (~> 1.2, >= 1.2.1)
       formtastic (~> 3.1)
@@ -105,6 +112,7 @@ GEM
     cloudflare-rails (0.6.0)
       httparty
       rails (>= 5.0, < 6.1.0)
+    coderay (1.1.2)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
     devise (4.7.1)
@@ -210,6 +218,11 @@ GEM
       phony (> 2.15)
     polyamorous (2.3.2)
       activerecord (>= 5.2.1)
+    pry (0.13.0)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
     public_suffix (4.0.3)
     puma (4.3.3)
       nio4r (~> 2.0)
@@ -370,6 +383,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_admin-humanized_enum
   activeadmin
   activerecord-postgis-adapter
   arctic_admin
@@ -390,6 +404,7 @@ DEPENDENCIES
   newrelic_rpm
   pg (>= 0.18, < 2.0)
   phony_rails
+  pry-rails
   puma (~> 4.1)
   rack-attack
   rails (~> 6.0.2, >= 6.0.2.2)
@@ -417,4 +432,4 @@ RUBY VERSION
    ruby 2.6.3p62
 
 BUNDLED WITH
-   2.0.2
+   2.1.4
