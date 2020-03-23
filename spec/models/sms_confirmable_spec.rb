@@ -102,7 +102,7 @@ describe SmsConfirmable do
     end
 
     before do
-      allow_any_instance_of(Sms::Provider).to receive(:send_msg)
+      allow_any_instance_of(Sms::O2Connector).to receive(:send_msg)
     end
 
     context 'confirmed_at is set' do
