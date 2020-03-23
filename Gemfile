@@ -111,3 +111,6 @@ gem 'draper'
 # localisation
 gem 'rails-i18n'
 gem 'devise-i18n'
+
+# geocoding
+gem 'geocoder'

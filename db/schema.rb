@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_21_111028) do
+ActiveRecord::Schema.define(version: 2020_03_23_085947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,11 +32,12 @@ ActiveRecord::Schema.define(version: 2020_03_21_111028) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "street"
-    t.string "street_number", null: false
+    t.string "street_number"
     t.string "city", null: false
     t.string "city_part", null: false
     t.string "geo_entry_id", null: false
     t.string "geo_unit_id", null: false
+    t.string "geo_provider", null: false
     t.geometry "coordinate", limit: {:srid=>4326, :type=>"st_point"}
     t.string "postal_code"
     t.string "country_code", limit: 3, null: false
@@ -44,7 +45,6 @@ ActiveRecord::Schema.define(version: 2020_03_21_111028) do
     t.bigint "addressable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "geo_provider"
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
