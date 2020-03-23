@@ -1,6 +1,7 @@
 ActiveAdmin.register Address do
+  menu false
 
-  actions :all, :except => [:destroy, :new, :create]
+  actions :all, except: %i[destroy new create]
 
   decorate_with AddressDecorator
 
@@ -90,7 +91,7 @@ ActiveAdmin.register Address do
       else
         puts @resource.errors.messages
         @resource.errors.add :base, I18n.t('activerecord.errors.models.address.base.inaccurate_address')
-        render :edit, notice:@resource.errors.messages
+        render :edit, notice: @resource.errors.messages
       end
     end
   end

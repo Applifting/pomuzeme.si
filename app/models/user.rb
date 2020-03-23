@@ -15,6 +15,9 @@ class User < ApplicationRecord
            through: :roles,
            source: :resource,
            source_type: :Organisation
+  has_many :created_requests, class_name: 'Request', foreign_key: :created_by_id
+  has_many :closed_requests, class_name: 'Request', foreign_key: :closed_by_id
+  has_many :requests, class_name: 'Request', foreign_key: :coordinator_id
 
   has_many :coordinating_groups, through: :coordinating_organisations, source: :groups
 
@@ -23,11 +26,20 @@ class User < ApplicationRecord
   validates :last_name, presence: true
 
   def cached_roles_name
-    @cached_roles_name ||= roles_name.map &:to_sym
+    @cached_roles_name ||= roles_name.map(&:to_sym)
+  end
+
+  def organisation_colleagues
+    coordinating_organisations.map(&:coordinators).flatten
   end
 
   def to_s
     [first_name, last_name].compact.join(' ')
+  end
+  alias title to_s
+
+  def organisation_group
+    coordinating_groups.take
   end
 
   def has_any_role?(role_name)
@@ -43,5 +55,9 @@ class User < ApplicationRecord
   def group_volunteers
     GroupVolunteer.joins(group: :organisation_groups)
                   .where(organisation_groups: { organisation_id: coordinating_organisation_ids })
+  end
+
+  def coordinator_organisation_requests
+    Request.where(organisation_id: coordinating_organisations.select(:id))
   end
 end

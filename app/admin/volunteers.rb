@@ -1,20 +1,16 @@
 ActiveAdmin.register Volunteer do
   decorate_with VolunteerDecorator
 
-  permit_params :description
+  permit_params :description, :first_name, :last_name, :phone, :email
 
-  # Scopes
-  # TODO: fix preloading
-  # scope 'all', default: true do |_scope|
-  #   Volunteer.preload(:addresses)
-  # end
-  scope :all, default: true
+  scope :all, default: true do |scope|
+    scope.available_for(current_user.organisation_group.id)
+  end
   scope :unconfirmed, if: -> { current_user.admin? }
   scope :confirmed, if: -> { current_user.admin? }
 
   # Filters
-  filter :first_name
-  filter :last_name
+  filter :full_name_cont, label: 'Jméno / příjmení'
   filter :has_labels, label: 'Štítky',
                       as: :select, multiple: true,
                       collection: proc { OptionsWrapper.wrap (Label.managable_by(current_user).map { |i| [i.name, i.id] }), params, :has_labels },
@@ -23,7 +19,7 @@ ActiveAdmin.register Volunteer do
   filter :phone
   filter :email
   filter :search_nearby, as: :hidden, label: 'Location'
-  filter :address_search_input, as: :address_search
+  filter :address_search_input, as: :address_search, label: 'Vzdálenost od adresy'
 
   index do
     javascript_for(*location_autocomplete(callback: 'InitFilterAutocomplete'))
@@ -57,6 +53,7 @@ ActiveAdmin.register Volunteer do
     end
 
     panel nil, style: 'width: 580px' do
+      render partial: 'recruitment'
       render partial: 'labels'
     end
   end

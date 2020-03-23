@@ -13,6 +13,7 @@ gem 'activerecord-postgis-adapter'
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
+gem 'sprockets', '= 3.7.2'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -54,6 +55,7 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'pry-rails'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -73,6 +75,8 @@ group :test do
   gem 'test-prof', '~> 0.10'
   # One liner matchers
   gem 'shoulda-matchers', '~> 4.3'
+  # Fake data
+  gem 'ffaker', '~> 2.14'
 end
 
 group :production do
@@ -99,6 +103,7 @@ gem 'cancancan'
 gem 'rolify'
 
 # active admin
+gem 'active_admin-humanized_enum'
 gem 'activeadmin'
 gem 'arctic_admin'
 gem 'draper'

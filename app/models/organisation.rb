@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 class Organisation < ApplicationRecord
   resourcify
 
   # Associations
-  has_many :roles
   has_many :coordinators,
-           -> { where(roles: { name: :coordinator }) },
+           -> { joins(:roles).where(roles: { name: :coordinator }) },
            class_name: :User,
            through: :roles,
            source: :users
   has_many :organisation_groups
   has_many :groups, through: :organisation_groups
+  has_many :requests
 
   # Validations
   validates :name, presence: true
