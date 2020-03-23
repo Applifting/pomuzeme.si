@@ -56,7 +56,6 @@
 
           <div class="input-field">
             <%= form.text_field :street_search, class: 'validate autocomplete', required: true %>
-            <ul id="searchResult" class="autocomplete-content dropdown-content geolocation-search"></ul>
             <%= form.label :street_search %>
           </div>
 
@@ -64,13 +63,15 @@
           <%= form.hidden_field :street_number %>
           <%= form.hidden_field :city %>
           <%= form.hidden_field :city_part %>
+          <%= form.hidden_field :postal_code %>
+          <%= form.hidden_field :country_code %>
           <%= form.hidden_field :geo_entry_id %>
           <%= form.hidden_field :geo_unit_id %>
           <%= form.hidden_field :geo_coord_x %>
           <%= form.hidden_field :geo_coord_y %>
 
           <div class="input-field">
-            <%= form.text_area :description, class: 'validate', required: false %>
+            <%= form.text_area :description, class: 'validate', required: false, placeholder: '' %>
             <%= form.label :description %>
           </div>
 
