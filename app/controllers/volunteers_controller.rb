@@ -9,6 +9,7 @@ class VolunteersController < ApplicationController
       bind_volunteer_with_organisation_group(volunteer) if @partner_signup_group
       render 'volunteer/register_success'
     else
+      Rails.logger.error address.errors.messages
       render 'volunteer/register_error', locals: { volunteer: volunteer, address: address }
     end
   end
