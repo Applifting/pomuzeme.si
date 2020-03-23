@@ -48,7 +48,7 @@ class VolunteersController < ApplicationController
 
   def address_params
     params.require(:volunteer).permit(
-        :street, :city, :street_number, :city_part, :geo_entry_id, :geo_unit_id, :geo_coord_x, :geo_coord_y
+        :street, :city, :street_number, :city_part, :postal_code, :country_code, :geo_entry_id, :geo_unit_id, :geo_coord_x, :geo_coord_y
     )
   end
 
