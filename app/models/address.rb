@@ -31,6 +31,30 @@ class Address < ApplicationRecord
     with_calculated_distance Geography::Point.from_coordinates(longitude: longitude, latitude: latitude)
   end
 
+  def self.new_from_string(string)
+    result = Geocoder.search(string).first
+    return Address.new unless result.present?
+
+    find_property = proc do |type, property|
+      component = result.data['address_components'].find { |c| c['types'].include?(type) } || {}
+      component[property]
+    end
+
+    geometry = proc { |type| result.data['geometry']['location'][type] }
+    city     = find_property['locality', 'long_name'] || find_property['administrative_area_level_2', 'long_name']
+
+    Address.new country_code: find_property['country', 'short_name'].downcase,
+                postal_code: find_property['postal_code', 'long_name'],
+                city: city,
+                city_part: find_property['neighborhood', 'long_name'] || city,
+                street: find_property['route', 'long_name'],
+                street_number: find_property['street_number', 'long_name'],
+                coordinate: Geography::Point.from_coordinates(latitude: geometry['lat'], longitude: geometry['lng']),
+                geo_entry_id: result.data['place_id'],
+                geo_unit_id: result.data['place_id'],
+                geo_provider: 'google_places'
+  end
+
   def to_s
     [street_number, street, city, city_part, postal_code].uniq.compact.join ', '
   end
