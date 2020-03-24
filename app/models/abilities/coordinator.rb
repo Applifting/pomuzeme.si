@@ -14,9 +14,11 @@ module Abilities
 
       can :manage, Label, group_id: user.coordinating_groups.pluck(:id)
       can :manage, VolunteerLabel
-      can :manage, [RequestedVolunteer, RequestedVolunteerDecorator], request_id: user.coordinator_organisation_requests.pluck(:id)
-      can :create, Request
-      can :manage, [Request, RequestDecorator], id: user.coordinator_organisation_requests.pluck(:id)
+
+      # Temporarily disabled before it's bug-free
+      # can :manage, [RequestedVolunteer, RequestedVolunteerDecorator], request_id: user.coordinator_organisation_requests.pluck(:id)
+      # can :create, Request
+      # can :manage, [Request, RequestDecorator], id: user.coordinator_organisation_requests.pluck(:id)
 
       can_manage_recruitment user
     end
