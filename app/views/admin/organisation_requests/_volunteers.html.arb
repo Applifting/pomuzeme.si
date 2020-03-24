@@ -8,6 +8,7 @@ end
 table_for resource.requested_volunteers.includes(:volunteer).order(:state).map(&:decorate) do
   column :first_name
   column :last_name
+  column :phone
   column :state
   column 'Akce', class: 'centered', &:actions
 end

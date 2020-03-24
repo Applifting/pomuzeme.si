@@ -5,12 +5,15 @@ ActiveAdmin.register RequestedVolunteer do
   belongs_to :organisation_request
   permit_params :request_id, :volunteer_id, :state
 
-  before_action :ensure_request_id
-
   form do |f|
-    f.input :request_id, as: :hidden
-    f.input :volunteer, label: 'Dobrovolník' unless resource.persisted?
-    f.input :state, label: 'Stav', as: :select, collection: RequestedVolunteer.states.keys, include_blank: false
+    if object.new_record?
+      f.input :volunteer, collection: Volunteer.available_for(current_user.organisation_group.id)
+                                               .verified_by(current_user.organisation_group.id),
+                          disabled: Volunteer.assigned_to_request(resource.request_id).pluck(:id)
+    end
+    f.input :state, as: :select,
+                    selected: (object.new_record? ? :notified : resource.state),
+                    include_blank: false
     f.actions
   end
 
@@ -48,10 +51,6 @@ ActiveAdmin.register RequestedVolunteer do
         success.html { redirect_to admin_organisation_request_path(resource.request_id) }
         failure.html { render :new }
       end
-    end
-
-    def ensure_request_id
-      params[:request_id] ||= params[:organisation_request_id]
     end
   end
 end

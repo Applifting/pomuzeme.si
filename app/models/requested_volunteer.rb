@@ -6,7 +6,7 @@ class RequestedVolunteer < ApplicationRecord
 
   validates_uniqueness_of :volunteer_id, scope: :request_id
 
-  delegate :first_name, :last_name, to: :volunteer
+  delegate :first_name, :last_name, :phone, :to_s, to: :volunteer
 
   enum state: {
     pending_notification: 1,

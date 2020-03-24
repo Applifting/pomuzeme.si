@@ -12,10 +12,10 @@ ActiveAdmin.register Volunteer do
   # Filters
   filter :full_name_cont, label: 'Jméno / příjmení'
   filter :has_labels, label: 'Štítky',
-         as: :select, multiple: true,
-         collection: proc { OptionsWrapper.wrap (Label.managable_by(current_user).map { |i| [i.name, i.id] }), params, :has_labels },
-         selected: 1,
-         input_html: { style: 'height: 100px' }
+                      as: :select, multiple: true,
+                      collection: proc { OptionsWrapper.wrap (Label.managable_by(current_user).map { |i| [i.name, i.id] }), params, :has_labels },
+                      selected: 1,
+                      input_html: { style: 'height: 100px' }
   filter :phone
   filter :email
   filter :search_nearby, as: :hidden, label: 'Location'

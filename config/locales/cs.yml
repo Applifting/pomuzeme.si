@@ -40,7 +40,7 @@ cs:
           inactive: Dobrovolník vyřazen
         source:
           migration: nahrání dat
-          channel: online kanál,
+          channel: online kanál
           public_pool: veřejný seznam
     models:
       volunteer: Dobrovolník
@@ -53,8 +53,8 @@ cs:
       roles: Role
       label: Štítek
       volunteer_label: Štítek
-      request: Požadavek
-      organisation_request: Požadavek
+      request: Poptávka
+      organisation_request: Poptávka
     attributes:
       volunteer:
         first_name: Jméno
@@ -140,19 +140,30 @@ cs:
         closed_state: Uzavřeno stavem
         coordinator: Koordinátor
         creator: Vytvořil
-        fullfillment_date: Datum splnění
+        fullfillment_date: Požadované datum vyřízení
         organisation: Organizace
         required_volunteer_count: Požadovaný počet dobrovolníků
+        accepted_volunteers_count: Potvrzení / požadovaní dobrovolníci
         state: Stav
         state_last_updated_at: Stav naposledy aktualizován
         subscriber: Odběratel
         subscriber_phone: Telefon odběratele
         states:
-          created: Vytvoreno
-          searching_capacity: Naplnovani kapacity
-          pending_confirmation: Potvrzovani dobrovolniku
-          help_coordinated: Uskutecneno
-          closed: Uzavreno
+          created: Vytvořeno
+          searching_capacity: Naplňování kapacity
+          pending_confirmation: Potvrzování dobrovolníků
+          help_coordinated: Čeká na vyřízení
+          closed: Uzavřeno
+      requested_volunteer:
+        first_name: Jméno
+        volunteer: Dobrovolník
+        state: Stav dobrovolníka v poptávce
+        states:
+          pending_notification: Odesílání zprávy
+          notified: Osloven
+          accepted: Potvrzen
+          rejected: Odmítl
+          removed: Odebrán
     errors:
       format: "%{attribute} %{message}"
       messages:

@@ -30,7 +30,7 @@ class Request < ApplicationRecord
   }
 
   scope :sorted_state, -> { order(state: :asc, state_last_updated_at: :desc) }
-  scope :assignable, -> { where(state: [:created, :searching_capacity, :pending_confirmation]) }
+  scope :assignable, -> { where(state: %i[created searching_capacity pending_confirmation]) }
 
   def title
     [text[0..39], subscriber, address].compact.join ', '
