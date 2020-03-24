@@ -53,6 +53,8 @@ ActiveAdmin.register Volunteer do
 
     if scoped_request
       para I18n.t('active_admin.batch_actions.assign_request.title', request: scoped_request.title)
+      para I18n.t('active_admin.batch_actions.assign_request.description'), class: :small
+      para
       selectable_column
     end
     id_column

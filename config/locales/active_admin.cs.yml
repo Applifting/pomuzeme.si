@@ -76,6 +76,7 @@ cs:
         assign_request: 'Přiřadit požadavek'
       assign_request:
         title: "Vybíráte dobrovolníky pro poptávku: %{request}"
+        description: seznam neobsahuje dobrovolníky, kteří jsou již v poptávce zařazeni
         confirmation: "Opravdu chcete přidat dobrovolníky do poptávky?"
     comments:
       resource_type: "Typ zdroje"
