@@ -32,7 +32,7 @@ ActiveAdmin.register Volunteer do
   config.batch_actions = true
   # Form args has to be inside lambda due to calling of current_user
 
-  batch_action :assign_request do |ids|
+  batch_action :assign_request, confirm: I18n.t('active_admin.batch_actions.assign_request.confirmation') do |ids|
     request = referer_request
     Admin::Requests::VolunteerAssigner.new(current_user, request, Volunteer.where(id: ids)).perform
     redirect_to admin_organisation_request_path request.id
@@ -52,7 +52,7 @@ ActiveAdmin.register Volunteer do
     javascript_for(*location_autocomplete(callback: 'InitFilterAutocomplete'))
 
     if scoped_request
-      para "Vybíráte dobrovolníky pro poptávku: #{scoped_request.title}"
+      para I18n.t('active_admin.batch_actions.assign_request.title', request: scoped_request.title)
       selectable_column
     end
     id_column

@@ -74,6 +74,9 @@ cs:
       labels:
         destroy: "Vymazat"
         assign_request: 'Přiřadit požadavek'
+      assign_request:
+        title: "Vybíráte dobrovolníky pro poptávku: %{request}"
+        confirmation: "Opravdu chcete přidat dobrovolníky do poptávky?"
     comments:
       resource_type: "Typ zdroje"
       author_type: "Typ autora"
