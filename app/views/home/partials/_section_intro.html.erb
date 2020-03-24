@@ -25,12 +25,20 @@
 
     <div class="supporters-counts-wrapper">
       <div class="supporters-counts-item">
-        <div class="count">2 546</div>
+        <div class="count">
+          <% cache :volunteer_count do %>
+            <%= Volunteer.confirmed.size %>
+          <% end %>
+        </div>
         <div class="count-label">Registrovaných dobrovolníků</div>
       </div>
 
       <div class="supporters-counts-item">
-        <div class="count">17</div>
+        <div class="count">
+          <% cache :organisation_count do %>
+            <%= Organisation.all.size %>
+          <% end %>
+        </div>
         <div class="count-label">Dobročinných organizací</div>
       </div>
     </div>

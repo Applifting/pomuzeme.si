@@ -14,6 +14,8 @@ class Volunteer < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { email&.present? }
   validate :location
 
+  after_commit :invalidate_volunteer_count_cache
+
   def with_existing_record
     Volunteer.unconfirmed.where(phone: normalized_phone).take || self
   end
@@ -24,5 +26,9 @@ class Volunteer < ApplicationRecord
     return if street && street_number && city && city_part && geo_entry_id && geo_unit_id && geo_coord_x && geo_coord_y
 
     errors[:geolocation_err] << ' Prosíme vyberte celou adresu i s číslem popisným'
+  end
+
+  def invalidate_volunteer_count_cache
+    Rails.cache.delete :volunteer_count
   end
 end

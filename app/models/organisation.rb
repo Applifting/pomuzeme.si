@@ -21,8 +21,8 @@ class Organisation < ApplicationRecord
   validates :contact_person_phone, phony_plausible: true, uniqueness: true
 
   before_validation :upcase_abbreviation
-
   after_create :create_coordinator
+  after_commit :invalidate_organisation_count_cache
 
   def to_s
     "#{name} ~ #{abbreviation}"
@@ -36,5 +36,9 @@ class Organisation < ApplicationRecord
 
   def create_coordinator
     Role.create name: :coordinator, resource: self
+  end
+
+  def invalidate_organisation_count_cache
+    Rails.cache.delete :organisation_count
   end
 end
