@@ -141,6 +141,7 @@ cs:
         closed_state: Uzavřeno stavem
         coordinator: Koordinátor
         creator: Vytvořil
+        full_address: Adresa
         fullfillment_date: Požadované datum vyřízení
         organisation: Organizace
         required_volunteer_count: Požadovaný počet dobrovolníků

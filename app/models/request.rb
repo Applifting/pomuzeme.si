@@ -3,13 +3,15 @@
 class Request < ApplicationRecord
   before_validation :set_state, :set_state_last_updated_at
 
-  has_one :address, as: :addressable
+  has_one :address, as: :addressable, dependent: :destroy
   belongs_to :creator, class_name: 'User', foreign_key: :created_by_id
   belongs_to :closer, class_name: 'User', foreign_key: :closed_by_id, optional: true
   belongs_to :coordinator, class_name: 'User', foreign_key: :coordinator_id, optional: true
   belongs_to :organisation
   has_many :requested_volunteers
   has_many :volunteers, through: :requested_volunteers
+
+  accepts_nested_attributes_for :address
 
   validates :text, :required_volunteer_count, :subscriber, presence: true
   validates :creator, :state, :state_last_updated_at, presence: true

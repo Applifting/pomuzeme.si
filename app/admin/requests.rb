@@ -9,7 +9,9 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   scope_to :current_user, association_method: :coordinator_organisation_requests, unless: -> { current_user.admin? }
 
   permit_params :closed_note, :coordinator_id, :created_by_id, :fullfillment_date, :organisation_id,
-                :required_volunteer_count, :state, :subscriber, :subscriber_phone, :text
+                :required_volunteer_count, :state, :subscriber, :subscriber_phone, :text,
+                address_attributes: [:street_number, :street, :city, :city_part, :postal_code, :country_code,
+                                     :latitude, :longitude, :geo_entry_id]
 
   # Filters
   filter :text
@@ -35,6 +37,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
       attributes_table_for resource do
         row :id
         row :text
+        row :full_address
         row :required_volunteer_count
         row :fullfillment_date
         row :coordinator
@@ -49,12 +52,29 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   end
 
   form do |f|
+    javascript_for(*location_autocomplete(callback: 'InitRequestAutocomplete'))
+
     f.inputs 'Poptávka' do
       f.input :text, as: :text
       f.input :required_volunteer_count
       f.input :subscriber
       f.input :subscriber_phone, input_html: { maxlength: 13 }
     end
+
+    para "Současná adresa: #{f.object.decorate.full_address}"
+    custom_input :full_address, class: 'geocomplete', label: I18n.t('activerecord.attributes.request.full_address')
+    f.inputs for: [:address, f.object.address || f.object.build_address] do |address_form|
+      address_form.input :street_number, as: :hidden
+      address_form.input :street, as: :hidden
+      address_form.input :city, as: :hidden
+      address_form.input :city_part, as: :hidden
+      address_form.input :postal_code, as: :hidden
+      address_form.input :country_code, as: :hidden
+      address_form.input :latitude, as: :hidden
+      address_form.input :longitude, as: :hidden
+      address_form.input :geo_entry_id, as: :hidden
+    end
+
     f.inputs 'Koordinace' do
       f.input :state if resource.persisted?
       f.input :organisation, as: :select,
