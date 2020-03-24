@@ -3,8 +3,15 @@ ActiveAdmin.register Volunteer do
 
   permit_params :description, :first_name, :last_name, :phone, :email
 
-  scope :all, default: true do |scope|
-    current_user.admin? ?  scope : scope.available_for(current_user.organisation_group.id)
+  scope :volunteer_verified, default: true do |scope|
+    scope.verified_by(current_user.organisation_group.id)
+  end
+  scope :volunteer_public do |scope|
+    scope.not_recruited_by(current_user.organisation_group.id)
+  end
+  # scope
+  scope :volunteer_all, default: true do |scope|
+    current_user.admin? ? scope : scope.available_for(current_user.organisation_group.id)
   end
   scope :unconfirmed, if: -> { current_user.admin? }
   scope :confirmed, if: -> { current_user.admin? }
@@ -21,9 +28,23 @@ ActiveAdmin.register Volunteer do
   filter :search_nearby, as: :hidden, label: 'Location'
   filter :address_search_input, as: :address_search, label: 'Vzdálenost od adresy'
 
+  # Batch actions
+  config.batch_actions = true
+  # Form args has to be inside lambda due to calling of current_user
+  form_lambda = -> { { request: current_user.coordinator_organisation_requests.assignable.collect { |request| [request.title, request.id] } } }
+
+  batch_action :assign_request, form: form_lambda do |ids, inputs|
+    request = Request.find(inputs[:request])
+    Admin::Requests::VolunteerAssigner.new(current_user, request, Volunteer.where(id: ids)).perform
+    redirect_to admin_organisation_request_path request
+  rescue StandardError => e
+    redirect_to admin_volunteers_path, alert: e.message
+  end
+
   index do
     javascript_for(*location_autocomplete(callback: 'InitFilterAutocomplete'))
 
+    selectable_column
     id_column
     column :full_name
     column :phone

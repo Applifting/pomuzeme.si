@@ -73,6 +73,7 @@ cs:
       action_label: "%{title}"
       labels:
         destroy: "Vymazat"
+        assign_request: 'Přiřadit požadavek'
     comments:
       resource_type: "Typ zdroje"
       author_type: "Typ autora"
@@ -112,6 +113,9 @@ cs:
       message: "Nemáte oprávnění k provedení této akce."
     scopes:
       all: vše
+      volunteer_all: všichni
+      volunteer_verified: ověření
+      volunteer_public: veřejní
       in_progress: otevřené
       closed: uzavřené
     index_list:

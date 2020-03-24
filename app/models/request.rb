@@ -3,11 +3,13 @@
 class Request < ApplicationRecord
   before_validation :set_state, :set_state_last_updated_at
 
-  has_many :addresses, as: :addressable
+  has_one :address, as: :addressable
   belongs_to :creator, class_name: 'User', foreign_key: :created_by_id
   belongs_to :closer, class_name: 'User', foreign_key: :closed_by_id, optional: true
   belongs_to :coordinator, class_name: 'User', foreign_key: :coordinator_id, optional: true
   belongs_to :organisation
+  has_many :requested_volunteers
+  has_many :volunteers, through: :requested_volunteers
 
   validates :text, :required_volunteer_count, :subscriber, presence: true
   validates :creator, :state, :state_last_updated_at, presence: true
@@ -28,6 +30,11 @@ class Request < ApplicationRecord
   }
 
   scope :sorted_state, -> { order(state: :asc, state_last_updated_at: :desc) }
+  scope :assignable, -> { where(state: %i[created searching_capacity pending_confirmation]) }
+
+  def title
+    [text[0..39], subscriber, address].compact.join ', '
+  end
 
   def set_state
     self.state = :created unless state

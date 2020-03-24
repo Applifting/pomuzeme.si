@@ -31,9 +31,9 @@ SeedHelper.create_group organisation: organisation3,
                                                dětem a dospělým, seniorům i lidem v různých životních krizích.
                                                Jsme jeden z nejvýznamnějších poskytovatelů sociálních služeb v ČR a jednička ve speciálním školství."
 
-SeedHelper.create_coordinator(email: 'coordinator@example.com', password: 'password', organisation: organisation1, first_name: 'Pavel', last_name: 'Pomahac')
-SeedHelper.create_coordinator(email: 'coordinator2@example.com', password: 'password', organisation: organisation2, first_name: 'Josef', last_name: 'Novak')
-SeedHelper.create_coordinator(email: 'coordinator3@example.com', password: 'password', organisation: organisation1, first_name: 'Josef', last_name: 'Novak')
+coordinator1 = SeedHelper.create_coordinator(email: 'coordinator@example.com', password: 'password', organisation: organisation1, first_name: 'Pavel', last_name: 'Pomahac')
+coordinator2 = SeedHelper.create_coordinator(email: 'coordinator2@example.com', password: 'password', organisation: organisation2, first_name: 'Josef', last_name: 'Novak')
+coordinator3 = SeedHelper.create_coordinator(email: 'coordinator3@example.com', password: 'password', organisation: organisation1, first_name: 'Josef', last_name: 'Novak')
 admin.grant :coordinator, organisation1
 
 # Create sample volunteers
@@ -41,12 +41,13 @@ SeedHelper.create_volunteer(first_name: 'Marie', last_name: 'Laskava', zipcode: 
 SeedHelper.create_volunteer(first_name: 'Teodor', last_name: 'Dobry', zipcode: '77900', city: 'Olomouc', street: '17. listopadu 1192', phone: '+420455888333', email: 'teo@dobry.cz')
 SeedHelper.create_volunteer(first_name: 'Petra', last_name: 'Mala', zipcode: '77900', city: 'Olomouc', street: '17. listopadu 1192', phone: '+420603225444', email: 'petra@mala.cz')
 
-SeedHelper.create_request(organisation: organisation1, text: 'Potřebujeme 5 dobrovolníků', required_volunteer_count: 5, subscriber: 'Subscriber', subscriber_phone: '+420 555 555 555', creator: User.first, state_last_updated_at: DateTime.now)
-SeedHelper.create_request(organisation: organisation1, text: 'Potřebujeme 10 dobrovolníků', required_volunteer_count: 10, subscriber: 'Subscriber', subscriber_phone: '+420 555 555 555', creator: User.first, state_last_updated_at: DateTime.now, state: :pending_confirmation)
-SeedHelper.create_request(organisation: organisation1, text: 'Potřebujeme 8 dobrovolníků', required_volunteer_count: 8, subscriber: 'Subscriber', subscriber_phone: '+420 555 555 555', creator: User.first, state_last_updated_at: DateTime.now)
-SeedHelper.create_request(organisation: organisation2, text: 'Potřebujeme 5 dobrovolníků', required_volunteer_count: 5, subscriber: 'Subscriber', subscriber_phone: '+420 555 555 555', creator: User.first, state_last_updated_at: DateTime.now)
-
 (1..50).each do |i|
   identifier = '%03d' % i
   SeedHelper.create_volunteer(first_name: 'Volunteer', last_name: identifier, zipcode: '77900', city: 'Olomouc', street: '17. listopadu 1192', phone: '+420603225' + identifier, email: 'volunteer@007.cz')
 end
+
+SeedHelper.create_request(organisation: organisation1, coordinator: coordinator1, text: 'Potřebujeme 5 dobrovolníků', required_volunteer_count: 5, subscriber: 'Subscriber', subscriber_phone: '+420 555 555 555', creator: User.first, state_last_updated_at: DateTime.now)
+SeedHelper.create_request(organisation: organisation1, coordinator: coordinator1, text: 'Potřebujeme 10 dobrovolníků', required_volunteer_count: 10, subscriber: 'Subscriber', subscriber_phone: '+420 555 555 555', creator: User.first, state_last_updated_at: DateTime.now, state: :pending_confirmation)
+SeedHelper.create_request(organisation: organisation1, coordinator: coordinator1, text: 'Potřebujeme 12 dobrovolníků', required_volunteer_count: 12, subscriber: 'Subscriber', subscriber_phone: '+420 555 555 555', creator: User.first, state_last_updated_at: DateTime.now, state: :pending_confirmation)
+SeedHelper.create_request(organisation: organisation2, text: 'Potřebujeme 5 dobrovolníků', required_volunteer_count: 5, subscriber: 'Subscriber', subscriber_phone: '+420 555 555 555', creator: User.first, state_last_updated_at: DateTime.now)
+SeedHelper.create_request(organisation: organisation1, coordinator: coordinator3, text: 'Potřebujeme 8 dobrovolníků', required_volunteer_count: 8, subscriber: 'Subscriber', subscriber_phone: '+420 555 555 555', creator: User.first, state_last_updated_at: DateTime.now)
