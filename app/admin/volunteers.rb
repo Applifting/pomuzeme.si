@@ -46,7 +46,7 @@ ActiveAdmin.register Volunteer do
     include ActiveAdmin::VolunteersHelper
 
     def scoped_collection
-      scoped_request ? super.where.not(id: Volunteer.assigned_to_request(scoped_request.id)) : super
+      scoped_request ? super.not_blocked.where.not(id: Volunteer.assigned_to_request(scoped_request.id)) : super
     end
   end
 

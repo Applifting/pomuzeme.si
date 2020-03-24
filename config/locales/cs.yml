@@ -149,6 +149,7 @@ cs:
         full_address: Adresa
         update_address: Nová adresa
         fullfillment_date: Požadované datum vyřízení
+        block_volunteer_until: Blokace dobrovolníka do
         organisation: Organizace
         required_volunteer_count: Požadovaný počet dobrovolníků
         accepted_volunteers_count: Potvrzení / požadovaní dobrovolníci

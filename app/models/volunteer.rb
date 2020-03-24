@@ -34,6 +34,8 @@ class Volunteer < ApplicationRecord
   scope :verified_by, ->(group_id) { left_joins(:group_volunteers).where(group_volunteers: { group_id: group_id, recruitment_status: 3 }) }
   scope :not_recruited_by, ->(group_id) { left_joins(:group_volunteers).where(format(NOT_RECRUITED_BY_CONDITIONS, group_id: group_id)) }
   scope :assigned_to_request, ->(request_id) { left_joins(:requested_volunteers).where(requested_volunteers: { request_id: request_id }) }
+  scope :blocked, -> { left_joins(:requests).where(requested_volunteers: { state: :accepted }, requests: { block_volunteer_until: Time.now.. }) }
+  scope :not_blocked, -> { where.not(id: blocked) }
 
   attr_accessor :address_search_input
 
