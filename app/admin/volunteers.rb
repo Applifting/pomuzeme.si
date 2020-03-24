@@ -4,7 +4,7 @@ ActiveAdmin.register Volunteer do
   permit_params :description, :first_name, :last_name, :phone, :email
 
   scope :all, default: true do |scope|
-    scope.available_for(current_user.organisation_group.id)
+    current_user.admin? ?  scope : scope.available_for(current_user.organisation_group.id)
   end
   scope :unconfirmed, if: -> { current_user.admin? }
   scope :confirmed, if: -> { current_user.admin? }
