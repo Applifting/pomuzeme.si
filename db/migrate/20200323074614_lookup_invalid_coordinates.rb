@@ -3,7 +3,7 @@ class LookupInvalidCoordinates < ActiveRecord::Migration[6.0]
     reversible do |dir|
       dir.up do
         ActiveRecord::Base.transaction do
-          invalid_addresses.each { |address| fix_coordinate address }
+          invalid_addresses.each { |address| fix_coordinate(address) if address.addressable.present? }
         end
       end
     end
