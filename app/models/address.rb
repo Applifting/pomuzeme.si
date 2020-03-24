@@ -1,16 +1,17 @@
 class Address < ApplicationRecord
-
-  NEAREST_ADDRESSES_SQL = 'CROSS JOIN (SELECT ST_SetSRID(ST_MakePoint(%{longitude}, %{latitude}), 4326)::geography AS ref_geom) AS r'
+  NEAREST_ADDRESSES_SQL = 'CROSS JOIN (SELECT ST_SetSRID(ST_MakePoint(%{longitude}, %{latitude}), 4326)::geography AS ref_geom) AS r'.freeze
 
   belongs_to :addressable, polymorphic: true, autosave: true
 
   # Scopes
-  scope :with_calculated_distance, ->(center_point) { joins(NEAREST_ADDRESSES_SQL % { longitude: center_point.longitude, latitude: center_point.latitude})
-                                                      .select('addresses.*','ST_Distance(addresses.coordinate, ref_geom) as distance_meters')}
+  scope :with_calculated_distance, lambda { |center_point|
+                                     joins(format(NEAREST_ADDRESSES_SQL, longitude: center_point.longitude, latitude: center_point.latitude))
+                                       .select('addresses.*', 'ST_Distance(addresses.coordinate, ref_geom) as distance_meters')
+                                   }
 
   enum country_code: { cz: 'cz' }, _suffix: true
   enum geo_provider: { google_places: 'google_places',
-                       cadstudio: 'cadstudio'}, _suffix: true
+                       cadstudio: 'cadstudio' }, _suffix: true
 
   validates_presence_of :city, :city_part, :geo_entry_id,
                         :geo_unit_id, :coordinate, :country_code, :geo_provider
@@ -31,7 +32,7 @@ class Address < ApplicationRecord
   end
 
   def to_s
-    [street_number, street, city, city_part, postal_code].compact.join ', '
+    [street_number, street, city, city_part, postal_code].uniq.compact.join ', '
   end
 
   def only_address_errors?

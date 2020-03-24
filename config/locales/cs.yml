@@ -36,7 +36,7 @@ cs:
         recruitment_statuses:
           waiting_for_contact: Čeká na kontakt
           onboarding: Probíhá nábor
-          active: Dobrovolník aktivní
+          active: Dobrovolník aktivní (ověřený)
           inactive: Dobrovolník vyřazen
         source:
           migration: nahrání dat
@@ -82,8 +82,9 @@ cs:
         created_at: Vytvořeno
         updated_at: Upraveno
       group_volunteer:
+        address: Adresa
         group: Skupina
-        coordinator: Koordinátor
+        coordinator_id: Koordinátor
         recruitment_status: Stav náboru
         source: Zdroj dobrovolníka
         comments: Poznámky
@@ -94,7 +95,7 @@ cs:
         recruitment_statuses:
           waiting_for_contact: Čeká na kontakt
           onboarding: Probíhá nábor
-          active: Dobrovolník aktivní
+          active: Dobrovolník aktivní (ověřený)
           inactive: Dobrovolník vyřazen
         sources:
           channel: Vlastní nábor

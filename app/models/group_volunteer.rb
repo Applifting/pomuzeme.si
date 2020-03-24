@@ -16,8 +16,12 @@ class GroupVolunteer < ApplicationRecord
   # Validations
   validates :volunteer, uniqueness: {  scope: :group }
 
+  # Attributes
+  delegate :to_s, :title, to: :volunteer
+
   # Scopes
   scope :in_recruitment_with, ->(group_id) { where(group_volunteers: { group_id: group_id }).take }
   scope :in_progress, -> { where(recruitment_status: IN_RECRUITMENT) }
   scope :closed, -> { where.not(recruitment_status: IN_RECRUITMENT) }
+  scope :unassigned, -> { where(coordinator_id: nil) }
 end

@@ -112,11 +112,14 @@ cs:
     access_denied:
       message: "Nemáte oprávnění k provedení této akce."
     scopes:
-      all: vše
-      volunteer_all: všichni
-      volunteer_verified: ověření
-      volunteer_public: veřejní
-      in_progress: otevřené
+      all: Vše
+      volunteer_all: Všichni
+      volunteer_verified: Ověření
+      volunteer_public: Veřejní
+      recruitment_in_progress: Otevřený
+      recruitment_closed: Uzavřený
+      recruitment_all: Vše
+      recruitment_unassigned: Bez koordinátora
       closed: uzavřené
     index_list:
       table: "Tabulka"

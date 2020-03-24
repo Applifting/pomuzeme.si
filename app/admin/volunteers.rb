@@ -23,8 +23,10 @@ ActiveAdmin.register Volunteer do
                       collection: proc { OptionsWrapper.wrap (Label.managable_by(current_user).map { |i| [i.name, i.id] }), params, :has_labels },
                       selected: 1,
                       input_html: { style: 'height: 100px' }
-  filter :phone
-  filter :email
+  filter :phone_or_email_cont, label: 'Telefon / email'
+  filter :group_volunteers_coordinator_id_eq, as: :select,
+                                              collection: proc { OptionsWrapper.wrap (current_user.organisation_colleagues.map { |i| [i.to_s, i.id] }), params, :group_volunteer_coordinator_eq },
+                                              label: 'Koordinátor dobrovolníka'
   filter :search_nearby, as: :hidden, label: 'Location'
   filter :address_search_input, as: :address_search, label: 'Vzdálenost od adresy'
 

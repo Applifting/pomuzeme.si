@@ -29,7 +29,7 @@ class User < ApplicationRecord
   end
 
   def organisation_colleagues
-    coordinating_organisations.map(&:coordinators).flatten
+    coordinating_organisations.map(&:coordinators).flatten.uniq
   end
 
   def to_s
