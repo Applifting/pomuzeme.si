@@ -114,3 +114,6 @@ gem 'devise-i18n'
 
 # geocoding
 gem 'geocoder'
+
+# sending emails
+gem 'sparkpost_rails'
