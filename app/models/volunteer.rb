@@ -45,6 +45,11 @@ class Volunteer < ApplicationRecord
     Volunteer.unconfirmed.where(phone: normalized_phone).take || self
   end
 
+  def to_s
+    "#{first_name} #{last_name}"
+  end
+  alias title to_s
+
   private
 
   # Dirty ransack scopes
