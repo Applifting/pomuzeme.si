@@ -2,7 +2,7 @@
 
 div class: 'title h4' do
   span 'Dobrovolníci'
-  span link_to('', new_admin_organisation_request_requested_volunteer_path(organisation_request_id: resource.id), class: 'action add') if can?(:manage, Request)
+  span link_to('', admin_volunteers_path(params: {request_id: resource.id}), class: 'action add') if can?(:manage, Request)
 end
 
 table_for resource.requested_volunteers.includes(:volunteer).order(:state).map(&:decorate) do

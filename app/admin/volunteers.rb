@@ -31,20 +31,30 @@ ActiveAdmin.register Volunteer do
   # Batch actions
   config.batch_actions = true
   # Form args has to be inside lambda due to calling of current_user
-  form_lambda = -> { { request: current_user.coordinator_organisation_requests.assignable.collect { |request| [request.title, request.id] } } }
 
-  batch_action :assign_request, form: form_lambda do |ids, inputs|
-    request = Request.find(inputs[:request])
+  batch_action :assign_request do |ids|
+    request = referer_request
     Admin::Requests::VolunteerAssigner.new(current_user, request, Volunteer.where(id: ids)).perform
-    redirect_to admin_organisation_request_path request
+    redirect_to admin_organisation_request_path request.id
   rescue StandardError => e
-    redirect_to admin_volunteers_path, alert: e.message
+    redirect_to admin_organisation_request_path(request.id), alert: e.message
+  end
+
+  controller do
+    include ActiveAdmin::VolunteersHelper
+
+    def scoped_collection
+      scoped_request ? super.where.not(id: Volunteer.assigned_to_request(scoped_request.id)) : super
+    end
   end
 
   index do
     javascript_for(*location_autocomplete(callback: 'InitFilterAutocomplete'))
 
-    selectable_column
+    if scoped_request
+      para "Vybíráte dobrovolníky pro poptávku: #{scoped_request.title}"
+      selectable_column
+    end
     id_column
     column :full_name
     column :phone
