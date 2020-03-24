@@ -1,7 +1,7 @@
 class Label < ApplicationRecord
   # Associations
   belongs_to :group
-  has_many :volunteer_labels
+  has_many :volunteer_labels, dependent: :destroy
 
   # Validations
   validates :name, uniqueness: { scope: :group_id }

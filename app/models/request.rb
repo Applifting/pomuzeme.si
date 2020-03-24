@@ -10,7 +10,7 @@ class Request < ApplicationRecord
   belongs_to :closer, class_name: 'User', foreign_key: :closed_by_id, optional: true
   belongs_to :coordinator, class_name: 'User', foreign_key: :coordinator_id, optional: true
   belongs_to :organisation
-  has_many :requested_volunteers
+  has_many :requested_volunteers, dependent: :destroy
   has_many :volunteers, through: :requested_volunteers
 
   # Validations

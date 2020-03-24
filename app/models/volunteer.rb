@@ -7,12 +7,12 @@ class Volunteer < ApplicationRecord
   NOT_RECRUITED_BY_CONDITIONS = 'group_volunteers.id is null OR (group_volunteers.is_exclusive = false and group_volunteers.group_id != %{group_id})'.freeze
 
   # Associations
-  has_many :addresses, as: :addressable
-  has_many :group_volunteers, dependent: :delete_all
+  has_many :addresses, as: :addressable, dependent: :destroy
+  has_many :group_volunteers, dependent: :destroy
   has_many :groups, through: :group_volunteers
-  has_many :volunteer_labels, dependent: :delete_all
+  has_many :volunteer_labels, dependent: :destroy
   has_many :labels, through: :volunteer_labels
-  has_many :requested_volunteers, dependent: :delete_all
+  has_many :requested_volunteers, dependent: :destroy
   has_many :requests, through: :requested_volunteers
 
   # normalize phone format and add default czech prefix if missings
