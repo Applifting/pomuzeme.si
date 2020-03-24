@@ -113,6 +113,9 @@ cs:
       message: "Nemáte oprávnění k provedení této akce."
     scopes:
       all: vše
+      volunteer_all: všichni
+      volunteer_verified: ověření
+      volunteer_public: veřejní
       in_progress: otevřené
       closed: uzavřené
     index_list:
