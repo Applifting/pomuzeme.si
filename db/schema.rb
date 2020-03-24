@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_20_162412) do
+ActiveRecord::Schema.define(version: 2020_03_23_085947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -27,6 +28,24 @@ ActiveRecord::Schema.define(version: 2020_03_20_162412) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "street"
+    t.string "street_number"
+    t.string "city", null: false
+    t.string "city_part", null: false
+    t.string "geo_entry_id", null: false
+    t.string "geo_unit_id", null: false
+    t.string "geo_provider", null: false
+    t.geometry "coordinate", limit: {:srid=>4326, :type=>"st_point"}
+    t.string "postal_code"
+    t.string "country_code", limit: 3, null: false
+    t.string "addressable_type"
+    t.bigint "addressable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
   create_table "group_volunteers", force: :cascade do |t|
@@ -80,6 +99,29 @@ ActiveRecord::Schema.define(version: 2020_03_20_162412) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "requests", force: :cascade do |t|
+    t.bigint "created_by_id", null: false
+    t.bigint "closed_by_id"
+    t.bigint "coordinator_id"
+    t.bigint "organisation_id"
+    t.integer "required_volunteer_count", null: false
+    t.integer "state", default: 1, null: false
+    t.integer "closed_state"
+    t.string "text", limit: 160, null: false
+    t.string "subscriber", limit: 150, null: false
+    t.string "subscriber_phone", limit: 20, null: false
+    t.string "closed_note", limit: 500
+    t.datetime "fullfillment_date"
+    t.datetime "closed_at"
+    t.datetime "state_last_updated_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["closed_by_id"], name: "index_requests_on_closed_by_id"
+    t.index ["coordinator_id"], name: "index_requests_on_coordinator_id"
+    t.index ["created_by_id"], name: "index_requests_on_created_by_id"
+    t.index ["organisation_id"], name: "index_requests_on_organisation_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -112,25 +154,25 @@ ActiveRecord::Schema.define(version: 2020_03_20_162412) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  create_table "volunteer_labels", force: :cascade do |t|
+    t.bigint "volunteer_id", null: false
+    t.bigint "label_id", null: false
+    t.bigint "created_by_id", null: false
+    t.index ["created_by_id"], name: "index_volunteer_labels_on_created_by_id"
+    t.index ["label_id"], name: "index_volunteer_labels_on_label_id"
+    t.index ["volunteer_id"], name: "index_volunteer_labels_on_volunteer_id"
+  end
+
   create_table "volunteers", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "phone", null: false
-    t.string "street", null: false
-    t.string "city", null: false
-    t.string "zipcode"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "email", null: false
     t.string "confirmation_code"
     t.datetime "confirmation_valid_to"
     t.datetime "confirmed_at"
-    t.string "street_number", null: false
-    t.string "city_part", null: false
-    t.string "geo_entry_id", null: false
-    t.string "geo_unit_id", null: false
-    t.float "geo_coord_x", null: false
-    t.float "geo_coord_y", null: false
     t.text "description"
     t.index ["phone"], name: "index_volunteers_on_phone"
   end
@@ -139,4 +181,7 @@ ActiveRecord::Schema.define(version: 2020_03_20_162412) do
   add_foreign_key "group_volunteers", "volunteers"
   add_foreign_key "organisation_groups", "groups"
   add_foreign_key "organisation_groups", "organisations"
+  add_foreign_key "volunteer_labels", "labels"
+  add_foreign_key "volunteer_labels", "users", column: "created_by_id"
+  add_foreign_key "volunteer_labels", "volunteers"
 end

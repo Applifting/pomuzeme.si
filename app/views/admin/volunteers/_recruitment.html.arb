@@ -1,0 +1,21 @@
+# frozen_string_literal: true
+
+recruitment = resource.group_volunteers.in_recruitment_with(current_user.organisation_group.id)
+
+div class: 'title h4' do
+  if recruitment.present?
+    span 'Nábor'
+    span link_to('', edit_admin_volunteer_group_volunteer_path(resource, recruitment), class: 'action edit') # if can?(:manage, GroupVolunteer)
+  else
+    a 'Začít nábor', href: new_admin_volunteer_group_volunteer_path(resource), class: 'button primary'
+  end
+end
+
+if recruitment.present?
+  attributes_table_for recruitment do
+    row :recruitment_status
+    row :source
+    row :coordinator
+    row :comments
+  end
+end

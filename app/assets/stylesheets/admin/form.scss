@@ -1,0 +1,26 @@
+.datetime_picker input {
+  width: 280px !important;
+}
+
+textarea {
+  height: 200px;
+}
+
+.button {
+  line-height: 30px;
+  text-align: center;
+  border-radius: 3px;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+
+  &.short {
+    height: 28px
+  }
+
+  &.primary {
+    background-color: green;
+    color: white;
+  }
+}

@@ -34,10 +34,10 @@ cs:
     enums:
       group_volunteer:
         recruitment_statuses:
-          waiting_for_contact: čeká na kontakt
-          onboarding: probíhá nábor
-          active: dobrovolník aktivní
-          inactive: dobrovolník vyřazen
+          waiting_for_contact: Čeká na kontakt
+          onboarding: Probíhá nábor
+          active: Dobrovolník aktivní
+          inactive: Dobrovolník vyřazen
         source:
           migration: nahrání dat
           channel: online kanál,
@@ -49,9 +49,31 @@ cs:
       comment: Komentář
       group: Organizační skupina
       group_volunteer: Nábor
+      recruitment: Nábor
       roles: Role
       label: Štítek
+      volunteer_label: Štítek
+      request: Požadavek
     attributes:
+      volunteer:
+        first_name: Jméno
+        last_name: Příjmení
+        full_name: Jméno a příjmení
+        street_search: Vyhledejte vaši adresu
+        street: Ulice
+        city: Město
+        city_part: Městská část
+        zipcode: PSČ
+        distance: Vzdalenost
+        phone: Telefonní číslo
+        email: E-mail
+        confirmation_code: Ověřovací kód
+        addresses: Adresy
+        full_address: Adresa
+        confirmed?: Potvrzen?
+        description: Jak může pomoci
+        created_at: Vytvořen
+        updated_at: Upraven
       group:
         name: Název
         slug: Kód
@@ -60,7 +82,7 @@ cs:
         updated_at: Upraveno
       group_volunteer:
         group: Skupina
-        coordinator_id: Koordinátor
+        coordinator: Koordinátor
         recruitment_status: Stav náboru
         source: Zdroj dobrovolníka
         comments: Poznámky
@@ -68,6 +90,15 @@ cs:
         is_exclusive: Jen pro vás
         created_at: Vytvořeno
         updated_at: Upraveno
+        recruitment_statuses:
+          waiting_for_contact: Čeká na kontakt
+          onboarding: Probíhá nábor
+          active: Dobrovolník aktivní
+          inactive: Dobrovolník vyřazen
+        sources:
+          channel: Vlastní nábor
+          public_pool: pomuzeme.si
+          migration: Import
       label:
         name: Název
         description: Popis
@@ -85,25 +116,36 @@ cs:
       user:
         first_name: Jméno
         last_name: Příjmení
-      volunteer:
-        first_name: Jméno
-        last_name: Příjmení
-        full_name: Jméno a příjmení
-        street_search: Vyhledejte vaši adresu
-        street: Ulice
-        city: Město
-        city_part: Městská část
+      address:
         full_address: Adresa
-        zipcode: PSČ
-        phone: Telefonní číslo
-        email: E-mail
-        confirmation_code: Ověřovací kód
-        confirmed?: Potvrzen?
-        geolocation_err: Nepřesná adresa.
-        recaptcha: Oveření recaptcha
-        description: Jak můžete pomoci?
-        created_at: Vytovřen
-        updated_at: Upraven
+        street_number: Cislo domu
+        street: Ulice
+        city: Mesto
+        city_part: Mestska cast
+        postal_code: PSC
+        geo_provider: Poskytovatel geodat
+        country_code: Kod statu
+        addressable_type: Model dat
+        addressable_id: ID dat
+        created_at: Vytvořeno
+        updated_at: Upraveno
+      volunteer_label:
+        label: Štítek
+      request:
+        text: Popis
+        closer: Uzavřel
+        closed_at: Datum uzavření
+        closed_note: Poznámka k uzavření
+        closed_state: Uzavřeno stavem
+        coordinator: Koordinátor
+        creator: Vytvořil
+        fullfillment_date: Datum splnění
+        organisation: Organizace
+        required_volunteer_count: Požadovaný počet dobrovolníků
+        state: Stav
+        state_last_updated_at: Stav naposledy aktualizován
+        subscriber: Odběratel
+        subscriber_phone: Telefon odběratele
     errors:
       format: "%{attribute} %{message}"
       messages:
@@ -148,6 +190,7 @@ cs:
               sms_not_working: "Ověřovací kód nebylo možné odeslat. Zkuste to prosím za chvilku."
               age_confirmed_required: "Pro registraci je potřeba být starší 18 let."
               terms_of_service_required: "Pro registraci je potřeba souhlasit se zpracováním údajů."
+              recaptcha_not_valid: 'Oveření recaptcha je neplatné.'
             phone:
               improbable_phone: není správně
             confirmation_code:
@@ -158,6 +201,9 @@ cs:
           attributes:
             contact_person_phone:
               improbable_phone: není správně
+        address:
+          base:
+            inaccurate_address: Nepřesná adresa. Prosíme vyberte adresu z našeptávače.
     messages:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
 
@@ -169,3 +215,5 @@ cs:
   errors:
     messages:
       invalid_zipcode: nebylo rozpoznano.
+    authorisation:
+      not_authorised_for_resource: "K této položce nemáte oprávnění [%{action}: %{subject}]."

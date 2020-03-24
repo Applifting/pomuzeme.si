@@ -56,7 +56,6 @@
 
           <div class="input-field">
             <%= form.text_field :street_search, class: 'validate autocomplete', required: true %>
-            <ul id="searchResult" class="autocomplete-content dropdown-content geolocation-search"></ul>
             <%= form.label :street_search %>
           </div>
 
@@ -64,20 +63,22 @@
           <%= form.hidden_field :street_number %>
           <%= form.hidden_field :city %>
           <%= form.hidden_field :city_part %>
+          <%= form.hidden_field :postal_code %>
+          <%= form.hidden_field :country_code %>
           <%= form.hidden_field :geo_entry_id %>
           <%= form.hidden_field :geo_unit_id %>
           <%= form.hidden_field :geo_coord_x %>
           <%= form.hidden_field :geo_coord_y %>
 
           <div class="input-field">
-            <%= form.text_area :description, class: 'validate', required: false %>
-            <%= form.label :description %>
+            <%= form.text_area :description, class: 'validate', required: false, placeholder: '' %>
+            <%= form.label :description, 'Jak můžete pomoci?' %>
           </div>
 
           <div class="checkbox-row">
             <label>
               <%= form.check_box :terms_of_service %>
-              <span>Souhlasím s <%= link_to 'podmínkami užívání', 'podminky_dobrovolnika_pomuzemesi.pdf', target: '_blank' %></span>
+              <span>Souhlasím s podmínkami <%= link_to 'užívání', 'podminky_dobrovolnika_pomuzemesi.pdf', target: '_blank' %> a <%= link_to 'ochrany osobních údajů', 'podminky_ochrany_osobnich_udaju_pomuzemesi.pdf', target: '_blank' %></span>
             </label>
           </div>
           <div class="checkbox-row">

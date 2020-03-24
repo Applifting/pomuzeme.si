@@ -31,6 +31,56 @@
 
 en:
   activerecord:
+    models:
+      volunteer: Volunteer
+      organisation: Organisation
+      user: User
+      comment: Comment
+      request: Request
+    attributes:
+      volunteer:
+        first_name: First name
+        last_name: Last name
+        full_name: Full name
+        street_search: Search your address
+        street: Street
+        city: City
+        city_part: City part
+        zipcode: Zipcode
+        phone: Phone number
+        email: E-mail
+        confirmation_code: Confirmation code
+        confirmed?: Confirmed
+        geolocation_err: Invalid address
+        recaptcha: Recaptcha validation
+        description: How can you help?
+      organisation:
+        name: Name
+        abbreviation: Code
+        business_id_number: Tax number
+        contact_person: Contact person
+        contact_person_phone: Contact phone
+        contact_person_email: Contact email
+        created_at: Created at
+        updated_at: Updated at
+      user:
+        first_name: First name
+        last_name: Last name
+      request:
+        text: Text
+        creator: Creator
+        closer: Closer
+        coordinator: Coordinator
+        organisation: Organisation
+        required_volunteer_count: Required covolunteers count
+        state: State
+        closed_state: Closed with state
+        subscriber: Subscriber
+        subscriber_phone: Subscriber phone
+        closed_note: Closed note
+        fullfillment_date: Fullfillment date
+        closed_at: Closed at
+        state_last_updated_at: State last updated at
     errors:
       models:
         volunteer:
