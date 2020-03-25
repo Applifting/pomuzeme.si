@@ -41,6 +41,8 @@ class Volunteer < ApplicationRecord
     update confirmed_at: Time.zone.now
   end
 
+  after_commit :invalidate_volunteer_count_cache
+
   def with_existing_record
     Volunteer.unconfirmed.where(phone: normalized_phone).take || self
   end
@@ -67,5 +69,9 @@ class Volunteer < ApplicationRecord
   def self.search_nearby(encoded_location)
     latitude, longitude = encoded_location.split '#'
     with_calculated_distance Geography::Point.from_coordinates(longitude: longitude, latitude: latitude)
+  end
+
+  def invalidate_volunteer_count_cache
+    Rails.cache.delete :volunteer_count
   end
 end

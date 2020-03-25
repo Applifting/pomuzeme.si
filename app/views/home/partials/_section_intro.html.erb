@@ -1,4 +1,4 @@
-<%= image_tag asset_path('bg-wave.svg'), class: 'wave'  %>
+<%= image_tag asset_path('bg-wave.svg'), class: 'wave' %>
 
 <section class="section-intro">
   <div class="section">
@@ -6,14 +6,43 @@
       <div class="column-left">
         <h2>Proč Pomůžeme.si?</h2>
         <p>
-          Umožňujeme lidem snadno a rychle dostat svou pomoc k&nbsp;těm, kteří ji potřebují. Koordinaci dobrovolníků a neziskovek děláme efektivnější. Hledáme dobrovolníky organizacím, které jsou v&nbsp;souvislosti s&nbsp;koronavirem přetížené. Jedeme v&nbsp;tom společně. Pomůžeme.si.
+          Umožňujeme lidem snadno a rychle dostat svou pomoc k&nbsp;těm, kteří ji potřebují. Koordinaci dobrovolníků a
+          neziskovek děláme efektivnější. Hledáme dobrovolníky organizacím, které jsou v&nbsp;souvislosti s&nbsp;koronavirem
+          přetížené. Jedeme v&nbsp;tom společně. Pomůžeme.si.
         </p>
       </div>
       <div class="column-right">
-        <%= image_tag asset_path('intro.svg'), class: 'intro-image'  %>
+        <%= image_tag asset_path('intro.svg'), class: 'intro-image' %>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="section-intro section-counts">
+  <div class="section">
+    <h2 class="counts-header">Kolik nás už pomáhá?</h2>
+
+    <div class="supporters-counts-wrapper">
+      <div class="supporters-counts-item">
+        <div class="count">
+          <% cache :volunteer_count do %>
+            <%= Volunteer.confirmed.size %>
+          <% end %>
+        </div>
+        <div class="count-label">Registrovaných dobrovolníků</div>
+      </div>
+
+      <div class="supporters-counts-item">
+        <div class="count">
+          <% cache :organisation_count do %>
+            <%= Organisation.all.size %>
+          <% end %>
+        </div>
+        <div class="count-label">Dobročinných organizací</div>
       </div>
     </div>
   </div>
 </section>
 
-<%= image_tag asset_path('bg-wave.svg'), class: 'wave bottom'  %>
+<%= image_tag asset_path('bg-wave.svg'), class: 'wave bottom' %>

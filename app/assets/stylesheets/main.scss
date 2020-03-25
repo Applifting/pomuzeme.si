@@ -120,6 +120,10 @@ h2 {
     font-weight: bold;
     font-size: 24px;
   }
+
+  @include sm {
+    font-size: 20px;
+  }
 }
 
 h3 {
@@ -353,8 +357,92 @@ h4 {
       }
     }
 
-    button {
+  }
 
+}
+
+.section-counts {
+  padding-top: 0;
+
+  > * {
+    overflow-x: unset;
+  }
+
+  .counts-header {
+    margin-top: 0;
+    @include md {
+      text-align: center;
+    }
+  }
+
+  .supporters-counts-wrapper {
+    display: flex;
+    font-family: $title-font;
+    margin-top: 32px;
+
+    @include md {
+      flex-wrap: wrap;
+      text-align: center;
+      justify-content: center;
+    }
+
+
+    .supporters-counts-item {
+      display: flex;
+      align-items: center;
+
+      @include md {
+        flex-direction: column;
+      }
+
+      &:first-of-type {
+        margin: 0 140px 0 0;
+
+        @include lg {
+          margin: 0 64px 0 0;
+        }
+
+        @include md {
+          margin: 0 32px 0 0;
+        }
+
+        @include sm {
+          margin: 0 0 32px;
+        }
+
+      }
+
+      .count {
+        font-size: 64px;
+        line-height: 120%;
+        margin-right: 24px;
+
+        @include lg {
+          font-size: 48px;
+          line-height: 120%;
+          margin-right: 24px;
+        }
+
+        @include md {
+          margin-right: 0;
+
+        }
+      }
+
+      .count-label {
+        padding-left: 24px;
+        border-left: 1px solid $secondary-button-color;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 160%;
+        max-width: 200px;
+
+        @include md {
+          border-left: none;
+          padding-left: 0;
+          font-size: 16px
+        }
+      }
     }
   }
 }
