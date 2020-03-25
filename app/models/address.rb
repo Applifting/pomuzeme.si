@@ -42,6 +42,10 @@ class Address < ApplicationRecord
   private
 
   def initialize_defaults
-    self.country_code = 'cz'
+    self.country_code ||= 'cz'
+    self.geo_unit_id ||= geo_entry_id
+    self.coordinate ||= Geography::Point.from_coordinates latitude: latitude,
+                                                          longitude: longitude
+    self.geo_provider ||= :google_places
   end
 end

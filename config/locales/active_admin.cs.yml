@@ -124,6 +124,7 @@ cs:
       recruitment_closed: Uzavřený
       recruitment_all: Vše
       recruitment_unassigned: Bez koordinátora
+      user_organisation_requests: Moje organizace
       closed: uzavřené
     index_list:
       table: "Tabulka"
