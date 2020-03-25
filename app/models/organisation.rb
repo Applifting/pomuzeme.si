@@ -28,6 +28,12 @@ class Organisation < ApplicationRecord
     "#{name} ~ #{abbreviation}"
   end
 
+  def self.cached_count
+    Rails.cache.fetch :organisation_count do
+      Organisation.all.size
+    end
+  end
+
   private
 
   def upcase_abbreviation

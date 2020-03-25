@@ -20,6 +20,12 @@ class Volunteer < ApplicationRecord
     Volunteer.unconfirmed.where(phone: normalized_phone).take || self
   end
 
+  def self.cached_count
+    Rails.cache.fetch :volunteer_count do
+      Volunteer.confirmed.size
+    end
+  end
+
   private
 
   def location
