@@ -114,3 +114,6 @@ gem 'devise-i18n'
 
 # geocoding
 gem 'geocoder'
+
+# email provider
+gem 'sendgrid-ruby'
