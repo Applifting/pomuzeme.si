@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   namespace :docs do
     get '/partner-kit', to: redirect { 'https://drive.google.com/drive/folders/1w9_PVRbZ9VvE10zY0sR26f6SlmLq0xZn' }
-    get '/letak-linky-pomoci', to: redirect { 'htts://d113nbfwgx4fgo.cloudfront.net/leaflet-diakonie.pdf' }
+    get '/letak-linky-pomoci', to: redirect { 'https://d113nbfwgx4fgo.cloudfront.net/leaflet-diakonie.pdf' }
   end
 
   namespace :api do
