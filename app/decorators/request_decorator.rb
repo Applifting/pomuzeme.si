@@ -8,11 +8,11 @@ class RequestDecorator < ApplicationDecorator
   end
 
   def full_address
-    [full_street, [address.city_part, address.city].uniq, address.postal_code].flatten.compact.join(', ')
+    [full_street, [address&.city_part, address&.city].uniq, address&.postal_code].flatten.compact.join(', ')
   end
 
   def full_street
-    [address.street, address.street_number].uniq.compact.join(' ')
+    [address&.street, address&.street_number].uniq.compact.join(' ')
   end
 
   private

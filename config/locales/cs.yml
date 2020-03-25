@@ -140,16 +140,18 @@ cs:
         closed_note: Poznámka k uzavření
         closed_state: Uzavřeno stavem
         coordinator: Koordinátor
+        coordinator_id: Koordinátor
         creator: Vytvořil
         full_address: Adresa
+        update_address: Nová adresa
         fullfillment_date: Požadované datum vyřízení
         organisation: Organizace
         required_volunteer_count: Požadovaný počet dobrovolníků
         accepted_volunteers_count: Potvrzení / požadovaní dobrovolníci
         state: Stav
         state_last_updated_at: Stav naposledy aktualizován
-        subscriber: Odběratel
-        subscriber_phone: Telefon odběratele
+        subscriber: Příjemce
+        subscriber_phone: Telefon příjemce
         states:
           created: Vytvořeno
           searching_capacity: Naplňování kapacity

@@ -14,6 +14,7 @@ module ActiveAdmin
               label_text(name, options)
             end
             input(extract_options(name, options))
+            hint(options)
           end
         end
       end
@@ -22,6 +23,12 @@ module ActiveAdmin
 
       def label_text(name, options)
         options[:label] ? normalize_name(options[:label]) : normalize_name(name)
+      end
+
+      def hint(options)
+        return unless options[:hint]
+
+        para options[:hint], class: 'inline-hints'
       end
 
       def normalize_name(name)
@@ -42,10 +49,10 @@ module ActiveAdmin
 
       def extract_options(name, options)
         base = {
-            type:  options[:type] || 'text',
-            id:    options[:id] || default_id(name),
-            name:  options[:name] || default_name(name),
-            class: options[:class]
+          type: options[:type] || 'text',
+          id: options[:id] || default_id(name),
+          name: options[:name] || default_name(name),
+          class: options[:class]
         }
         options.except(:id, :class).merge(base)
       end
