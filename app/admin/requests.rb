@@ -92,7 +92,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     f.inputs 'Koordinace' do
       f.input :state if resource.persisted?
       f.input :organisation, as: :select,
-                             collection: Organisation.where(id: current_user.coordinating_organisations.pluck(:id)),
+                             collection: current_user.coordinating_organisations.map { |o| [o.name, o.id] },
                              include_blank: false
       f.input :coordinator_id, as: :select, collection: current_user.organisation_colleagues
       f.input :closed_note, as: :text if resource.persisted?
