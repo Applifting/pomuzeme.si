@@ -6,8 +6,6 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
 
   menu priority: 2
 
-  scope_to :current_user, association_method: :coordinator_organisation_requests, unless: -> { current_user.admin? }
-
   permit_params :closed_note, :coordinator_id, :created_by_id, :fullfillment_date, :organisation_id,
                 :required_volunteer_count, :state, :subscriber, :subscriber_phone, :text,
                 address_attributes: %i[street_number street city city_part postal_code country_code
@@ -17,7 +15,15 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   filter :text
   filter :required_volunteer_count
   filter :state, as: :select, collection: Request.states
+  filter :organisation, as: :select, collection: proc { Organisation.user_group_organisations(current_user) }
 
+  # Scopes
+  scope :user_organisation_requests, default: true do |scope|
+    scope.with_organisations(current_user.coordinating_organisations.pluck(:id))
+  end
+  scope :all
+
+  # Controller
   controller do
     def scoped_collection
       super.includes(:address)
@@ -40,20 +46,36 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   end
 
   show do
-    panel resource.text do
-      attributes_table_for resource do
-        row :id
-        row :text
-        row :full_address
-        row :required_volunteer_count
-        row :fullfillment_date
-        row :coordinator
-        row :state
-        row :state_last_updated_at
+    div style: 'width: 600px' do
+      panel resource.text do
+        attributes_table_for resource do
+          row :address
+          row :fullfillment_date
+        end
       end
-    end
-    panel nil, style: 'width: 580px' do
-      render partial: 'volunteers'
+      panel '' do
+        attributes_table_for resource do
+          row :id
+          row :organisation
+          row :required_volunteer_count
+          row :coordinator
+          row :state
+          row :state_last_updated_at
+        end
+      end
+      panel 'Osobní údaje' do
+        if can?(:manage, resource)
+          attributes_table_for resource do
+            row :subscriber
+            row :subscriber_phone
+          end
+        else
+          para 'Tyto údaje může zobrazit pouze koordinátor organizace, která poptávku spravuje.', class: :small
+        end
+      end
+      panel nil, style: 'width: 580px' do
+        render partial: 'volunteers' if can?(:manage, resource)
+      end
     end
     active_admin_comments
   end
@@ -73,8 +95,8 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
       f.input :subscriber_phone, input_html: { maxlength: 13 }
       address_label = proc { |type| I18n.t("activerecord.attributes.request.#{type}") }
       custom_input :full_address, class: 'geocomplete',
-                                  label: object.new_record? ? address_label['full_address'] : address_label['update_address'],
-                                  hint: ("Současná adresa: #{f.object.decorate.full_address}" if resource.address)
+                                  label: object.new_record? ? (address_label['full_address'] + ' *') : address_label['update_address'],
+                                  hint: ("Současná adresa: #{f.object.address}" if resource.address)
 
       f.inputs for: [:address, f.object.address || f.object.build_address] do |address_form|
         address_form.input :street_number, as: :hidden
@@ -91,9 +113,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
 
     f.inputs 'Koordinace' do
       f.input :state if resource.persisted?
-      f.input :organisation, as: :select,
-                             collection: current_user.coordinating_organisations.map { |o| [o.name, o.id] },
-                             include_blank: false
+      f.input :organisation, as: :select, collection: Organisation.user_group_organisations(current_user)
       f.input :coordinator_id, as: :select, collection: current_user.organisation_colleagues
       f.input :closed_note, as: :text if resource.persisted?
       f.input :created_by_id, as: :hidden, input_html: { value: current_user.id }

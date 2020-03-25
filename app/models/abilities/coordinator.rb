@@ -2,7 +2,7 @@ module Abilities
   module Coordinator
     def add_coordinator_ability(user)
       can :read, ActiveAdmin::Page, name: 'Dashboard'
-      can %i[index read], [Organisation, OrganisationDecorator]
+      can %i[index read], [Organisation, OrganisationDecorator], id: Organisation.user_group_organisations(user).pluck(:id)
       can :update, [Organisation, OrganisationDecorator], id: user.coordinating_organisations.pluck(:id)
       can %i[read], [User, UserDecorator], id: user.coordinators_in_organisations.pluck(:id)
 
@@ -30,8 +30,10 @@ module Abilities
 
     def can_manage_requests(user)
       can :create, Request
-      can :manage, [RequestedVolunteer, RequestedVolunteerDecorator], request_id: user.coordinator_organisation_requests.pluck(:id)
-      can :manage, [Request, RequestDecorator], id: user.coordinator_organisation_requests.pluck(:id)
+      can %i[index read], [Request, RequestDecorator], organisation_id: Organisation.user_group_organisations(user).pluck(:id)
+      can :manage, [Request, RequestDecorator], organisation_id: user.coordinating_organisations.pluck(:id)
+
+      can :manage, [RequestedVolunteer, RequestedVolunteerDecorator], request: { organisation_id: Organisation.user_group_organisations(user).pluck(:id) }
     end
   end
 end

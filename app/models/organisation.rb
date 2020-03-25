@@ -22,9 +22,12 @@ class Organisation < ApplicationRecord
   validates :contact_person_phone, presence: true
   validates :contact_person_phone, phony_plausible: true, uniqueness: true
 
+  # Hooks
   before_validation :upcase_abbreviation
-
   after_create :create_coordinator
+
+  # Scopes
+  scope :user_group_organisations, ->(user) { joins(groups: :organisation_groups).where(organisation_groups: { group_id: user.coordinating_groups.pluck(:id) }).distinct }
 
   def to_s
     "#{name} ~ #{abbreviation}"
