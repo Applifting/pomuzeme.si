@@ -17,7 +17,6 @@ ActiveAdmin.register Recruitment do
   end
 
   index do
-    column(:group) if current_user.admin?
     column :volunteer
     column :address do |resource|
       resource.volunteer&.addresses&.first
@@ -27,6 +26,7 @@ ActiveAdmin.register Recruitment do
     column :is_exclusive
     column :coordinator
     column :comments
+    column(:group) if current_user.admin?
     column :created_at
     column :updated_at
 

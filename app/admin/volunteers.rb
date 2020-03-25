@@ -62,12 +62,14 @@ ActiveAdmin.register Volunteer do
     column :full_name
     column :phone
     column :email
-    column :full_address
+    column :address
     if params[:q] && params[:q][:search_nearby]
       params[:order] = 'distance_meters_asc'
 
       # we'll alias this column to `distance_meters` in our scope so it can be sorted by
-      column :distance, sortable: 'distance_meters', &:distance_in_km
+      column :distance, sortable: 'distance_meters' do |resource|
+        resource.address.distance_in_km(resource.distance_meters)
+      end
     end
     column :confirmed? if current_user.admin?
     actions
@@ -79,7 +81,7 @@ ActiveAdmin.register Volunteer do
         row :full_name
         row :phone
         row :email
-        row :full_address
+        row :address
         row :description
         row :created_at
         row :updated_at

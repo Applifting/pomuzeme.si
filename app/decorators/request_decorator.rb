@@ -1,18 +1,11 @@
 class RequestDecorator < ApplicationDecorator
+  decorates_association :address
   delegate_all
 
   def volunteer_params
     puts object.address
     puts object.address.coordinate
     { request_id: object.id }.merge search_params
-  end
-
-  def full_address
-    [full_street, [address&.city_part, address&.city].uniq, address&.postal_code].flatten.compact.join(', ')
-  end
-
-  def full_street
-    [address&.street, address&.street_number].uniq.compact.join(' ')
   end
 
   private

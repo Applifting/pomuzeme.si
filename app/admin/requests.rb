@@ -18,10 +18,17 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   filter :required_volunteer_count
   filter :state, as: :select, collection: Request.states
 
+  controller do
+    def scoped_collection
+      super.includes(:address)
+    end
+  end
+
   index do
     id_column
     column :state
     column :text
+    column :address
     column :accepted_volunteers_count do |resource|
       "#{resource.requested_volunteers.accepted.count} / #{resource.required_volunteer_count}"
     end

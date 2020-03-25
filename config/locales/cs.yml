@@ -70,6 +70,7 @@ cs:
         email: E-mail
         confirmation_code: Ověřovací kód
         addresses: Adresy
+        address: Adresa
         full_address: Adresa
         confirmed?: Potvrzen?
         description: Jak může pomoci
@@ -85,6 +86,7 @@ cs:
         address: Adresa
         group: Skupina
         coordinator_id: Koordinátor
+        coordinator: Koordinátor
         recruitment_status: Stav náboru
         source: Zdroj dobrovolníka
         comments: Poznámky
@@ -133,6 +135,7 @@ cs:
         updated_at: Upraveno
       volunteer_label:
         label: Štítek
+        name: Štítek
       request:
         text: Popis
         closer: Uzavřel
@@ -142,6 +145,7 @@ cs:
         coordinator: Koordinátor
         coordinator_id: Koordinátor
         creator: Vytvořil
+        address: Adresa
         full_address: Adresa
         update_address: Nová adresa
         fullfillment_date: Požadované datum vyřízení
