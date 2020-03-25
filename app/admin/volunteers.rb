@@ -1,26 +1,76 @@
 ActiveAdmin.register Volunteer do
   decorate_with VolunteerDecorator
 
-  permit_params :description
+  permit_params :description, :first_name, :last_name, :phone, :email
 
-  # Scopes
-  scope :all, default: true
+  scope :volunteer_verified, default: true do |scope|
+    scope.verified_by(current_user.organisation_group.id)
+  end
+  scope :volunteer_public do |scope|
+    scope.not_recruited_by(current_user.organisation_group.id)
+  end
+  # scope
+  scope :volunteer_all, default: true do |scope|
+    current_user.admin? ? scope : scope.available_for(current_user.organisation_group.id)
+  end
   scope :unconfirmed, if: -> { current_user.admin? }
   scope :confirmed, if: -> { current_user.admin? }
 
   # Filters
-  filter :phone
-  filter :street
-  filter :city_part
-  filter :city
-  filter :description
+  filter :full_name_cont, label: 'Jméno / příjmení'
+  filter :has_labels, label: 'Štítky',
+                      as: :select, multiple: true,
+                      collection: proc { OptionsWrapper.wrap (Label.managable_by(current_user).map { |i| [i.name, i.id] }), params, :has_labels },
+                      selected: 1,
+                      input_html: { style: 'height: 100px' }
+  filter :phone_or_email_cont, label: 'Telefon / email'
+  filter :group_volunteers_coordinator_id_eq, as: :select,
+                                              collection: proc { OptionsWrapper.wrap (current_user.organisation_colleagues.map { |i| [i.to_s, i.id] }), params, :group_volunteer_coordinator_eq },
+                                              label: 'Koordinátor dobrovolníka'
+  filter :search_nearby, as: :hidden, label: 'Location'
+  filter :address_search_input, as: :address_search, label: 'Vzdálenost od adresy'
+
+  # Batch actions
+  config.batch_actions = true
+  # Form args has to be inside lambda due to calling of current_user
+
+  batch_action :assign_request, confirm: I18n.t('active_admin.batch_actions.assign_request.confirmation') do |ids|
+    request = referer_request
+    Admin::Requests::VolunteerAssigner.new(current_user, request, Volunteer.where(id: ids)).perform
+    redirect_to admin_organisation_request_path request.id
+  rescue StandardError => e
+    redirect_to admin_organisation_request_path(request.id), alert: e.message
+  end
+
+  controller do
+    include ActiveAdmin::VolunteersHelper
+
+    def scoped_collection
+      scoped_request ? super.where.not(id: Volunteer.assigned_to_request(scoped_request.id)) : super
+    end
+  end
 
   index do
+    javascript_for(*location_autocomplete(callback: 'InitFilterAutocomplete'))
+
+    if scoped_request
+      para I18n.t('active_admin.batch_actions.assign_request.title', request: scoped_request.title)
+      para I18n.t('active_admin.batch_actions.assign_request.description'), class: :small
+      selectable_column
+    end
     id_column
     column :full_name
     column :phone
     column :email
-    column :full_address
+    column :address
+    if params[:q] && params[:q][:search_nearby]
+      params[:order] = 'distance_meters_asc'
+
+      # we'll alias this column to `distance_meters` in our scope so it can be sorted by
+      column :distance, sortable: 'distance_meters' do |resource|
+        resource.address.distance_in_km(resource.distance_meters)
+      end
+    end
     column :confirmed? if current_user.admin?
     actions
   end
@@ -31,11 +81,16 @@ ActiveAdmin.register Volunteer do
         row :full_name
         row :phone
         row :email
-        row :full_address
+        row :address
         row :description
         row :created_at
         row :updated_at
       end
+    end
+
+    panel nil, style: 'width: 580px' do
+      render partial: 'recruitment'
+      render partial: 'labels'
     end
   end
 

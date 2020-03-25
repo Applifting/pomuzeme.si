@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 class Organisation < ApplicationRecord
   resourcify
 
   # Associations
-  has_many :roles
   has_many :coordinators,
-           -> { where(roles: { name: :coordinator }) },
+           -> { joins(:roles).where(roles: { name: :coordinator }) },
            class_name: :User,
            through: :roles,
            source: :users
   has_many :organisation_groups
   has_many :groups, through: :organisation_groups
+  has_many :requests
 
   # Validations
   validates :name, presence: true
@@ -20,9 +22,13 @@ class Organisation < ApplicationRecord
   validates :contact_person_phone, presence: true
   validates :contact_person_phone, phony_plausible: true, uniqueness: true
 
+  # Hooks
   before_validation :upcase_abbreviation
   after_create :create_coordinator
   after_commit :invalidate_organisation_count_cache
+
+  # Scopes
+  scope :user_group_organisations, ->(user) { joins(groups: :organisation_groups).where(organisation_groups: { group_id: user.coordinating_groups.pluck(:id) }).distinct }
 
   def to_s
     "#{name} ~ #{abbreviation}"

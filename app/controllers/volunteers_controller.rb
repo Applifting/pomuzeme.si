@@ -3,11 +3,14 @@ class VolunteersController < ApplicationController
 
   def register
     volunteer = Volunteer.new(volunteer_params).with_existing_record
+    address = volunteer.addresses.build address_with_coordinate
+
     if resolve_recaptcha(volunteer) && volunteer.valid? && agreements_granted?(volunteer) && save_and_send_code(volunteer)
       bind_volunteer_with_organisation_group(volunteer) if @partner_signup_group
       render 'volunteer/register_success'
     else
-      render 'volunteer/register_error', locals: { volunteer: volunteer }
+      Rails.logger.error address.errors.messages
+      render 'volunteer/register_error', locals: { volunteer: volunteer, address: address }
     end
   end
 
@@ -41,10 +44,20 @@ class VolunteersController < ApplicationController
   private
 
   def volunteer_params
+    params.require(:volunteer).permit(:first_name, :last_name, :phone, :email, :description)
+  end
+
+  def address_params
     params.require(:volunteer).permit(
-      :first_name, :last_name, :street, :city, :street_number,
-      :city_part, :geo_entry_id, :geo_unit_id, :geo_coord_x, :geo_coord_y, :phone, :email, :description
+        :street, :city, :street_number, :city_part, :postal_code, :country_code, :geo_entry_id, :geo_unit_id, :geo_coord_x, :geo_coord_y
     )
+  end
+
+  def address_with_coordinate
+    coordinate = Geography::Point.from_coordinates latitude: address_params[:geo_coord_y].to_d,
+                                                   longitude: address_params[:geo_coord_x].to_d
+    address_params.except(:geo_coord_x, :geo_coord_y).merge(coordinate: coordinate,
+                                                            geo_provider: 'google_places')
   end
 
   def confirm_params

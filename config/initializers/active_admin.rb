@@ -1,4 +1,5 @@
 # require custom Arbre components from app/components/
+Dir[Rails.root.join('app/components/active_admin/inputs/*.rb')].each { |f| require f }
 Dir[Rails.root.join('app/components/active_admin/views/*.rb')].sort.each { |f| require f }
 
 ActiveAdmin.setup do |config|

@@ -14,10 +14,25 @@
   background-color: green;
 }
 
-p.red {
-  color: red;
+p {
+  &.red {
+    color: red;
+  }
+  &.small {
+    font-size: 12px;
+  }
 }
 
 a:hover {
   color: red;
+}
+
+.batch_actions_selector {
+  padding: 10px 10px 0 0;
+  float: left;
+}
+
+.table_tools {
+  display: flex;
+  flex-direction: column-reverse;
 }

@@ -54,18 +54,28 @@ module SeedHelper
 
       volunteer.assign_attributes first_name: args[:first_name],
                                   last_name: args[:last_name],
-                                  zipcode: args[:zipcode],
-                                  city: args[:city],
-                                  city_part: args[:city],
-                                  street: args[:street],
-                                  street_number: args[:street],
                                   phone: args[:phone],
                                   email: args[:email],
-                                  geo_entry_id: 42, # fake data below, maybe make robust later
-                                  geo_unit_id: 42,
-                                  geo_coord_x: 42,
-                                  geo_coord_y: 42
+                                  confirmed_at: Time.zone.now
+
+      volunteer.addresses.build city: args[:city],
+                                city_part: args[:city],
+                                street: args[:street],
+                                street_number: args[:street],
+                                postal_code: args[:zipcode],
+                                geo_entry_id: 42, # fake data below, maybe make robust later
+                                geo_unit_id: 42,
+                                geo_provider: Address.geo_providers[:cadstudio],
+                                coordinate: Geography::Point.from_coordinates(latitude: 50.0941253, longitude: 14.4548767)
       volunteer.save!
     end
+  end
+
+  def self.create_request(**args)
+    assigned_volunteers_count = rand(0..args[:required_volunteer_count].to_i)
+
+    request = Request.new(args)
+    request.volunteers = Volunteer.order("RANDOM()").limit(assigned_volunteers_count)
+    request.save!
   end
 end

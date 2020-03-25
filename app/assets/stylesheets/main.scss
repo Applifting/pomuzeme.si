@@ -80,6 +80,10 @@ img {
   &.secondary {
     background-color: $secondary-button-color;
   }
+
+  &:disabled {
+    background: silver;
+  }
 }
 
 .wave {
@@ -532,7 +536,7 @@ h4 {
   }
 
   a {
-    margin-bottom: 96px;
+    margin-bottom: 30px;
   }
 }
 
@@ -659,4 +663,9 @@ h4 {
   top: 46px;
   max-height: 250px;
   transform-origin: 0px 0px;
+}
+
+// Somebody please explain how to fix this
+.pac-container {
+  z-index: 9999;
 }

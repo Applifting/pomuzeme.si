@@ -31,6 +31,10 @@ cs:
         ends_with: "Končí na"
         greater_than: "Větší než"
         less_than: "Menší než"
+    search_status:
+      headline: Výsledky hledání
+      current_scope: scope
+      current_filters: filtry
     status_tag:
       "yes": "Ano"
       "no": "Ne"
@@ -69,6 +73,11 @@ cs:
       action_label: "%{title}"
       labels:
         destroy: "Vymazat"
+        assign_request: 'Přiřadit požadavek'
+      assign_request:
+        title: "Vybíráte dobrovolníky pro poptávku: %{request}"
+        description: seznam neobsahuje dobrovolníky, kteří jsou již v poptávce zařazeni
+        confirmation: "Opravdu chcete přidat dobrovolníky do poptávky?"
     comments:
       resource_type: "Typ zdroje"
       author_type: "Typ autora"
@@ -106,8 +115,24 @@ cs:
         sign_in_with_omniauth_provider: "Přihlásit se přes %{provider}"
     access_denied:
       message: "Nemáte oprávnění k provedení této akce."
+    scopes:
+      all: Vše
+      volunteer_all: Všichni
+      volunteer_verified: Ověření
+      volunteer_public: Veřejní
+      recruitment_in_progress: Otevřený
+      recruitment_closed: Uzavřený
+      recruitment_all: Vše
+      recruitment_unassigned: Bez koordinátora
+      user_organisation_requests: Moje organizace
+      closed: uzavřené
     index_list:
       table: "Tabulka"
       block: "Seznam"
       grid: "Tabulka"
       blog: "Blog"
+    search_status:
+      headline: "Stav hledani:"
+      current_scope: "Scope:"
+      current_filters: "Aktualni filtry:"
+      no_current_filters: "Zadne"

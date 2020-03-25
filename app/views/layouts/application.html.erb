@@ -84,6 +84,7 @@
   </script>
 <% end %>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAPS_API_KEY'] %>&libraries=places&callback=signUpLocationCallback"></script>
   <script>
       $(document).ready(function() {
           M.CharacterCounter.init(document.querySelectorAll('#validation-code'));

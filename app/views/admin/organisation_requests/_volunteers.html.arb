@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+div class: 'title h4' do
+  span 'Dobrovolníci'
+  span link_to('', admin_volunteers_path(params: resource.decorate.volunteer_params), class: 'action add', data: { turbolinks: false }) if can?(:manage, Request)
+end
+
+table_for resource.requested_volunteers.includes(:volunteer).order(:state).map(&:decorate) do
+  column :first_name
+  column :last_name
+  column :phone
+  column :state
+  column 'Akce', class: 'centered', &:actions
+end

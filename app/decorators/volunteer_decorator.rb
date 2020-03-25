@@ -1,16 +1,13 @@
 class VolunteerDecorator < ApplicationDecorator
+  decorates_association :addresses
   delegate_all
 
   def confirmed?
     object.confirmed?
   end
 
-  def full_address
-    [full_street, [object.city_part, object.city].uniq, object.zipcode].flatten.compact.join(', ')
-  end
-
-  def full_street
-    [object.street, object.street_number].uniq.compact.join(' ')
+  def address
+    @address ||= addresses[0]
   end
 
   def full_name
