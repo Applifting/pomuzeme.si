@@ -132,7 +132,7 @@ h2 {
   font-weight: 500;
   font-size: 38px;
   line-height: 150%;
-  margin: 16px 0;
+  margin: 16px 0px;
   color: $heading-color;
 
   @include lg {
@@ -182,6 +182,20 @@ h5 {
     font-size: 16px;
   }
 
+}
+
+.body1 {
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 150%;
+  color: $text-color;
+
+  @include lg {
+    font-size: 16px;
+    line-height: 160%;
+  }
 }
 
 .main-header {
@@ -272,8 +286,6 @@ h5 {
   }
 }
 
-.section-orgs {
-  display: flex;
 .button-group {
   display: flex;
   align-items: stretch;
@@ -294,7 +306,7 @@ h5 {
   }
 }
 
-
+.section-news {
   background-color: $background-dark;
 
   .news-content {
@@ -320,11 +332,14 @@ h5 {
       }
     }
 
+    .created-at {
+      color: $secondary-button-color;
+    }
+
     .article-link-wrapper {
       margin-bottom: 2rem;
-
-      .createdAt {
-        color: $secondary-button-color;
+      @include lg {
+        margin-bottom: 1rem;
       }
 
       h5 {
@@ -336,8 +351,144 @@ h5 {
       }
     }
 
+    .news-link-wrapper {
+      margin-bottom: 2rem;
+      @include lg {
+        margin-bottom: 1rem;
+      }
+
+      a {
+        color: $text-color;
+
+        h3 {
+          margin: 0
+        }
+      }
+    }
+
 
   }
+}
+
+.main-footer {
+  background-color: $background-dark;
+  padding-top: 40px;
+
+  .footer-content {
+    display: flex;
+    padding: 0 34px;
+
+    @include lg {
+      display: block;
+      padding: 0 34px;
+    }
+
+    @include sm {
+      padding: 0 34px;
+    }
+
+    .column-left {
+      width: 50%;
+      padding-right: 64px;
+
+      @include lg {
+        padding-right: 0;
+        padding-bottom: 30px;
+        width: 100%;
+      }
+    }
+
+    .column-right {
+      width: 50%;
+      padding-left: 64px;
+      border-left: 1px solid $secondary-button-color;
+      padding-bottom: 62px;
+      position: relative;
+
+      @include lg {
+        padding: 0;
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid $secondary-button-color;
+      }
+
+      .rocket {
+        position: absolute;
+        top: 24px;
+        right: 34px;
+
+        @include sm {
+          top: 60px;
+          right: 50%;
+          transform: translateX(50%);
+        }
+      }
+
+      h4, p, div {
+        position: relative;
+      }
+
+      h4 {
+        @include lg {
+          margin-top: 46px;
+        }
+      }
+    }
+
+    h4 {
+      @include lg {
+        margin-bottom: 30px;
+      }
+    }
+
+    .body1 {
+      margin: 0 0 16px;
+
+      @include lg {
+        margin-bottom: 22px;
+      }
+    }
+
+    .contact-item {
+      margin: 8px 0;
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      line-height: 160%;
+
+      img {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .copy {
+    text-align: center;
+    padding: 20px 0 36px;
+
+    @include lg {
+      text-align: left;
+      padding-left: 34px;
+    }
+
+    a {
+      color: #3F3F3F;
+      font-size: 18px;
+      line-height: 150%;
+    }
+  }
+}
+
+.geolocation-search {
+  tab-index: 0;
+  display: block;
+  opacity: 1;
+  transform: scaleX(1) scaleY(1);
+  width: 352px;
+  left: 0px;
+  top: 46px;
+  max-height: 250px;
+  transform-origin: 0px 0px;
 }
 
 // Somebody please explain how to fix this
