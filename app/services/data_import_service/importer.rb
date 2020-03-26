@@ -9,8 +9,9 @@ module DataImportService
 
     attr_accessor :raw_lines
 
-    def initialize(filename, organisation_group)
+    def initialize(filename, organisation_group, output_file = DataImportService::ArrayToCsv::OUTPUT)
       @filename    = filename
+      @output_file = output_file
       @group       = organisation_group
       @volunteer   = nil
       @raw_lines   = []
@@ -24,9 +25,10 @@ module DataImportService
     def call
       read_lines
       import_data
-      @output.to_csv if @output.present?
 
-      destroy_data if Rails.env.development?
+      # destroy_data if Rails.env.development?
+
+      @output.to_csv(@output_file) if @output.present?
     end
 
     def import_data

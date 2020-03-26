@@ -1,9 +1,11 @@
 module DataImportService
   module ArrayToCsv
+    OUTPUT = 'tmp/import_result.csv'
+
     refine Array do
       require 'csv'
 
-      def to_csv(csv_filename = 'hash.csv')
+      def to_csv(csv_filename = OUTPUT)
         CSV.open(csv_filename, 'wb') do |csv|
           keys = first.keys
           # header_row
