@@ -10,9 +10,9 @@ module Api
       def perform
         validate_params!
         validate_access!
-        request.with_lock do
+        @request.with_lock do
           validate_capacity!
-          @volunteer_request.update! state: resolve_state
+          requested_volunteer.update! state: resolve_state
         end
       end
 
@@ -33,7 +33,7 @@ module Api
       end
 
       def validate_access!
-        return if @volunteer_request.present?
+        return if requested_volunteer.present?
 
         raise AuthorisationError
       end
