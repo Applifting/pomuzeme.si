@@ -1,8 +1,6 @@
 ActiveAdmin.register_page 'SuperAdmin' do
   menu priority: 1
 
-  # permit_params :import_data
-
   page_action :import_data, method: :post do
     temp_file = params[:import][:filename]
     group     = Group.find(params[:import][:group_id])
