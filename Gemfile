@@ -76,12 +76,13 @@ group :test do
   # One liner matchers
   gem 'shoulda-matchers', '~> 4.3'
   # Fake data
-  gem 'ffaker', '~> 2.14'
 end
 
 group :production do
   gem 'rails_autoscale_agent'
 end
+
+gem 'ffaker', '~> 2.14'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
