@@ -9,9 +9,9 @@ module DataImportService
 
     attr_accessor :raw_lines
 
-    def initialize(filename, group)
+    def initialize(filename, organisation_group)
       @filename    = filename
-      @group       = group
+      @group       = organisation_group
       @raw_lines   = []
       @output      = []
       @row_output  = nil

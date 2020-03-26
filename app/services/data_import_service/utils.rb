@@ -6,10 +6,15 @@ module DataImportService
       rescue StandardError => e
         puts e
         puts e.backtrace[0..20]
-        raise ActiveRecord::Rollback if @row_output.keys.any? { |k| k.to_s.start_with? 'error' }
+        Raven.capture_exception e
+        raise ActiveRecord::Rollback
       ensure
-        @output << @row_output
+        @output << @row_output if error_present?
       end
+    end
+
+    def error_present?
+      @row_output.any? { |k, v| k.start_with?('error') && v.present? }
     end
 
     def read_lines
