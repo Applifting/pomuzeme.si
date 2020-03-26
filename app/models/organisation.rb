@@ -9,9 +9,9 @@ class Organisation < ApplicationRecord
            class_name: :User,
            through: :roles,
            source: :users
-  has_many :organisation_groups
+  has_many :organisation_groups, dependent: :destroy
   has_many :groups, through: :organisation_groups
-  has_many :requests
+  has_many :requests, dependent: :destroy
 
   # Validations
   validates :name, presence: true
