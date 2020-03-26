@@ -3,8 +3,6 @@ class RequestDecorator < ApplicationDecorator
   delegate_all
 
   def volunteer_params
-    puts object.address
-    puts object.address.coordinate
     { request_id: object.id }.merge search_params
   end
 

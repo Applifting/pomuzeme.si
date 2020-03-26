@@ -108,12 +108,15 @@ gem 'activeadmin'
 gem 'arctic_admin'
 gem 'draper'
 
+# geocoding
+gem 'geocoder'
+
 # localisation
 gem 'rails-i18n'
 gem 'devise-i18n'
 
-# geocoding
-gem 'geocoder'
-
 # email provider
 gem 'sendgrid-ruby'
+
+# data management
+gem 'csv'

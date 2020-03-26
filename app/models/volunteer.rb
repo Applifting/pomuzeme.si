@@ -8,11 +8,11 @@ class Volunteer < ApplicationRecord
 
   # Associations
   has_many :addresses, as: :addressable
-  has_many :group_volunteers
+  has_many :group_volunteers, dependent: :delete_all
   has_many :groups, through: :group_volunteers
-  has_many :volunteer_labels
+  has_many :volunteer_labels, dependent: :delete_all
   has_many :labels, through: :volunteer_labels
-  has_many :requested_volunteers
+  has_many :requested_volunteers, dependent: :delete_all
   has_many :requests, through: :requested_volunteers
 
   # normalize phone format and add default czech prefix if missings
@@ -27,7 +27,7 @@ class Volunteer < ApplicationRecord
   # Scopes
   scope :with_calculated_distance, lambda { |center_point|
     joins(:addresses).joins(format(NEAREST_ADDRESSES_SQL, longitude: center_point.longitude, latitude: center_point.latitude))
-        .select('volunteers.*', 'ST_Distance(addresses.coordinate, ref_geom) as distance_meters')
+                     .select('volunteers.*', 'ST_Distance(addresses.coordinate, ref_geom) as distance_meters')
   }
   scope :with_labels, ->(label_ids) { joins(:volunteer_labels).where(volunteer_labels: { label_id: label_ids }).distinct }
   scope :available_for, ->(group_id) { left_joins(:group_volunteers).where(format(AVAILABLE_VOLUNTEERS_CONDITIONS, group_id: group_id)) }
@@ -67,9 +67,9 @@ class Volunteer < ApplicationRecord
 
   def self.has_labels(*label_ids)
     joins(:volunteer_labels)
-        .where('volunteer_labels' => { label_id: label_ids })
-        .group(:id)
-        .having("count(*) >= #{label_ids.count}")
+      .where('volunteer_labels' => { label_id: label_ids })
+      .group(:id)
+      .having("count(*) >= #{label_ids.count}")
   end
 
   def self.search_nearby(encoded_location)

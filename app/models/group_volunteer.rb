@@ -1,11 +1,12 @@
 class GroupVolunteer < ApplicationRecord
   DEFAULT_RECRUITMENT_STATUS = 1
   WAITING_FOR_CONTACT = :waiting_for_contact
-  SRC_PUBLIC_POOL     = :public_pool
+  ACTIVE = :active
+  SRC_PUBLIC_POOL = :public_pool
   IN_RECRUITMENT = [1, 2].freeze
 
   # Enums
-  enum recruitment_status: { WAITING_FOR_CONTACT => 1, onboarding: 2, active: 3, inactive: 4 }
+  enum recruitment_status: { WAITING_FOR_CONTACT => 1, onboarding: 2, ACTIVE => 3, inactive: 4 }
   enum source: { migration: 1, channel: 2, SRC_PUBLIC_POOL => 3 }
 
   # Associations
