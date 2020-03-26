@@ -170,6 +170,110 @@ h4 {
   }
 }
 
+h5 {
+  font-family: $title-font;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 160%;
+  color: $text-color;
+
+  @include lg {
+    font-size: 16px;
+  }
+
+}
+
+.main-header {
+  .main-logo {
+    position: relative;
+    left: -40px;
+  }
+}
+
+.section-hero {
+  padding-top: 72px;
+
+  @include lg {
+    padding-top: 30px;
+  }
+
+  .hero-content {
+    display: flex;
+
+    @include lg {
+      flex-direction: column;
+    }
+
+    .column-left {
+      width: 560px;
+      flex-shrink: 0;
+
+      @include lg {
+        width: 100%;
+      }
+    }
+
+    .column-right {
+      width: 495px;
+
+      @include lg {
+        width: 100%;
+      }
+    }
+
+    h1 {
+      .lighter {
+        color: $heading-color;
+        position: relative;
+      }
+
+      img {
+        position: absolute;
+        right: -85px;
+        top: -56px;
+
+        @include lg {
+          transform: scale(.7);
+          transform-origin: left;
+        }
+      }
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 160%;
+      font-family: $title-font;
+      margin: 0 0 24px;
+
+      @include lg {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 160%;
+      }
+    }
+
+    .hero-image {
+      width: 475px;
+      margin-left: 20px;
+
+      @include lg {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 30px 0 0;
+      }
+    }
+
+    button {
+
+    }
+  }
+}
+
+.section-orgs {
+  display: flex;
 .button-group {
   display: flex;
   align-items: stretch;
@@ -187,6 +291,52 @@ h4 {
 
   @include lg {
     justify-content: space-evenly;
+  }
+}
+
+
+  background-color: $background-dark;
+
+  .news-content {
+    display: flex;
+
+    @include lg {
+      flex-direction: column;
+    }
+
+    .column-left {
+      width: 510px;
+      margin-right: 42px;
+      @include lg {
+        width: 100%;
+      }
+    }
+
+    .column-right {
+      width: 510px;
+      margin-right: 0;
+      @include lg {
+        width: 100%;
+      }
+    }
+
+    .article-link-wrapper {
+      margin-bottom: 2rem;
+
+      .createdAt {
+        color: $secondary-button-color;
+      }
+
+      h5 {
+        margin: 0;
+
+        .site-name {
+          color: $primary-button-color;
+        }
+      }
+    }
+
+
   }
 }
 
