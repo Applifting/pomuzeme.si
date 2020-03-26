@@ -12,6 +12,7 @@ module DataImportService
     def initialize(filename, organisation_group)
       @filename    = filename
       @group       = organisation_group
+      @volunteer   = nil
       @raw_lines   = []
       @output      = []
       @row_output  = nil
@@ -23,7 +24,9 @@ module DataImportService
     def call
       read_lines
       import_data
-      @output.to_csv
+      @output.to_csv if @output.present?
+
+      destroy_data if Rails.env.development?
     end
 
     def import_data
@@ -33,16 +36,26 @@ module DataImportService
           @row_output = row.dup.merge(error_headers)
 
           save_model(volunteer_builder) do |volunteer|
+            @volunteer = volunteer
             save_model(group_volunteer_builder(volunteer))
 
             request ||= find_or_create_by(Request, row['request_text'])
             requested_volunteer_creator(request, volunteer)
+
+            volunteer_labels_creator
           end
         end
       end
     end
 
     private
+
+    def destroy_data
+      binding.pry
+      Volunteer.destroy_all
+      Request.destroy_all
+      Label.destroy_all
+    end
 
     def check_inputs
       raise TypeError unless @group.is_a? Group
@@ -52,7 +65,8 @@ module DataImportService
       {
         'error_volunteer' => nil,
         'error_group_volunteer' => nil,
-        'error_request' => nil
+        'error_request' => nil,
+        'error_label' => nil
       }
     end
   end

@@ -28,5 +28,27 @@ module DataImportService
                                 state: :accepted,
                                 last_accepted_at: @row['volunteer_created_at']
     end
+
+    def volunteer_labels_creator
+      label_names = @row.select { |k, _v| k.to_s.start_with? 'label_' }.values
+      labels = label_names.map do |label_name|
+        find_or_create_by(Label, label_name)
+      end
+      volunteer_label_creator(labels)
+    end
+
+    def volunteer_label_creator(labels)
+      labels.each do |label|
+        VolunteerLabel.create label: label,
+                              volunteer: @volunteer,
+                              user: find_or_create_by(User, @row['group_volunteer_coordinator'])
+      end
+    end
+
+    def label_creator(name)
+      Label.find_or_create_by(name: name) do |label|
+        label.group = @group
+      end
+    end
   end
 end
