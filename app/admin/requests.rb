@@ -7,7 +7,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   menu priority: 2
 
   permit_params :closed_note, :coordinator_id, :created_by_id, :fullfillment_date, :organisation_id,
-                :required_volunteer_count, :state, :subscriber, :subscriber_phone, :text,
+                :required_volunteer_count, :state, :subscriber, :subscriber_phone, :text, :block_volunteer_until,
                 address_attributes: %i[street_number street city city_part postal_code country_code
                                        latitude longitude geo_entry_id]
 
@@ -58,6 +58,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
           row :id
           row :organisation
           row :required_volunteer_count
+          row :block_volunteer_until
           row :coordinator
           row :state
           row :state_last_updated_at
@@ -113,7 +114,11 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
 
     f.inputs 'Koordinace' do
       f.input :state if resource.persisted?
-      f.input :organisation, as: :select, collection: Organisation.user_group_organisations(current_user)
+      f.input :organisation, as: :select,
+                             collection: Organisation.where(id: current_user.coordinating_organisations.pluck(:id)),
+                             include_blank: false
+      f.input :fullfillment_date, as: :datetime_picker
+      f.input :block_volunteer_until, as: :datetime_picker
       f.input :coordinator_id, as: :select, collection: current_user.organisation_colleagues
       f.input :closed_note, as: :text if resource.persisted?
       f.input :created_by_id, as: :hidden, input_html: { value: current_user.id }
