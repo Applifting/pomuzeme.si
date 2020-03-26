@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       post '/session/create', to: 'session#create'
       namespace :volunteer do
         get 'profile'
+        get 'preferences'
+        put 'preferences', action: :update_preferences
         namespace :requests do
           get 'active', to: 'active'
         end

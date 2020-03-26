@@ -8,8 +8,10 @@ module Api
 
     def authorize_request
       puts request.headers['HTTP_AUTHORIZATION']
-      @current_volunteer = Volunteer.find Api::JsonWebToken.decode(request.headers['HTTP_AUTHORIZATION'].split(' ').last)[:volunteer_id]
-    rescue StandardError
+      puts Api::JsonWebToken.decode(request.headers['HTTP_AUTHORIZATION'].split(' ').last)
+      @current_volunteer = ::Volunteer.find Api::JsonWebToken.decode(request.headers['HTTP_AUTHORIZATION'].split(' ').last)[:volunteer_id]
+    rescue StandardError => e
+      puts e.message
       error_response ApiErrors[:INVALID_TOKEN], status: :unauthorized
     end
 

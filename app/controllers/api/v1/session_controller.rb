@@ -34,6 +34,6 @@ class Api::V1::SessionController < ApiController
   def valid_recaptcha?
     return true unless Rails.env.production?
 
-    verify_recaptcha(response: permitted_params[:recaptcha_token])
+    verify_recaptcha(response: permitted_params[:recaptcha_token], site_key: ENV['RECAPTCHA_MOBILE_SITE_KEY'])
   end
 end
