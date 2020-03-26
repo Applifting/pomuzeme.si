@@ -24,7 +24,7 @@ Rails.application.routes.draw do
         get 'preferences'
         put 'preferences', action: :update_preferences
         namespace :requests do
-          get 'active', to: 'active'
+          get '/', action: :index
         end
       end
     end

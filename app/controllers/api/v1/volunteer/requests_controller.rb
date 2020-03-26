@@ -1,6 +1,6 @@
 class Api::V1::Volunteer::RequestsController < ApiController
 
-  def active
-    json_response Request.all
+  def index
+    json_response current_volunteer.requested_volunteers.includes(:request)
   end
 end

@@ -5,7 +5,7 @@ class Api::V1::VolunteerController < ApiController
   end
 
   def preferences
-    render json: current_volunteer, serializer: VolunteerPreferencesSerializer
+    json_response current_volunteer, serializer: VolunteerPreferencesSerializer
   end
 
   def update_preferences
