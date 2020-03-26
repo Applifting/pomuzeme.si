@@ -40,6 +40,11 @@ GEM
     active_admin-humanized_enum (0.1.1)
       active_record-humanized_enum
       activeadmin (>= 1.0.0.pre1)
+    active_model_serializers (0.10.10)
+      actionpack (>= 4.1, < 6.1)
+      activemodel (>= 4.1, < 6.1)
+      case_transform (>= 0.2)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     active_record-humanized_enum (0.1.2)
       activesupport
       i18n
@@ -108,6 +113,8 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
+    case_transform (0.2)
+      activesupport
     childprocess (3.0.0)
     cloudflare-rails (0.6.0)
       httparty
@@ -169,6 +176,8 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (2.3.0)
+    jsonapi-renderer (0.2.2)
+    jwt (2.2.1)
     kaminari (1.2.0)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.0)
@@ -384,6 +393,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_admin-humanized_enum
+  active_model_serializers
   activeadmin
   activerecord-postgis-adapter
   arctic_admin
@@ -401,6 +411,7 @@ DEPENDENCIES
   geocoder
   httparty
   jbuilder (~> 2.7)
+  jwt
   listen (>= 3.0.5, < 3.2)
   newrelic_rpm
   pg (>= 0.18, < 2.0)

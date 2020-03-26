@@ -98,6 +98,7 @@ gem 'devise'
 
 # authorization
 gem 'cancancan'
+gem 'jwt'
 
 # role management
 gem 'rolify'
@@ -114,3 +115,6 @@ gem 'devise-i18n'
 
 # geocoding
 gem 'geocoder'
+
+# serializers
+gem 'active_model_serializers'

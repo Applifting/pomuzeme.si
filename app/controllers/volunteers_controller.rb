@@ -110,7 +110,7 @@ class VolunteersController < ApplicationController
     # TEMPORARY DISABLED
     # score_threshold = ENV['RECAPTCHA_THRESHOLD']&.to_f
     # if score_threshold.present?
-    #  recaptcha = verify_recaptcha(action: 'login', minimum_score: score_threshold)
+    recaptcha = verify_recaptcha(action: 'login', minimum_score: score_threshold)
     #  volunteer.errors[:recaptcha] << 'je neplatné' unless recaptcha
     #  recaptcha
     # else

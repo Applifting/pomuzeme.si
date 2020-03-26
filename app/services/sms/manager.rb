@@ -5,6 +5,12 @@ class Sms::Manager
     Sms::O2Connector.new.send_msg(phone, msg)
   end
 
+  def send_authorization_code(code, phone)
+    msg = I18n.t('sms.mobile_authorization', code: code)
+    # Sms::NetHost.new.send_msg(phone, msg)
+    Sms::O2Connector.new.send_msg(phone, msg)
+  end
+
   def self.send_welcome_msg(phone, group = nil)
     if group.present?
       new.send_partner_welcome_msg(phone, group)
