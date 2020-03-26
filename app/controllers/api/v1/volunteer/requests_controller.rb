@@ -13,7 +13,7 @@ class Api::V1::Volunteer::RequestsController < ApiController
 
   private
 
-  def permitter_params
+  def permitted_params
     params.permit :id, :response
   end
 end

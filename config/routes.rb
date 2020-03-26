@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         put 'preferences', action: :update_preferences
         namespace :requests do
           get '/', action: :index
+          post '/:id/respond', action: :respond
         end
       end
     end

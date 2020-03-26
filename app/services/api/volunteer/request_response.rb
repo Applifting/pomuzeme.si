@@ -12,7 +12,7 @@ module Api
         validate_access!
         request.with_lock do
           validate_capacity!
-          volunteer_request.update! state: resolve_state
+          @volunteer_request.update! state: resolve_state
         end
       end
 
@@ -23,7 +23,7 @@ module Api
       end
 
       def resolve_state
-        ActiveModel::Type::Boolean.new.cast(@params[:notifications_to_app]) ? :accepted : :rejected
+        ActiveModel::Type::Boolean.new.cast(@params[:accept]) ? :accepted : :rejected
       end
 
       def validate_capacity!
@@ -33,13 +33,13 @@ module Api
       end
 
       def validate_access!
-        return if volunteer_request.present?
+        return if @volunteer_request.present?
 
         raise AuthorisationError
       end
 
       def validate_params!
-        return if @params.key?(:response)
+        return if @params.key?(:accept)
 
         raise InvalidArgumentError
       end
