@@ -108,6 +108,7 @@ gem 'active_admin-humanized_enum'
 gem 'activeadmin'
 gem 'arctic_admin'
 gem 'draper'
+gem 'activeadmin_json_editor'
 
 # localisation
 gem 'rails-i18n'

@@ -93,6 +93,18 @@ ActiveAdmin.register Volunteer do
     end
   end
 
+  form do |f|
+    f.inputs do
+      f.inputs :first_name
+      f.inputs :last_name
+      f.inputs :phone
+      f.inputs :email
+      f.inputs :description, as: :text
+      f.inputs :preferences, as: :jsonb
+    end
+    f.actions
+  end
+
   csv do
     column :first_name
     column :last_name
