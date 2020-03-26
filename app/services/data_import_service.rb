@@ -13,4 +13,11 @@ module DataImportService
 end
 
 # TODOs
-# find existing coordinators, labels, requests
+# budou jedna organizace
+# nefunguje opakovaná adres
+# upravit adresu exklusivního dobrovolní
+# find existing organisations, coordinators, labels, requests
+# hledat poptávku podle příjemce / zobrazit příjemce v seznamu
+# organizace defaultní (1)
+# seřadit štítky ve filtrech abecedně
+# abecedně seřadit štítky ve filtru
