@@ -2,6 +2,7 @@ class Api::V1::SessionController < ApiController
   skip_before_action :authorize_request
 
   def new
+    return error_response(ApiErrors[:INVALID_CAPTCHA], status: :forbidden) unless valid_recaptcha?
     volunteer = volunteer_from_params
     return error_response(ApiErrors[:VOLUNTEER_NOT_FOUND], status: :not_found) unless volunteer
 
@@ -13,7 +14,7 @@ class Api::V1::SessionController < ApiController
   def create
     volunteer = volunteer_from_params
     return error_response(ApiErrors[:VOLUNTEER_NOT_FOUND], status: :unauthorized) unless volunteer
-    return error_response(ApiErrors[:INVALID_VERIFICATION_CODE], status: :unauthorized) unless volunteer.authorize_with(permitted_params[:code])
+    return error_response(ApiErrors[:INVALID_VERIFICATION_CODE], status: :unauthorized) unless volunteer.authorize_with(permitted_params[:sms_verification_code])
 
     json_response token: token(volunteer)
   end
@@ -21,12 +22,18 @@ class Api::V1::SessionController < ApiController
   private
 
   def volunteer_from_params
-    Volunteer.find_by phone: PhonyRails.normalize_number(permitted_params[:phone], country_code: 'cz')
+    Volunteer.find_by phone: PhonyRails.normalize_number(permitted_params[:phone_number], country_code: 'cz')
   rescue Phony::NormalizationError
     nil
   end
 
   def permitted_params
-    params.permit :phone, :code, :fcm_token
+    params.permit :phone_number, :sms_verification_code, :fcm_token, :recaptcha_token
+  end
+
+  def valid_recaptcha?
+    return true unless Rails.env.production?
+
+    verify_recaptcha(response: permitted_params[:recaptcha_token])
   end
 end
