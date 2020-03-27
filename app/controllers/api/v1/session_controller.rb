@@ -14,7 +14,7 @@ class Api::V1::SessionController < ApiController
   def create
     volunteer = volunteer_from_params
     return error_response(ApiErrors[:VOLUNTEER_NOT_FOUND], status: :unauthorized) unless volunteer
-    return error_response(ApiErrors[:INVALID_VERIFICATION_CODE], status: :unauthorized) unless volunteer.authorize_with(permitted_params[:sms_verification_code])
+    return handle_unauthorized(volunteer) unless volunteer.authorize_with(permitted_params[:sms_verification_code])
 
     json_response token: token(volunteer)
   end
@@ -35,5 +35,11 @@ class Api::V1::SessionController < ApiController
     return true # unless Rails.env.production?
 
     verify_recaptcha(response: permitted_params[:recaptcha_token], site_key: ENV['RECAPTCHA_MOBILE_SITE_KEY'])
+  end
+
+  def handle_unauthorized(volunteer)
+    return error_response(ApiErrors[:INVALID_VERIFICATION_CODE], status: :unauthorized) if volunteer.authorization_code_attempts.positive?
+
+    error_response(ApiErrors[:INVALID_VERIFICATION_CODE], status: :upgrade_required)
   end
 end
