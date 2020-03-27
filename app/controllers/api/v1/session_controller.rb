@@ -40,6 +40,6 @@ class Api::V1::SessionController < ApiController
   def handle_unauthorized(volunteer)
     return error_response(ApiErrors[:INVALID_VERIFICATION_CODE], status: :unauthorized) if volunteer.authorization_code_attempts.positive?
 
-    error_response(ApiErrors[:INVALID_VERIFICATION_CODE], status: :upgrade_required)
+    error_response(ApiErrors[:INVALID_VERIFICATION_CODE], status: :too_many_requests)
   end
 end
