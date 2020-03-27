@@ -19,8 +19,10 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
 
   # Scopes
   scope :user_organisation_requests, default: true do |scope|
-    scope.with_organisations(current_user.coordinating_organisations.pluck(:id))
+    scope.not_closed
+         .with_organisations(current_user.coordinating_organisations.pluck(:id))
   end
+  scope :closed
   scope :all
 
   # Controller
@@ -62,7 +64,15 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
           end
           row :required_volunteer_count
           row :block_volunteer_until
-          row :coordinator
+          row :coordinator do
+            if can?(:update, resource)
+              best_in_place resource, :coordinator_id, as: :select,
+                                                       collection: current_user.organisation_colleagues.map { |u| [u.id, u.to_s] },
+                                                       url: admin_organisation_request_path(resource)
+            else
+              resource.coordinator
+            end
+          end
           row :state_last_updated_at
           row :created_at
           row :creator
