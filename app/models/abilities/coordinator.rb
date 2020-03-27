@@ -1,6 +1,7 @@
 module Abilities
   module Coordinator
     def add_coordinator_ability(user)
+      can :manage, (ActiveAdmin.register_page 'Import Data')
       can :read, ActiveAdmin::Page, name: 'Dashboard'
       can %i[index read], [Organisation, OrganisationDecorator], id: Organisation.user_group_organisations(user).pluck(:id)
       can :update, [Organisation, OrganisationDecorator], id: user.coordinating_organisations.pluck(:id)
