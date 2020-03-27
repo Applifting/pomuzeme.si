@@ -2,8 +2,9 @@ require 'ffaker'
 
 module DataImportService
   module Creators
-    def request_creator(_text)
-      save_model(request_builder)
+    def request_creator(text)
+      request = Request.joins(:organisation).where(text: text, organisations: { name: @row['request_organisation'] }).take
+      request || save_model(request_builder)
     end
 
     def user_creator(name)
