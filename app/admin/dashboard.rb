@@ -1,32 +1,30 @@
-ActiveAdmin.register_page "Dashboard" do
-  menu priority: 1, label: proc { I18n.t("active_admin.dashboard") }
+ActiveAdmin.register_page 'Dashboard' do
+  menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
 
-  content title: proc { I18n.t("active_admin.dashboard") } do
-    div class: "blank_slate_container", id: "dashboard_default_message" do
-      span class: "blank_slate" do
-        span I18n.t("active_admin.dashboard_welcome.welcome")
-        small I18n.t("active_admin.dashboard_welcome.call_to_action")
+  content title: proc { I18n.t('active_admin.dashboard') } do
+    columns do
+      column do
+        panel 'Nábor' do
+          count = GroupVolunteer.in_progress.in_recruitment_with_organisations(current_user.coordinating_organisations.select(:id)).count
+          para 'dobrovolníci v aktivním náboru', class: :small
+          a href: admin_recruitments_path do
+            h3 count
+          end
+        end
+      end
+
+      column do
+        panel 'Poptávky' do
+          count = Request.not_closed
+                         .with_organisations(current_user.coordinating_organisations.pluck(:id))
+                         .without_coordinator
+                         .count
+          para 'bez koordinátora', class: :small
+          a href: admin_organisation_requests_path do
+            h3 count
+          end
+        end
       end
     end
-
-    # Here is an example of a simple dashboard with columns and panels.
-    #
-    # columns do
-    #   column do
-    #     panel "Recent Posts" do
-    #       ul do
-    #         Post.recent(5).map do |post|
-    #           li link_to(post.title, admin_post_path(post))
-    #         end
-    #       end
-    #     end
-    #   end
-
-    #   column do
-    #     panel "Info" do
-    #       para "Welcome to ActiveAdmin."
-    #     end
-    #   end
-    # end
-  end # content
+  end
 end
