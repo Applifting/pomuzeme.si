@@ -20,7 +20,7 @@ ActiveAdmin.register Volunteer do
   filter :full_name_cont, label: 'Jméno / příjmení'
   filter :has_labels, label: 'Štítky',
                       as: :select, multiple: true,
-                      collection: proc { OptionsWrapper.wrap (Label.managable_by(current_user).map { |i| [i.name, i.id] }), params, :has_labels },
+                      collection: proc { OptionsWrapper.wrap (Label.alphabetically.managable_by(current_user).map { |i| [i.name, i.id] }), params, :has_labels },
                       selected: 1,
                       input_html: { style: 'height: 100px' }
   filter :phone_or_email_cont, label: 'Telefon / email'

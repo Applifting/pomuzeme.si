@@ -8,4 +8,5 @@ class Label < ApplicationRecord
 
   # Scopes
   scope :managable_by, ->(user) { where(group_id: user.coordinating_groups.pluck(:id)) }
+  scope :alphabetically, -> { order(:name) }
 end

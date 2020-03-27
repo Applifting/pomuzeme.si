@@ -5,7 +5,7 @@ div class: 'title h4' do
   span link_to('', new_admin_volunteer_volunteer_label_path(volunteer_id: resource.id), class: 'action add') if can?(:manage, VolunteerLabel)
 end
 
-table_for resource.volunteer_labels.managable_by(current_user) do
+table_for resource.volunteer_labels.alphabetically.managable_by(current_user) do
   delete_link = proc do |label|
     link_to I18n.t('active_admin.delete_model'), admin_volunteer_volunteer_label_path(label.volunteer_id, label.id), method: :delete
   end
