@@ -1,6 +1,6 @@
 module DataImportService
   module ArrayToCsv
-    OUTPUT = 'tmp/import_result.csv'
+    OUTPUT = 'tmp/import_result.csv'.freeze
 
     refine Array do
       require 'csv'
