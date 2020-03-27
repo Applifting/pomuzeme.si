@@ -5,7 +5,7 @@ div class: 'title h4' do
   span link_to('', new_admin_group_label_path(group_id: resource.id), class: 'action add') if can?(:manage, Label)
 end
 
-table_for resource.labels do
+table_for resource.labels.alphabetically do
   delete_link = proc do |label|
     link_to I18n.t('active_admin.delete_model'), admin_group_label_path(label.group_id, label.id), method: :delete
   end

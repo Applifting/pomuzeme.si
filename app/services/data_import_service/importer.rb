@@ -26,8 +26,6 @@ module DataImportService
       read_lines
       import_data
 
-      # destroy_data if Rails.env.development?
-
       @output.to_csv(@output_file) if @output.present?
     end
 
@@ -39,10 +37,10 @@ module DataImportService
 
           save_model(volunteer_builder) do |volunteer|
             @volunteer = volunteer
-            save_model(group_volunteer_builder(volunteer))
+            save_model group_volunteer_builder
 
             request ||= find_or_create_by(Request, row['request_text'])
-            requested_volunteer_creator(request, volunteer)
+            requested_volunteer_creator(request)
 
             volunteer_labels_creator
           end
@@ -51,13 +49,6 @@ module DataImportService
     end
 
     private
-
-    def destroy_data
-      binding.pry
-      Volunteer.destroy_all
-      Request.destroy_all
-      Label.destroy_all
-    end
 
     def check_inputs
       raise TypeError unless @group.is_a? Group

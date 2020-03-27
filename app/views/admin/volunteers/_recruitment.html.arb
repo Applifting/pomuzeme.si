@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-recruitment = resource.group_volunteers.in_recruitment_with(current_user.organisation_group.id)
+recruitment = resource.group_volunteers.in_recruitment_with(current_user.organisation_group.id).take
 
 div class: 'title h4' do
   if recruitment.present?

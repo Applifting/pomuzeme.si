@@ -2,28 +2,32 @@ require 'ffaker'
 
 module DataImportService
   module Creators
-    def request_creator(*)
-      save_model(request_builder)
+    def request_creator(text)
+      request = Request.joins(:organisation).where(text: text, organisations: { name: @row['request_organisation'] }).take
+      request || save_model(request_builder)
     end
 
     def user_creator(name)
       first_name, last_name = name.split(' ')
 
-      User.create last_name: last_name || first_name,
-                  first_name: first_name, email: FFaker::Internet.email,
-                  password: SecureRandom.uuid
+      user = User.find_by(last_name: last_name || first_name, first_name: first_name)
+      user || User.create(last_name: last_name || first_name,
+                          first_name: first_name, email: FFaker::Internet.email,
+                          password: SecureRandom.uuid)
     end
 
     def organisation_creator(name)
-      Organisation.create name: name,
-                          abbreviation: ('a'..'z').to_a.sample(4).join(''),
-                          contact_person: FFaker::Name.name,
-                          contact_person_phone: '+420' + rand(666_666_666..888_888_888).to_s,
-                          contact_person_email: FFaker::Internet.email
+      Organisation.find_or_create_by(name: name) do |organisation|
+        organisation.assign_attributes name: name,
+                                       abbreviation: ('a'..'z').to_a.sample(4).join(''),
+                                       contact_person: FFaker::Name.name,
+                                       contact_person_phone: '+420' + rand(666_666_666..888_888_888).to_s,
+                                       contact_person_email: FFaker::Internet.email
+      end
     end
 
-    def requested_volunteer_creator(request, volunteer)
-      RequestedVolunteer.create volunteer: volunteer,
+    def requested_volunteer_creator(request)
+      RequestedVolunteer.create volunteer: @volunteer,
                                 request: request,
                                 state: :accepted,
                                 last_accepted_at: @row['volunteer_created_at']
@@ -34,10 +38,10 @@ module DataImportService
       labels = label_names.map do |label_name|
         find_or_create_by(Label, label_name)
       end
-      volunteer_label_creator(labels)
+      create_volunteer_labels(labels)
     end
 
-    def volunteer_label_creator(labels)
+    def create_volunteer_labels(labels)
       labels.each do |label|
         VolunteerLabel.create label: label,
                               volunteer: @volunteer,
@@ -46,9 +50,8 @@ module DataImportService
     end
 
     def label_creator(name)
-      Label.find_or_create_by(name: name) do |label|
-        label.group = @group
-      end
+      label = Label.find_by(name: name, group: @group)
+      label || Label.new(name: name, group: @group).tap(&:save)
     end
   end
 end
