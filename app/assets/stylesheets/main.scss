@@ -311,9 +311,10 @@ h5 {
 
   .news-content {
     display: flex;
-
+    padding: 120px 0;
     @include lg {
       flex-direction: column;
+      padding: 40px 0;
     }
 
     .column-left {
@@ -329,6 +330,10 @@ h5 {
       margin-right: 0;
       @include lg {
         width: 100%;
+
+        h2 {
+          margin-top: 4rem
+        }
       }
     }
 
