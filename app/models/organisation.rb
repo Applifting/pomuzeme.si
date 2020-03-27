@@ -9,9 +9,9 @@ class Organisation < ApplicationRecord
            class_name: :User,
            through: :roles,
            source: :users
-  has_many :organisation_groups
+  has_many :organisation_groups, dependent: :destroy
   has_many :groups, through: :organisation_groups
-  has_many :requests
+  has_many :requests, dependent: :destroy
 
   # Validations
   validates :name, presence: true
@@ -22,12 +22,22 @@ class Organisation < ApplicationRecord
   validates :contact_person_phone, presence: true
   validates :contact_person_phone, phony_plausible: true, uniqueness: true
 
+  # Hooks
   before_validation :upcase_abbreviation
   after_create :create_coordinator
   after_commit :invalidate_organisation_count_cache
 
+  # Scopes
+  scope :user_group_organisations, ->(user) { joins(groups: :organisation_groups).where(organisation_groups: { group_id: user.coordinating_groups.pluck(:id) }).distinct }
+
   def to_s
     "#{name} ~ #{abbreviation}"
+  end
+
+  def self.cached_count
+    Rails.cache.fetch :organisation_count do
+      Organisation.all.size
+    end
   end
 
   private

@@ -1,6 +1,6 @@
 cs:
   active_admin:
-    dashboard: Úvod
+    dashboard: Přehled
     dashboard_welcome:
       welcome: "Vítejte v Active Admin. Toto je nástěnka."
       call_to_action: "Pro přidání sekcí na nástěnku se podívejte do souboru 'app/admin/dashboard.rb'"
@@ -124,6 +124,7 @@ cs:
       recruitment_closed: Uzavřený
       recruitment_all: Vše
       recruitment_unassigned: Bez koordinátora
+      user_organisation_requests: Moje organizace
       closed: uzavřené
     index_list:
       table: "Tabulka"
