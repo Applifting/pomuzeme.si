@@ -11,9 +11,14 @@
       <p>
         Pomáháme dostat dobrovolníky tam, kde jsou třeba.
       </p>
-      <button id="chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
-        Chci pomáhat
-      </button>
+      <div class="button-group">
+        <button id="chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
+          Chci pomáhat
+        </button>
+        <button id="chci-pomahat" class="main-button tertiary">
+          <a href="#pro-organizace">Jsem z organizace</a>
+        </button>
+      </div>
     </div>
     <div class="column-right">
       <%= image_tag asset_path('hero.svg'), class: 'hero-image'  %>
