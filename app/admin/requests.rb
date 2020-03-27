@@ -12,8 +12,8 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
                                        latitude longitude geo_entry_id]
 
   # Filters
-  filter :text
-  filter :required_volunteer_count
+  filter :text_cont, label: 'Text poptávky'
+  filter :subscriber_cont, label: 'Příjemce poptávky'
   filter :state, as: :select, collection: Request.states
   filter :organisation, as: :select, collection: proc { Organisation.user_group_organisations(current_user) }
 
@@ -36,6 +36,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     id_column
     column :state
     column :text
+    column :subscriber
     column :address
     column :accepted_volunteers_count do |resource|
       "#{resource.requested_volunteers.accepted.count} / #{resource.required_volunteer_count}"
@@ -53,6 +54,16 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
         attributes_table_for resource do
           row :address, &:address_link
           row :fullfillment_date
+        end
+      end
+      panel 'Osobní údaje' do
+        if can?(:manage, resource)
+          attributes_table_for resource do
+            row :subscriber
+            row :subscriber_phone
+          end
+        else
+          para 'Tyto údaje může zobrazit pouze koordinátor organizace, která poptávku spravuje.', class: :small
         end
       end
       panel '' do
@@ -77,16 +88,6 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
           row :created_at
           row :creator
           row :organisation
-        end
-      end
-      panel 'Osobní údaje' do
-        if can?(:manage, resource)
-          attributes_table_for resource do
-            row :subscriber
-            row :subscriber_phone
-          end
-        else
-          para 'Tyto údaje může zobrazit pouze koordinátor organizace, která poptávku spravuje.', class: :small
         end
       end
       panel nil do

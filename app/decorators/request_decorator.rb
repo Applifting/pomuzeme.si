@@ -6,6 +6,14 @@ class RequestDecorator < ApplicationDecorator
     { request_id: object.id }.merge search_params
   end
 
+  def subscriber
+    if h.can?(:manage, object)
+      object.subscriber
+    else
+      I18n.t 'activerecord.attributes.request.subscriber_hidden'
+    end
+  end
+
   def address_link
     if h.can? :manage, object
       h.link_to h.content_tag(:span, address.to_s, class: 'action edit'), h.edit_admin_address_path(address)
