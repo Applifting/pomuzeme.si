@@ -31,6 +31,8 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'best_in_place', '~> 3.1', '>= 3.1.1'
+
 gem 'httparty'
 
 # cloudflare - heroku integration according to https://www.viget.com/articles/heroku-cloudflare-the-right-way/

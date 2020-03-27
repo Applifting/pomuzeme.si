@@ -13,9 +13,18 @@ end
 
 if recruitment.present?
   attributes_table_for recruitment do
-    row :recruitment_status
+    row :recruitment_status do
+      best_in_place recruitment, :recruitment_status, as: :select,
+                                                      collection: I18n.t('activerecord.attributes.group_volunteer.recruitment_statuses'),
+                                                      url: admin_volunteer_group_volunteer_path(resource, recruitment)
+    end
     row :source
     row :coordinator
-    row :comments
+    row :comments do
+      best_in_place recruitment, :comments, as: :textarea,
+                                            url: admin_volunteer_group_volunteer_path(resource, recruitment),
+                                            ok_button: 'Uložit',
+                                            ok_button_class: 'button short'
+    end
   end
 end

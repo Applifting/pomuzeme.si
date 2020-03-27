@@ -55,13 +55,18 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
       end
       panel '' do
         attributes_table_for resource do
-          row :id
-          row :organisation
+          row :state do |request|
+            best_in_place request, :state, as: :select,
+                                           collection: I18n.t('activerecord.attributes.request.states'),
+                                           url: admin_organisation_request_path(resource)
+          end
           row :required_volunteer_count
           row :block_volunteer_until
           row :coordinator
-          row :state
           row :state_last_updated_at
+          row :created_at
+          row :creator
+          row :organisation
         end
       end
       panel 'Osobní údaje' do
@@ -74,7 +79,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
           para 'Tyto údaje může zobrazit pouze koordinátor organizace, která poptávku spravuje.', class: :small
         end
       end
-      panel nil, style: 'width: 580px' do
+      panel nil do
         render partial: 'volunteers' if can?(:manage, resource)
       end
     end
