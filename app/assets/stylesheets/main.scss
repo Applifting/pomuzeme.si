@@ -94,6 +94,30 @@ img {
   }
 }
 
+.text-button {
+  font-family: $main-font;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 150%;
+  color: $primary-button-color;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  padding: .5rem 1rem;
+  border-radius: 20px;
+  transition: background-color .3s;
+
+  &:hover {
+    background-color: rgba(100, 204, 227, 0.11);
+  }
+
+  &:focus {
+    background-color: transparent;
+  }
+}
+
 .wave-container {
   display: flex;
   justify-content: center;
