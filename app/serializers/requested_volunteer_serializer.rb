@@ -3,6 +3,7 @@ class RequestedVolunteerSerializer < ActiveModel::Serializer
   attributes :id,
              :state,
              :requested_volunteer_state,
+             :title,
              :short_description,
              :city,
              :city_part,
@@ -30,6 +31,10 @@ class RequestedVolunteerSerializer < ActiveModel::Serializer
 
   def state
     object.request.state
+  end
+
+  def title
+    object.request.text[0..29]
   end
 
   def short_description
