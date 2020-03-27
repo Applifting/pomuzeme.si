@@ -21,7 +21,7 @@ class GroupVolunteer < ApplicationRecord
   delegate :to_s, :title, to: :volunteer
 
   # Scopes
-  scope :in_recruitment_with, ->(group_id) { where(group_volunteers: { group_id: group_id }).take }
+  scope :in_recruitment_with, ->(group_id) { where(group_volunteers: { group_id: group_id }) }
   scope :in_recruitment_with_organisations, ->(group_id) { where(group_volunteers: { group_id: group_id }) }
   scope :in_progress, -> { where(recruitment_status: IN_RECRUITMENT) }
   scope :closed, -> { where.not(recruitment_status: IN_RECRUITMENT) }

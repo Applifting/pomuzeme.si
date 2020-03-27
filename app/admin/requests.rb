@@ -51,7 +51,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     div style: 'width: 600px' do
       panel resource.text do
         attributes_table_for resource do
-          row :address
+          row :address, &:address_link
           row :fullfillment_date
         end
       end

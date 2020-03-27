@@ -9,6 +9,10 @@ module Abilities
       can %i[read download], [Volunteer, VolunteerDecorator], id: Volunteer.available_for(user.organisation_group.id).pluck(:id)
       cannot %i[read], Volunteer, confirmed_at: nil
 
+      can :update, [Address, AddressDecorator], Address.all do |address|
+        can? :manage, address.addressable
+      end
+
       can %i[read], [Group], id: user.coordinating_groups.pluck(:id)
 
       can :manage, Label, group_id: user.coordinating_groups.pluck(:id)

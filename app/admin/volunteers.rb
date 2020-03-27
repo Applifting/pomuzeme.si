@@ -81,7 +81,7 @@ ActiveAdmin.register Volunteer do
         row :full_name
         row :phone
         row :email
-        row :address
+        row :address, &:address_link
         row :description
         row :created_at
         row :updated_at
@@ -92,6 +92,14 @@ ActiveAdmin.register Volunteer do
       render partial: 'recruitment'
       render partial: 'labels'
     end
+  end
+
+  form do |f|
+    f.input :first_name
+    f.input :last_name
+    f.input :phone
+    f.input :email
+    f.input :description
   end
 
   csv do

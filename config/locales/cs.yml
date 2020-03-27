@@ -122,6 +122,9 @@ cs:
         last_name: Příjmení
       address:
         full_address: Adresa
+        current_address: "Aktuální adresa: %{address}"
+        updated: Adresa byla aktualizovaná
+        new_address: Nová adresa
         street_number: Cislo domu
         street: Ulice
         city: Mesto

@@ -6,6 +6,14 @@ class RequestDecorator < ApplicationDecorator
     { request_id: object.id }.merge search_params
   end
 
+  def address_link
+    if h.can? :manage, object
+      h.link_to h.content_tag(:span, address.to_s, class: 'action edit'), h.edit_admin_address_path(address)
+    else
+      address
+    end
+  end
+
   private
 
   def search_params
