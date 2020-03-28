@@ -14,4 +14,7 @@ table_for resource.requested_volunteers.includes(:volunteer).order(:state).map(&
                                                collection: I18n.t('activerecord.attributes.requested_volunteer.states'),
                                                url: admin_organisation_request_requested_volunteer_path(resource, requested_volunteer)
   end
+  column 'Zprávy' do |requested_volunteer|
+    link_to 'poslat', new_admin_volunteer_message_path(requested_volunteer.volunteer_id, request_id: resource.id)
+  end
 end
