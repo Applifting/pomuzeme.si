@@ -168,7 +168,7 @@ h3 {
   font-weight: 600;
   font-size: 26px;
   line-height: 160%;
-  margin: 16px 0;
+  margin: 16px 0px;
 
   @include lg {
     font-size: 20px;
@@ -213,6 +213,64 @@ h5 {
   @include lg {
     font-size: 16px;
     line-height: 160%;
+  }
+}
+
+.main-header {
+  display: flex;
+  flex-direction: row;
+
+  .main-logo {
+    position: relative;
+    left: -40px;
+  }
+
+  .navigation {
+    display: flex;
+    background: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    height: 66px;
+    line-height: 14px;
+    align-items: center;
+
+    .desktop-menu {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+
+      .menu-item {
+        transition: none;
+        float: none;
+        height: auto;
+
+        .link {
+          font-family: Montserrat, serif;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 14px;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          padding: 0;
+          color: #50350D;
+        }
+
+        .link:hover {
+          background: none;
+        }
+
+        .link.wanna-join {
+          color: #64CCE3;
+        }
+      }
+    }
+
+    @include custom(1199) {
+      .desktop-menu {
+        display: none;
+      }
+    }
   }
 }
 
