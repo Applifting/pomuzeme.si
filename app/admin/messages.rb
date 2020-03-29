@@ -9,18 +9,8 @@ ActiveAdmin.register Message do
     def create
       super do |success, failure|
         success.html do
-          original_referrer = params[:message][:redirect_to]
-          redirect = original_referrer && URI(original_referrer).path
-
-          redirect_to redirect, notice: 'Zpráva odeslána'
+          redirect_to new_admin_volunteer_message_path(params[:volunteer_id], request_id: params[:message][:request_id]), notice: 'Zpráva odeslána'
         end
-        failure.html { render :new }
-      end
-    end
-
-    def destroy
-      super do |success, failure|
-        success.html { redirect_to admin_group_path(resource.group_id) }
         failure.html { render :new }
       end
     end
@@ -35,6 +25,9 @@ ActiveAdmin.register Message do
       f.input :created_by_id, as: :hidden, input_html: { value: current_user.id }
       custom_input :redirect_to, type: :hidden, value: request.referrer
     end
-    f.actions
+    f.actions do
+      f.action :submit
+      f.action :cancel, as: :link, label: 'Zpět do poptávky', url: admin_organisation_request_path(params[:request_id])
+    end
   end
 end

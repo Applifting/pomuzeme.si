@@ -10,7 +10,7 @@ module SmsService
 
         def initialize(phone, text)
           @phone = phone
-          @text  = text
+          @text  = SmsService.replace_special_chars(text)
         end
 
         def self.receive
@@ -32,7 +32,7 @@ module SmsService
         end
 
         def self.send(phone, text)
-          new(phone, SmsService.replace_special_chars(text)).send
+          new(phone, text).send
         end
 
         def send(attempt = 0)

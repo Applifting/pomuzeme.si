@@ -15,6 +15,9 @@ module SmsService
         private
 
         def parse_response(raw_response)
+          puts '========================'
+          puts raw_response
+          puts '========================'
           @response = raw_response.to_s
                                   .split("\n")
                                   .map(&:strip)
