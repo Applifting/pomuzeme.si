@@ -3,7 +3,7 @@
 ActiveAdmin.register RequestedVolunteer do
   decorate_with RequestedVolunteerDecorator
   belongs_to :organisation_request
-  permit_params :request_id, :volunteer_id, :state
+  permit_params :request_id, :volunteer_id, :state, :visible_sensitive
 
   form do |f|
     if object.new_record?
