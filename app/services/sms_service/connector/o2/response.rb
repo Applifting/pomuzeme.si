@@ -4,11 +4,16 @@ module SmsService
       class Response
         attr_reader :response, :raw_response
         delegate :success?, to: :raw_response
-        delegate :ref_msg_id, :msg_id, :from_number, :response_description, :text, to: :response
+        delegate :ref_msg_id, :msg_id, :from_number, :response_description,
+                 :selector, :timestamp, :response_code, :text, to: :response
 
         def initialize(raw_response)
           @raw_response = raw_response
           parse_response
+        end
+
+        def blank?
+          response.ba_id.nil?
         end
 
         def to_s
@@ -18,9 +23,6 @@ module SmsService
         private
 
         def parse_response
-          puts '========================'
-          puts raw_response
-          puts '========================'
           @response = OpenStruct.new raw_response.to_s
                                                  .split("\n")
                                                  .map(&:strip)

@@ -11,11 +11,11 @@ panel 'Konverzace s dobrovolníkem' do
               div class: 'msg-box' do
                 div msg.text, class: 'body'
                 div id: 'msg-time', style: 'display: inline-flex' do
-                  seen_date = false # msg&.message_read&.created_at
+                  seen_date = msg&.read_at
                   div(span, class: 'unread-dot') unless seen_date
                   span [msg.creator.to_s, msg.created_at.strftime('%H:%M')].compact.join(' '), class: 'msg-time'
                   if seen_date
-                    div("seen #{distance_of_time_in_words(seen_date, Time.zone.now)} ago",
+                    div("přečteno před #{distance_of_time_in_words(seen_date, Time.zone.now)}",
                         class: 'msg-time tooltip',
                         title: seen_date)
                   end

@@ -1,12 +1,22 @@
 module SmsService
   module Connector
     module O2
+      MESSAGE_DELIVERED_TO_NETWORK = 'ISUC_010'.freeze
+
       def self.send_message(phone, text)
         Message.send(phone, text)
       end
 
       def self.receive_message
-        Message.receive
+        Message.receive do |incoming_message|
+          next if incoming_message.blank?
+
+          confirm(incoming_message) && next if incoming_message&.response_code == MESSAGE_DELIVERED_TO_NETWORK
+
+          event_type = incoming_message.selector == 'Response' ? :delivery_report_received : :message_received
+
+          confirm(incoming_message) if MessagingService.callback(event_type, incoming_message)
+        end
       end
 
       def self.confirm(message_response)

@@ -17,7 +17,8 @@ module SmsService
 
         def self.receive
           raw_response = O2.client.get('/smsconnector/getpost/GP', { query: { action: 'receive', baID: 1_992_125 } })
-          handle_response(raw_response)
+          response = handle_response(raw_response)
+          block_given? ? yield(response) : response
         end
 
         def self.confirm(incoming_msg)
@@ -51,15 +52,23 @@ module SmsService
           handle_response(raw_response)
         end
 
-        private
-
-        def handle_response(raw_response)
+        def self.handle_response(raw_response)
           parsed_response = Response.new raw_response
           parsed_response.success? ? parsed_response : handle_error(parsed_response)
         end
 
-        def handle_error(parsed_response)
+        def self.handle_error(parsed_response)
           raise SmsService::MessagingError, parsed_response.response_description
+        end
+
+        private
+
+        def handle_response(raw_response)
+          self.class.handle_response raw_response
+        end
+
+        def handle_error(parsed_response)
+          self.class.handle_error parsed_response
         end
 
         def send_mock_message

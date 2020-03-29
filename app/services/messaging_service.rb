@@ -10,7 +10,10 @@ module MessagingService
     SmsService.send(message_object) do |response|
       Callbacks.message_sent(message_object, response)
     end
-  rescue SmsService::MessagingError => e
+  rescue StandardError => e
+    # TODO: cleanup
+    puts e
+    puts e.backtrace[0..10]
     Raven.capture_exception e
   end
 

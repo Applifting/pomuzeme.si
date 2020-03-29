@@ -1,7 +1,7 @@
 class Message < ApplicationRecord
   # Associations
   belongs_to :volunteer, optional: true
-  belongs_to :creator, class_name: 'User', foreign_key: :created_by_id
+  belongs_to :creator, optional: true, class_name: 'User', foreign_key: :created_by_id
   belongs_to :request, optional: true
 
   # Attributes
