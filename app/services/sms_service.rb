@@ -5,6 +5,8 @@ module SmsService
 
   def self.send(decorated_message_object)
     response = Connector::O2.send_message(decorated_message_object.phone, decorated_message_object.text)
+
+    block_given? ? yield(response) : response
   end
 
   def self.send_text(phone, text)

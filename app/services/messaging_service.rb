@@ -7,18 +7,16 @@ module MessagingService
 
     # detect channel (sms / app)
     # delegate message sending to required channel service
-    ::SmsService.send(message_object)
+    SmsService.send(message_object) do |response|
+      Callbacks.message_sent(message_object, response)
+    end
+  rescue SmsService::MessagingError => e
+    Raven.capture_exception e
   end
 
-  def self.send_callback(message_object); end
-
-  def self.callback(event_type)
-    # case event_type
-    # when :delivery_report_received
-    # when :message_received
-    # when :request_accepted
-    # when :request_rejected
-    # end
+  # Receive callbacks: message_received, message_sent, delivery_report_received
+  def self.callback(event_type, payload)
+    Callbacks.send(event_type, payload)
   end
 
   class OutgoingMessage
@@ -26,7 +24,7 @@ module MessagingService
     # - send message
     # - decorate message text (creator's signature, ...)
 
-    attr_reader :phone
+    attr_reader :phone, :message
 
     def initialize(active_record_message)
       @phone   = active_record_message&.volunteer&.phone
@@ -34,6 +32,7 @@ module MessagingService
       @creator = active_record_message.creator
       @request_organisation = active_record_message&.request&.organisation
       @request = active_record_message&.request
+      @message = active_record_message
     end
 
     def text
