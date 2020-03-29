@@ -26,8 +26,10 @@ The application is an MVC monolith written in the RubyOnRails framework. On Fron
 1. `git clone git@github.com:Applifting/pomuzeme.si.git && cd pomuzeme.si`
 2. `bundle install`
 3. [setup `RGeo`](https://stackoverflow.com/questions/31170055/activerecord-postgis-adapter-undefined-method-point-for-nilnilclass)
-4. `rake db:create && rake db:migrate` Note: avoid `db:setup` as there is an `db:create` hook that is required,
+4. `rake db:create` Note: avoid `db:setup` as there is an `db:create` hook that is required,
    in order to have postgres extension.
+5. `psql pomuzeme_si_development -c "CREATE EXTENSION postgis;"`
+6. `rake db:migrate`
 5. `yarn install`
 6. `rails server`
 
