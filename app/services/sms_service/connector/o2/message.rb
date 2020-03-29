@@ -3,6 +3,8 @@ module SmsService
   # receive delivery_report (ISUC_005) > update message received at > onsuccess: confirm receipt
   # receive incoming message > create new message > onsuccess: confirm receipt
 
+  class MessagingError < StandardError; end
+
   module Connector
     module O2
       class Message
@@ -15,7 +17,7 @@ module SmsService
 
         def self.receive
           raw_response = O2.client.get('/smsconnector/getpost/GP', { query: { action: 'receive', baID: 1_992_125 } })
-          Response.new raw_response
+          handle_response(raw_response)
         end
 
         def self.confirm(incoming_msg)
@@ -24,11 +26,11 @@ module SmsService
               action: 'confirm',
               baID: 1_992_125,
               refBaID: 1_992_125,
-              refMsgID: inc_msg['msgID']
+              refMsgID: inc_msg.msg_id
             }
           }
           raw_response = O2.client.get('/smsconnector/getpost/GP', { query: confirm_query[incoming_msg] })
-          Response.new raw_response
+          handle_response(raw_response)
         end
 
         def self.send(phone, text)
@@ -46,10 +48,19 @@ module SmsService
             send(1)
           end
 
-          Response.new raw_response
+          handle_response(raw_response)
         end
 
         private
+
+        def handle_response(raw_response)
+          parsed_response = Response.new raw_response
+          parsed_response.success? ? parsed_response : handle_error(parsed_response)
+        end
+
+        def handle_error(parsed_response)
+          raise SmsService::MessagingError, parsed_response.response_description
+        end
 
         def send_mock_message
           puts '==========================='
@@ -82,7 +93,7 @@ module SmsService
             action: 'receive',
             baID: 1_992_125,
             refBaID: 1_992_125,
-            refMsgID: incoming_msg['msgID']
+            refMsgID: incoming_msg.msg_id
           }
         end
       end
