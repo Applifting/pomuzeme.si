@@ -1,0 +1,28 @@
+panel 'Messages' do
+  groupped_by_date = Message.all.group_by { |msg| msg.created_at.to_date }
+
+  groupped_by_date.each do |date, messages|
+    ul class: 'messages' do
+      li date(date, format: '%A, %d/%m/%Y'), class: 'date-header'
+      messages.each do |msg|
+        li class: msg.sent_by_css('msg') do
+          div class: 'msg-wrapper' do
+            div class: 'msg-box' do
+              div msg.text, class: 'body'
+              div id: 'msg-time', style: 'display: inline-flex' do
+                seen_date = false # msg&.message_read&.created_at
+                div(span, class: 'unread-dot') unless seen_date
+                span [msg.creator.to_s, msg.created_at.strftime('%H:%M')].compact.join(' '), class: 'msg-time'
+                if seen_date
+                  div("seen #{distance_of_time_in_words(seen_date, Time.zone.now)} ago",
+                      class: 'msg-time tooltip',
+                      title: seen_date)
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

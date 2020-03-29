@@ -27,6 +27,8 @@ ActiveAdmin.register Message do
   end
 
   form do |f|
+    render partial: 'messages'
+
     f.inputs 'Nová zpráva' do
       f.input :text
       f.input :request_id, as: :hidden, input_html: { value: params[:request_id] }

@@ -27,7 +27,7 @@ module SmsService
       end
 
       def sms_gateway(phone, msg)
-        SmsService.send_text(phone, msg)
+        ::SmsService.send_text(phone, msg)
       end
     end
   end
