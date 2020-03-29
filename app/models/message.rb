@@ -7,6 +7,7 @@ class Message < ApplicationRecord
   # Attributes
   enum state: { pending: 1, sent: 2, received: 3 }
   enum direction: { outgoing: 1, incoming: 2 }
+  enum channel: { sms: 1 }
 
   # Validations
   validates_presence_of :text
@@ -17,6 +18,8 @@ class Message < ApplicationRecord
   private
 
   def send_outgoing_message
+    return if direction == :incoming
+
     MessagingService.send(self)
   end
 end
