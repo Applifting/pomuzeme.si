@@ -1,14 +1,13 @@
 <script type="text/javascript">
   $(document).ready(function() {
-    function registerScroll(link) {
-      var id = link.dataset.target
-      link.addEventListener('click', function() {
-        var elmnt = document.getElementById(id);
-        elmnt.scrollIntoView();
-      })
-    }
+    const registerScroll = link => {
+      const id = link.dataset.target;
+      link.addEventListener('click', () =>
+          document.getElementById(id).scrollIntoView({behavior: 'smooth'})
+      );
+    };
 
-    const scrollables = document.querySelectorAll('#scrollable');
+    const scrollables = document.querySelectorAll('.js-scrollable');
 
     for (let scrollable of scrollables) {
       registerScroll(scrollable);
@@ -33,10 +32,10 @@
         <button id="chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
           Chci pomáhat
         </button>
-        <button id="chci-pomahat" class="main-button tertiary">
-          <a id="scrollable" data-target="pro-organizace">Organizuji dobrovolníky</a>
+        <button class="main-button tertiary">
+          <a href="javascript:void(0);" class="js-scrollable" data-target="pro-organizace">Organizuji dobrovolníky</a>
         </button>
-        <button id="chci-pomahat" class="main-button tertiary">
+        <button class="main-button tertiary">
           <a href="<%= ENV['NEED_VOLUNTEERS_GOOGLE_FORM']%>" target="_blank">Potřebuji dobrovolníky</a>
         </button>
       </div>
