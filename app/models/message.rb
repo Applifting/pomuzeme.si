@@ -6,6 +6,7 @@ class Message < ApplicationRecord
 
   # Attributes
   enum state: { pending: 1, sent: 2, received: 3 }
+  enum direction: { outgoing: 1, incoming: 2 }
 
   # Validations
   validates_presence_of :text

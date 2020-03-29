@@ -5,6 +5,14 @@ module SmsService
         Message.send(phone, text)
       end
 
+      def self.receive_message
+        Message.receive
+      end
+
+      def self.confirm(message_response)
+        Message.confirm message_response
+      end
+
       def self.client
         @client ||= Client.init
       end
@@ -31,16 +39,6 @@ module SmsService
 
           p12 = OpenSSL::PKCS12.create(pass, 'auth', OpenSSL::PKey.read(key), OpenSSL::X509::Certificate.new(crt))
           self.class.pkcs12 p12.to_der, pass
-        end
-      end
-
-      class Response
-        def initialize(raw_response)
-          parse_response raw_response
-        end
-
-        def parse_response(raw_response)
-          @response = raw_response.to_s.split("\n").map { |i| i.split('=') }.to_h
         end
       end
     end

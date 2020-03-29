@@ -1,4 +1,8 @@
 module SmsService
+  # send msg > update msg_id refMsgID
+  # receive delivery_report (ISUC_005) > update message received at > onsuccess: confirm receipt
+  # receive incoming message > create new message > onsuccess: confirm receipt
+
   module Connector
     module O2
       class Message
@@ -9,8 +13,26 @@ module SmsService
           @text  = text
         end
 
+        def self.receive
+          raw_response = O2.client.get('/smsconnector/getpost/GP', { query: { action: 'receive', baID: 1_992_125 } })
+          Response.new raw_response
+        end
+
+        def self.confirm(incoming_msg)
+          confirm_query = proc { |inc_msg|
+            {
+              action: 'confirm',
+              baID: 1_992_125,
+              refBaID: 1_992_125,
+              refMsgID: inc_msg['msgID']
+            }
+          }
+          raw_response = O2.client.get('/smsconnector/getpost/GP', { query: confirm_query[incoming_msg] })
+          Response.new raw_response
+        end
+
         def self.send(phone, text)
-          new(phone, text).send
+          new(phone, SmsService.replace_special_chars(text)).send
         end
 
         def send(attempt = 0)
@@ -25,10 +47,6 @@ module SmsService
           end
 
           Response.new raw_response
-        end
-
-        def receive_msg
-          raw_response = self.class.get('/smsconnector/getpost/GP', { query: receive_query })
         end
 
         private
@@ -51,26 +69,20 @@ module SmsService
             fromNumber: '+420720002125',
             toNumber: phone,
             text: text,
-            deliveryReport: 'FALSE',
+            deliveryReport: 'TRUE',
             intruder: 'FALSE',
-            multipart: 'FALSE',
+            multipart: 'TRUE',
             validityPeriod: 10_000,
             priority: 1
           }
         end
 
-        def receive_query
+        def confirm_query(incoming_msg)
           {
-            action: 'send',
+            action: 'receive',
             baID: 1_992_125,
-            fromNumber: '+420720002125',
-            toNumber: '',
-            text: '',
-            deliveryReport: 'FALSE',
-            intruder: 'FALSE',
-            multipart: 'FALSE',
-            validityPeriod: 10_000,
-            priority: 1
+            refBaID: 1_992_125,
+            refMsgID: incoming_msg['msgID']
           }
         end
       end

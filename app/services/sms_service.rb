@@ -12,4 +12,8 @@ module SmsService
   end
 
   def self.receive(incoming_msg_object); end
+
+  def self.replace_special_chars(text)
+    text.tr('ěščřžýáíéúůťďóňĚŠČŘŽÝÁÍÉÚŮŤĎÓŇ', 'escrzyaieuutdonESCRZYAIEUUTDON')
+  end
 end
