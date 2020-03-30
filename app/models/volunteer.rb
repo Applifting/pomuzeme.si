@@ -61,6 +61,10 @@ class Volunteer < ApplicationRecord
     end
   end
 
+  def fcm_active?
+    preferences.try(:[], 'notifications_to_app')
+  end
+
   private
 
   # Dirty ransack scopes

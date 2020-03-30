@@ -1,0 +1,10 @@
+cs:
+  push:
+    notifications:
+      request:
+        new:
+          title: Byla vám přiřazena nová nabídka
+          body: A to je fajn
+        update:
+          title: Nabídka byla aktualizována
+          body: A tady bude popis
