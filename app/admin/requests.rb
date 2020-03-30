@@ -8,6 +8,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
 
   permit_params :closed_note, :coordinator_id, :created_by_id, :fullfillment_date, :organisation_id,
                 :required_volunteer_count, :state, :subscriber, :subscriber_phone, :text, :block_volunteer_until,
+                :long_text,
                 address_attributes: %i[street_number street city city_part postal_code country_code
                                        latitude longitude geo_entry_id]
 
@@ -98,6 +99,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
           attributes_table_for resource do
             row :subscriber
             row :subscriber_phone
+            row :long_text
           end
         else
           para 'Tyto údaje může zobrazit pouze koordinátor organizace, která poptávku spravuje.', class: :small
@@ -139,6 +141,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
         address_form.input :longitude, as: :hidden
         address_form.input :geo_entry_id, as: :hidden
       end
+      f.input :long_text, as: :text, hint: 'Tento popis bude dostupny pouze vybranym dobrovolnikum v aplikaci'
     end
 
     f.inputs 'Koordinace' do

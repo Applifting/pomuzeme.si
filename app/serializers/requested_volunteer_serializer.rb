@@ -19,6 +19,7 @@ class RequestedVolunteerSerializer < ActiveModel::Serializer
              :subscriber, # attributes below are considered as sensitive
              :subscriber_phone,
              :address,
+             :long_description,
              :all_details_granted # indicates if user can see all fields including sensitive
 
   def id
@@ -105,6 +106,12 @@ class RequestedVolunteerSerializer < ActiveModel::Serializer
     return unless show_extended? && object.visible_sensitive
 
     object.request.subscriber_phone
+  end
+
+  def long_description
+    return unless show_extended? && object.visible_sensitive
+
+    object.request.long_text
   end
 
   def all_details_granted

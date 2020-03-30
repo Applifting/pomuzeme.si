@@ -138,6 +138,7 @@ cs:
         name: Štítek
       request:
         text: Popis
+        long_text: Detailni popis
         closer: Uzavřel
         closed_at: Datum uzavření
         closed_note: Poznámka k uzavření
