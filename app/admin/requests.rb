@@ -141,9 +141,11 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     end
 
     f.inputs 'Koordinace' do
+      organisations = current_user.admin? ? Organisation.all : Organisation.joins(:organisation_groups).where(organisation_groups: { group_id: current_user.organisation_group.id })
+
       f.input :state if resource.persisted?
       f.input :organisation, as: :select,
-                             collection: Organisation.where(id: current_user.coordinating_organisations.pluck(:id)),
+                             collection: organisations,
                              include_blank: false
       f.input :block_volunteer_until, as: :datetime_picker
       f.input :coordinator_id, as: :select, collection: current_user.organisation_colleagues
