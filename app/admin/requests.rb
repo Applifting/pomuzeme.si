@@ -43,7 +43,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     def notify_volunteers_updated
       return if resource.volunteers.fcm_active.empty?
 
-      Push::Requests::UpdaterService.new(resource_id, resource.volunteers.fcm_active).perform
+      Push::Requests::UpdaterService.new(resource.id, resource.volunteers.fcm_active).perform
     end
   end
 
