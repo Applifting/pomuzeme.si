@@ -3,8 +3,8 @@ cs:
     notifications:
       request:
         new:
-          title: Byla vám přiřazena nová nabídka
-          body: A to je fajn
+          title: Byla vám nabídnuta nová poptávka
+          body: "Organizace: %{request.organisation.name}\nPopis: %{request.text}"
         update:
-          title: Nabídka byla aktualizována
-          body: A tady bude popis
+          title: Poptávka byla aktualizovana
+          body: "Organizace: %{request.organisation.name}\nPopis: %{request.text}"

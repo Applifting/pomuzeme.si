@@ -1,8 +1,11 @@
 module Push
   module Requests
     class BaseService
-      def initialize(request, volunteers)
-        @request = request
+
+      attr_reader :request, :volunteers
+
+      def initialize(request_id, volunteers)
+        @request = Request.eager_load(:organisation).find request_id
         @volunteers = volunteers
       end
 
@@ -21,7 +24,7 @@ module Push
       end
 
       def receivers
-        @receivers ||= @volunteers.map(&:fcm_token).compact.uniq
+        @receivers ||= volunteers.map(&:fcm_token).compact.uniq
       end
     end
   end

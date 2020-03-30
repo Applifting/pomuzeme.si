@@ -60,14 +60,13 @@ ActiveAdmin.register RequestedVolunteer do
     def notify_volunteer_assigned
       return unless resource.volunteer.fcm_active?
 
-      Push::Requests::AssignerService.new(resource.request, [resource.volunteer]).perform
+      Push::Requests::AssignerService.new(resource.request_id, [resource.volunteer]).perform
     end
 
     def notify_volunteer_updated
-      puts resource.volunteer.fcm_active?
       return unless resource.volunteer.fcm_active?
 
-      Push::Requests::UpdaterService.new(resource.request, [resource.volunteer]).perform
+      Push::Requests::UpdaterService.new(resource.request_id, [resource.volunteer]).perform
     end
   end
 end
