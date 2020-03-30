@@ -105,13 +105,7 @@ img {
   border: none;
   text-decoration: none;
   cursor: pointer;
-  padding: .5rem 1rem;
-  border-radius: 20px;
-  transition: background-color .3s;
-
-  &:hover {
-    background-color: rgba(100, 204, 227, 0.11);
-  }
+  padding: 0;
 
   &:focus {
     background-color: transparent;
