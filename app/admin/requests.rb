@@ -18,8 +18,16 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   filter :organisation, as: :select, collection: proc { Organisation.user_group_organisations(current_user) }
 
   # Scopes
-  scope :user_organisation_requests, default: true do |scope|
-    scope.not_closed
+  scope :request_in_preparation, default: true do |scope|
+    scope.assignable
+         .with_organisations(current_user.coordinating_organisations.pluck(:id))
+  end
+  scope :request_in_fulfillment do |scope|
+    scope.in_progress
+         .with_organisations(current_user.coordinating_organisations.pluck(:id))
+  end
+  scope :request_check_fulfillment do |scope|
+    scope.check_fulfillment
          .with_organisations(current_user.coordinating_organisations.pluck(:id))
   end
   scope :closed
@@ -34,15 +42,13 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
 
   index do
     id_column
-    column :state do |resource|
-      status_tag I18n.t(resource.state, scope: 'activerecord.attributes.request.states')
-    end
-    column :text
+    column :state
     column :subscriber
-    column :address
+    column :text
     column :accepted_volunteers_count do |resource|
       "#{resource.requested_volunteers.accepted.count} / #{resource.required_volunteer_count}"
     end
+    column :address
     column :fullfillment_date
     column :coordinator
     column :state_last_updated_at
@@ -139,7 +145,6 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
       f.input :organisation, as: :select,
                              collection: Organisation.where(id: current_user.coordinating_organisations.pluck(:id)),
                              include_blank: false
-      f.input :fullfillment_date, as: :datetime_picker
       f.input :block_volunteer_until, as: :datetime_picker
       f.input :coordinator_id, as: :select, collection: current_user.organisation_colleagues
       f.input :closed_note, as: :text if resource.persisted?
