@@ -36,6 +36,7 @@ class Volunteer < ApplicationRecord
   scope :assigned_to_request, ->(request_id) { left_joins(:requested_volunteers).where(requested_volunteers: { request_id: request_id }) }
   scope :blocked, -> { left_joins(:requests).where(requested_volunteers: { state: :accepted }, requests: { block_volunteer_until: Time.now.. }) }
   scope :not_blocked, -> { where.not(id: blocked) }
+  scope :fcm_active, -> { where('preferences @> ?', { notifications_to_app: true }.to_json) }
 
   attr_accessor :address_search_input
 

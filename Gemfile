@@ -128,3 +128,6 @@ gem 'csv'
 
 # serializers
 gem 'active_model_serializers'
+
+# push notifications
+gem 'rpush'

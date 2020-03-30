@@ -128,6 +128,7 @@ GEM
       rails (>= 5.0, < 6.1.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.6)
+    connection_pool (2.2.2)
     crass (1.0.6)
     csv (3.1.2)
     devise (4.7.1)
@@ -166,6 +167,7 @@ GEM
     has_scope (0.7.2)
       actionpack (>= 4.1)
       activesupport (>= 4.1)
+    http-2 (0.10.1)
     httparty (0.18.0)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
@@ -221,6 +223,10 @@ GEM
     multi_json (1.14.1)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
+    net-http-persistent (3.1.0)
+      connection_pool (~> 2.2)
+    net-http2 (0.18.2)
+      http-2 (~> 0.10.1)
     newrelic_rpm (6.9.0.363)
     nio4r (2.5.2)
     nokogiri (1.10.9)
@@ -305,6 +311,15 @@ GEM
       activerecord (>= 5.0)
       rgeo (>= 1.0.0)
     rolify (5.2.0)
+    rpush (5.0.0)
+      activesupport (>= 5.0)
+      jwt (>= 1.5.6)
+      multi_json (~> 1.0)
+      net-http-persistent
+      net-http2 (~> 0.14)
+      railties
+      rainbow
+      thor (>= 0.18.1, < 2.0)
     rspec-core (3.9.1)
       rspec-support (~> 3.9.1)
     rspec-expectations (3.9.1)
@@ -438,6 +453,7 @@ DEPENDENCIES
   rails_autoscale_agent
   recaptcha
   rolify
+  rpush
   rspec-rails (~> 3.9)
   rubocop
   sass-rails (>= 6)
