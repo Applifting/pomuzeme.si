@@ -10,7 +10,8 @@ module Push
 
       def notification
         { title: I18n.t('push.notifications.request.update.title'),
-          body: I18n.t('push.notifications.request.update.body', request: request) }
+          body: I18n.t('push.notifications.request.update.body', description: request.text,
+                                                                 organisation: request.organisation.name) }
       end
     end
   end

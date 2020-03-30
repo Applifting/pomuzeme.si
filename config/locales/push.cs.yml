@@ -4,7 +4,7 @@ cs:
       request:
         new:
           title: Byla vám nabídnuta nová poptávka
-          body: "Organizace: %{request.organisation.name}\nPopis: %{request.text}"
+          body: "Organizace: %{organisation}\nPopis: %{description}"
         update:
           title: Poptávka byla aktualizovana
-          body: "Organizace: %{request.organisation.name}\nPopis: %{request.text}"
+          body: "Organizace: %{organisation}\nPopis: %{description}"
