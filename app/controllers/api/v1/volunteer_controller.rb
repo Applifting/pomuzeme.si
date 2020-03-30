@@ -14,6 +14,10 @@ class Api::V1::VolunteerController < ApiController
     head :ok
   end
 
+  def organisations
+    json_response current_volunteer.accessed_organisations, each_serializer: OrganisationSerializer
+  end
+
   private
 
   def permitted_params

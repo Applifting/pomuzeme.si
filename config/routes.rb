@@ -19,7 +19,11 @@ Rails.application.routes.draw do
       post '/geo/fulltext', to: 'geolocation#fulltext'
       post '/session/new', to: 'session#new'
       post '/session/create', to: 'session#create'
+      namespace :organisations do
+        get '/', action: :index
+      end
       namespace :volunteer do
+        get 'organisations'
         get 'profile'
         get 'preferences'
         put 'preferences', action: :update_preferences

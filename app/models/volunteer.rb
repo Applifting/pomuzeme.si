@@ -65,6 +65,10 @@ class Volunteer < ApplicationRecord
     preferences.try(:[], 'notifications_to_app')
   end
 
+  def accessed_organisations
+    Organisation.left_joins(:organisation_groups).where(organisation_groups: { group_id: group_ids })
+  end
+
   private
 
   # Dirty ransack scopes
