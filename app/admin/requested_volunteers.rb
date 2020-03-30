@@ -2,7 +2,7 @@
 
 ActiveAdmin.register RequestedVolunteer do
   decorate_with RequestedVolunteerDecorator
-  belongs_to :organisation_request, :parent_class => Request
+  belongs_to :organisation_request, parent_class: Request
   permit_params :request_id, :volunteer_id, :state, :visible_sensitive
 
   form do |f|
