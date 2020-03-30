@@ -40,7 +40,6 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     private
 
     def notify_volunteers_updated
-      puts 'foobar'
       return if resource.volunteers.fcm_active.empty?
 
       Push::Requests::UpdaterService(resource, resource.volunteers.fcm_active).perform
