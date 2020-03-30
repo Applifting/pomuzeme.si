@@ -34,6 +34,7 @@ ActiveAdmin.register RequestedVolunteer do
   controller do
     def create
       super do |success, failure|
+        notify_volunteer_assigned if success.present?
         success.html { redirect_to admin_organisation_request_path(resource.request_id) }
         failure.html { render :new }
       end
@@ -41,6 +42,7 @@ ActiveAdmin.register RequestedVolunteer do
 
     def update
       super do |success, failure|
+        notify_volunteer_updated if success.present?
         success.html { redirect_to admin_organisation_request_path(resource.request_id) }
         failure.html { render :new }
       end
@@ -51,6 +53,21 @@ ActiveAdmin.register RequestedVolunteer do
         success.html { redirect_to admin_organisation_request_path(resource.request_id) }
         failure.html { render :new }
       end
+    end
+
+    private
+
+    def notify_volunteer_assigned
+      return unless resource.volunteer.fcm_active?
+
+      Push::Requests::AssignerService.new(resource.request, [resource.volunteer]).perform
+    end
+
+    def notify_volunteer_updated
+      puts resource.volunteer.fcm_active?
+      return unless resource.volunteer.fcm_active?
+
+      Push::Requests::UpdaterService.new(resource.request, [resource.volunteer]).perform
     end
   end
 end

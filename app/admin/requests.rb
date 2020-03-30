@@ -27,8 +27,23 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
 
   # Controller
   controller do
+    def update
+      super do |success, _failure|
+        notify_volunteers_updated if success.present?
+      end
+    end
+
     def scoped_collection
       super.includes(:address)
+    end
+
+    private
+
+    def notify_volunteers_updated
+      puts 'foobar'
+      return if resource.volunteers.fcm_active.empty?
+
+      Push::Requests::UpdaterService(resource, resource.volunteers.fcm_active).perform
     end
   end
 

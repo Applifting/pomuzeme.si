@@ -15,14 +15,4 @@ class RequestedVolunteer < ApplicationRecord
     rejected: 4,
     removed: 5
   }
-
-  after_create :notify_volunteer
-
-  private
-
-  def notify_volunteer
-    return unless volunteer.fcm_active?
-
-    Push::RequestService.new(request, [volunteer]).perform
-  end
 end
