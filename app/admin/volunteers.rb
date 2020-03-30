@@ -60,8 +60,12 @@ ActiveAdmin.register Volunteer do
     end
     id_column
     column :full_name
-    column :phone
-    column :email
+    column :phone do |resource|
+      resource.show_contact_details?(params) ? resource.phone : 'v detailu'
+    end
+    column :email do |resource|
+      resource.show_contact_details?(params) ? resource.email : 'v detailu'
+    end
     column :address
     if params[:q] && params[:q][:search_nearby]
       params[:order] = 'distance_meters_asc'
@@ -105,8 +109,12 @@ ActiveAdmin.register Volunteer do
   csv do
     column :first_name
     column :last_name
-    column :phone
-    column :email
+    column :phone do |resource|
+      resource.show_contact_details?(params) ? resource.phone : 'v detailu'
+    end
+    column :email do |resource|
+      resource.show_contact_details?(params) ? resource.email : 'v detailu'
+    end
     column :street
     column :city
   end
