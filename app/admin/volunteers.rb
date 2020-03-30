@@ -99,11 +99,14 @@ ActiveAdmin.register Volunteer do
   end
 
   form do |f|
-    f.input :first_name
-    f.input :last_name
-    f.input :phone
-    f.input :email
-    f.input :description
+    f.inputs do
+      f.input :first_name
+      f.input :last_name
+      f.input :phone
+      f.input :email
+      f.input :description
+    end
+    f.actions
   end
 
   csv do
