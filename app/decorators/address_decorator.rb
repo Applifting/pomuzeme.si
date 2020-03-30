@@ -10,7 +10,10 @@ class AddressDecorator < ApplicationDecorator
   end
 
   def full_address
-    [full_street, [address&.city_part, address&.city].uniq, address&.postal_code].flatten.compact.join(', ')
+    [full_street, [address&.city_part, address&.city].uniq, address&.postal_code].flatten
+                                                                                 .compact
+                                                                                 .reject(&:blank?)
+                                                                                 .join(', ')
   end
   alias to_s full_address
 
