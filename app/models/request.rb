@@ -17,6 +17,7 @@ class Request < ApplicationRecord
   validates :text, :required_volunteer_count, :subscriber, presence: true
   validates :creator, :state, :state_last_updated_at, presence: true
   validates :subscriber_phone, phony_plausible: true, presence: true
+  validate :address_presence
 
   # Attributes
   accepts_nested_attributes_for :address
@@ -54,5 +55,13 @@ class Request < ApplicationRecord
     return unless state_changed? || !state_last_updated_at
 
     self.state_last_updated_at = DateTime.now
+  end
+
+  private
+
+  def address_presence
+    return if address.present? && address.valid?
+
+    errors.add :base, I18n.t('activerecord.errors.models.address.base.inaccurate_address')
   end
 end

@@ -115,6 +115,8 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   form do |f|
     javascript_for(*location_autocomplete(callback: 'InitRequestAutocomplete'))
 
+    f.semantic_errors
+
     f.inputs 'Poptávka služby' do
       f.input :text, as: :text, hint: 'Tento popis dostane dobrovolník do aplikace / SMS'
       f.input :required_volunteer_count, input_html: { value: object.required_volunteer_count.nil? ? 1 : resource.required_volunteer_count }
