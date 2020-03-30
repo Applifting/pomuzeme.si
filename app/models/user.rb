@@ -23,6 +23,7 @@ class User < ApplicationRecord
   # Validations
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :phone, phony_plausible: true, uniqueness: true, presence: true
 
   def cached_roles_name
     @cached_roles_name ||= roles_name.map(&:to_sym)
