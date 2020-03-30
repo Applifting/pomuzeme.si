@@ -18,10 +18,10 @@ ActiveAdmin.register Recruitment do
 
   index do
     column :volunteer
+    column :recruitment_status, &:humanized_recruitment_status
     column :address do |resource|
       resource.volunteer&.addresses&.first
     end
-    column :recruitment_status, &:humanized_recruitment_status
     column :source
     column :is_exclusive
     column :coordinator

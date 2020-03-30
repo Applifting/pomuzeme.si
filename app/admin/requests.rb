@@ -34,7 +34,9 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
 
   index do
     id_column
-    column :state
+    column :state do |resource|
+      status_tag I18n.t(resource.state, scope: 'activerecord.attributes.request.states')
+    end
     column :text
     column :subscriber
     column :address
@@ -69,12 +71,14 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
       panel '' do
         attributes_table_for resource do
           row :state do |request|
-            best_in_place request, :state, as: :select,
-                                           collection: I18n.t('activerecord.attributes.request.states'),
-                                           url: admin_organisation_request_path(resource)
+            if can?(:update, resource)
+              best_in_place request, :state, as: :select,
+                                             collection: I18n.t('activerecord.attributes.request.states'),
+                                             url: admin_organisation_request_path(resource)
+            else
+              status_tag I18n.t(resource.state, scope: 'activerecord.attributes.request.states')
+            end
           end
-          row :required_volunteer_count
-          row :block_volunteer_until
           row :coordinator do
             if can?(:update, resource)
               best_in_place resource, :coordinator_id, as: :select,
@@ -84,6 +88,8 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
               resource.coordinator
             end
           end
+          row :required_volunteer_count
+          row :block_volunteer_until
           row :state_last_updated_at
           row :created_at
           row :creator
