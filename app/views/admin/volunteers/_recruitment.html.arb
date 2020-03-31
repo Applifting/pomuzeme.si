@@ -18,8 +18,12 @@ if recruitment.present?
                                                       collection: I18n.t('activerecord.attributes.group_volunteer.recruitment_statuses'),
                                                       url: admin_volunteer_group_volunteer_path(resource, recruitment)
     end
+    row :coordinator do
+      best_in_place recruitment, :coordinator_id, as: :select,
+                                                  collection: current_user.organisation_colleagues.map { |i| [i.id, i.to_s] },
+                                                  url: admin_volunteer_group_volunteer_path(resource, recruitment)
+    end
     row :source
-    row :coordinator
     row :comments do
       best_in_place recruitment, :comments, as: :textarea,
                                             url: admin_volunteer_group_volunteer_path(resource, recruitment),

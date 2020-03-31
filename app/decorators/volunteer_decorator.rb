@@ -1,6 +1,7 @@
 class VolunteerDecorator < ApplicationDecorator
   decorates_association :addresses
   delegate_all
+  delegate :city, :street, to: :address
 
   def confirmed?
     object.confirmed?
@@ -16,6 +17,10 @@ class VolunteerDecorator < ApplicationDecorator
     else
       address
     end
+  end
+
+  def show_contact_details?(params)
+    params['scope'] == 'volunteer_verified' || params['scope'].nil?
   end
 
   def full_name
