@@ -9,6 +9,9 @@ table_for resource.requested_volunteers.includes(:volunteer).order(:state).map(&
   column :first_name
   column :last_name
   column :phone
-  column :state
-  column 'Akce', class: 'centered', &:actions
+  column :state do |requested_volunteer|
+    best_in_place requested_volunteer, :state, as: :select,
+                                               collection: I18n.t('activerecord.attributes.requested_volunteer.states'),
+                                               url: admin_organisation_request_requested_volunteer_path(resource, requested_volunteer)
+  end
 end

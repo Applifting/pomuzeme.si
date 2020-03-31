@@ -7,12 +7,12 @@ class Volunteer < ApplicationRecord
   NOT_RECRUITED_BY_CONDITIONS = 'group_volunteers.id is null OR (group_volunteers.is_exclusive = false and group_volunteers.group_id != %{group_id})'.freeze
 
   # Associations
-  has_many :addresses, as: :addressable
-  has_many :group_volunteers
+  has_many :addresses, as: :addressable, dependent: :destroy
+  has_many :group_volunteers, dependent: :destroy
   has_many :groups, through: :group_volunteers
-  has_many :volunteer_labels
+  has_many :volunteer_labels, dependent: :destroy
   has_many :labels, through: :volunteer_labels
-  has_many :requested_volunteers
+  has_many :requested_volunteers, dependent: :destroy
   has_many :requests, through: :requested_volunteers
 
   # normalize phone format and add default czech prefix if missings
@@ -27,13 +27,17 @@ class Volunteer < ApplicationRecord
   # Scopes
   scope :with_calculated_distance, lambda { |center_point|
     joins(:addresses).joins(format(NEAREST_ADDRESSES_SQL, longitude: center_point.longitude, latitude: center_point.latitude))
-        .select('volunteers.*', 'ST_Distance(addresses.coordinate, ref_geom) as distance_meters')
+                     .select('volunteers.*', 'ST_Distance(addresses.coordinate, ref_geom) as distance_meters')
+                     .order('distance_meters ASC')
   }
   scope :with_labels, ->(label_ids) { joins(:volunteer_labels).where(volunteer_labels: { label_id: label_ids }).distinct }
   scope :available_for, ->(group_id) { left_joins(:group_volunteers).where(format(AVAILABLE_VOLUNTEERS_CONDITIONS, group_id: group_id)) }
+  scope :exclusive_for, ->(group_id) { left_joins(:group_volunteers).where(group_volunteers: { is_exclusive: true, group_id: group_id }) }
   scope :verified_by, ->(group_id) { left_joins(:group_volunteers).where(group_volunteers: { group_id: group_id, recruitment_status: 3 }) }
   scope :not_recruited_by, ->(group_id) { left_joins(:group_volunteers).where(format(NOT_RECRUITED_BY_CONDITIONS, group_id: group_id)) }
   scope :assigned_to_request, ->(request_id) { left_joins(:requested_volunteers).where(requested_volunteers: { request_id: request_id }) }
+  scope :blocked, -> { left_joins(:requests).where(requested_volunteers: { state: :accepted }, requests: { block_volunteer_until: Time.now.. }) }
+  scope :not_blocked, -> { where.not(id: blocked) }
 
   attr_accessor :address_search_input
 

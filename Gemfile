@@ -31,6 +31,8 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'best_in_place', '~> 3.1', '>= 3.1.1'
+
 gem 'httparty'
 
 # cloudflare - heroku integration according to https://www.viget.com/articles/heroku-cloudflare-the-right-way/
@@ -76,12 +78,13 @@ group :test do
   # One liner matchers
   gem 'shoulda-matchers', '~> 4.3'
   # Fake data
-  gem 'ffaker', '~> 2.14'
 end
 
 group :production do
   gem 'rails_autoscale_agent'
 end
+
+gem 'ffaker', '~> 2.14'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
@@ -108,12 +111,15 @@ gem 'activeadmin'
 gem 'arctic_admin'
 gem 'draper'
 
+# geocoding
+gem 'geocoder'
+
 # localisation
 gem 'rails-i18n'
 gem 'devise-i18n'
 
-# geocoding
-gem 'geocoder'
-
 # email provider
 gem 'sendgrid-ruby'
+
+# data management
+gem 'csv'

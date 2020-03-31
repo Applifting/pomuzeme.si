@@ -63,10 +63,12 @@ ActiveAdmin.register Address do
   form do |f|
     javascript_for(*location_autocomplete)
 
-    f.inputs do
+    f.inputs 'Aktualizace adresy' do
       f.semantic_errors
       f.input :id, as: :hidden
-      custom_input :full_address, class: 'geocomplete'
+      custom_input :full_address, label: I18n.t('activerecord.attributes.address.new_address'),
+                                  class: 'geocomplete',
+                                  hint: I18n.t('activerecord.attributes.address.current_address', address: resource)
       f.input :street_number, as: :hidden
       f.input :street, as: :hidden
       f.input :city, as: :hidden
@@ -76,8 +78,13 @@ ActiveAdmin.register Address do
       f.input :latitude, as: :hidden
       f.input :longitude, as: :hidden
       f.input :geo_entry_id, as: :hidden
-      f.input :addressable_type
-      f.input :addressable_id
+      custom_input :redirect_to, type: :hidden, value: request.referrer
+      if current_user.admin?
+        f.inputs 'Super admin' do
+          f.input :addressable_type
+          f.input :addressable_id
+        end
+      end
     end
     f.actions
   end
@@ -87,7 +94,9 @@ ActiveAdmin.register Address do
       @resource = AddressForm.build(permitted_params[:address])
 
       if @resource.save
-        redirect_to admin_address_path @resource.address, notice: :updated
+        original_referrer = params[:address][:redirect_to]
+        redirect = original_referrer && URI(original_referrer).path || admin_address_path(@resource)
+        redirect_to redirect, notice: I18n.t('activerecord.attributes.address.updated')
       else
         puts @resource.errors.messages
         @resource.errors.add :base, I18n.t('activerecord.errors.models.address.base.inaccurate_address')

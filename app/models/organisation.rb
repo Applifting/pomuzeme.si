@@ -9,9 +9,9 @@ class Organisation < ApplicationRecord
            class_name: :User,
            through: :roles,
            source: :users
-  has_many :organisation_groups
+  has_many :organisation_groups, dependent: :destroy
   has_many :groups, through: :organisation_groups
-  has_many :requests
+  has_many :requests, dependent: :destroy
 
   # Validations
   validates :name, presence: true
@@ -28,7 +28,7 @@ class Organisation < ApplicationRecord
   after_commit :invalidate_organisation_count_cache
 
   # Scopes
-  scope :user_group_organisations, ->(user) { joins(groups: :organisation_groups).where(organisation_groups: { group_id: user.coordinating_groups.pluck(:id) }).distinct }
+  scope :user_group_organisations, ->(user) { joins(:organisation_groups).where(organisation_groups: { group_id: user.organisation_group.id }) }
 
   def to_s
     "#{name} ~ #{abbreviation}"

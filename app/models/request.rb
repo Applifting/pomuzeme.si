@@ -10,7 +10,7 @@ class Request < ApplicationRecord
   belongs_to :closer, class_name: 'User', foreign_key: :closed_by_id, optional: true
   belongs_to :coordinator, class_name: 'User', foreign_key: :coordinator_id, optional: true
   belongs_to :organisation
-  has_many :requested_volunteers
+  has_many :requested_volunteers, dependent: :destroy
   has_many :volunteers, through: :requested_volunteers
 
   # Validations
@@ -38,6 +38,11 @@ class Request < ApplicationRecord
   scope :sorted_state, -> { order(state: :asc, state_last_updated_at: :desc) }
   scope :assignable, -> { where(state: %i[created searching_capacity pending_confirmation]) }
   scope :with_organisations, ->(*organisation_id) { where(organisation_id: organisation_id) }
+  scope :in_progress, -> { where('state = 4 AND (fullfillment_date IS NULL OR fullfillment_date > ?)', Time.zone.now) }
+  scope :not_closed, -> { where.not(state: :closed) }
+  scope :closed, -> { where(state: :closed) }
+  scope :check_fulfillment, -> { where('state = 4 AND fullfillment_date < ?', Time.zone.now) }
+  scope :without_coordinator, -> { where(coordinator_id: nil) }
 
   def title
     [text[0..39], address].compact.join ', '

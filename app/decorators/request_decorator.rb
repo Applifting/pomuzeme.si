@@ -3,9 +3,23 @@ class RequestDecorator < ApplicationDecorator
   delegate_all
 
   def volunteer_params
-    puts object.address
-    puts object.address.coordinate
     { request_id: object.id }.merge search_params
+  end
+
+  def subscriber
+    if h.can?(:manage, object)
+      object.subscriber
+    else
+      I18n.t 'activerecord.attributes.request.subscriber_hidden'
+    end
+  end
+
+  def address_link
+    if h.can?(:manage, object) && address
+      h.link_to h.content_tag(:span, address.to_s, class: 'action edit'), h.edit_admin_address_path(address)
+    else
+      address
+    end
   end
 
   private

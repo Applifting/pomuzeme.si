@@ -44,10 +44,17 @@ img {
   text-align: center;
   outline: none;
   padding: 0;
+  margin: 12px 0;
   font-family: $title-font;
 
   &.secondary {
     background-color: $secondary-button-color;
+  }
+
+  &.tertiary {
+    background-color: $background-light;
+    color: gray;
+    border: 3px black;
   }
 }
 
@@ -56,7 +63,7 @@ img {
   height: 64px;
   line-height: 64px;
   font-size: 18px;
-  max-width: 280px;
+  max-width: 320px;
   border-radius: 32px;
   box-shadow: $shadow_1;
 
@@ -158,6 +165,26 @@ h4 {
   }
 }
 
+.button-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+
+  button#chci-pomahat {
+    margin-right: 12px;
+  }
+
+  a {
+    color: $tertiary-button-color;
+  }
+
+  @include lg {
+    justify-content: space-evenly;
+  }
+}
+
 .section-hero {
   padding-top: 72px;
 
@@ -231,10 +258,6 @@ h4 {
         transform: translateX(-50%);
         margin: 30px 0 0;
       }
-    }
-
-    button {
-
     }
   }
 }
@@ -489,7 +512,7 @@ h4 {
       }
 
       @include lg {
-        margin: 40px 0;
+        margin: 20px 0;
       }
 
       p {
@@ -517,7 +540,7 @@ h4 {
   }
 }
 
-.section-contact {
+.section-partner-contact {
   text-align: center;
 
   h3 {
@@ -537,6 +560,29 @@ h4 {
 
   a {
     margin-bottom: 30px;
+  }
+
+  .about_app {
+    max-width: 500px;
+    margin: auto;
+    text-align: left;
+    padding-bottom: 24px;
+
+    p {
+      margin: 0;
+    }
+
+    ul {
+      padding-left: 24px;
+      li {
+        line-height: 24px;
+        list-style-type: square;
+        color: gray;
+      }
+    }
+    .asterix {
+      font-size: 10px;
+    }
   }
 }
 

@@ -1,0 +1,12 @@
+.best_in_place:after {
+  font-family: 'Font Awesome 5 Free';
+  color: gray;
+  font-size: 10px;
+  position: relative;
+  margin-left: 7px;
+}
+
+.best_in_place:after {
+  top: -1px;
+  content: "\f044";
+}
