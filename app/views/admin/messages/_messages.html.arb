@@ -1,8 +1,8 @@
 panel 'Konverzace s dobrovolníkem' do
   div class: :conversation do
-    groupped_by_date = Message.all.order(:created_at).decorate.group_by { |msg| msg.created_at.to_date }
+    para 'Źádné zprávy.' if groupped_messages.blank?
 
-    groupped_by_date.each do |date, messages|
+    groupped_messages.each do |date, messages|
       ul class: 'messages' do
         li date, class: 'date-header'
         messages.each do |msg|

@@ -1,4 +1,6 @@
 class Message < ApplicationRecord
+  MESSAGES_FOR_REQUEST_SQL = 'volunteer_id = %{volunteer_id} AND (request_id IS NULL OR request_id = %{request_id})'.freeze
+
   # Associations
   belongs_to :volunteer, optional: true
   belongs_to :creator, optional: true, class_name: 'User', foreign_key: :created_by_id
@@ -14,6 +16,11 @@ class Message < ApplicationRecord
 
   # Hooks
   after_create :send_outgoing_message
+
+  # Scopes
+  scope :unread, -> {  where(read_at: nil) }
+  scope :incoming, -> {  where(direction: 1) }
+  scope :for_request, ->(request_id, volunteer_id) { where(format(MESSAGES_FOR_REQUEST_SQL, request_id: request_id, volunteer_id: volunteer_id)) }
 
   private
 
