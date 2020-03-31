@@ -17,7 +17,11 @@ ActiveAdmin.register Message do
   end
 
   form do |f|
+    # Mark incoming messages as read
+    Message.incoming.unread.for_request(params[:request_id], params[:volunteer_id]).each(&:mark_as_read)
+
     groupped_messages = Message.for_request(params[:request_id], params[:volunteer_id]).order(:created_at).decorate.group_by { |msg| msg.created_at.to_date }
+
     render partial: 'messages', locals: { groupped_messages: groupped_messages }
 
     f.inputs 'Nová zpráva' do
