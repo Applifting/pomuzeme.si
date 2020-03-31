@@ -19,7 +19,9 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
 
   # Scopes
   # Experimental feature
-  scope :unread_msgs, default: true, if: -> { current_user.admin? }, &:has_unread_messages
+  scope :unread_msgs, default: true, if: -> { current_user.admin? } do |scope|
+    scope.not_closed.has_unread_messages
+  end
   scope :request_in_preparation, default: true do |scope|
     scope.assignable
          .with_organisations(current_user.coordinating_organisations.pluck(:id))
