@@ -2,6 +2,8 @@ module SmsService
   module Connector
     module O2
       MESSAGE_DELIVERED_TO_NETWORK = 'ISUC_010'.freeze
+      BA_ID                        = 1_992_125
+      PHONE_NUMBER                 = '+420720002125'.freeze
 
       def self.send_message(phone, text)
         Message.send(phone, text)

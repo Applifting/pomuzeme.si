@@ -1,8 +1,4 @@
 module SmsService
-  # send msg > update msg_id refMsgID
-  # receive delivery_report (ISUC_005) > update message received at > onsuccess: confirm receipt
-  # receive incoming message > create new message > onsuccess: confirm receipt
-
   class MessagingError < StandardError; end
 
   module Connector
@@ -16,21 +12,20 @@ module SmsService
         end
 
         def self.receive
-          raw_response = O2.client.get('/smsconnector/getpost/GP', { query: { action: 'receive', baID: 1_992_125 } })
+          raw_response = O2.client.get('/smsconnector/getpost/GP', { query: { action: 'receive', baID: O2::BA_ID } })
           response = handle_response(raw_response)
           block_given? ? yield(response) : response
         end
 
         def self.confirm(incoming_msg)
-          confirm_query = proc { |inc_msg|
-            {
-              action: 'confirm',
-              baID: 1_992_125,
-              refBaID: 1_992_125,
-              refMsgID: inc_msg.msg_id
-            }
+          confirm_query = {
+            action: 'confirm',
+            baID: O2::BA_ID,
+            refBaID: O2::BA_ID,
+            refMsgID: incoming_msg.msg_id
           }
-          raw_response = O2.client.get('/smsconnector/getpost/GP', { query: confirm_query[incoming_msg] })
+
+          raw_response = O2.client.get('/smsconnector/getpost/GP', { query: confirm_query })
           handle_response(raw_response)
         end
 
@@ -39,13 +34,15 @@ module SmsService
         end
 
         def send(attempt = 0)
-          return send_mock_message if ENV['SMS_MOCK'] == 'true'
-
-          raw_response = O2.client.get('/smsconnector/getpost/GP', { query: send_query })
+          raw_response = if ENV['SMS_MOCK'] == 'true'
+                           send_mock_message
+                         else
+                           O2.client.get('/smsconnector/getpost/GP', { query: send_query })
+                         end
 
           # If request returns no success code try it again after 100ms
           if raw_response.code > 299 && attempt < 1
-            sleep 0.1
+            sleep 0.2
             send(1)
           end
 
@@ -75,7 +72,8 @@ module SmsService
           puts '==========================='
           puts "SMS for #{phone}, TEXT -> #{text}"
           puts '==========================='
-          Response.new mock_raw_response_success
+
+          mock_raw_response_success
         end
 
         def mock_raw_response_success
@@ -85,8 +83,8 @@ module SmsService
         def send_query
           {
             action: 'send',
-            baID: 1_992_125,
-            fromNumber: '+420720002125',
+            baID: O2::BA_ID,
+            fromNumber: O2::PHONE_NUMBER,
             toNumber: phone,
             text: text,
             deliveryReport: 'TRUE',
@@ -100,8 +98,8 @@ module SmsService
         def confirm_query(incoming_msg)
           {
             action: 'receive',
-            baID: 1_992_125,
-            refBaID: 1_992_125,
+            baID: O2::BA_ID,
+            refBaID: O2::BA_ID,
             refMsgID: incoming_msg.msg_id
           }
         end

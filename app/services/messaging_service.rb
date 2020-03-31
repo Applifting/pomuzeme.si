@@ -2,31 +2,21 @@
 
 module MessagingService
   def self.send(active_record_message)
-    # create message_object shared with / understood by SMSService, PushNotificationService
     message_object = OutgoingMessage.new(active_record_message)
 
-    # detect channel (sms / app)
-    # delegate message sending to required channel service
     SmsService.send(message_object) do |response|
       Callbacks.message_sent(message_object, response)
     end
   rescue StandardError => e
-    # TODO: cleanup
-    puts e
-    puts e.backtrace[0..10]
+    Raven.extra_context active_record_message: active_record_message
     Raven.capture_exception e
   end
 
-  # Receive callbacks: message_received, message_sent, delivery_report_received
   def self.callback(event_type, payload)
     Callbacks.send(event_type, payload)
   end
 
   class OutgoingMessage
-    # expose attributes needed to:
-    # - send message
-    # - decorate message text (creator's signature, ...)
-
     attr_reader :phone, :message
 
     def initialize(active_record_message)
