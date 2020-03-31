@@ -141,7 +141,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     end
 
     f.inputs 'Koordinace' do
-      organisations = current_user.admin? ? Organisation.all : Organisation.joins(:organisation_groups).where(organisation_groups: { group_id: current_user.organisation_group.id })
+      organisations = current_user.admin? ? Organisation.all : Organisation.user_group_organisations(current_user)
 
       f.input :state if resource.persisted?
       f.input :organisation, as: :select,
