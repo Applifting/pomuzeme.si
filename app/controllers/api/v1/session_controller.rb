@@ -1,5 +1,5 @@
 class Api::V1::SessionController < ApiController
-  skip_before_action :authorize_request
+  skip_before_action :authorize_request, except: :refresh
 
   def new
     return error_response(ApiErrors[:INVALID_CAPTCHA], status: :forbidden) unless valid_recaptcha?
@@ -17,6 +17,10 @@ class Api::V1::SessionController < ApiController
     return handle_unauthorized(volunteer) unless volunteer.authorize_with(permitted_params[:sms_verification_code])
 
     json_response token: token(volunteer)
+  end
+
+  def refresh
+    json_response token: token(current_volunteer)
   end
 
   private

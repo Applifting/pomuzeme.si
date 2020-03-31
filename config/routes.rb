@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       post '/geo/fulltext', to: 'geolocation#fulltext'
       post '/session/new', to: 'session#new'
       post '/session/create', to: 'session#create'
+      post '/session/refresh', to: 'session#refresh'
       namespace :organisations do
         get '/', action: :index
       end
