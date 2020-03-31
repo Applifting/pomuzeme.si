@@ -46,7 +46,7 @@ class Request < ApplicationRecord
   scope :closed, -> { where(state: :closed) }
   scope :check_fulfillment, -> { where('state = 4 AND fullfillment_date < ?', Time.zone.now) }
   scope :without_coordinator, -> { where(coordinator_id: nil) }
-  scope :has_unread_messages, -> { joins(requested_volunteers: :messages).where(HAS_UNREAD_MESSAGES) }
+  scope :has_unread_messages, -> { joins(requested_volunteers: :messages).where(HAS_UNREAD_MESSAGES).distinct }
 
   def title
     [text[0..39], address].compact.join ', '
