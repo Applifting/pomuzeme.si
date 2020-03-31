@@ -20,7 +20,7 @@ ActiveAdmin.register Volunteer do
   filter :full_name_cont, label: 'Jméno / příjmení'
   filter :has_labels, label: 'Štítky',
                       as: :select, multiple: true,
-                      collection: proc { OptionsWrapper.wrap (Label.managable_by(current_user).map { |i| [i.name, i.id] }), params, :has_labels },
+                      collection: proc { OptionsWrapper.wrap (Label.alphabetically.managable_by(current_user).map { |i| [i.name, i.id] }), params, :has_labels },
                       selected: 1,
                       input_html: { style: 'height: 100px' }
   filter :phone_or_email_cont, label: 'Telefon / email'
@@ -60,8 +60,12 @@ ActiveAdmin.register Volunteer do
     end
     id_column
     column :full_name
-    column :phone
-    column :email
+    column :phone do |resource|
+      resource.show_contact_details?(params) ? resource.phone : 'v detailu'
+    end
+    column :email do |resource|
+      resource.show_contact_details?(params) ? resource.email : 'v detailu'
+    end
     column :address
     if params[:q] && params[:q][:search_nearby]
       params[:order] = 'distance_meters_asc'
@@ -81,7 +85,7 @@ ActiveAdmin.register Volunteer do
         row :full_name
         row :phone
         row :email
-        row :address
+        row :address, &:address_link
         row :description
         row :created_at
         row :updated_at
@@ -96,10 +100,10 @@ ActiveAdmin.register Volunteer do
 
   form do |f|
     f.inputs do
-      f.inputs :first_name
-      f.inputs :last_name
-      f.inputs :phone
-      f.inputs :email
+      f.input :first_name
+      f.input :last_name
+      f.input :phone
+      f.input :email
       f.inputs :description, as: :text
       f.inputs :preferences, as: :jsonb
     end
@@ -109,8 +113,12 @@ ActiveAdmin.register Volunteer do
   csv do
     column :first_name
     column :last_name
-    column :phone
-    column :email
+    column :phone do |resource|
+      resource.show_contact_details?(params) ? resource.phone : 'v detailu'
+    end
+    column :email do |resource|
+      resource.show_contact_details?(params) ? resource.email : 'v detailu'
+    end
     column :street
     column :city
   end

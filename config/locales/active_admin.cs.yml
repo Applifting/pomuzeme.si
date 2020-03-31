@@ -124,7 +124,9 @@ cs:
       recruitment_closed: Uzavřený
       recruitment_all: Vše
       recruitment_unassigned: Bez koordinátora
-      user_organisation_requests: Moje organizace
+      request_in_preparation: v přípravě
+      request_in_fulfillment: v plnění
+      request_check_fulfillment: ke kontrole
       closed: uzavřené
     index_list:
       table: "Tabulka"

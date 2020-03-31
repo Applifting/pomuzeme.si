@@ -1,13 +1,19 @@
 module Abilities
   module Coordinator
     def add_coordinator_ability(user)
+      can :manage, (ActiveAdmin.register_page 'Import Data')
       can :read, ActiveAdmin::Page, name: 'Dashboard'
       can %i[index read], [Organisation, OrganisationDecorator], id: Organisation.user_group_organisations(user).pluck(:id)
       can :update, [Organisation, OrganisationDecorator], id: user.coordinating_organisations.pluck(:id)
       can %i[read], [User, UserDecorator], id: user.coordinators_in_organisations.pluck(:id)
 
       can %i[read download], [Volunteer, VolunteerDecorator], id: Volunteer.available_for(user.organisation_group.id).pluck(:id)
+      can :manage, [Volunteer, VolunteerDecorator], id: Volunteer.exclusive_for(user.organisation_group.id).pluck(:id)
       cannot %i[read], Volunteer, confirmed_at: nil
+
+      can :update, [Address, AddressDecorator], Address.all do |address|
+        can? :manage, address.addressable
+      end
 
       can %i[read], [Group], id: user.coordinating_groups.pluck(:id)
 

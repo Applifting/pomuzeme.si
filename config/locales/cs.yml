@@ -122,6 +122,9 @@ cs:
         last_name: Příjmení
       address:
         full_address: Adresa
+        current_address: "Aktuální adresa: %{address}"
+        updated: Adresa byla aktualizovaná
+        new_address: Nová adresa
         street_number: Cislo domu
         street: Ulice
         city: Mesto
@@ -157,6 +160,7 @@ cs:
         state: Stav
         state_last_updated_at: Stav naposledy aktualizován
         subscriber: Příjemce
+        subscriber_hidden: skrytý příjemce
         subscriber_phone: Telefon příjemce
         created_at: Vytvořeno
         states:

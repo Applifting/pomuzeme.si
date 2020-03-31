@@ -12,4 +12,5 @@ class VolunteerLabel < ApplicationRecord
 
   # Scopes
   scope :managable_by, ->(user) { joins(:label).where(labels: { group_id: user.coordinating_groups.pluck(:id) }) }
+  scope :alphabetically, -> { joins(:label).order('labels.name') }
 end

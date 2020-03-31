@@ -10,7 +10,10 @@ class AddressDecorator < ApplicationDecorator
   end
 
   def full_address
-    [full_street, [address&.city_part, address&.city].uniq, address&.postal_code].flatten.compact.join(', ')
+    [full_street, [address&.city_part, address&.city].uniq, address&.postal_code].flatten
+                                                                                 .compact
+                                                                                 .reject(&:blank?)
+                                                                                 .join(', ')
   end
   alias to_s full_address
 
@@ -19,6 +22,6 @@ class AddressDecorator < ApplicationDecorator
   end
 
   def distance_in_km(distance_meters)
-    (distance_meters / 1_000).round 2
+    (distance_meters / 1_000).round(2).to_s + ' km'
   end
 end

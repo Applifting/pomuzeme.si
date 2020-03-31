@@ -20,7 +20,7 @@ module AddressForm
     private
 
     def find_or_build_address_from_params
-      find_or_build_address_from_params || instantiate_new_product
+      find_or_build_address_from_params
     end
 
     def form_submitted?

@@ -1,5 +1,5 @@
 # require custom Arbre components from app/components/
-Dir[Rails.root.join('app/components/active_admin/inputs/*.rb')].each { |f| require f }
+Dir[Rails.root.join('app/components/active_admin/inputs/*.rb')].sort.each { |f| require f }
 Dir[Rails.root.join('app/components/active_admin/views/*.rb')].sort.each { |f| require f }
 
 ActiveAdmin.setup do |config|
@@ -275,7 +275,7 @@ ActiveAdmin.setup do |config|
   # Pagination is enabled by default for all resources.
   # You can control the default per page count for all resources here.
   #
-  # config.default_per_page = 30
+  config.default_per_page = 15
   #
   # You can control the max per page count too.
   #
