@@ -22,7 +22,7 @@ module Abilities
       can_manage_requests user
       can_manage_recruitment user
 
-      can_import_and_cleanup_data if ENV['ENV_FLAVOR'] == 'staging'
+      can_import_and_cleanup_data if ENV['ENV_FLAVOR'] == 'staging' || Rails.env.development?
     end
 
     def can_manage_recruitment(user)
