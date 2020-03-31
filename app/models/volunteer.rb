@@ -70,10 +70,10 @@ class Volunteer < ApplicationRecord
   end
 
   def self.has_labels(*label_ids)
-    joins(:volunteer_labels)
-      .where('volunteer_labels' => { label_id: label_ids })
-      .group(:id)
-      .having("count(*) >= #{label_ids.count}")
+    where(id: Volunteer.unscoped.joins(:volunteer_labels)
+                                .where('volunteer_labels' => { label_id: label_ids })
+                                .group(:id)
+                                .having("count(*) >= #{label_ids.count}").select(:id))
   end
 
   def self.search_nearby(encoded_location)
