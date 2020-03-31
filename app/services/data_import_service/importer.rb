@@ -40,7 +40,7 @@ module DataImportService
             save_model group_volunteer_builder
 
             request ||= find_or_create_by(Request, row['request_text'])
-            requested_volunteer_creator(request)
+            requested_volunteer_creator(request) if request
 
             volunteer_labels_creator
           end
