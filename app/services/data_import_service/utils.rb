@@ -6,6 +6,7 @@ module DataImportService
       rescue StandardError => e
         puts e
         puts e.backtrace[0..20]
+        Raven.extra_context(data_row: @row_output)
         Raven.capture_exception e
         raise ActiveRecord::Rollback
       ensure
