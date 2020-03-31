@@ -38,7 +38,7 @@ class User < ApplicationRecord
   alias title to_s
 
   def organisation_group
-    @organisation_group = coordinating_groups.take
+    @organisation_group ||= coordinating_groups.take
   end
 
   def has_any_role?(role_name)
