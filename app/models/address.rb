@@ -9,7 +9,6 @@ class Address < ApplicationRecord
                                        .select('addresses.*', 'ST_Distance(addresses.coordinate, ref_geom) as distance_meters')
                                    }
 
-  enum country_code: { cz: 'cz' }, _suffix: true
   enum geo_provider: { google_places: 'google_places',
                        cadstudio: 'cadstudio' }, _suffix: true
 

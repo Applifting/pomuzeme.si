@@ -18,7 +18,9 @@ class AddressDecorator < ApplicationDecorator
   alias to_s full_address
 
   def full_street
-    [address&.street, address&.street_number].uniq.compact.join(' ')
+    [address&.street, address&.street_number].uniq
+                                             .reject(&:blank?)
+                                             .compact.join(' ')
   end
 
   def distance_in_km(distance_meters)

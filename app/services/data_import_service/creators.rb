@@ -17,13 +17,17 @@ module DataImportService
     end
 
     def organisation_creator(name)
-      Organisation.find_or_create_by(name: name) do |organisation|
-        organisation.assign_attributes name: name,
-                                       abbreviation: ('a'..'z').to_a.sample(4).join(''),
-                                       contact_person: FFaker::Name.name,
-                                       contact_person_phone: '+420' + rand(666_666_666..888_888_888).to_s,
-                                       contact_person_email: FFaker::Internet.email
+      organisation = Organisation.find_or_create_by(name: name) do |new_organisation|
+        new_organisation.assign_attributes name: name,
+                                           abbreviation: ('a'..'z').to_a.sample(4).join(''),
+                                           contact_person: FFaker::Name.name,
+                                           contact_person_phone: '+420' + rand(666_666_666..888_888_888).to_s,
+                                           contact_person_email: FFaker::Internet.email
       end
+
+      OrganisationGroup.create(organisation: organisation, group: @group) if organisation.organisation_groups.blank?
+
+      organisation
     end
 
     def requested_volunteer_creator(request)
