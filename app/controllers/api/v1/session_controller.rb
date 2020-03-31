@@ -16,7 +16,7 @@ class Api::V1::SessionController < ApiController
     return error_response(ApiErrors[:VOLUNTEER_NOT_FOUND], status: :unauthorized) unless volunteer
     return handle_unauthorized(volunteer) unless volunteer.authorize_with(permitted_params[:sms_verification_code])
 
-    json_response token: token(volunteer)
+    json_response token: token(volunteer), registration_in_progress: volunteer.registration_in_progress?
   end
 
   def refresh
