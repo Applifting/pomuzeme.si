@@ -1,6 +1,10 @@
 class RequestedVolunteerDecorator < ApplicationDecorator
   delegate_all
 
+  def volunteer_name_link
+    h.content_tag(:a, object.to_s, href: h.admin_volunteer_path(object.volunteer_id))
+  end
+
   def actions
     [button_edit].compact.join(' | ').html_safe
   end

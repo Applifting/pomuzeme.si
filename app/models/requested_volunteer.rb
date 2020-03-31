@@ -3,6 +3,7 @@
 class RequestedVolunteer < ApplicationRecord
   belongs_to :request
   belongs_to :volunteer
+  has_many :messages, through: :volunteer
 
   validates_uniqueness_of :volunteer_id, scope: :request_id
 

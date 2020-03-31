@@ -47,6 +47,7 @@ cs:
       organisation: Organizace
       user: Uživatel
       comment: Komentář
+      message: Zprávy
       group: Organizační skupina
       group_volunteer: Nábor
       recruitment: Nábor
