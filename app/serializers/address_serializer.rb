@@ -8,7 +8,8 @@ class AddressSerializer < ActiveModel::Serializer
              :latitude,
              :longitude,
              :postal_code,
-             :country_code
+             :country_code,
+             :default
 
   def latitude
     object.coordinate.latitude
@@ -16,5 +17,9 @@ class AddressSerializer < ActiveModel::Serializer
 
   def longitude
     object.coordinate.longitude
+  end
+
+  def default
+    object.default || false
   end
 end

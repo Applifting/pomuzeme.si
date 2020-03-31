@@ -57,7 +57,8 @@ class VolunteersController < ApplicationController
     coordinate = Geography::Point.from_coordinates latitude: address_params[:geo_coord_y].to_d,
                                                    longitude: address_params[:geo_coord_x].to_d
     address_params.except(:geo_coord_x, :geo_coord_y).merge(coordinate: coordinate,
-                                                            geo_provider: 'google_places')
+                                                            geo_provider: 'google_places',
+                                                            default: true)
   end
 
   def confirm_params

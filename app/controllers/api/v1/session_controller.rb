@@ -1,5 +1,5 @@
 class Api::V1::SessionController < ApiController
-  skip_before_action :authorize_request, except: :refresh
+  skip_before_action :authorize_request, :must_be_registered, except: :refresh
 
   def new
     return error_response(ApiErrors[:INVALID_CAPTCHA], status: :forbidden) unless valid_recaptcha?
@@ -26,7 +26,8 @@ class Api::V1::SessionController < ApiController
   private
 
   def volunteer_from_params
-    Volunteer.find_by phone: PhonyRails.normalize_number(permitted_params[:phone_number], country_code: 'cz')
+    normalized_phone = PhonyRails.normalize_number(permitted_params[:phone_number], country_code: 'cz')
+    Volunteer.find_by(phone: normalized_phone) || Volunteer.create!(first_name: '', last_name: '', email: '', phone: normalized_phone, pending_registration: true)
   rescue Phony::NormalizationError
     nil
   end

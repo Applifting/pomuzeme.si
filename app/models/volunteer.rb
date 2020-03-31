@@ -20,8 +20,8 @@ class Volunteer < ApplicationRecord
   phony_normalized_method :phone, default_country_code: 'CZ'
 
   # Validations
-  validates :first_name, :last_name, :phone, presence: true
-  validates :phone, phony_plausible: true, uniqueness: true
+  validates :first_name, :last_name, presence: true, unless: -> { registration_in_progress? }
+  validates :phone, phony_plausible: true, uniqueness: true, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { email&.present? }
 
   # Scopes
@@ -69,6 +69,10 @@ class Volunteer < ApplicationRecord
 
   def accessed_organisations
     Organisation.left_joins(:organisation_groups).where(organisation_groups: { group_id: group_ids })
+  end
+
+  def registration_in_progress?
+    confirmed_at.nil? && pending_registration?
   end
 
   private

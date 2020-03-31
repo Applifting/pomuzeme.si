@@ -26,12 +26,16 @@ Rails.application.routes.draw do
       namespace :volunteer do
         get 'organisations'
         get 'profile'
+        put 'profile', action: :update_profile
+        put 'register'
         get 'preferences'
         put 'preferences', action: :update_preferences
         namespace :requests do
           get '/', action: :index
           post '/:id/respond', action: :respond
         end
+        resources :addresses, except: %i[edit new]
+
       end
     end
   end

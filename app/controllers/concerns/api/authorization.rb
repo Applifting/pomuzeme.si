@@ -12,6 +12,10 @@ module Api
       raise Api::AuthorizationError
     end
 
+    def must_be_registered
+      raise Api::RegistrationError if current_volunteer.registration_in_progress?
+    end
+
     def token(volunteer)
       Api::JsonWebToken.encode volunteer_id: volunteer.id
     end

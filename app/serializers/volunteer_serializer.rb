@@ -4,9 +4,14 @@ class VolunteerSerializer < ActiveModel::Serializer
              :last_name,
              :email,
              :phone,
-             :address
+             :address,
+             :addresses
 
   def address
-    object.addresses[0]
+    ActiveModelSerializers::SerializableResource.new object.addresses[0]
+  end
+
+  def addresses
+    ActiveModelSerializers::SerializableResource.new object.addresses
   end
 end
