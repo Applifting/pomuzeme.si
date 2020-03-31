@@ -1,6 +1,6 @@
 panel 'Konverzace s dobrovolníkem' do
   div class: :conversation do
-    para 'Źádné zprávy.' if groupped_messages.blank?
+    para 'Žádné zprávy.' if groupped_messages.blank?
 
     groupped_messages.each do |date, messages|
       ul class: 'messages' do
