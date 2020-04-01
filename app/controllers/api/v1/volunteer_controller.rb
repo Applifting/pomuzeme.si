@@ -35,7 +35,7 @@ class Api::V1::VolunteerController < ApiController
   private
 
   def preferences_params
-    params.permit(:notifications_to_app)
+    params.permit(:notifications_to_app, :sound)
   end
 
   def register_params

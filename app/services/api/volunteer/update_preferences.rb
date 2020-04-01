@@ -10,6 +10,7 @@ module Api
         validate_params!
         @volunteer.preferences ||= {}
         @volunteer.preferences['notifications_to_app'] = ActiveModel::Type::Boolean.new.cast @params[:notifications_to_app]
+        @volunteer.preferences['sound'] = ActiveModel::Type::Boolean.new.cast @params[:sound]
         @volunteer.save!
       end
 
