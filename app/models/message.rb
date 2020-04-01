@@ -34,10 +34,10 @@ class Message < ApplicationRecord
   private
 
   def send_outgoing_message
-    MessageSenderJob.perform_later id
+    Messages::SenderJob.perform_later id
   end
 
   def process_incoming_message
-    MessageReceivedProcessorJob.perform_later self
+    Messages::ReceivedProcessorJob.perform_later self
   end
 end

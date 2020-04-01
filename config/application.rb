@@ -35,8 +35,7 @@ module PomuzemeSi
     config.after_initialize do
       next unless defined?(Rails::Server)
 
-      puts 'here'
-      MessageReceiverJob.perform_later
+      Messages::ReceiverJob.perform_later
     end
   end
 end
