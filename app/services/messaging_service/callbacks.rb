@@ -23,11 +23,11 @@ module MessagingService
       def message_received(adapter_response)
         volunteer = Volunteer.find_by(phone: adapter_response.from_number)
 
-        Message.create volunteer: volunteer,
-                       text: adapter_response.text,
-                       direction: :incoming,
-                       state: :received,
-                       channel: :sms
+        Message.create! volunteer: volunteer,
+                        text: adapter_response.text,
+                        direction: :incoming,
+                        state: :received,
+                        channel: :sms
       end
     end
   end
