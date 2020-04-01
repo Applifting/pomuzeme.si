@@ -95,6 +95,7 @@ ActiveAdmin.register Volunteer do
     panel nil, style: 'width: 580px' do
       render partial: 'recruitment'
       render partial: 'labels'
+      render partial: 'requests'
     end
   end
 

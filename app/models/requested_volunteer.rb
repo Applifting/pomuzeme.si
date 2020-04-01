@@ -8,6 +8,10 @@ class RequestedVolunteer < ApplicationRecord
   validates_uniqueness_of :volunteer_id, scope: :request_id
 
   delegate :first_name, :last_name, :phone, :to_s, to: :volunteer
+  delegate :text, :subscriber, to: :request
+
+  # Scopes
+  scope :with_organisations, ->(*organisation_ids) { joins(:request).where(requests: { organisation_id: organisation_ids }) }
 
   enum state: {
     pending_notification: 1,
