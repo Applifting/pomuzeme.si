@@ -7,10 +7,10 @@ module DataImportService
     end
 
     def request_builder
-      request = build_instance(Request, @row.except('request_address', 'request_organisation'))
+      request = build_instance(Request, @row.except('request_address', 'request_organisation', 'request_creator'))
       request.assign_attributes required_volunteer_count: 1,
                                 address: Address.new_from_string(@row['request_address']),
-                                creator: find_or_create_by(User, :full_name, @row['group_volunteer_coordinator']),
+                                creator: find_or_create_by(User, :full_name, @row['request_creator']),
                                 coordinator: find_or_create_by(User, :full_name, @row['group_volunteer_coordinator']),
                                 organisation: find_or_create_by(Organisation, :name, @row['request_organisation'])
       request
@@ -26,6 +26,7 @@ module DataImportService
 
     def group_volunteer_builder
       return unless @volunteer
+      return unless @row['group_volunteer_recruitment_status']
 
       group_volunteer = build_instance(GroupVolunteer, @row.except('group_volunteer_coordinator'))
       return unless group_volunteer
