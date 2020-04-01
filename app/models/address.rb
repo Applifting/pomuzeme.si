@@ -39,7 +39,7 @@ class Address < ApplicationRecord
       component[property]
     end
 
-    geometry = proc { |type| result.data['geometry']['location'][type] }
+    location = result.data['geometry']['location']
     city     = find_property['locality', 'long_name'] || find_property['administrative_area_level_2', 'long_name']
 
     Address.new country_code: find_property['country', 'short_name'].downcase,
@@ -48,7 +48,7 @@ class Address < ApplicationRecord
                 city_part: find_property['neighborhood', 'long_name'] || city,
                 street: find_property['route', 'long_name'],
                 street_number: find_property['street_number', 'long_name'] || '',
-                coordinate: Geography::Point.from_coordinates(latitude: geometry['lat'], longitude: geometry['lng']),
+                coordinate: Geography::Point.from_coordinates(latitude: location['lat'], longitude: location['lng']),
                 geo_entry_id: result.data['place_id'],
                 geo_unit_id: result.data['place_id'],
                 geo_provider: 'google_places'

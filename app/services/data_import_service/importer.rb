@@ -17,7 +17,7 @@ module DataImportService
       @raw_lines   = []
       @output      = []
       @row_output  = nil
-      @cache       = Hash.new({})
+      @cache       = nested_hash
 
       check_inputs
     end
@@ -35,15 +35,14 @@ module DataImportService
           @row = row
           @row_output = row.dup.merge(error_headers)
 
-          save_model(volunteer_builder) do |volunteer|
-            @volunteer = volunteer
-            save_model group_volunteer_builder
+          # Import volunteer independently
+          @volunteer = find_or_create_by(Volunteer, :phone, row['volunteer_phone'])
+          save_model group_volunteer_builder if @volunteer
+          volunteer_labels_custom_creator if @volunteer
 
-            request ||= find_or_create_by(Request, row['request_text'])
-            requested_volunteer_creator(request) if request
-
-            volunteer_labels_creator
-          end
+          # Create request independently
+          request ||= find_or_create_by(Request, :text, row['request_text'])
+          requested_volunteer_custom_creator(request) if request && @volunteer
         end
       end
     end

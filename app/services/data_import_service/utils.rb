@@ -18,6 +18,10 @@ module DataImportService
       @row_output.any? { |k, v| k.start_with?('error') && v.present? }
     end
 
+    def nested_hash
+      Hash.new { |h, k| h[k] = nested_hash }
+    end
+
     def read_lines
       @csv = CSV.open(@filename, headers: true)
       loop do
