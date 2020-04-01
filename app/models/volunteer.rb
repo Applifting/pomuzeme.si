@@ -27,7 +27,7 @@ class Volunteer < ApplicationRecord
   # Scopes
   scope :with_calculated_distance, lambda { |center_point|
     joins(:addresses).joins(format(NEAREST_ADDRESSES_SQL, longitude: center_point.longitude, latitude: center_point.latitude))
-                     .select('volunteers.*', 'ST_Distance(addresses.coordinate, ref_geom) as distance_meters')
+                     .select('volunteers.*', 'addresses.id AS distance_address_id', 'ST_Distance(addresses.coordinate, ref_geom) as distance_meters')
                      .order('distance_meters ASC')
   }
   scope :with_labels, ->(label_ids) { joins(:volunteer_labels).where(volunteer_labels: { label_id: label_ids }).distinct }

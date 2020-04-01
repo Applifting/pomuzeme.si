@@ -10,7 +10,7 @@ class Api::V1::Volunteer::AddressesController < ApiController
   end
 
   def create
-    address = current_volunteer.addresses.new Address.attributes_for_geo_result(geo_result).merge(permitted_params.slice(:default))
+    address = current_volunteer.addresses.new ::Address.attributes_for_geo_result(geo_result).merge(permitted_params.slice(:default))
     validate! address
     address.save!
     json_response address, status: :created
@@ -18,7 +18,7 @@ class Api::V1::Volunteer::AddressesController < ApiController
 
   def update
     address = current_volunteer.addresses.find(permitted_params[:id])
-    address.assign_attributes Address.attributes_for_geo_result(geo_result).merge(permitted_params.slice(:default))
+    address.assign_attributes ::Address.attributes_for_geo_result(geo_result).merge(permitted_params.slice(:default))
     validate! address
     address.save!
     json_response address, status: :accepted

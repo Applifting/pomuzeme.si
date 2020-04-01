@@ -66,14 +66,19 @@ ActiveAdmin.register Volunteer do
     column :email do |resource|
       resource.show_contact_details?(params) ? resource.email : 'v detailu'
     end
-    column :address
     if params[:q] && params[:q][:search_nearby]
       params[:order] = 'distance_meters_asc'
+
+      column :address do |resource|
+        resource.addresses.detect { |address| address.id == resource.distance_address_id }
+      end
 
       # we'll alias this column to `distance_meters` in our scope so it can be sorted by
       column :distance, sortable: 'distance_meters' do |resource|
         resource.address.distance_in_km(resource.distance_meters)
       end
+    else
+      column :address
     end
     column :confirmed? if current_user.admin?
     actions

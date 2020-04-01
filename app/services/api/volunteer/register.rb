@@ -21,7 +21,7 @@ module Api
       def build_addresses
         params[:addresses].each do |address|
           geo_result = Geocoder.search(address[:place_id], lookup: :google_places_details).first
-          volunteer.addresses.build Address.attributes_for_geo_result(geo_result).merge(address.slice(:default))
+          volunteer.addresses.build ::Address.attributes_for_geo_result(geo_result).merge(address.slice(:default))
         end
       end
 
