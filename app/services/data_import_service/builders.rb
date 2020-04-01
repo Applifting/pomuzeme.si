@@ -10,9 +10,9 @@ module DataImportService
       request = build_instance(Request, @row.except('request_address', 'request_organisation'))
       request.assign_attributes required_volunteer_count: 1,
                                 address: Address.new_from_string(@row['request_address']),
-                                creator: find_or_create_by(User, @row['group_volunteer_coordinator']),
-                                coordinator: find_or_create_by(User, @row['group_volunteer_coordinator']),
-                                organisation: find_or_create_by(Organisation, @row['request_organisation'])
+                                creator: find_or_create_by(User, :full_name, @row['group_volunteer_coordinator']),
+                                coordinator: find_or_create_by(User, :full_name, @row['group_volunteer_coordinator']),
+                                organisation: find_or_create_by(Organisation, :name, @row['request_organisation'])
       request
     end
 
@@ -35,7 +35,7 @@ module DataImportService
                                           group: @group,
                                           is_exclusive: true,
                                           source: :migration,
-                                          coordinator: find_or_create_by(User, @row['group_volunteer_coordinator'])
+                                          coordinator: find_or_create_by(User, :full_name, @row['group_volunteer_coordinator'])
         group_volunteer
       end
     end

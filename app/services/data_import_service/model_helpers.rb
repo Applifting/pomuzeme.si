@@ -1,11 +1,11 @@
 module DataImportService
   module ModelHelpers
-    def find_or_create_by(klass, name)
-      return unless name
+    def find_or_create_by(klass, attribute, value)
+      return if value.blank? || attribute.blank?
 
       creator = (klass.to_s.underscore + '_creator').to_sym
 
-      @cache[klass.to_s][name] ||= send(creator, name)
+      @cache[klass.to_s][attribute][value].presence || (@cache[klass.to_s][attribute][value] = send(creator, attribute, value))
     end
 
     def find_or_build_by(klass, name)
