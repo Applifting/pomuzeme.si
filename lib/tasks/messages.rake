@@ -1,8 +1,8 @@
 namespace :messages do
   task receive: :environment do
-    loop do
+    def receive
       response = SmsService.receive
-      break if response.blank?
+      receive if response
     end
   end
 end
