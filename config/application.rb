@@ -31,12 +31,6 @@ module PomuzemeSi
     end
 
     config.active_job.queue_adapter = :sidekiq
-
-    config.after_initialize do
-      next unless defined?(Rails::Server)
-
-      Messages::ReceiverJob.perform_later
-    end
   end
 end
 
