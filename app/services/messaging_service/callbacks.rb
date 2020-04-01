@@ -16,10 +16,12 @@ module MessagingService
         message = Message.find_by!(channel_msg_id: adapter_response.channel_msg_id)
         message.update read_at: adapter_response.delivery_receipt_timestamp,
                        state: :received
+      rescue StandardError
+        false
       end
 
       def message_received(adapter_response)
-        volunteer = Volunteer.find_by!(phone: adapter_response.from_number)
+        volunteer = Volunteer.find_by(phone: adapter_response.from_number)
 
         Message.create volunteer: volunteer,
                        text: adapter_response.text,
