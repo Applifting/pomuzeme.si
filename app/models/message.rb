@@ -29,7 +29,7 @@ class Message < ApplicationRecord
   private
 
   def send_outgoing_message
-    return if direction == :incoming
+    return if direction.to_sym == :incoming
 
     MessagingService.send(self)
   end
