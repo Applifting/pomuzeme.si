@@ -17,7 +17,7 @@ module MessagingService
         message.update read_at: adapter_response.delivery_receipt_timestamp,
                        state: :received
       rescue StandardError
-        false
+        true
       end
 
       def message_received(adapter_response)
