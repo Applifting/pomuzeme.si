@@ -123,3 +123,6 @@ gem 'sendgrid-ruby'
 
 # data management
 gem 'csv'
+
+# background job processing
+gem 'sidekiq'

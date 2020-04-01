@@ -1,4 +1,6 @@
 class Message < ApplicationRecord
+  include MessageStateManipulation
+
   MESSAGES_FOR_REQUEST_SQL = 'volunteer_id = %{volunteer_id} AND (request_id IS NULL OR request_id = %{request_id})'.freeze
 
   # Associations
@@ -10,12 +12,15 @@ class Message < ApplicationRecord
   enum state: { pending: 1, sent: 2, received: 3 }
   enum direction: { outgoing: 1, incoming: 2 }
   enum channel: { sms: 1 }
+  enum message_type: { other: 1, request_offer: 2 }, _prefix: true
 
   # Validations
   validates_presence_of :text
 
   # Hooks
-  after_create :send_outgoing_message
+  after_commit :send_outgoing_message, on: :create, if: :outgoing? # perform job outside transaction
+  after_commit :process_incoming_message, on: :create, if: :incoming? # perform job outside transaction
+  after_commit :process_state_changed, on: :update, if: :saved_change_to_state?
 
   # Scopes
   scope :unread, -> { where(read_at: nil) }
@@ -29,8 +34,10 @@ class Message < ApplicationRecord
   private
 
   def send_outgoing_message
-    return if direction.to_sym == :incoming
+    MessageSenderJob.perform_later id
+  end
 
-    MessagingService.send(self)
+  def process_incoming_message
+    MessageReceivedProcessorJob.perform_later self
   end
 end

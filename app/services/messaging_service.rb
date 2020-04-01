@@ -33,7 +33,7 @@ module MessagingService
     end
 
     def creator_signature
-      [@creator.to_s, @request_organisation.name].compact.join(', ')
+      [@creator.to_s, @request_organisation&.name].compact.join(', ')
     end
   end
 end

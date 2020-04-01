@@ -29,6 +29,15 @@ module PomuzemeSi
     config.generators do |g|
       g.test_framework :rspec
     end
+
+    config.active_job.queue_adapter = :sidekiq
+
+    config.after_initialize do
+      next unless defined?(Rails::Server)
+
+      puts 'here'
+      MessageReceiverJob.perform_later
+    end
   end
 end
 
