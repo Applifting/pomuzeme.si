@@ -190,6 +190,587 @@ h4 {
   }
 }
 
+.section-hero {
+  padding-top: 72px;
+
+  @include lg {
+    padding-top: 30px;
+  }
+
+  .hero-content {
+    display: flex;
+
+    @include lg {
+      flex-direction: column;
+    }
+
+    .column-left {
+      width: 560px;
+      flex-shrink: 0;
+
+      @include lg {
+        width: 100%;
+      }
+    }
+
+    .column-right {
+      width: 495px;
+
+      @include lg {
+        width: 100%;
+      }
+    }
+
+    h1 {
+      .lighter {
+        color: $heading-color;
+        position: relative;
+      }
+
+      img {
+        position: absolute;
+        right: -85px;
+        top: -56px;
+
+        @include lg {
+          transform: scale(.7);
+          transform-origin: left;
+        }
+      }
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 160%;
+      font-family: $title-font;
+      margin: 0 0 24px;
+
+      @include lg {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 160%;
+      }
+    }
+
+    .hero-image {
+      width: 475px;
+      margin-left: 20px;
+
+      @include lg {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 30px 0 0;
+      }
+    }
+  }
+}
+
+.section-orgs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 66px $section-padding 44px;
+
+  @include sm {
+    flex-direction: column;
+  }
+
+  .org-logo {
+    padding: 24px;
+  }
+
+  .text {
+    font-size: 18px;
+    line-height: 150%;
+
+    &:first-child {
+      padding-right: 12px;
+
+      @include sm {
+        padding-bottom: 16px;
+      }
+    }
+
+    &:last-child {
+      padding-left: 12px;
+
+      @include sm {
+        padding-top: 16px;
+      }
+    }
+
+    &.big-text {
+      width: 100%;
+      padding-left: 0 !important;
+      text-align: center;
+
+      @include sm {
+        padding-top: 32px;
+      }
+    }
+  }
+}
+
+.section-intro {
+  padding-top: 30px;
+  padding-bottom: 58px;
+  background-color: $background-dark;
+
+  .section {
+    @include lg {
+      padding: 0 34px;
+    }
+  }
+
+  .intro-content {
+    display: flex;
+
+    @include lg {
+      flex-direction: column;
+    }
+
+    .column-left {
+      width: 490px;
+
+      @include lg {
+        width: 100%;
+      }
+    }
+
+    .column-right {
+      width: 475px;
+
+      @include lg {
+        width: 100%;
+      }
+    }
+
+    h2 {
+      margin-top: 108px;
+    }
+
+    p {
+      font-size: 20px;
+      line-height: 160%;
+      margin: 0;
+      position: relative;
+      z-index: 2;
+
+      @include lg {
+        font-size: 18px;
+      }
+    }
+
+    .intro-image {
+      width: 454px;
+      margin-left: 111px;
+
+      @include xl {
+        margin-left: 50px;
+      }
+
+      @include lg {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        top: -30px;
+      }
+    }
+  }
+}
+
+.section-application {
+  padding-top: 44px;
+  background-color: $background-dark;
+
+  .section {
+    @include lg {
+      padding: 0 34px;
+    }
+
+    .application-content {
+      display: flex;
+      padding: 0;
+
+      @include lg {
+        flex-direction: column;
+      }
+
+      .column-left {
+        width: 500px;
+
+        @include lg {
+          width: 100%;
+        }
+
+        .application-list {
+          font-family: Montserrat, serif;
+          color: #50350D;
+
+          .list-item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            &-content {
+              font-size: 20px;
+              padding-top: 12px;
+              padding-left: 12px;
+              width: 100%;
+
+              @include lg {
+                font-size: 16px;
+              }
+            }
+          }
+        }
+
+        .application-list .list-item:before {
+          content: "";
+          background-size: 16px 21px;
+          background-image: url("blue-check.svg");
+          background-repeat: no-repeat;
+          height: 16px;
+          width: 21px;
+        }
+      }
+    }
+  }
+}
+
+.section-counts {
+  padding-top: 0;
+
+  > * {
+    overflow-x: unset;
+  }
+
+  .counts-header {
+    margin-top: 0;
+    @include md {
+      text-align: center;
+    }
+  }
+
+  .supporters-counts-wrapper {
+    display: flex;
+    font-family: $title-font;
+    margin-top: 32px;
+
+    @include md {
+      flex-wrap: wrap;
+      text-align: center;
+      justify-content: center;
+    }
+
+
+    .supporters-counts-item {
+      display: flex;
+      align-items: center;
+
+      @include md {
+        flex-direction: column;
+      }
+
+      &:first-of-type {
+        margin: 0 140px 0 0;
+
+        @include lg {
+          margin: 0 64px 0 0;
+        }
+
+        @include md {
+          margin: 0 32px 0 0;
+        }
+
+        @include sm {
+          margin: 0 0 32px;
+        }
+
+      }
+
+      .count {
+        font-size: 64px;
+        line-height: 120%;
+        margin-right: 24px;
+
+        @include lg {
+          font-size: 48px;
+          line-height: 120%;
+          margin-right: 24px;
+        }
+
+        @include md {
+          margin-right: 0;
+
+        }
+      }
+
+      .count-label {
+        padding-left: 24px;
+        border-left: 1px solid $secondary-button-color;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 160%;
+        max-width: 200px;
+
+        @include md {
+          border-left: none;
+          padding-left: 0;
+          font-size: 16px
+        }
+      }
+    }
+  }
+}
+
+.section-guide {
+  text-align: center;
+
+  h2 {
+    margin: 80px 0 64px;
+
+    @include lg {
+      margin-bottom: 32px;
+    }
+  }
+
+  h3 {
+    margin-bottom: 63px;
+
+    @include lg {
+      display: none;
+    }
+  }
+
+  .guide-content {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    @include lg {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .step {
+      width: 260px;
+      margin: 0 24px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      @include lg {
+        margin: 20px 0;
+      }
+
+      p {
+        font-size: 20px;
+        line-height: 160%;
+      }
+    }
+
+    .arrow {
+      position: relative;
+      bottom: 160px;
+
+      @include xl {
+        display: none;
+      }
+    }
+  }
+
+  button {
+    margin-top: 52px;
+
+    @include lg {
+      margin-top: 12px;
+    }
+  }
+}
+
+.section-partner-contact {
+  text-align: center;
+
+  h3 {
+    margin: 96px 0 24px;
+  }
+
+  p {
+    font-size: 20px;
+    line-height: 160%;
+    margin: 0 0 32px;
+
+    @include lg {
+      font-size: 16px;
+      line-height: 160%;
+    }
+  }
+
+  a {
+    margin-bottom: 30px;
+  }
+
+  .about_app {
+    max-width: 500px;
+    margin: auto;
+    text-align: left;
+    padding-bottom: 24px;
+
+    p {
+      margin: 0;
+    }
+
+    ul {
+      padding-left: 24px;
+
+      li {
+        line-height: 24px;
+        list-style-type: square;
+        color: gray;
+      }
+    }
+
+    .asterix {
+      font-size: 10px;
+    }
+  }
+}
+
+.main-footer {
+  background-color: $background-dark;
+  padding-top: 40px;
+
+  .footer-content {
+    display: flex;
+    padding: 0 34px;
+
+    @include lg {
+      display: block;
+      padding: 0 34px;
+    }
+
+    @include sm {
+      padding: 0 34px;
+    }
+
+    .column-left {
+      width: 50%;
+      padding-right: 64px;
+
+      @include lg {
+        padding-right: 0;
+        padding-bottom: 30px;
+        width: 100%;
+      }
+    }
+
+    .column-right {
+      width: 50%;
+      padding-left: 64px;
+      border-left: 1px solid $secondary-button-color;
+      padding-bottom: 62px;
+      position: relative;
+
+      @include lg {
+        padding: 0;
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid $secondary-button-color;
+      }
+
+      .rocket {
+        position: absolute;
+        top: 24px;
+        right: 34px;
+
+        @include sm {
+          top: 60px;
+          right: 50%;
+          transform: translateX(50%);
+        }
+      }
+
+      h4, p, div {
+        position: relative;
+      }
+
+      h4 {
+        @include lg {
+          margin-top: 46px;
+        }
+      }
+    }
+
+    h4 {
+      @include lg {
+        margin-bottom: 30px;
+      }
+    }
+
+    p {
+      margin: 0 0 16px;
+      font-size: 18px;
+      line-height: 150%;
+
+      @include lg {
+        font-size: 16px;
+        line-height: 160%;
+        margin-bottom: 22px;
+      }
+    }
+
+    .contact-item {
+      margin: 8px 0;
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      line-height: 160%;
+
+      img {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .copy {
+    text-align: center;
+    padding: 20px 0 36px;
+
+    @include lg {
+      text-align: left;
+      padding-left: 34px;
+    }
+
+    a {
+      color: #3F3F3F;
+      font-size: 18px;
+      line-height: 150%;
+    }
+  }
+}
+
+.geolocation-search {
+  tab-index: 0;
+  display: block;
+  opacity: 1;
+  transform: scaleX(1) scaleY(1);
+  width: 352px;
+  left: 0px;
+  top: 46px;
+  max-height: 250px;
+  transform-origin: 0px 0px;
+}
+
 // Somebody please explain how to fix this
 .pac-container {
   z-index: 9999;
