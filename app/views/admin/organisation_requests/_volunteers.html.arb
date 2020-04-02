@@ -5,8 +5,9 @@ div class: 'title h4' do
   span link_to('', admin_volunteers_path(params: resource.decorate.volunteer_params), class: 'action add', data: { turbolinks: false }) if can?(:manage, Request)
 end
 
-
-span link_to('Zaslat zprávu dobrovolníkům čekajícím na oslovení', notify_volunteers_admin_organisation_request_path, method: :post) if can?(:manage, Request)
+if can?(:manage, Request) && resource.requested_volunteers.to_be_notified.present?
+  span(link_to('Oslovit dobrovolníky', notify_volunteers_admin_organisation_request_path, method: :post, class: 'button primary'))
+end
 
 table_for resource.requested_volunteers.includes(:volunteer).order(:state).map(&:decorate) do
   column :full_name, &:volunteer_name_link
