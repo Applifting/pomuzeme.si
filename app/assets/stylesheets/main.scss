@@ -394,13 +394,16 @@ h4 {
 
     .application-content {
       display: flex;
-      padding: 0;
+      padding: 0 0 54px;
 
       @include lg {
         flex-direction: column;
       }
 
       .column-left {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
         width: 500px;
 
         @include lg {
@@ -438,6 +441,20 @@ h4 {
           width: 21px;
         }
 
+        .phone-container-mobile {
+          display: none;
+
+          @include lg {
+            display: flex;
+            justify-content: center;
+            padding: 36px 0;
+
+            .phone {
+              width: 150px;
+            }
+          }
+        }
+
         .store-buttons {
           display: flex;
           flex-direction: row;
@@ -452,12 +469,29 @@ h4 {
 
           @include lg {
             max-width: 260px;
-            margin-top: 24px;
+            margin: 24px auto 0;
 
             .apple-store, .google-play {
               height: 36px;
             }
           }
+        }
+      }
+
+      .column-right {
+        display: flex;
+        justify-content: center;
+        padding: 36px 0;
+        margin: auto;
+
+        .phone {
+          width: 300px;
+        }
+      }
+
+      @include lg {
+        .column-right {
+          display: none;
         }
       }
     }
