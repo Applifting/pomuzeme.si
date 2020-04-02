@@ -1,102 +1,21 @@
 <div id="registration" class="modal">
   <div class="modal-content-custom">
-
     <%= image_tag asset_path('close.svg'), class: 'close modal-close' %>
-
+    <div class="modal-card-header">
+      <h2 class="modal-title">Registrujte se</h2>
+    </div>
     <section class="modal-card-body">
-
       <div class="modal-left">
-        <div>
-          <p class="modal-thanks">Patří vám velké díky!</p>
-          <p class="modal-explain">Je skvělé, že chcete pomáhat. Jedeme v&nbsp;tom společně. Pomůžeme.si.</p>
+        <%= image_tag asset_path('application-registration.svg'), class: 'application-registration' %>
+        <p class="application-text">Pokračujte v mobilní aplikaci</p>
+        <div class="stores">
+          <a href="https://www.apple.com/ios/app-store/" class="store apple-store">
+            <%= image_tag asset_path('apple-store.svg') %>
+          </a>
+          <a href="https://play.google.com/" class="store google-play">
+            <%= image_tag asset_path('google-play.svg') %>
+          </a>
         </div>
-        <div class="illustration">
-          <%= image_tag asset_path('registration-background.svg'), class: 'background' %>
-          <%= image_tag asset_pack_path('media/images/one-hand.svg'), class: 'one-hand' %>
-        </div>
-      </div>
-
-      <div class="modal-right">
-        <h3>Vyplňte potřebné údaje</h3>
-        <%= form_with model: Volunteer.new, id: 'registration-form', url: register_volunteer_path, remote: true do |form| %>
-          <div class="input-field">
-            <%= form.text_field :first_name, class: 'validate', required: true %>
-            <%= form.label :first_name %>
-          </div>
-
-          <div class="input-field">
-            <%= form.text_field :last_name, class: 'validate', required: true %>
-            <%= form.label :last_name %>
-          </div>
-
-          <div class="phone-row">
-            <div class="phone-prefix">+420</div>
-
-            <div class="input-field">
-              <%= form.telephone_field :phone, class: 'validate', required: true %>
-              <%= form.label :phone %>
-            </div>
-          </div>
-
-          <div class="input-field">
-            <%= form.text_field :email, class: 'validate', required: false %>
-            <%= form.label :email %>
-          </div>
-
-          <div class="address-title">
-            <span>Adresa</span>
-
-            <img
-              src="<%= asset_pack_path('media/images/tooltip.svg') %>"
-              class="tooltipped"
-              data-position="top"
-              data-tooltip="Díky adrese vás propojíme právě s těmi dobročinnými organizacemi, které se nacházejí ve vaší lokalitě."
-              />
-          </div>
-
-          <div class="input-field">
-            <%= form.text_field :street_search, class: 'validate autocomplete', required: true %>
-            <%= form.label :street_search %>
-          </div>
-
-          <%= form.hidden_field :street %>
-          <%= form.hidden_field :street_number %>
-          <%= form.hidden_field :city %>
-          <%= form.hidden_field :city_part %>
-          <%= form.hidden_field :postal_code %>
-          <%= form.hidden_field :country_code %>
-          <%= form.hidden_field :geo_entry_id %>
-          <%= form.hidden_field :geo_unit_id %>
-          <%= form.hidden_field :geo_coord_x %>
-          <%= form.hidden_field :geo_coord_y %>
-
-          <div class="input-field">
-            <%= form.text_area :description, class: 'validate', required: false, placeholder: '' %>
-            <%= form.label :description, 'Jak můžete pomoci?' %>
-          </div>
-
-          <div class="checkbox-row">
-            <label>
-              <%= form.check_box :terms_of_service %>
-              <span>Souhlasím s podmínkami <%= link_to 'užívání', 'podminky_dobrovolnika_pomuzemesi.pdf', target: '_blank' %> a <%= link_to 'ochrany osobních údajů', 'podminky_ochrany_osobnich_udaju_pomuzemesi.pdf', target: '_blank' %></span>
-            </label>
-          </div>
-          <div class="checkbox-row">
-            <label>
-              <%= form.check_box :age_confirmed %>
-              <span>Prohlašuji, že jsem osoba starší 18 let</span>
-            </label>
-          </div>
-
-          <div class="registration-errors">
-            <ul id="registration-errors-list" class="error-list">
-
-            </ul>
-          </div>
-
-          <%= form.submit 'Zaregistrovat se', class: 'form-button', data: { disable_with: "Zaregistrovat se..." } %>
-          <%= recaptcha_v3(action: 'login') %>
-        <% end %>
       </div>
     </section>
   </div>
