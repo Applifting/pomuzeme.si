@@ -1,6 +1,6 @@
 #registration {
   background: #FFFFFF;
-  max-width: 960px;
+  max-width: 840px;
 
   .modal-content-custom {
     .modal-card-header {
@@ -22,30 +22,34 @@
     .modal-card-body {
       display: flex;
       flex-direction: row;
-      padding-bottom: 32px;
+      padding-bottom: 48px;
 
       @include lg {
         flex-direction: column;
       }
 
-      .modal-left {
+      .modal-left, .modal-right {
         background: #FFFFFF;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        align-items: center;
         padding-top: 24px;
         width: 100%;
 
-        .application-text {
+        .subtitle {
           color: #50350D;
           font-size: 20px;
           margin: 4px 0 8px;
+          text-align: center;
         }
+      }
 
+      .modal-left {
         .stores {
           display: flex;
           flex-direction: row;
           justify-content: center;
+          margin-top: 40px;
           width: 100%;
 
           .store {
@@ -57,6 +61,60 @@
               height: 36px;
             }
           }
+        }
+      }
+
+      .divider-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 12px 0;
+        flex-direction: column;
+
+        .divider {
+          height: 100px;
+          width: 2px;
+
+          &.left {
+            background: linear-gradient(180deg, rgba(207, 189, 162, 0) 0%, #CFBDA2 100%);
+          }
+
+          &.right {
+            background: linear-gradient(0deg, rgba(207, 189, 162, 0) 0%, #CFBDA2 100%);
+          }
+        }
+
+        @include lg {
+          flex-direction: row;
+          margin: 32px 0 0;
+
+          .divider {
+            height: 2px;
+            width: 100px;
+
+            &.left {
+              background: linear-gradient(90deg, rgba(207, 189, 162, 0) 0%, #CFBDA2 100%);
+            }
+
+            &.right {
+              background: linear-gradient(270deg, rgba(207, 189, 162, 0) 0%, #CFBDA2 100%);
+            }
+          }
+        }
+
+        .text {
+          font-size: 20px;
+          margin: 0 4px;
+        }
+      }
+
+      .modal-right {
+        .laptop {
+          width: 184px;
+        }
+
+        .main-button {
+          margin-bottom: 0;
         }
       }
     }

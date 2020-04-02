@@ -7,7 +7,7 @@
     <section class="modal-card-body">
       <div class="modal-left">
         <%= image_tag asset_path('application-registration.svg'), class: 'application-registration' %>
-        <p class="application-text">Pokračujte v mobilní aplikaci</p>
+        <p class="subtitle">Pokračujte v mobilní aplikaci</p>
         <div class="stores">
           <a href="https://www.apple.com/ios/app-store/" class="store apple-store">
             <%= image_tag asset_path('apple-store.svg') %>
@@ -16,6 +16,18 @@
             <%= image_tag asset_path('google-play.svg') %>
           </a>
         </div>
+      </div>
+      <div class="divider-container">
+        <div class="divider left"></div>
+        <p class="text">NEBO</p>
+        <div class="divider right"></div>
+      </div>
+      <div class="modal-right">
+        <%= image_tag asset_path('hiw-laptop.svg'), class: 'laptop'%>
+        <p class="subtitle">Registrace přes web</p>
+        <button id="register-via-web" class="modal-trigger main-button" data-target="web-registration" aria-haspopup="true">
+          Registrovat se
+        </button>
       </div>
     </section>
   </div>
