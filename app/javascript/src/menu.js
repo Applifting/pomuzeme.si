@@ -6,6 +6,7 @@ $(document).ready(function () {
     const mobileMenu = document.querySelector('#js-mobile-menu-container');
     const body = document.querySelector('body');
     const wannaJoinButton = document.querySelector('#js-mobile-menu-container .main-button');
+    const headerContainer = document.querySelector('#js-main-header-container');
 
     const closeCallback = () => {
         mobileMenu.classList.remove('open');
@@ -40,4 +41,18 @@ $(document).ready(function () {
     closeMenuButton.onclick = closeCallback;
 
     wannaJoinButton.addEventListener('click', closeCallback);
+
+    let previousScrollTop;
+    let previousDocumentScrollTop;
+
+    window.addEventListener('scroll', () => {
+        if (previousScrollTop > document.body.scrollTop || previousDocumentScrollTop > document.documentElement.scrollTop) {
+            headerContainer.classList.remove('hidden');
+        } else if (document.body.scrollTop > headerContainer.clientHeight || document.documentElement.scrollTop > headerContainer.clientHeight) {
+            headerContainer.classList.add('hidden');
+        }
+
+        previousScrollTop = document.body.scrollTop;
+        previousDocumentScrollTop = document.documentElement.scrollTop;
+    });
 });

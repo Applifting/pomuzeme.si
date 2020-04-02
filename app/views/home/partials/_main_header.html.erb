@@ -27,30 +27,32 @@
     </nav>
   </div>
 </div>
-<header class="main-header section">
-  <%= image_tag asset_path('pomuzemesi.svg'), class: 'main-logo'  %>
-  <nav class="navigation">
-    <ul id="js-desktop-menu-list" class="desktop-menu">
-      <li class="menu-item">
-        <a href="javascript:void(0);" class="link slide-link">O NÁS</a>
-      </li>
-      <li class="menu-item">
-        <a href="javascript:void(0);" class="link slide-link">JAK TO FUNGUJE</a>
-      </li>
-      <li class="menu-item">
-        <a href="javascript:void(0);" class="link slide-link">AKTUÁLNĚ</a>
-      </li>
-      <li class="menu-item">
-        <a href="javascript:void(0);" class="link slide-link">PARTNEŘI</a>
-      </li>
-      <li class="menu-item">
-        <a href="javascript:void(0);" class="link wanna-join modal-trigger" data-target="registration">CHCI POMÁHAT</a>
-      </li>
-    </ul>
-  </nav>
-  <div class="mobile-menu-icon-container">
-    <a id="js-menu-button" class="menu-button">
-      <i class="material-icons">menu</i>
-    </a>
-  </div>
-</header>
+<div id="js-main-header-container" class="main-header-container">
+  <header class="main-header section">
+    <%= image_tag asset_path('pomuzemesi.svg'), class: 'main-logo'  %>
+    <nav class="navigation">
+      <ul id="js-desktop-menu-list" class="desktop-menu">
+        <li class="menu-item">
+          <a href="javascript:void(0);" class="link slide-link">O NÁS</a>
+        </li>
+        <li class="menu-item">
+          <a href="javascript:void(0);" class="link slide-link">JAK TO FUNGUJE</a>
+        </li>
+        <li class="menu-item">
+          <a href="javascript:void(0);" class="link slide-link">AKTUÁLNĚ</a>
+        </li>
+        <li class="menu-item">
+          <a href="javascript:void(0);" class="link slide-link">PARTNEŘI</a>
+        </li>
+        <li class="menu-item">
+          <a href="javascript:void(0);" class="link wanna-join modal-trigger" data-target="registration">CHCI POMÁHAT</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="mobile-menu-icon-container">
+      <a id="js-menu-button" class="menu-button">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </header>
+</div>
