@@ -2,7 +2,7 @@
   width: 700px;
 
   .msg {
-    margin-bottom: 30px;
+    margin-bottom: 12px;
     display: flex;
     align-items: flex-start;
   }
@@ -74,16 +74,16 @@
     margin-left: 20px;
   }
 
-  .msg .body p {
-    margin: 7px 0px 7px 0px;
+  .msg .body {
+    font-size: 13px;
   }
 
   .msg .msg-time {
     text-align: right;
     color: rgba(84, 84, 84, 0.67);
     display: block;
-    font-size: 13px;
-    margin-top: 10px;
+    font-size: 10px;
+    margin-top: 11px;
   }
 
   .msg.volunteer .msg-time {
@@ -127,7 +127,7 @@
     background-color: blue;
     border-radius: 50%;
     display: inline-block;
-    margin-top: 15px;
+    margin-top: 14px;
     margin-right: 5px;
   }
 
