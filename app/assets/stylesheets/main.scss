@@ -418,7 +418,7 @@ h4 {
 
             &-content {
               font-size: 20px;
-              padding-top: 12px;
+              padding-top: 8px;
               padding-left: 12px;
               width: 100%;
 
@@ -436,6 +436,28 @@ h4 {
           background-repeat: no-repeat;
           height: 16px;
           width: 21px;
+        }
+
+        .store-buttons {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          max-width: 360px;
+          margin-top: 48px;
+          width: 100%;
+
+          .apple-store, .google-play {
+            height: 48px;
+          }
+
+          @include lg {
+            max-width: 260px;
+            margin-top: 24px;
+
+            .apple-store, .google-play {
+              height: 36px;
+            }
+          }
         }
       }
     }
