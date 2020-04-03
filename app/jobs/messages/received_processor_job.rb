@@ -1,6 +1,7 @@
 module Messages
   class ReceivedProcessorJob < ApplicationJob
     attr_reader :message
+
     def perform(message)
       @message = message
       return invalid_response unless valid_response?
