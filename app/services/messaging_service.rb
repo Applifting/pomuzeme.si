@@ -29,11 +29,18 @@ module MessagingService
     end
 
     def text
-      "#{@text} [#{creator_signature}]"
+      [
+        @text,
+        ("[#{creator_signature}]" if message_has_creator?)
+      ].join(' ')
+    end
+
+    def message_has_creator?
+      message.creator.present?
     end
 
     def creator_signature
-      [@creator.to_s, @request_organisation.name].compact.join(', ')
+      [@creator.to_s, @request_organisation&.name].compact.join(', ')
     end
   end
 end
