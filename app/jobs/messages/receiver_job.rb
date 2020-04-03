@@ -1,13 +1,15 @@
 module Messages
   class ReceiverJob < ApplicationJob
+    queue_as :receiver_queue
+
     def perform
       Rails.logger.debug 'Performing MessageReceiverJob'
-      Messages::ReceiverJob.set(wait: 15.seconds).perform_later
+      Messages::ReceiverJob.set(wait: 31.seconds).perform_later
 
       if Rails.env.production?
         SmsService.receive
       else
-        puts "Calling receiver service"
+        puts 'Calling receiver service'
       end
     end
   end

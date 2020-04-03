@@ -19,7 +19,10 @@ module Admin
 
       def notify(requested_volunteer)
         # TODO: handle notification type after FCM is merged
-        Message.outgoing.sms.message_type_request_offer.create! request: request, text: sms_text, volunteer_id: requested_volunteer.volunteer_id
+        Message.outgoing.sms.message_type_request_offer.create! request: request,
+                                                                text: sms_text,
+                                                                volunteer_id: requested_volunteer.volunteer_id,
+                                                                creator: user
         requested_volunteer.pending_notification!
       end
 
