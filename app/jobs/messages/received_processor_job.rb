@@ -24,7 +24,10 @@ module Messages
     end
 
     def invalid_response
-      create_message I18n.t('sms.request.unrecognized')
+      volunteer = Volunteer.find(@message.volunteer_id)
+      text      = I18n.t('sms.request.unrecognized')
+
+      SmsService.send_text volunteer.phone, text
     end
 
     def capacity_exceeded_response(requested_volunteer)
