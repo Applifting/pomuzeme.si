@@ -5,6 +5,5 @@ staging:
 production:
   :concurrency: 5
 :queues:
-  - sender_queue
-  - receiver_queue
   - default
+  - receiver_queue
