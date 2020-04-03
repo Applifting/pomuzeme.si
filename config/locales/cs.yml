@@ -246,9 +246,9 @@ cs:
     welcome: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se ozve jedna z organizaci ve vasem okoli a zapoji vas do deni. Reknete o nas i pratelum? Pomuzeme.si
     welcome_channel: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se vám ozve %{group_name} a zapoji vas do deni. Reknete o nas i pratelum? pomuzeme.si/%{group_slug}
     request:
-      offer: "%{identifier} %{text} Odp. ANO / NE"
+      offer: "%{identifier} %{text} Prosíme, odpovězte ANO / NE"
       unrecognized: Máte-li o poptávku zájem, odpovězte ANO nebo NE
-      confirmed: Byl jste přijat, koordinátor %{organisation} se vám ozve s detaily.
+      confirmed: Díky za potvrzení, koordinátor %{organisation} se vám ozve s detaily.
       rejected: Poptávka organizace %{organisation} byla odmítnuta.
       over_capacity: Moc děkujeme za zájem, na poptávku organizace %{organisation} se již našlo dostatek dobrovolníků. Počkejte na další.
   errors:
