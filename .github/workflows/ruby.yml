@@ -26,11 +26,8 @@ jobs:
     env:
       # Use PostgreSQL for the host here because we have specified a container for the job.
       # If we were running the job on the VM this would be localhost
-      DATABASE_URL: postgis://postgres:@postgres:5432/pomuzeme_si_test
+      DATABASE_URL: postgis://postgres:pomuzeme_si_test@postgres:5432/pomuzeme_si_test
       RAILS_ENV: test
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: pomuzeme_si_test
 
     steps:
     - uses: actions/checkout@v2
