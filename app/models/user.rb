@@ -18,7 +18,6 @@ class User < ApplicationRecord
   has_many :created_requests, class_name: 'Request', foreign_key: :created_by_id
   has_many :closed_requests, class_name: 'Request', foreign_key: :closed_by_id
   has_many :requests, class_name: 'Request', foreign_key: :coordinator_id
-
   has_many :coordinating_groups, through: :coordinating_organisations, source: :groups
 
   # Validations
@@ -30,7 +29,7 @@ class User < ApplicationRecord
   end
 
   def organisation_colleagues
-    coordinating_organisations.map(&:coordinators).flatten
+    coordinating_organisations.map(&:coordinators).flatten.uniq
   end
 
   def to_s
@@ -39,7 +38,7 @@ class User < ApplicationRecord
   alias title to_s
 
   def organisation_group
-    coordinating_groups.take
+    @organisation_group ||= coordinating_groups.take
   end
 
   def has_any_role?(role_name)

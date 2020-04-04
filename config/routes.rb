@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -13,11 +16,12 @@ Rails.application.routes.draw do
     post :confirm, on: :collection
     post :resend, on: :collection
   end
+
   root 'home#index'
-  get '/:slug', param: :slug, to: 'home#partner_signup', slug: /(?!.*?admin).*/
 
   namespace :docs do
     get '/partner-kit', to: redirect { 'https://drive.google.com/drive/folders/1w9_PVRbZ9VvE10zY0sR26f6SlmLq0xZn' }
+    get '/letak-linky-pomoci', to: redirect { 'https://d113nbfwgx4fgo.cloudfront.net/leaflet-diakonie.pdf' }
   end
 
   namespace :api do
@@ -25,4 +29,6 @@ Rails.application.routes.draw do
       post '/geo/fulltext', to: 'geolocation#fulltext'
     end
   end
+
+  get '/:slug', param: :slug, to: 'home#partner_signup', slug: /(?!.*?admin).*/
 end

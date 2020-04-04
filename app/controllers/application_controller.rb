@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_action :set_raven_context
+
   def not_found
     raise ActionController::RoutingError, 'Not Found'
   end
@@ -14,5 +16,9 @@ class ApplicationController < ActionController::Base
     redirect_to redirect, alert: I18n.t("errors.authorisation.#{error.message}",
                                         action: error.action,
                                         subject: error.subject)
+  end
+
+  def set_raven_context
+    Raven.user_context(id: current_user.id) if current_user
   end
 end

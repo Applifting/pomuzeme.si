@@ -72,7 +72,10 @@ module SeedHelper
   end
 
   def self.create_request(**args)
+    assigned_volunteers_count = rand(0..args[:required_volunteer_count].to_i)
+
     request = Request.new(args)
+    request.volunteers = Volunteer.order("RANDOM()").limit(assigned_volunteers_count)
     request.save!
   end
 end

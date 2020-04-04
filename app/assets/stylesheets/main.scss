@@ -44,10 +44,17 @@ img {
   text-align: center;
   outline: none;
   padding: 0;
+  margin: 12px 0;
   font-family: $title-font;
 
   &.secondary {
     background-color: $secondary-button-color;
+  }
+
+  &.tertiary {
+    background-color: $background-light;
+    color: gray;
+    border: 3px black;
   }
 }
 
@@ -56,7 +63,7 @@ img {
   height: 64px;
   line-height: 64px;
   font-size: 18px;
-  max-width: 280px;
+  max-width: 320px;
   border-radius: 32px;
   box-shadow: $shadow_1;
 
@@ -120,6 +127,10 @@ h2 {
     font-weight: bold;
     font-size: 24px;
   }
+
+  @include sm {
+    font-size: 20px;
+  }
 }
 
 h3 {
@@ -151,6 +162,26 @@ h4 {
   .main-logo {
     position: relative;
     left: -40px;
+  }
+}
+
+.button-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+
+  button#chci-pomahat {
+    margin-right: 12px;
+  }
+
+  a {
+    color: $tertiary-button-color;
+  }
+
+  @include lg {
+    justify-content: space-evenly;
   }
 }
 
@@ -227,10 +258,6 @@ h4 {
         transform: translateX(-50%);
         margin: 30px 0 0;
       }
-    }
-
-    button {
-
     }
   }
 }
@@ -353,8 +380,92 @@ h4 {
       }
     }
 
-    button {
+  }
 
+}
+
+.section-counts {
+  padding-top: 0;
+
+  > * {
+    overflow-x: unset;
+  }
+
+  .counts-header {
+    margin-top: 0;
+    @include md {
+      text-align: center;
+    }
+  }
+
+  .supporters-counts-wrapper {
+    display: flex;
+    font-family: $title-font;
+    margin-top: 32px;
+
+    @include md {
+      flex-wrap: wrap;
+      text-align: center;
+      justify-content: center;
+    }
+
+
+    .supporters-counts-item {
+      display: flex;
+      align-items: center;
+
+      @include md {
+        flex-direction: column;
+      }
+
+      &:first-of-type {
+        margin: 0 140px 0 0;
+
+        @include lg {
+          margin: 0 64px 0 0;
+        }
+
+        @include md {
+          margin: 0 32px 0 0;
+        }
+
+        @include sm {
+          margin: 0 0 32px;
+        }
+
+      }
+
+      .count {
+        font-size: 64px;
+        line-height: 120%;
+        margin-right: 24px;
+
+        @include lg {
+          font-size: 48px;
+          line-height: 120%;
+          margin-right: 24px;
+        }
+
+        @include md {
+          margin-right: 0;
+
+        }
+      }
+
+      .count-label {
+        padding-left: 24px;
+        border-left: 1px solid $secondary-button-color;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 160%;
+        max-width: 200px;
+
+        @include md {
+          border-left: none;
+          padding-left: 0;
+          font-size: 16px
+        }
+      }
     }
   }
 }
@@ -401,7 +512,7 @@ h4 {
       }
 
       @include lg {
-        margin: 40px 0;
+        margin: 20px 0;
       }
 
       p {
@@ -429,7 +540,7 @@ h4 {
   }
 }
 
-.section-contact {
+.section-partner-contact {
   text-align: center;
 
   h3 {
@@ -449,6 +560,29 @@ h4 {
 
   a {
     margin-bottom: 30px;
+  }
+
+  .about_app {
+    max-width: 500px;
+    margin: auto;
+    text-align: left;
+    padding-bottom: 24px;
+
+    p {
+      margin: 0;
+    }
+
+    ul {
+      padding-left: 24px;
+      li {
+        line-height: 24px;
+        list-style-type: square;
+        color: gray;
+      }
+    }
+    .asterix {
+      font-size: 10px;
+    }
   }
 }
 

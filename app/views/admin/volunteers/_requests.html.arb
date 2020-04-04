@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+div class: 'title h4' do
+  span 'Poptávky'
+end
+
+table_for resource.requested_volunteers.with_organisations(current_user.coordinating_organisations.pluck(:id)) do
+  column :subscriber
+  column :text
+  column :state
+  column 'Detail', class: 'centered' do |request|
+    a 'detail', href: admin_organisation_request_path(request.request_id)
+  end
+end

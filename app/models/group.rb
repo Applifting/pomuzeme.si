@@ -1,9 +1,9 @@
 class Group < ApplicationRecord
   # Associations
-  has_many :labels
-  has_many :organisation_groups
+  has_many :labels, dependent: :destroy
+  has_many :organisation_groups, dependent: :destroy
   has_many :organisations, through: :organisation_groups
-  has_many :group_volunteers
+  has_many :group_volunteers, dependent: :destroy
   has_many :volunteers, through: :group_volunteers
 
   # Validations

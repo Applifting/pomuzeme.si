@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Sms::Manager do
+describe SmsService::Manager do
   before(:all) { I18n.locale = :cs }
 
   describe '.send_welcome_msg' do
