@@ -1,0 +1,114 @@
+@import "../variables";
+
+.main-footer {
+  background-color: $background-dark;
+  padding-top: 40px;
+
+  .footer-content {
+    display: flex;
+    padding: 0 34px;
+
+    @include lg {
+      display: block;
+      padding: 0 34px;
+    }
+
+    @include sm {
+      padding: 0 34px;
+    }
+
+    .column-left {
+      width: 50%;
+      padding-right: 64px;
+
+      @include lg {
+        padding-right: 0;
+        padding-bottom: 30px;
+        width: 100%;
+      }
+    }
+
+    .column-right {
+      width: 50%;
+      padding-left: 64px;
+      border-left: 1px solid $secondary-button-color;
+      padding-bottom: 62px;
+      position: relative;
+
+      @include lg {
+        padding: 0;
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid $secondary-button-color;
+      }
+
+      .rocket {
+        position: absolute;
+        top: 24px;
+        right: 34px;
+
+        @include sm {
+          top: 60px;
+          right: 50%;
+          transform: translateX(50%);
+        }
+      }
+
+      h4, p, div {
+        position: relative;
+      }
+
+      h4 {
+        @include lg {
+          margin-top: 46px;
+        }
+      }
+    }
+
+    h4 {
+      @include lg {
+        margin-bottom: 30px;
+      }
+    }
+
+    p {
+      margin: 0 0 16px;
+      font-size: 18px;
+      line-height: 150%;
+
+      @include lg {
+        font-size: 16px;
+        line-height: 160%;
+        margin-bottom: 22px;
+      }
+    }
+
+    .contact-item {
+      margin: 8px 0;
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      line-height: 160%;
+
+      img {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .copy {
+    text-align: center;
+    padding: 20px 0 36px;
+
+    @include lg {
+      text-align: left;
+      padding-left: 34px;
+    }
+
+    a {
+      color: #3F3F3F;
+      font-size: 18px;
+      line-height: 150%;
+    }
+  }
+}
