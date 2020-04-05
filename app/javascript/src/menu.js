@@ -17,11 +17,7 @@ $(document).ready(function () {
     const scrollToId = id => document.querySelector('#' + id).scrollIntoView();
     const smoothlyScrollToId = id => document.querySelector('#' + id).scrollIntoView({behavior: 'smooth'});
 
-    menuButton.onclick = () => {
-        mobileMenu.classList.add('open');
-        body.style.height = '100vh';
-        body.style.overflow = 'hidden';
-    };
+    menuButton.onclick = () => mobileMenu.classList.add('open');
 
     const linkIds = ['intro', 'guide', 'counts', 'organizace'];
 

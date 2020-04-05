@@ -213,6 +213,8 @@ h4 {
 
     &.open {
       display: flex;
+      height: 100vh;
+      overflow: hidden;
 
       .mobile-menu {
         display: flex;
@@ -285,14 +287,15 @@ h4 {
 
 .main-header-container {
   background: #FFFBF2;
+  box-shadow: 0px 3px 20px rgba(66, 58, 75, 0.08);
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 10;
+  transition: top 0.3s;
 
   &.hidden {
     top: -66px;
-    transition: top 0.3s;
   }
 
   .main-header {
