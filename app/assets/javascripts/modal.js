@@ -16,7 +16,6 @@ function modalEvent(button) {
 $(document).ready(function() {
   const buttons = document.querySelectorAll(`a[data-modal-trigger]`);
 
-  console.log(buttons);
 
   for(let button of buttons) {
     modalEvent(button);
