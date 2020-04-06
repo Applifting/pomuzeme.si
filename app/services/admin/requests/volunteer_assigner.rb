@@ -1,12 +1,11 @@
 module Admin
   module Requests
     class VolunteerAssigner
-
       def initialize(user, request, volunteers, requested_state: nil)
         @user = user
         @request = request
         @volunteers = volunteers
-        @requested_state = requested_state || :pending_notification
+        @requested_state = requested_state || :to_be_notified
       end
 
       def perform

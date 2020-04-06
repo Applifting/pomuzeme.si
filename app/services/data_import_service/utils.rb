@@ -6,6 +6,7 @@ module DataImportService
       rescue StandardError => e
         puts e
         puts e.backtrace[0..20]
+        Raven.extra_context(data_row: @row_output)
         Raven.capture_exception e
         raise ActiveRecord::Rollback
       ensure
@@ -15,6 +16,10 @@ module DataImportService
 
     def error_present?
       @row_output.any? { |k, v| k.start_with?('error') && v.present? }
+    end
+
+    def nested_hash
+      Hash.new { |h, k| h[k] = nested_hash }
     end
 
     def read_lines

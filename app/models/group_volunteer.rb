@@ -15,7 +15,7 @@ class GroupVolunteer < ApplicationRecord
   belongs_to :coordinator, class_name: 'User', foreign_key: :coordinator_id, optional: true
 
   # Validations
-  validates :volunteer, uniqueness: {  scope: :group }
+  validates :volunteer, uniqueness: { scope: :group }
 
   # Attributes
   delegate :to_s, :title, to: :volunteer

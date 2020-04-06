@@ -18,8 +18,20 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   filter :organisation, as: :select, collection: proc { Organisation.user_group_organisations(current_user) }
 
   # Scopes
-  scope :user_organisation_requests, default: true do |scope|
-    scope.not_closed
+  # Experimental feature
+  scope :unread_msgs, default: true, if: -> { current_user.admin? } do |scope|
+    scope.not_closed.has_unread_messages
+  end
+  scope :request_in_preparation, default: true do |scope|
+    scope.assignable
+         .with_organisations(current_user.coordinating_organisations.pluck(:id))
+  end
+  scope :request_in_fulfillment do |scope|
+    scope.in_progress
+         .with_organisations(current_user.coordinating_organisations.pluck(:id))
+  end
+  scope :request_check_fulfillment do |scope|
+    scope.check_fulfillment
          .with_organisations(current_user.coordinating_organisations.pluck(:id))
   end
   scope :closed
@@ -32,15 +44,21 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     end
   end
 
+  member_action :notify_volunteers, method: :post do
+    Admin::Requests::VolunteerNotifier.new(current_user, resource).perform
+    flash[:notice] = 'Dobrovolníci osloveni'
+    redirect_to admin_organisation_request_path(resource)
+  end
+
   index do
     id_column
     column :state
-    column :text
     column :subscriber
-    column :address
+    column :text
     column :accepted_volunteers_count do |resource|
       "#{resource.requested_volunteers.accepted.count} / #{resource.required_volunteer_count}"
     end
+    column :address
     column :fullfillment_date
     column :coordinator
     column :state_last_updated_at
@@ -69,12 +87,14 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
       panel '' do
         attributes_table_for resource do
           row :state do |request|
-            best_in_place request, :state, as: :select,
-                                           collection: I18n.t('activerecord.attributes.request.states'),
-                                           url: admin_organisation_request_path(resource)
+            if can?(:update, resource)
+              best_in_place request, :state, as: :select,
+                                             collection: I18n.t('activerecord.attributes.request.states'),
+                                             url: admin_organisation_request_path(resource)
+            else
+              status_tag I18n.t(resource.state, scope: 'activerecord.attributes.request.states')
+            end
           end
-          row :required_volunteer_count
-          row :block_volunteer_until
           row :coordinator do
             if can?(:update, resource)
               best_in_place resource, :coordinator_id, as: :select,
@@ -84,6 +104,8 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
               resource.coordinator
             end
           end
+          row :required_volunteer_count
+          row :block_volunteer_until
           row :state_last_updated_at
           row :created_at
           row :creator
@@ -129,11 +151,12 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     end
 
     f.inputs 'Koordinace' do
+      organisations = current_user.admin? ? Organisation.all : Organisation.user_group_organisations(current_user)
+
       f.input :state if resource.persisted?
       f.input :organisation, as: :select,
-                             collection: Organisation.where(id: current_user.coordinating_organisations.pluck(:id)),
+                             collection: organisations,
                              include_blank: false
-      f.input :fullfillment_date, as: :datetime_picker
       f.input :block_volunteer_until, as: :datetime_picker
       f.input :coordinator_id, as: :select, collection: current_user.organisation_colleagues
       f.input :closed_note, as: :text if resource.persisted?

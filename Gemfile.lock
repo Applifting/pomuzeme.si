@@ -117,6 +117,7 @@ GEM
       rails (>= 5.0, < 6.1.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.6)
+    connection_pool (2.2.2)
     crass (1.0.6)
     csv (3.1.2)
     devise (4.7.1)
@@ -234,6 +235,8 @@ GEM
     rack (2.2.2)
     rack-attack (6.2.2)
       rack (>= 1.0, < 3)
+    rack-protection (2.0.8.1)
+      rack
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -280,6 +283,7 @@ GEM
       ffi (~> 1.0)
     recaptcha (5.4.1)
       json
+    redis (4.1.3)
     regexp_parser (1.7.0)
     request_store (1.5.0)
       rack (>= 1.4)
@@ -340,6 +344,11 @@ GEM
       faraday (>= 1.0)
     shoulda-matchers (4.3.0)
       activesupport (>= 4.2.0)
+    sidekiq (6.0.6)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      rack-protection (>= 2.0.0)
+      redis (>= 4.1.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -429,6 +438,7 @@ DEPENDENCIES
   sendgrid-ruby
   sentry-raven
   shoulda-matchers (~> 4.3)
+  sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets (= 3.7.2)

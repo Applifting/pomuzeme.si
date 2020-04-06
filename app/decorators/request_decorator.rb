@@ -15,7 +15,7 @@ class RequestDecorator < ApplicationDecorator
   end
 
   def address_link
-    if h.can? :manage, object
+    if h.can?(:manage, object) && address
       h.link_to h.content_tag(:span, address.to_s, class: 'action edit'), h.edit_admin_address_path(address)
     else
       address

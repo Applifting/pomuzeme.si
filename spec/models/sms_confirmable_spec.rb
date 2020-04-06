@@ -86,7 +86,6 @@ describe SmsConfirmable do
           .to include('is expired')
       end
     end
-
   end
 
   describe '#obtain_confirmation_code' do
@@ -115,7 +114,7 @@ describe SmsConfirmable do
       end
     end
 
-   context 'confirmed_at is not set' do
+    context 'confirmed_at is not set' do
       before do
         allow(subject).to receive(:can_obtain_code?).and_return(false)
       end
