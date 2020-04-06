@@ -39,10 +39,11 @@ RSpec.describe Request, type: :model do
         state: :created,
       }
     end
+    let(:travel_time) { Time.zone.local(2020, 05, 05, 20, 00, 00) }
 
     context 'during creation' do
       before do
-        travel_to(Time.zone.local(2020, 05, 05, 20, 00, 00))
+        travel_to travel_time
       end
 
       after do
@@ -52,13 +53,13 @@ RSpec.describe Request, type: :model do
       subject { described_class.create(params) }
 
       it 'sets the value as provided in the params' do
-        params[:state_last_updated_at] = '2020-01-05 20:00:00'
+        params[:state_last_updated_at] = travel_time.iso8601
 
-        expect(subject.state_last_updated_at).to eq('2020-01-05 20:00:00')
+        expect(subject.state_last_updated_at).to eq(travel_time)
       end
 
       it 'sets the value to now if not provided in the params' do
-        expect(subject.state_last_updated_at).to eq('2020-05-05 20:00:00')
+        expect(subject.state_last_updated_at).to eq(travel_time)
       end
     end
 
