@@ -2,6 +2,7 @@
 //= require modal
 //= require geocomplete
 //= require best_in_place
+//= require active_admin_datetimepicker
 
 $(document).ready(function () {
   $.ajaxSetup({
