@@ -18,6 +18,11 @@ class ApplicationController < ActionController::Base
                                         subject: error.subject)
   end
 
+  rescue_from StandardError do |error|
+    Raven.capture_exception error
+    raise error
+  end
+
   def set_raven_context
     Raven.user_context(id: current_user.id) if current_user
   end
