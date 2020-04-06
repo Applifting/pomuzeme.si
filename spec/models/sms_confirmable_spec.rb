@@ -131,6 +131,10 @@ describe SmsConfirmable do
     context 'and can obtain confirmation code' do
       let(:sms_manager) { double(:sms_manager) }
 
+      before do
+        allow(SmsService::Manager).to receive(:send_verification_code).and_return(true)
+      end
+
       it 'updates confirmation_code on model' do
         expect do
           confirmable.obtain_confirmation_code
@@ -144,8 +148,8 @@ describe SmsConfirmable do
       end
 
       it 'sends new SMS' do
-        allow(SmsService::Manager).to receive(:new).and_return(sms_manager)
         expect(sms_manager).to receive(:send_verification_code).once
+        allow(SmsService::Manager).to receive(:send_verification_code).and_return(sms_manager.send_verification_code)
         confirmable.obtain_confirmation_code
       end
     end

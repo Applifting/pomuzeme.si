@@ -92,13 +92,23 @@ img {
     background: silver;
   }
 }
-
-.wave {
+.wave-container {
+  display: flex;
+  justify-content: center;
   width: 100%;
+  overflow: hidden;
+  position: relative;
 
-  &.bottom {
-    transform: rotate(180deg);
-    vertical-align: top;
+  .wave {
+    position: relative;
+    width: calc(100% + 8px);
+    top: 1px;
+
+    &.bottom {
+      top: -1px;
+      transform: rotate(180deg);
+      vertical-align: top;
+    }
   }
 }
 

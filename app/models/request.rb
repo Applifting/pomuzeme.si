@@ -17,9 +17,12 @@ class Request < ApplicationRecord
   has_many :messages
 
   # Validations
-  validates :text, :required_volunteer_count, :subscriber, presence: true
+  validates :required_volunteer_count, presence: true
   validates :creator, :state, :state_last_updated_at, presence: true
   validates :subscriber_phone, phony_plausible: true, presence: true
+  validates :text, presence: true, length: { maximum: 160 }
+  validates :subscriber, presence: true, length: { maximum: 150 }
+  validates :closed_note, length: { maximum: 500 }
 
   # Attributes
   accepts_nested_attributes_for :address
