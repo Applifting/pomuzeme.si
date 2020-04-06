@@ -1,0 +1,55 @@
+name: CI Test
+# This workflow is triggered on every push and every pull request to the repository and builds the app with tests
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Runs all of the steps inside the specified container rather than on the VM host.
+    container:
+      image: ruby:2.6.3
+
+    # Use PostgreSQL DB container with PostGIS extension
+    services:
+      postgres:
+        image: postgis/postgis:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: pomuzeme_si_test
+        ports:
+        - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    env:
+      # Use PostgreSQL for the host here because we have specified a container for the job.
+      # If we were running the job on the VM this would be localhost
+      DATABASE_URL: postgis://postgres:@postgres:5432/pomuzeme_si_test
+      RAILS_ENV: test
+      username: postgres
+      password: postgres
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: borales/actions-yarn@v2.1.0  # Yarn packages
+      with:
+        cmd: install
+
+    - name: Install required dependencies and packages for PostGIS/GEOS
+      run: |
+        apt-get update -y
+        apt-get -yqq install libpq-dev libgeos-dev
+    - name: Bundle install
+      run: |
+        gem install bundler
+        gem install rgeo -- --with-geos-dir=/usr/lib
+        bundle install --jobs 4 --retry 3
+    - name: Setup Database
+      run: |
+        bundle exec rake db:create
+        bundle exec rake db:migrate
+    - name: Run RSpec
+      run: |
+        bundle exec rspec
