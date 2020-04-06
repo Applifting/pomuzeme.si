@@ -102,7 +102,7 @@ describe SmsConfirmable do
     end
 
     before do
-      allow_any_instance_of(Sms::Provider).to receive(:send_msg)
+      allow_any_instance_of(Sms::O2Connector).to receive(:send_msg)
     end
 
     context 'confirmed_at is set' do
@@ -131,6 +131,10 @@ describe SmsConfirmable do
 
     context 'and can obtain confirmation code' do
       let(:sms_manager) { double(:sms_manager) }
+
+      before do
+        allow_any_instance_of(Sms::Manager).to receive(:send_verification_code).and_return(true)
+      end
 
       it 'updates confirmation_code on model' do
         expect do
