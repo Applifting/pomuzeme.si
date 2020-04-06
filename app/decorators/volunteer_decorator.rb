@@ -19,8 +19,8 @@ class VolunteerDecorator < ApplicationDecorator
     end
   end
 
-  def show_contact_details?(params)
-    params['scope'] == 'volunteer_verified' || params['scope'].nil?
+  def show_contact_details?(user, params)
+    user.admin? || params['scope'] == 'volunteer_verified' || params['scope'].nil?
   end
 
   def full_name
