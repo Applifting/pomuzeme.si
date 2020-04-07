@@ -4,10 +4,10 @@ module Abilities
       can :read, ActiveAdmin::Page, name: 'Dashboard'
       can %i[index read], [Organisation, OrganisationDecorator], id: user.cache_output(:user_group_organisations) { Organisation.user_group_organisations(user).pluck(:id) }
       can :update, [Organisation, OrganisationDecorator], id: user.cache_output(:coordinating_organisations) { user.coordinating_organisation_ids }
-      can %i[read], [User, UserDecorator], id: user.cache_output(:coordinators_in_organisations) { user.coordinators_in_organisations.pluck(:id) }
+      can %i[read], [User, UserDecorator], id: user.cache_output(:group_coordinators) { user.group_coordinators.pluck(:id) }
 
-      can %i[read download], [Volunteer, VolunteerDecorator], id: Volunteer.available_for(user.cached_organisation_group.id).pluck(:id)
-      can :manage, [Volunteer, VolunteerDecorator], id: Volunteer.exclusive_for(user.cached_organisation_group.id).pluck(:id)
+      can %i[read download], [Volunteer, VolunteerDecorator], id: Volunteer.available_for(user.organisation_group.id).pluck(:id)
+      can :manage, [Volunteer, VolunteerDecorator], id: Volunteer.exclusive_for(user.organisation_group.id).pluck(:id)
       cannot %i[read], Volunteer, confirmed_at: nil
 
       can :update, [Address, AddressDecorator], Address.all do |address|
