@@ -4,11 +4,12 @@ module SmsService
   module Connector
     module O2
       class Message
-        attr_reader :phone, :text
+        attr_reader :phone, :text, :request_delivery_report
 
-        def initialize(phone, text)
+        def initialize(phone, text, delivery_report: nil)
           @phone = phone
           @text  = SmsService.replace_special_chars(text)
+          @request_delivery_report = delivery_report
         end
 
         def self.receive
@@ -29,8 +30,8 @@ module SmsService
           handle_response(raw_response)
         end
 
-        def self.send(phone, text)
-          new(phone, text).send
+        def self.send(phone, text, delivery_report:)
+          new(phone, text, delivery_report: delivery_report).send
         end
 
         def send(attempt = 0)
@@ -87,7 +88,7 @@ module SmsService
             fromNumber: O2::PHONE_NUMBER,
             toNumber: phone,
             text: text,
-            deliveryReport: 'TRUE',
+            deliveryReport: request_delivery_report,
             intruder: 'FALSE',
             multipart: 'TRUE',
             validityPeriod: 10_000,

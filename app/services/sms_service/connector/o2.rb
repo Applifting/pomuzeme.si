@@ -5,8 +5,8 @@ module SmsService
       BA_ID                        = 1_992_125
       PHONE_NUMBER                 = '+420720002125'.freeze
 
-      def self.send_message(phone, text)
-        Message.send(phone, text)
+      def self.send_message(phone, text, delivery_report:)
+        Message.send(phone, text, delivery_report: delivery_report)
       end
 
       def self.receive_message
