@@ -4,9 +4,10 @@ module Messages
 
     around_perform do |job, block|
       block.call
-      Messages::ReceiverJob.perform_later
     rescue StandardError => e
       Raven.capture_exception e
+    ensure
+      Messages::ReceiverJob.perform_later
     end
 
     def perform
