@@ -1,9 +1,8 @@
 module SmsService
   module Connector
     module O2
-      MESSAGE_DELIVERED_TO_NETWORK = 'ISUC_010'.freeze
-      BA_ID                        = ENV['O2_BA_ID']
-      PHONE_NUMBER                 = ENV['O2_PHONE_NUMBER']
+      BA_ID                        = 1_992_125
+      PHONE_NUMBER                 = '+420720002125'.freeze
 
       def self.send_message(phone, text, delivery_report:)
         Message.send(phone, text, delivery_report: delivery_report)
@@ -13,11 +12,9 @@ module SmsService
         Message.receive do |incoming_message|
           next if incoming_message.blank?
 
-          confirm(incoming_message) && next if incoming_message&.response_code == MESSAGE_DELIVERED_TO_NETWORK
+          confirm(incoming_message) && next if incoming_message&.ignore? || incoming_message&.error_report?
 
-          event_type = incoming_message.selector == 'Response' ? :delivery_report_received : :message_received
-
-          confirm(incoming_message) if MessagingService.callback(event_type, incoming_message)
+          confirm(incoming_message) if MessagingService.callback(incoming_message.message_type, incoming_message)
         end
       end
 

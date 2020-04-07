@@ -8,7 +8,7 @@ module MessagingService
       Callbacks.message_sent(message_object, response)
     end
   rescue StandardError => e
-    Raven.extra_context active_record_message: active_record_message
+    Raven.extra_context active_record_message: active_record_message.as_json
     Raven.capture_exception e
   end
 

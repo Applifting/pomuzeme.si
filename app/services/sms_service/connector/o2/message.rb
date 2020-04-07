@@ -56,6 +56,7 @@ module SmsService
         end
 
         def self.handle_error(parsed_response)
+          Raven.extra_context parsed_response: parsed_response.to_s
           raise SmsService::MessagingError, parsed_response.response_description
         end
 
