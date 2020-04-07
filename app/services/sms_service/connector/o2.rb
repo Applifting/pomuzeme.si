@@ -3,7 +3,7 @@ module SmsService
     module O2
       MESSAGE_DELIVERED_TO_NETWORK = 'ISUC_010'.freeze
       BA_ID                        = ENV['O2_BA_ID']
-      PHONE_NUMBER                 = '+420720002125'.freeze
+      PHONE_NUMBER                 = ENV['O2_PHONE_NUMBER']
 
       def self.send_message(phone, text, delivery_report:)
         Message.send(phone, text, delivery_report: delivery_report)
