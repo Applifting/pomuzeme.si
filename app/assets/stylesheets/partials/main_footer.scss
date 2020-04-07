@@ -1,7 +1,7 @@
 @import "../variables";
 
 .main-footer {
-  background-color: $background-dark;
+  background-color: $background-light;
   padding-top: 40px;
 
   .footer-content {
@@ -71,14 +71,10 @@
       }
     }
 
-    p {
+    .body1 {
       margin: 0 0 16px;
-      font-size: 18px;
-      line-height: 150%;
 
       @include lg {
-        font-size: 16px;
-        line-height: 160%;
         margin-bottom: 22px;
       }
     }
