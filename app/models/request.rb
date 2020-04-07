@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Request < ApplicationRecord
-  HAS_UNREAD_MESSAGES = 'requested_volunteers.volunteer_id = messages.volunteer_id AND messages.direction = 2 AND messages.read_at IS NULL'
-
   # Hooks
   before_validation :set_state, :set_state_last_updated_at
 
@@ -47,7 +45,7 @@ class Request < ApplicationRecord
   scope :in_progress, -> { where('state = 4 AND (fullfillment_date IS NULL OR fullfillment_date > ?)', Time.zone.now) }
   scope :check_fulfillment, -> { where('state = 4 AND fullfillment_date < ?', Time.zone.now) }
   scope :without_coordinator, -> { where(coordinator_id: nil) }
-  scope :has_unread_messages, -> { joins(requested_volunteers: :messages).where(HAS_UNREAD_MESSAGES).distinct }
+  scope :has_unread_messages, -> { joins(requested_volunteers: :messages).merge(Message.incoming.unread).distinct }
 
   def title
     [text[0..39], address].compact.join ', '
