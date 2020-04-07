@@ -125,7 +125,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     f.inputs 'Poptávka služby' do
       f.input :text, as: :text, hint: 'Tento popis dostane dobrovolník do aplikace / SMS'
       f.input :required_volunteer_count, input_html: { value: object.required_volunteer_count.nil? ? 1 : resource.required_volunteer_count }
-      f.input :fullfillment_date, as: :datetime_picker
+      f.input :fullfillment_date, as: :date_time_picker, input_html: { autocomplete: 'off' }
     end
 
     f.inputs 'Údaje příjemce' do
@@ -157,7 +157,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
       f.input :organisation, as: :select,
                              collection: organisations,
                              include_blank: false
-      f.input :block_volunteer_until, as: :datetime_picker
+      f.input :block_volunteer_until, as: :date_time_picker, input_html: { autocomplete: 'off' }
       f.input :coordinator_id, as: :select, collection: current_user.organisation_colleagues
       f.input :closed_note, as: :text if resource.persisted?
       f.input :created_by_id, as: :hidden, input_html: { value: current_user.id }

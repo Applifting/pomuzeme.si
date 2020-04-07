@@ -110,6 +110,7 @@ gem 'active_admin-humanized_enum'
 gem 'activeadmin'
 gem 'arctic_admin'
 gem 'draper'
+gem 'active_admin_datetimepicker'
 
 # geocoding
 gem 'geocoder'
