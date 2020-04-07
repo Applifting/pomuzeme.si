@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  include Authorizable
   rolify
+  include Authorizable
+  include Cacheable
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -25,10 +26,6 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-  def cached_roles_name
-    @cached_roles_name ||= roles_name.map(&:to_sym)
-  end
-
   def organisation_colleagues
     coordinating_organisations.map(&:coordinators).flatten.uniq
   end
@@ -40,10 +37,6 @@ class User < ApplicationRecord
 
   def organisation_group
     @organisation_group ||= coordinating_groups.take
-  end
-
-  def has_any_role?(role_name)
-    cached_roles_name.include? role_name
   end
 
   def coordinators_in_organisations

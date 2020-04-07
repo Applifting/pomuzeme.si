@@ -12,7 +12,7 @@ ActiveAdmin.register Organisation do
     column :name
     column :abbreviation
     column :business_id_number
-    if current_user.admin?
+    if current_user.cached_admin?
       column :created_at
       column :updated_at
     end

@@ -6,7 +6,7 @@ class Ability
   include Abilities::Coordinator
 
   def initialize(user)
-    add_coordinator_ability user if user.coordinator?
-    add_super_admin_ability user if user.admin?
+    add_coordinator_ability user if user.cached_coordinator?
+    add_super_admin_ability user if user.cached_admin?
   end
 end

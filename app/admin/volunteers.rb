@@ -11,10 +11,10 @@ ActiveAdmin.register Volunteer do
   end
   # scope
   scope :volunteer_all, default: true do |scope|
-    current_user.admin? ? scope : scope.available_for(current_user.organisation_group.id)
+    current_user.cached_admin? ? scope : scope.available_for(current_user.organisation_group.id)
   end
-  scope :unconfirmed, if: -> { current_user.admin? }
-  scope :confirmed, if: -> { current_user.admin? }
+  scope :unconfirmed, if: -> { current_user.cached_admin? }
+  scope :confirmed, if: -> { current_user.cached_admin? }
 
   # Filters
   filter :full_name_cont, label: 'Jméno / příjmení'
@@ -75,7 +75,7 @@ ActiveAdmin.register Volunteer do
         resource.address.distance_in_km(resource.distance_meters)
       end
     end
-    column :confirmed? if current_user.admin?
+    column :confirmed? if current_user.cached_admin?
     actions
   end
 

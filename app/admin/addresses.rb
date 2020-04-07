@@ -28,7 +28,7 @@ ActiveAdmin.register Address do
       column :distance, sortable: 'distance_meters', &:distance_in_km
     end
 
-    if current_user.admin?
+    if current_user.cached_admin?
       column :created_at
       column :updated_at
     end
@@ -79,7 +79,7 @@ ActiveAdmin.register Address do
       f.input :longitude, as: :hidden
       f.input :geo_entry_id, as: :hidden
       custom_input :redirect_to, type: :hidden, value: request.referrer
-      if current_user.admin?
+      if current_user.cached_admin?
         f.inputs 'Super admin' do
           f.input :addressable_type
           f.input :addressable_id
