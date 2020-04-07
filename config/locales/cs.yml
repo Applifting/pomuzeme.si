@@ -162,6 +162,7 @@ cs:
         subscriber: Příjemce
         subscriber_hidden: skrytý příjemce
         subscriber_phone: Telefon příjemce
+        subscriber_email: Email příjemce
         created_at: Vytvořeno
         states:
           created: Vytvořeno

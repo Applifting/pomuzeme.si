@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :created_requests, class_name: 'Request', foreign_key: :created_by_id
   has_many :closed_requests, class_name: 'Request', foreign_key: :closed_by_id
   has_many :requests, class_name: 'Request', foreign_key: :coordinator_id
+  has_many :organisation_requests, through: :coordinating_organisations, source: :requests
   has_many :coordinating_groups, through: :coordinating_organisations, source: :groups
 
   # Validations
