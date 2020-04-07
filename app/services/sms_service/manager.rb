@@ -23,7 +23,7 @@ module SmsService
       def send_partner_welcome_msg(phone, group)
         msg = I18n.t('sms.welcome_channel', group_name: group.name, group_slug: group.slug)
 
-        sms_gateway(phone, SmsService.replace_special_chars(msg))
+        sms_gateway(phone, I18n.transliterate(msg))
       end
 
       def sms_gateway(phone, msg)

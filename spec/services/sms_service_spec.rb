@@ -5,7 +5,7 @@ describe SmsService::Manager do
 
   describe '.send_welcome_msg' do
     let(:standard_text) { I18n.t 'sms.welcome' }
-    let(:partner_text)  { SmsService.replace_special_chars I18n.t('sms.welcome_channel', group_name: 'Clovek', group_slug: 'clovek') }
+    let(:partner_text)  { I18n.transliterate I18n.t('sms.welcome_channel', group_name: 'Clovek', group_slug: 'clovek') }
     let(:group)         { Group.new name: 'Clovek', slug: 'clovek' }
 
     it 'sends standard welcome message to free volunteer' do

@@ -8,7 +8,7 @@ module SmsService
 
         def initialize(phone, text, delivery_report: nil)
           @phone = phone
-          @text  = SmsService.replace_special_chars(text)
+          @text  = I18n.transliterate text
           @request_delivery_report = delivery_report
         end
 

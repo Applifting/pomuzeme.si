@@ -16,8 +16,4 @@ module SmsService
   def self.receive
     Connector::O2.receive_message
   end
-
-  def self.replace_special_chars(text)
-    text.tr('ěščřžýáíéúůťďóňĚŠČŘŽÝÁÍÉÚŮŤĎÓŇ', 'escrzyaieuutdonESCRZYAIEUUTDON')
-  end
 end
