@@ -4,7 +4,7 @@ class Api::V1::SessionController < ApiController
   def new
     return error_response(ApiErrors[:INVALID_CAPTCHA], status: :forbidden) unless valid_recaptcha?
     volunteer = volunteer_from_params
-    return error_response(ApiErrors[:VOLUNTEER_NOT_FOUND], status: :not_found) unless volunteer
+    return error_response(ApiErrors[:VOLUNTEER_NOT_FOUND], status: :not_found) if volunteer.nil? || volunteer.confirmed_at.nil?
 
     volunteer.obtain_authorization_code
     volunteer.update! fcm_token: permitted_params[:fcm_token] if permitted_params[:fcm_token].present?
@@ -26,8 +26,9 @@ class Api::V1::SessionController < ApiController
   private
 
   def volunteer_from_params
-    normalized_phone = PhonyRails.normalize_number(permitted_params[:phone_number], country_code: 'cz')
-    Volunteer.find_by(phone: normalized_phone) || Volunteer.create!(first_name: '', last_name: '', email: '', phone: normalized_phone, pending_registration: true)
+    # normalized_phone = PhonyRails.normalize_number(permitted_params[:phone_number], country_code: 'cz')
+    # Volunteer.find_by(phone: normalized_phone) ||˚ Volunteer.create!(first_name: '', last_name: '', email: '', phone: normalized_phone, pending_registration: true)
+    Volunteer.find_by phone: PhonyRails.normalize_number(permitted_params[:phone_number], country_code: 'cz')
   rescue Phony::NormalizationError
     nil
   end
