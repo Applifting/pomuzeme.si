@@ -37,6 +37,8 @@ module SmsService
           case response_code
           when MESSAGE_DELIVERED_TO_PHONE
             :delivery_report_received
+          else
+            :error_message
           end
         end
 
