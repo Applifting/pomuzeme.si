@@ -2,6 +2,9 @@ module SmsService
   module Connector
     module O2
       class Response
+        MESSAGE_DELIVERED_TO_NETWORK = 'ISUC_010'.freeze
+        MESSAGE_DELIVERED_TO_PHONE   = 'ISUC_005'.freeze
+
         # Required methods
         # :channel_msg_id, :from_number, :text, :delivery_receipt_timestamp
 
@@ -15,11 +18,32 @@ module SmsService
 
         def initialize(raw_response)
           @raw_response = raw_response
-          parse_response
+          @response     = parsed_response
+
+          report_error if response&.error_report?
         end
 
         def blank?
           response.ba_id.nil?
+        end
+
+        def error_report?
+          message_type == :error_message
+        end
+
+        def message_type
+          return :message_received if selector == 'TextSms'
+
+          case response_code
+          when MESSAGE_DELIVERED_TO_PHONE
+            :delivery_report_received
+          else
+            :error_message
+          end
+        end
+
+        def ignore?
+          response_code == MESSAGE_DELIVERED_TO_NETWORK
         end
 
         def to_s
@@ -28,14 +52,19 @@ module SmsService
 
         private
 
-        def parse_response
-          @response = OpenStruct.new raw_response.to_s
-                                                 .split("\n")
-                                                 .map(&:strip)
-                                                 .map { |i| i.split('=') }
-                                                 .reject { |i| i[1].blank? }
-                                                 .to_h
-                                                 .transform_keys(&:underscore)
+        def report_error
+          Raven.extra_context parsed_response: parsed_response.to_s
+          Raven.capture_exception 'O2 error response'
+        end
+
+        def parsed_response
+          OpenStruct.new raw_response.to_s
+                                     .split("\n")
+                                     .map(&:strip)
+                                     .map { |i| i.split('=') }
+                                     .reject { |i| i[1].blank? }
+                                     .to_h
+                                     .transform_keys(&:underscore)
         end
       end
     end

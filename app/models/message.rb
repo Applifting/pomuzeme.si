@@ -24,7 +24,6 @@ class Message < ApplicationRecord
 
   # Scopes
   scope :unread, -> { where(read_at: nil) }
-  scope :incoming, -> { where(direction: 2) }
   scope :for_request, ->(request_id, volunteer_id) { where(format(MESSAGES_FOR_REQUEST_SQL, request_id: request_id, volunteer_id: volunteer_id)) }
 
   def mark_as_read
