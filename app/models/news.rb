@@ -9,6 +9,9 @@ class News < ApplicationRecord
   scope :recent, -> { order(created_at: :desc) }
   scope :published, -> { where('created_at < ?', Time.zone.now) }
 
+  # Hooks
+  after_commit :invalidate_news_cache
+
   def self.cached_recent_news(count = 5)
     Rails.cache.fetch :news do
       News.news.recent.published.limit(count)
@@ -19,5 +22,12 @@ class News < ApplicationRecord
     Rails.cache.fetch :from_media do
       News.from_media.recent.published.limit(count)
     end
+  end
+
+  private
+
+  def invalidate_news_cache
+    Rails.cache.delete :news
+    Rails.cache.delete :password_confirmation
   end
 end
