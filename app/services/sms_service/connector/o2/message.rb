@@ -73,11 +73,7 @@ module SmsService
           puts "SMS for #{phone}, TEXT -> #{text}"
           puts '==========================='
 
-          mock_raw_response_success
-        end
-
-        def mock_raw_response_success
-          "selector=Response\nresponseType=SUCCESS\nresponseCode=ISUC_001\nresponseDescription=Pozadavek Send uspesne zpracovan - ISUC_001 - Send request successfully processed\nbaID=1992125\nrefBaID=1992125\nmsgID=ID-48555-1585223320437-1-2900914\ntimestamp=2020-03-29T13:35:00\nrefMsgID=ID-48555-1585223320437-1-2900913\n"
+          MockMessage
         end
 
         def send_query
@@ -102,6 +98,20 @@ module SmsService
             refBaID: O2::BA_ID,
             refMsgID: incoming_msg.msg_id
           }
+        end
+      end
+
+      class MockMessage
+        def self.code
+          200
+        end
+
+        def self.to_s
+          "selector=Response\nresponseType=SUCCESS\nresponseCode=ISUC_001\nresponseDescription=Pozadavek Send uspesne zpracovan - ISUC_001 - Send request successfully processed\nbaID=1992125\nrefBaID=1992125\nmsgID=ID-48555-1585223320437-1-2900914\ntimestamp=2020-03-29T13:35:00\nrefMsgID=ID-48555-1585223320437-1-2900913\n"
+        end
+
+        def self.success?
+          true
         end
       end
     end
