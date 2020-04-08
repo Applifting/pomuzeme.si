@@ -20,7 +20,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
 
   # Scopes
   # Experimental feature
-  scope :unread_msgs, default: true, if: -> { current_user.admin? } do |scope|
+  scope :unread_msgs, default: true, if: -> { current_user.cached_admin? } do |scope|
     scope.not_closed.has_unread_messages
   end
   scope :request_in_preparation, default: true do |scope|
@@ -41,7 +41,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   # Controller
   controller do
     def scoped_collection
-      super.includes(:address)
+      super.includes(:address, :coordinator, :organisation)
     end
   end
 
@@ -63,7 +63,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     column :fullfillment_date
     column :coordinator
     column :state_last_updated_at
-    column :organisation if current_user.admin?
+    column :organisation if current_user.cached_admin?
     actions
   end
 
@@ -154,7 +154,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     end
 
     f.inputs 'Koordinace' do
-      organisations = current_user.admin? ? Organisation.all : Organisation.user_group_organisations(current_user)
+      organisations = current_user.cached_admin? ? Organisation.all : Organisation.user_group_organisations(current_user)
 
       f.input :state if resource.persisted?
       f.input :organisation, as: :select,

@@ -26,10 +26,10 @@ ActiveAdmin.register Recruitment do
     column :is_exclusive
     column :coordinator
     column :comments
-    column(:group) if current_user.admin?
+    column(:group) if current_user.cached_admin?
     column :created_at
     column :updated_at
 
-    actions if current_user.admin?
+    actions if current_user.cached_admin?
   end
 end

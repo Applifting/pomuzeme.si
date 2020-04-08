@@ -2,9 +2,9 @@ module Abilities
   module Coordinator
     def add_coordinator_ability(user)
       can :read, ActiveAdmin::Page, name: 'Dashboard'
-      can %i[index read], [Organisation, OrganisationDecorator], id: Organisation.user_group_organisations(user).pluck(:id)
-      can :update, [Organisation, OrganisationDecorator], id: user.coordinating_organisations.pluck(:id)
-      can %i[read], [User, UserDecorator], id: user.coordinators_in_organisations.pluck(:id)
+      can %i[index read], [Organisation, OrganisationDecorator], id: user.cache_output(:user_group_organisations) { Organisation.user_group_organisations(user).pluck(:id) }
+      can :update, [Organisation, OrganisationDecorator], id: user.cache_output(:coordinating_organisations) { user.coordinating_organisation_ids }
+      can %i[read], [User, UserDecorator], id: user.cache_output(:group_coordinators) { user.group_coordinators.pluck(:id) }
 
       can %i[read download], [Volunteer, VolunteerDecorator], id: Volunteer.available_for(user.organisation_group.id).pluck(:id)
       can :manage, [Volunteer, VolunteerDecorator], id: Volunteer.exclusive_for(user.organisation_group.id).pluck(:id)
@@ -14,9 +14,9 @@ module Abilities
         can? :manage, address.addressable
       end
 
-      can %i[read], [Group], id: user.coordinating_groups.pluck(:id)
+      can %i[read], [Group], id: user.cache_output(:coordinating_groups) { user.coordinating_groups.pluck(:id) }
 
-      can :manage, Label, group_id: user.coordinating_groups.pluck(:id)
+      can :manage, Label, group_id: user.cache_output(:coordinating_groups) { user.coordinating_groups.pluck(:id) }
       can :manage, VolunteerLabel
 
       can_manage_requests user
@@ -37,11 +37,11 @@ module Abilities
       can :create, Request
 
       # read-only access to requests within organisation group
-      can %i[index read], [Request, RequestDecorator], organisation_id: Organisation.user_group_organisations(user).pluck(:id)
+      can %i[index read], [Request, RequestDecorator], organisation_id: user.cache_output(:user_group_organisations) { Organisation.user_group_organisations(user).pluck(:id) }
 
       # full access to requests in user's organisations
-      can :manage, [Request, RequestDecorator], organisation_id: user.coordinating_organisations.pluck(:id)
-      can :manage, [RequestedVolunteer, RequestedVolunteerDecorator], request: { organisation_id: Organisation.user_group_organisations(user).pluck(:id) }
+      can :manage, [Request, RequestDecorator], organisation_id: user.cache_output(:coordinating_organisations) { user.coordinating_organisation_ids }
+      can :manage, [RequestedVolunteer, RequestedVolunteerDecorator], request: { organisation_id: user.cache_output(:user_group_organisations) { Organisation.user_group_organisations(user).pluck(:id) } }
 
       # access to ActiveAdmin::Comment
       can %i[index read], ActiveAdmin::Comment, resource_type: 'Request', resource_id: user.coordinator_organisation_requests.pluck(:id)

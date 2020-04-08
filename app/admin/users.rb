@@ -41,7 +41,7 @@ ActiveAdmin.register User do
     column :first_name
     column :last_name
     column :email
-    if current_user.admin?
+    if current_user.cached_admin?
       column :created_at
       column :updated_at
     end

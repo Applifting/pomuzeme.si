@@ -21,7 +21,7 @@ ActiveAdmin.register_page 'Import Data' do
   end
 
   content do
-    managable_groups = current_user.admin? ? Group.all : current_user.coordinating_groups
+    managable_groups = current_user.cached_admin? ? Group.all : current_user.coordinating_groups
 
     tabs do
       tab 'Import' do

@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  rolify after_add: :handle_new_role
   include Authorizable
-  rolify
+  include Cacheable
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -25,10 +26,6 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-  def cached_roles_name
-    @cached_roles_name ||= roles_name.map(&:to_sym)
-  end
-
   def organisation_colleagues
     coordinating_organisations.map(&:coordinators).flatten.uniq
   end
@@ -42,14 +39,14 @@ class User < ApplicationRecord
     @organisation_group ||= coordinating_groups.take
   end
 
-  def has_any_role?(role_name)
-    cached_roles_name.include? role_name
-  end
-
-  def coordinators_in_organisations
+  def group_coordinators
     User.joins(:roles).where(roles: { name: :coordinator,
                                       resource_type: :Organisation,
                                       resource_id: coordinating_organisation_ids })
+  end
+
+  def organisation_coordinators
+    User.with_role(:coordinator, organisation_group)
   end
 
   def group_volunteers
@@ -59,5 +56,11 @@ class User < ApplicationRecord
 
   def coordinator_organisation_requests
     Request.where(organisation_id: coordinating_organisations.select(:id))
+  end
+
+  private
+
+  def handle_new_role(_role)
+    touch
   end
 end
