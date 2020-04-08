@@ -8,7 +8,7 @@ module SmsConfirmable
 
   CONFIRMATION_CODE_VALIDITY = 10 # minutes
   CONFIRMATION_CODE_LENGTH = 4
-  CONFIRMATION_CODE_REPEAT_BREAK = 30 # seconds
+  CONFIRMATION_CODE_REPEAT_BREAK = 5 # seconds
   AUTHORIZATION_CODE_VALIDITY = 10 # minutes
   AUTHORIZATION_CODE_ATTEMPTS = 5 # minutes
 
@@ -40,7 +40,7 @@ module SmsConfirmable
     raise StandardError, 'Token regenerated too early' unless can_obtain_code?
 
     regenerate_confirmation_code!
-    Sms::Manager.new.send_verification_code confirmation_code, phone
+    SmsService::Manager.send_verification_code phone, confirmation_code
   end
 
   def obtain_authorization_code

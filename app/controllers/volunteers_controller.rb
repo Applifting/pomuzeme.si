@@ -24,7 +24,7 @@ class VolunteersController < ApplicationController
     # TODO: We should not show any error to user if welcome SMS was not sent,
     # but we should be able to identify SMS that were not sent.
     partner_group = volunteer.groups.take
-    Sms::Manager.send_welcome_msg(volunteer.phone, partner_group)
+    SmsService::Manager.send_welcome_msg(volunteer.phone, partner_group)
 
     session[:volunteer_id] = nil
 
@@ -49,7 +49,7 @@ class VolunteersController < ApplicationController
 
   def address_params
     params.require(:volunteer).permit(
-        :street, :city, :street_number, :city_part, :postal_code, :country_code, :geo_entry_id, :geo_unit_id, :geo_coord_x, :geo_coord_y
+      :street, :city, :street_number, :city_part, :postal_code, :country_code, :geo_entry_id, :geo_unit_id, :geo_coord_x, :geo_coord_y
     )
   end
 
@@ -85,7 +85,9 @@ class VolunteersController < ApplicationController
   def with_captured_exception(volunteer)
     ActiveRecord::Base.transaction do
       yield volunteer
-    rescue StandardError
+    rescue StandardError => e
+      Raven.capture_exception e
+
       # TODO: sms_not_working is misleading and difficult to debug. There can be model validation issues raising errors.
       volunteer.errors.add(:base, :sms_not_working)
       raise ActiveRecord::Rollback

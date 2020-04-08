@@ -60,6 +60,7 @@ Entity(request, "Request"){
   not_null(required_volunteer_count) INTEGER
   not_null(subscriber) STRING
   not_null(subscriber_phone) STRING
+subscriber_email STRING
   not_null(created_by_id) ID
   coordinator_id ID
   not_null(organisation_id) ID
@@ -94,8 +95,15 @@ Entity(requested_volunteer, "Requested Volunteer"){
   last_removed_at DATETIME
 }
 
-' TODO: Mozna eventy
-
+Entity(message, "Message") {
+  not_null(volunteer_id) ID
+  not_null(text) STRING
+  not_null(created_by) ID
+  not_null(created_at) DATETIME
+  not_null(state) ENUM[pending|sent|received]
+  request_id ID
+  read BOOL default false
+}
 
 Entity(organisation, "Organisation") {
   not_null(name) STRING
@@ -108,8 +116,6 @@ Entity(organisation, "Organisation") {
   not_null(contact_person_phone) STRING
   not_null(contact_person_email) STRING
 }
-
-
 
 Entity(organisation_group, "Organisation Group") {
   not_null(name) STRING
@@ -146,7 +152,6 @@ Entity(role, "Role") {
   not_null(resource_id) ID
 }
 
-
 ' relationships
 organisation_group 	o-- organisation
 (organisation_group, organisation) .- organisation_in_organisation_group
@@ -163,5 +168,7 @@ volunteer *- address
 request -> address
 volunteer_in_organization_group -o volunteer
 organization_group <- volunteer_in_organization_group
+volunteer --o message
+request --o message
 
 @enduml

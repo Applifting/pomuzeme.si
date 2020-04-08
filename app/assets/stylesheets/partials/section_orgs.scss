@@ -1,0 +1,48 @@
+@import '../variables';
+
+.section-orgs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 66px $section-padding 44px;
+
+  @include sm {
+    flex-direction: column;
+  }
+
+  .org-logo {
+    padding: 24px;
+  }
+
+  .text {
+    font-size: 18px;
+    line-height: 150%;
+
+    &:first-child {
+      padding-right: 12px;
+
+      @include sm {
+        padding-bottom: 16px;
+      }
+    }
+
+    &:last-child {
+      padding-left: 12px;
+
+      @include sm {
+        padding-top: 16px;
+      }
+    }
+
+    &.big-text {
+      width: 100%;
+      padding-left: 0 !important;
+      text-align: center;
+
+      @include sm {
+        padding-top: 32px;
+      }
+    }
+  }
+}

@@ -7,11 +7,11 @@
 // For example, to change the sidebar width:
 // $sidebar-width: 242px;
 
-
 // Active Admin's got SASS!
 @import "active_admin/mixins";
 @import "arctic_admin/base";
 @import "admin/*";
+@import "active_admin_datetimepicker";
 
 
 // Overriding any non-variable SASS must be done after the fact.

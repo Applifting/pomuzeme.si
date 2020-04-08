@@ -1,0 +1,71 @@
+@import "../variables";
+
+.section-guide {
+  text-align: center;
+
+  h2 {
+    margin: 80px 0 64px;
+
+    @include lg {
+      margin-bottom: 32px;
+    }
+  }
+
+  h3 {
+    margin-bottom: 63px;
+
+    @include lg {
+      display: none;
+    }
+  }
+
+  .guide-content {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    @include lg {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .step {
+      width: 260px;
+      margin: 0 24px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      @include lg {
+        margin: 20px 0;
+      }
+
+      p {
+        font-size: 20px;
+        line-height: 160%;
+      }
+    }
+
+    .arrow {
+      position: relative;
+      bottom: 160px;
+
+      @include xl {
+        display: none;
+      }
+    }
+  }
+
+  button {
+    margin-top: 52px;
+
+    @include lg {
+      margin-top: 12px;
+    }
+  }
+}

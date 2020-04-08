@@ -14,11 +14,16 @@ class Request < ApplicationRecord
   belongs_to :organisation
   has_many :requested_volunteers, dependent: :destroy
   has_many :volunteers, through: :requested_volunteers
+  has_many :messages
 
   # Validations
-  validates :text, :required_volunteer_count, :subscriber, presence: true
+  validates :required_volunteer_count, presence: true
   validates :creator, :state, :state_last_updated_at, presence: true
   validates :subscriber_phone, phony_plausible: true, presence: true
+  validates :subscriber_email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { subscriber_email&.present? }
+  validates :text, presence: true, length: { maximum: 160 }
+  validates :subscriber, presence: true, length: { maximum: 150 }
+  validates :closed_note, length: { maximum: 500 }
   validate :address_presence
 
   # Attributes
@@ -42,10 +47,9 @@ class Request < ApplicationRecord
   scope :assignable, -> { where(state: %i[created searching_capacity pending_confirmation]) }
   scope :with_organisations, ->(*organisation_id) { where(organisation_id: organisation_id) }
   scope :in_progress, -> { where('state = 4 AND (fullfillment_date IS NULL OR fullfillment_date > ?)', Time.zone.now) }
-  scope :not_closed, -> { where.not(state: :closed) }
-  scope :closed, -> { where(state: :closed) }
   scope :check_fulfillment, -> { where('state = 4 AND fullfillment_date < ?', Time.zone.now) }
   scope :without_coordinator, -> { where(coordinator_id: nil) }
+  scope :has_unread_messages, -> { joins(requested_volunteers: :messages).merge(Message.incoming.unread).distinct }
 
   def title
     [text[0..39], address].compact.join ', '

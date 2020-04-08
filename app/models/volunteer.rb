@@ -14,6 +14,7 @@ class Volunteer < ApplicationRecord
   has_many :labels, through: :volunteer_labels
   has_many :requested_volunteers, dependent: :destroy
   has_many :requests, through: :requested_volunteers
+  has_many :messages, dependent: :destroy
 
   # normalize phone format and add default czech prefix if missings
   phony_normalize :phone, default_country_code: 'CZ'
@@ -83,10 +84,10 @@ class Volunteer < ApplicationRecord
   end
 
   def self.has_labels(*label_ids)
-    joins(:volunteer_labels)
-      .where('volunteer_labels' => { label_id: label_ids })
-      .group(:id)
-      .having("count(*) >= #{label_ids.count}")
+    where(id: Volunteer.unscoped.joins(:volunteer_labels)
+                                .where('volunteer_labels' => { label_id: label_ids })
+                                .group(:id)
+                                .having("count(*) >= #{label_ids.count}").select(:id))
   end
 
   def self.search_nearby(encoded_location)

@@ -5,7 +5,7 @@ module Admin
         @user = user
         @request = request
         @volunteers = volunteers
-        @requested_state = requested_state || :notified
+        @requested_state = requested_state || :to_be_notified
       end
 
       def perform

@@ -111,6 +111,7 @@ gem 'active_admin-humanized_enum'
 gem 'activeadmin'
 gem 'arctic_admin'
 gem 'draper'
+gem 'active_admin_datetimepicker'
 gem 'activeadmin_json_editor'
 
 # geocoding
@@ -131,3 +132,6 @@ gem 'active_model_serializers'
 
 # push notifications
 gem 'rpush'
+
+# background job processing
+gem 'sidekiq'

@@ -1,7 +1,7 @@
 # pomuzeme.si
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-17-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 An open-source platform which aims to simplify and streamline the coordination of volunteers. Through the platform, local organizations can reach volunteers in the area where assistance is needed. This project originated as a voluntary initiative in connection with the COVID-19 infection.
@@ -18,16 +18,20 @@ The application is an MVC monolith written in the RubyOnRails framework. On Fron
 2. NodeJS
 3. yarn (`sudo npm install -g yarn`)
 4. PostgreSQL
-5. Redis
+5. PostGIS 
+6. Redis
 
 #### Steps to get it running
 
 1. `git clone git@github.com:Applifting/pomuzeme.si.git && cd pomuzeme.si`
 2. `bundle install`
-3. `rake db:create && rake db:migrate` Note: avoid `db:setup` as there is an `db:create` hook that is required,
+3. [setup `RGeo`](https://stackoverflow.com/questions/31170055/activerecord-postgis-adapter-undefined-method-point-for-nilnilclass)
+4. `rake db:create` Note: avoid `db:setup` as there is an `db:create` hook that is required,
    in order to have postgres extension.
-4. `yarn install`
-5. `rails server`
+5. `psql pomuzeme_si_development -c "CREATE EXTENSION postgis;"`
+6. `rake db:migrate`
+5. `yarn install`
+6. `rails server`
 
 ## Contribution
 
@@ -94,6 +98,7 @@ Authors of this platform are awesome guys and girls from [Applifting](www.applif
   <tr>
     <td align="center"><a href="http://www.danielsenff.de"><img src="https://avatars2.githubusercontent.com/u/28617?v=4" width="100px;" alt=""/><br /><sub><b>Daniel Senff</b></sub></a><br /><a href="https://github.com/Applifting/pomuzeme.si/commits?author=Dahie" title="Code">💻</a> <a href="https://github.com/Applifting/pomuzeme.si/commits?author=Dahie" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://github.com/kirscfil"><img src="https://avatars0.githubusercontent.com/u/2674563?v=4" width="100px;" alt=""/><br /><sub><b>kirscfil</b></sub></a><br /><a href="#content-kirscfil" title="Content">🖋</a></td>
+    <td align="center"><a href="https://github.com/pmalak"><img src="https://avatars0.githubusercontent.com/u/17003612?v=4" width="100px;" alt=""/><br /><sub><b>Petr Malak</b></sub></a><br /><a href="https://github.com/Applifting/pomuzeme.si/commits?author=pmalak" title="Code">💻</a></td>
   </tr>
 </table>
 

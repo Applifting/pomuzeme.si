@@ -53,7 +53,7 @@ ActiveAdmin.register User do
     column :last_name
     column :email
     column :phone
-    if current_user.admin?
+    if current_user.cached_admin?
       column :created_at
       column :updated_at
     end
