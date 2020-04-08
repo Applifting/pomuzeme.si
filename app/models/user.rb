@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  rolify
+  rolify after_add: :handle_new_role
   include Authorizable
   include Cacheable
 
@@ -56,5 +56,11 @@ class User < ApplicationRecord
 
   def coordinator_organisation_requests
     Request.where(organisation_id: coordinating_organisations.select(:id))
+  end
+
+  private
+
+  def handle_new_role(_role)
+    touch
   end
 end
