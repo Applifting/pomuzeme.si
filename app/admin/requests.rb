@@ -63,7 +63,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     column :fullfillment_date
     column :coordinator
     column :state_last_updated_at
-    column :organisation if current_user.cached_admin?
+    column :organisation
     actions
   end
 
