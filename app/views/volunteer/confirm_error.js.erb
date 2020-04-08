@@ -1,7 +1,10 @@
 var confirmationErrors = $('#confirmation-errors-list');
 
+// reset reCaptcha token
+executeRecaptchaForConfirmation();
 // clear old errors
 confirmationErrors.empty();
+
 <% if defined? error %>
   confirmationErrors.append('<li><%= error %></li>')
 <% else %>

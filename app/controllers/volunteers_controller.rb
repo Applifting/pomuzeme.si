@@ -5,7 +5,7 @@ class VolunteersController < ApplicationController
     volunteer = Volunteer.new(volunteer_params).with_existing_record
     address = volunteer.addresses.build address_with_coordinate
 
-    if resolve_recaptcha(volunteer) && volunteer.valid? && agreements_granted?(volunteer) && save_and_send_code(volunteer)
+    if resolve_recaptcha(volunteer, action: 'login') && volunteer.valid? && agreements_granted?(volunteer) && save_and_send_code(volunteer)
       bind_volunteer_with_organisation_group(volunteer) if @partner_signup_group
       render 'volunteer/register_success'
     else
@@ -18,7 +18,7 @@ class VolunteersController < ApplicationController
     volunteer = Volunteer.find_by id: session[:volunteer_id]
     return render 'volunteer/confirm_error', locals: { error: I18n.t('activerecord.errors.messages.volunteer_not_found') } if volunteer.nil?
 
-    volunteer.confirm_with(confirm_params[:confirmation_code])
+    resolve_recaptcha(volunteer, action: 'confirmation') && volunteer.confirm_with(confirm_params[:confirmation_code])
     return render 'volunteer/confirm_error', locals: { volunteer: volunteer } if volunteer.errors.any?
 
     # TODO: We should not show any error to user if welcome SMS was not sent,
@@ -108,16 +108,12 @@ class VolunteersController < ApplicationController
     @partner_signup_group = Group.find(session[:group_id]) if session[:group_id]
   end
 
-  def resolve_recaptcha(_volunteer)
-    # TEMPORARY DISABLED
-    # score_threshold = ENV['RECAPTCHA_THRESHOLD']&.to_f
-    # if score_threshold.present?
-    #  recaptcha = verify_recaptcha(action: 'login', minimum_score: score_threshold)
-    #  volunteer.errors[:recaptcha] << 'je neplatné' unless recaptcha
-    #  recaptcha
-    # else
-    #  true
-    # end
-    true
+  def resolve_recaptcha(volunteer, action:)
+    score_threshold = ENV['RECAPTCHA_THRESHOLD']&.to_f
+    return true unless score_threshold.present?
+
+    verify_recaptcha(action: action, minimum_score: score_threshold).tap do |recaptcha|
+      volunteer.errors[:recaptcha] << 'je neplatné' unless recaptcha
+    end
   end
 end

@@ -25,6 +25,7 @@
         </p>
 
         <%= form.submit 'Dokončit registraci', class: 'form-button', data: { disable_with: "Dokončit registraci..." } %>
+        <%= recaptcha_v3(action: 'confirmation') %>
       <% end %>
     </section>
   </div>
