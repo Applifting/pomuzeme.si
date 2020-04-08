@@ -249,8 +249,8 @@ cs:
     request:
       offer: "%{identifier} %{text} Prosíme, odpovězte ANO / NE"
       unrecognized: Máte-li o poptávku zájem, odpovězte ANO nebo NE
-      confirmed: Díky za potvrzení, koordinátor %{organisation} se vám ozve s detaily.
-      rejected: Poptávka organizace %{organisation} byla odmítnuta.
+      confirmed: Díky za potvrzení poptávky %{identifier}, koordinátor %{organisation} se vám ozve s detaily.
+      rejected: Poptávka %{identifier} organizace %{organisation} byla odmítnuta.
       over_capacity: Moc děkujeme za zájem, na poptávku organizace %{organisation} se již našlo dostatek dobrovolníků. Počkejte na další.
   errors:
     messages:

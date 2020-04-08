@@ -61,4 +61,8 @@ class Request < ApplicationRecord
 
     self.state_last_updated_at = DateTime.now
   end
+
+  def identifier
+    @identifier ||= [organisation.abbreviation, ('%04d' % id)].join '-'
+  end
 end
