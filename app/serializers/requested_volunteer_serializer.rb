@@ -35,7 +35,7 @@ class RequestedVolunteerSerializer < ActiveModel::Serializer
   end
 
   def title
-    object.request.text[0..29]
+    object.request.text_title
   end
 
   def short_description

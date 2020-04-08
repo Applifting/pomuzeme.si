@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Request < ApplicationRecord
+  TITLE_MAX_LENGTH = 30
+
   # Hooks
   before_validation :set_state, :set_state_last_updated_at
 
@@ -57,6 +59,12 @@ class Request < ApplicationRecord
     return unless state_changed? || !state_last_updated_at
 
     self.state_last_updated_at = DateTime.now
+  end
+
+  def text_title
+    return text if text.size <= TITLE_MAX_LENGTH
+
+    text.truncate TITLE_MAX_LENGTH
   end
 
   private
