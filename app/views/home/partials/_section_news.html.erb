@@ -7,82 +7,12 @@
     <div class="news-content">
       <div class="column-left">
         <h2>Napsali o nás </h2>
-
-        <div class="article-link-wrapper">
-          <div class="created-at">včera</div>
-          <a href="#" target="_blank" rel="noopener noreferrer">
-            <h5>
-              <span class="site-name">CzechCrunch </span>
-              -
-              <span>Pomoc se na nás valí ze všech stran, hlásí iniciativa Pomůžeme.si. V krizi propojuje dobrovolníky a dobročinné organizace</span>
-            </h5>
-          </a>
-        </div>
-
-        <div class="article-link-wrapper">
-          <div class="created-at">včera</div>
-          <a href="#" target="_blank" rel="noopener noreferrer">
-            <h5>
-              <span class="site-name">Roklen24</span>
-              -
-              <span>Pomůžeme.si pomáhá koordinovat komunikaci dobrovolníků a lokálních organizací</span>
-            </h5>
-          </a>
-        </div>
-
-
-        <div class="article-link-wrapper">
-          <div class="created-at">včera</div>
-          <a href="#" target="_blank" rel="noopener noreferrer">
-            <h5>
-              <span class="site-name">CzechCrunch </span>
-              -
-              <span>Pomoc se na nás valí ze všech stran, hlásí iniciativa Pomůžeme.si. V krizi propojuje dobrovolníky a dobročinné organizace</span>
-            </h5>
-          </a>
-        </div>
-
+        <%= render partial: "publications", collection: @publications %>
       </div>
 
       <div class="column-right">
         <h2>Aktuality </h2>
-
-        <div class="news-link-wrapper">
-          <div class="created-at">dnes</div>
-          <a href="#">
-            <h3>Objevili jsme se ve zprávách ČT</h3>
-            <div class="body1 news-content-preview">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi
-              imperdiet,
-              mauris ac auctor dictum, nisl ligula egestas nulla, et sollicitudin sem purus in lacus.
-            </div>
-          </a>
-        </div>
-
-        <div class="news-link-wrapper">
-          <div class="created-at">dnes</div>
-          <a href="#" >
-            <h3>Vydali jsme mobilní aplikaci. Stahujte z Google Play a App Store!</h3>
-            <div class="body1 news-content-preview">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi
-              imperdiet,
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi imperdiet, adipiscing mauris ac auctor
-              dictum.
-            </div>
-          </a>
-        </div>
-
-        <div class="news-link-wrapper">
-          <div class="created-at">dnes</div>
-          <a href="#">
-            <h3>Pokořili jsme hranici 2000 dobrovolníků! Díky!</h3>
-            <div class="body1 news-content-preview">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi
-              imperdiet,
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi imperdiet, adipiscing mauris ac auctor
-              dictum.
-            </div>
-          </a>
-        </div>
-
-        <button class="text-button">Načíst starší aktuality</button>
+        <%= render partial: "news", collection: @news %>
       </div>
     </div>
   </div>

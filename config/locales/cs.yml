@@ -56,6 +56,7 @@ cs:
       volunteer_label: Štítek
       request: Poptávka
       organisation_request: Poptávka
+      news: Aktuality
     attributes:
       volunteer:
         first_name: Jméno
@@ -76,6 +77,17 @@ cs:
         confirmed?: Potvrzen?
         description: Jak může pomoci
         created_at: Vytvořen
+        updated_at: Upraven
+      news:
+        outlet: Médium
+        created_at: Publikovat po
+        created_at_hint: Pokud je nevyplněno, je publikováno hned.
+        publication_type: Umístit do
+        publication_types:
+          from_media: Napsali o nás
+          news: Aktualita
+        body: Text
+        title: Titulek
         updated_at: Upraven
       group:
         name: Název
