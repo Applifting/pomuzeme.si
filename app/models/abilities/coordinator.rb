@@ -42,6 +42,11 @@ module Abilities
       # full access to requests in user's organisations
       can :manage, [Request, RequestDecorator], organisation_id: user.coordinating_organisations.pluck(:id)
       can :manage, [RequestedVolunteer, RequestedVolunteerDecorator], request: { organisation_id: Organisation.user_group_organisations(user).pluck(:id) }
+
+      # access to ActiveAdmin::Comment
+      can %i[index read], ActiveAdmin::Comment, resource_type: 'Request', resource_id: user.coordinator_organisation_requests.pluck(:id)
+      can %i[create], ActiveAdmin::Comment, resource_type: 'Request', resource_id: user.organisation_request_ids
+      can %i[update destroy], ActiveAdmin::Comment, author: user
     end
 
     def can_import_and_cleanup_data

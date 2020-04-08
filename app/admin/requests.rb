@@ -7,7 +7,8 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   menu priority: 2
 
   permit_params :closed_note, :coordinator_id, :created_by_id, :fullfillment_date, :organisation_id,
-                :required_volunteer_count, :state, :subscriber, :subscriber_phone, :text, :block_volunteer_until,
+                :required_volunteer_count, :state, :subscriber, :subscriber_phone, :subscriber_email,
+                :text, :block_volunteer_until,
                 address_attributes: %i[street_number street city city_part postal_code country_code
                                        latitude longitude geo_entry_id]
 
@@ -79,6 +80,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
           attributes_table_for resource do
             row :subscriber
             row :subscriber_phone
+            row :subscriber_email
           end
         else
           para 'Tyto údaje může zobrazit pouze koordinátor organizace, která poptávku spravuje.', class: :small
@@ -132,6 +134,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
       para 'K osobním údajům příjemce služby se dostanou pouze koordinátoři vaší organizace.', class: :small
       f.input :subscriber
       f.input :subscriber_phone, input_html: { maxlength: 13 }
+      f.input :subscriber_email, input_html: { maxlength: 64 }
       address_label = proc { |type| I18n.t("activerecord.attributes.request.#{type}") }
       custom_input :full_address, class: 'geocomplete',
                                   label: object.new_record? ? (address_label['full_address'] + ' *') : address_label['update_address'],

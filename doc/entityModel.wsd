@@ -60,6 +60,7 @@ Entity(request, "Request"){
   not_null(required_volunteer_count) INTEGER
   not_null(subscriber) STRING
   not_null(subscriber_phone) STRING
+subscriber_email STRING
   not_null(created_by_id) ID
   coordinator_id ID
   not_null(organisation_id) ID
