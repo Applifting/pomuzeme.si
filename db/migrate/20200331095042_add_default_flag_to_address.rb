@@ -2,6 +2,8 @@ class AddDefaultFlagToAddress < ActiveRecord::Migration[6.0]
   def change
     add_column :addresses, :default, :boolean
 
+    Address.reset_column_information
+
     reversible do |dir|
       dir.up do
         Address.update_all default: true
