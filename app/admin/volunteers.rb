@@ -110,7 +110,7 @@ ActiveAdmin.register Volunteer do
       f.input :phone
       f.input :email
       f.inputs :description, as: :text
-      f.inputs :preferences, as: :jsonb
+      f.inputs(:preferences, as: :jsonb) if current_user.admin?
     end
     f.actions
   end
