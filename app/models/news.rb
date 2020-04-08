@@ -28,6 +28,6 @@ class News < ApplicationRecord
 
   def invalidate_news_cache
     Rails.cache.delete :news
-    Rails.cache.delete :password_confirmation
+    Rails.cache.delete :from_media
   end
 end
