@@ -45,7 +45,7 @@ module SmsConfirmable
 
   def obtain_authorization_code
     regenerate_authorization_code!
-    Sms::Manager.new.send_authorization_code authorization_code, phone
+    SmsService::Manager.send_authorization_code authorization_code, phone
   end
 
   private
