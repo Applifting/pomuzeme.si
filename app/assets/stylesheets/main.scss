@@ -94,24 +94,6 @@ img {
   }
 }
 
-.text-button {
-  font-family: $main-font;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 150%;
-  color: $primary-button-color;
-  background: transparent;
-  border: none;
-  text-decoration: none;
-  cursor: pointer;
-  padding: 0;
-
-  &:focus {
-    background-color: transparent;
-  }
-}
-
 .wave-container {
   display: flex;
   justify-content: center;
@@ -168,7 +150,7 @@ h3 {
   font-weight: 600;
   font-size: 26px;
   line-height: 160%;
-  margin: 16px 0;
+  margin: 16px 0px;
 
   @include lg {
     font-size: 20px;
@@ -185,34 +167,6 @@ h4 {
 
   @include lg {
     font-size: 19px;
-  }
-}
-
-h5 {
-  font-family: $title-font;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 160%;
-  color: $text-color;
-
-  @include lg {
-    font-size: 16px;
-  }
-
-}
-
-.body1 {
-  font-family: $main-font;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 150%;
-  color: $text-color;
-
-  @include lg {
-    font-size: 16px;
-    line-height: 160%;
   }
 }
 
