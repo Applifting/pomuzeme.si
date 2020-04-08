@@ -6,7 +6,7 @@ ActiveAdmin.register News do
   permit_params :title, :body, :url, :publication_type, :outlet, :created_at
 
   form do |f|
-    f.input :publication_type
+    f.input :publication_type, include_blank: false
     f.input :title
     f.input :created_at, as: :date_time_picker,
                          hint: I18n.t('activerecord.attributes.news.created_at_hint')
