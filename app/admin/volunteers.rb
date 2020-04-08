@@ -61,10 +61,10 @@ ActiveAdmin.register Volunteer do
     id_column
     column :full_name
     column :phone do |resource|
-      resource.show_contact_details?(params) ? resource.phone : 'v detailu'
+      resource.show_contact_details?(current_user, params) ? resource.phone : 'v detailu'
     end
     column :email do |resource|
-      resource.show_contact_details?(params) ? resource.email : 'v detailu'
+      resource.show_contact_details?(current_user, params) ? resource.email : 'v detailu'
     end
     column :address
     if params[:q] && params[:q][:search_nearby]
@@ -114,10 +114,10 @@ ActiveAdmin.register Volunteer do
     column :first_name
     column :last_name
     column :phone do |resource|
-      resource.show_contact_details?(params) ? resource.phone : 'v detailu'
+      resource.show_contact_details?(current_user, params) ? resource.phone : 'v detailu'
     end
     column :email do |resource|
-      resource.show_contact_details?(params) ? resource.email : 'v detailu'
+      resource.show_contact_details?(current_user, params) ? resource.email : 'v detailu'
     end
     column :street
     column :city
