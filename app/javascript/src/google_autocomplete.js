@@ -9,7 +9,7 @@ window.signUpLocationCallback = function (){
     //var input = $("#volunteer_street_search")
     var input = $('#volunteer_street_search');
     var autocomplete = new google.maps.places.Autocomplete(input[0]);
-    autocomplete.setTypes(['address']);
+    autocomplete.setTypes([]);
     autocomplete.setComponentRestrictions({country: "cz"});
     input.prop('placeholder', '')
 
