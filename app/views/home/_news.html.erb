@@ -1,0 +1,7 @@
+<div class="news-link-wrapper">
+  <div class="created-at"><%= I18n.l news.created_at, format: :long %></div>
+    <h3><%= news.title %></h3>
+    <div class="body1 news-content-preview">
+      <%= news.body.html_safe %>
+    </div>
+</div>
