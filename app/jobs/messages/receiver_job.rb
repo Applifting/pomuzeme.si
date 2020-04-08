@@ -7,7 +7,8 @@ module Messages
     rescue StandardError => e
       Raven.capture_exception e
     ensure
-      Messages::ReceiverJob.perform_later unless already_performing? || already_enqueued?
+      # wait 6 seconds due to update of workers information
+      Messages::ReceiverJob.set(wait: 6.seconds).perform_later unless already_performing? || already_enqueued?
     end
 
     def perform
