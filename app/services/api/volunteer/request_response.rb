@@ -12,6 +12,7 @@ module Api
         validate_params!
         validate_access!
         request.with_lock do
+          # TODO: handle logic in another service class
           validate_capacity!
           requested_volunteer.update!(state: request_accepted? ? :accepted : :rejected)
           request.update! state: resolve_request_state
