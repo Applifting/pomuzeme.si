@@ -1,12 +1,9 @@
 class RequestedVolunteerSerializer < ActiveModel::Serializer
-
   attributes :id,
              :state,
              :requested_volunteer_state,
              :title,
              :short_description,
-             :city,
-             :city_part,
              :organisation_id,
              :fullfillment_date,
              :required_volunteer_count,
@@ -40,14 +37,6 @@ class RequestedVolunteerSerializer < ActiveModel::Serializer
 
   def short_description
     object.request.text
-  end
-
-  def city
-    object.request.address&.city
-  end
-
-  def city_part
-    object.request.address&.city
   end
 
   def required_volunteer_count
@@ -91,10 +80,9 @@ class RequestedVolunteerSerializer < ActiveModel::Serializer
   end
 
   def address
-    # TODO: add another address serializer with restricted access
-    return unless show_extended? && object.visible_sensitive
+    serializer = show_extended? && object.visible_sensitive ? AddressSerializer : AddressRestrictedSerializer
 
-    ActiveModelSerializers::SerializableResource.new object.request.address
+    ActiveModelSerializers::SerializableResource.new object.request.address, serializer: serializer
   end
 
   def subscriber
