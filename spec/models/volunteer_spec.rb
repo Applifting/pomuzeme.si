@@ -138,11 +138,35 @@ describe Volunteer do
     end
 
     context 'blocked' do
+      include_context 'volunteers with group'
 
+      let(:request) { create :request, block_volunteer_until: 1.week.from_now }
+      let!(:requested_volunteer) { create :requested_volunteer, request: request, volunteer: volunteer }
+
+      it 'returns only accepted volunteers blocked by some request' do
+        expect(Volunteer.blocked).not_to include volunteer
+        requested_volunteer.accepted!
+        expect(Volunteer.blocked).to include volunteer
+
+        expect(Volunteer.blocked).not_to include exclusive_volunteer
+        expect(Volunteer.blocked).not_to include another_exclusive_volunteer
+        expect(Volunteer.blocked).not_to include non_exclusive_volunteer
+      end
     end
 
     context 'not_blocked' do
+      include_context 'volunteers with group'
 
+      let(:request) { create :request, block_volunteer_until: 1.week.from_now }
+      let!(:requested_volunteer) { create :requested_volunteer, :accepted, request: request, volunteer: volunteer }
+
+      it 'returns only volunteers not blocked by any request' do
+        expect(Volunteer.not_blocked).not_to include volunteer
+
+        expect(Volunteer.not_blocked).to include exclusive_volunteer
+        expect(Volunteer.not_blocked).to include another_exclusive_volunteer
+        expect(Volunteer.not_blocked).to include non_exclusive_volunteer
+      end
     end
   end
 

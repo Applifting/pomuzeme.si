@@ -5,5 +5,13 @@ FactoryBot.define do
     request
     volunteer
     state { :pending_notification }
+
+    trait :accepted do
+      state { :accepted }
+    end
+
+    trait :rejected do
+      state { :rejected }
+    end
   end
 end
