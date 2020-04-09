@@ -21,12 +21,12 @@
         <%= form_with model: Volunteer.new, id: 'registration-form', url: register_volunteer_path, remote: true do |form| %>
           <div class="input-field">
             <%= form.text_field :first_name, class: 'validate', required: true, ariaRequired: true %>
-            <%= form.label :first_name, "Jméno", class: 'required' %>
+            <%= form.label :first_name, class: 'required' %>
           </div>
 
           <div class="input-field">
             <%= form.text_field :last_name, class: 'validate', required: true, ariaRequired: true %>
-            <%= form.label :last_name, "Přijmení", class: 'required' %>
+            <%= form.label :last_name, class: 'required' %>
           </div>
 
           <div class="phone-row">
@@ -34,13 +34,13 @@
 
             <div class="input-field">
               <%= form.telephone_field :phone, class: 'validate', required: true, ariaRequired: true %>
-              <%= form.label :phone, "Mobil", class: 'required' %>
+              <%= form.label :phone, class: 'required' %>
             </div>
           </div>
 
           <div class="input-field">
             <%= form.text_field :email, class: 'validate', required: false, ariaRequired: true %>
-            <%= form.label :email, "Email", class: 'required' %>
+            <%= form.label :email, class: 'required' %>
           </div>
 
           <div class="address-title">
@@ -56,7 +56,7 @@
 
           <div class="input-field">
             <%= form.text_field :street_search, class: 'validate autocomplete', required: true, ariaRequired: true %>
-            <%= form.label :street_search, "Vyhledejte vaši adresu", class: 'required' %>
+            <%= form.label :street_search, class: 'required' %>
           </div>
 
           <%= form.hidden_field :street %>
