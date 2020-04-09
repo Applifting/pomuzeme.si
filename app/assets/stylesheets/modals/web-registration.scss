@@ -1,0 +1,143 @@
+#web-registration {
+  max-width: 960px;
+
+  .modal-content-custom {
+
+    .modal-card-body {
+      display: flex;
+
+      @include lg {
+        display: block;
+      }
+    }
+
+    .modal-left {
+      background: #FFFBF2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 64px 32px 0;
+      width: 50%;
+      text-align: center;
+
+      @include lg {
+        display: none;
+      }
+
+      .modal-thanks {
+        font-family: $title-font;
+        font-weight: 600;
+        font-size: 26px;
+        color: #D48D22;
+        padding-bottom: 24px;
+        line-height: 160%;
+      }
+
+      .modal-explain {
+        font-family: $main-font;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 150%;
+        color: #656565;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+
+      .illustration {
+        position: relative;
+
+        .background {
+          position: absolute;
+          top: -74px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .one-hand {
+          vertical-align: bottom;
+          position: relative;
+        }
+      }
+    }
+
+
+    .modal-right {
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 48px 64px 64px;
+      width: 50%;
+
+      @include lg {
+        width: 100%;
+        box-shadow: none;
+      }
+
+      @include sm {
+        padding: 32px 24px;
+      }
+
+      h3 {
+        margin-bottom: 24px;
+      }
+
+      .phone-row {
+        display: flex;
+
+        .phone-prefix {
+          font-size: 16px;
+          margin: 16px 0 22px;
+          padding: 0 14px;
+          line-height: 43.5px;
+
+          @include custom(1199) {
+            margin-top: 14px;
+          }
+        }
+
+        .input-field {
+          flex-grow: 1;
+        }
+      }
+
+      .address-title {
+        display: flex;
+        align-items: center;
+
+        img {
+          margin-left: 6px;
+        }
+      }
+
+      .checkbox-row {
+        margin: 30px 0;
+      }
+
+      .address-row {
+        display: flex;
+
+        .input-field {
+          &:first-child {
+            flex-grow: 1;
+          }
+
+          &:last-child {
+            width: 128px;
+            flex-shrink: 0;
+            margin-left: 24px;
+          }
+        }
+      }
+
+      .input-field {
+        textarea {
+          border-width: 0 1px 1px 0;
+          margin-top: 14px;
+        }
+
+        textarea:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}

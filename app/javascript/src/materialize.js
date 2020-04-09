@@ -7,13 +7,20 @@ function send_modal_view(modal) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems, {
+    const elems = document.querySelectorAll('.modal');
+    const instances = M.Modal.init(elems, {
         onOpenEnd: send_modal_view
+    });
+
+    const registrationViaWeb = document.querySelector('#register-via-web');
+    registrationViaWeb.addEventListener('click', () => {
+        const modalElement = document.querySelector('#registration');
+        const modalInstance = M.Modal.getInstance(modalElement);
+        modalInstance.close();
     });
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.tooltipped');
-    var instances = M.Tooltip.init(elems, {});
+    const elems = document.querySelectorAll('.tooltipped');
+    const instances = M.Tooltip.init(elems, {});
 });
