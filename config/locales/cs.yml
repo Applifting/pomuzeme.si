@@ -239,7 +239,7 @@ cs:
               terms_of_service_required: "Pro registraci je potřeba souhlasit se zpracováním údajů."
               recaptcha_not_valid: 'Oveření recaptcha je neplatné.'
             phone:
-              improbable_phone: není správně
+              improbable_phone: zadejte číslo v mezinárodním formátu, bez mezer
             confirmation_code:
               not_matching: "se neshoduje"
               expired: "vypršel"
@@ -247,10 +247,14 @@ cs:
         organisation:
           attributes:
             contact_person_phone:
-              improbable_phone: není správně
+              improbable_phone: zadejte číslo v mezinárodním formátu, bez mezer
         address:
           base:
             inaccurate_address: Nepřesná adresa. Prosíme vyberte adresu z našeptávače.
+        request:
+          attributes:
+            subscriber_phone:
+              improbable_phone: zadejte číslo v mezinárodním formátu, bez mezer
     messages:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
 
