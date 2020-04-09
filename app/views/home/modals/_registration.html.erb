@@ -21,12 +21,12 @@
         <%= form_with model: Volunteer.new, id: 'registration-form', url: register_volunteer_path, remote: true do |form| %>
           <div class="input-field">
             <%= form.text_field :first_name, class: 'validate', required: true, ariaRequired: true %>
-            <%= form.label :first_name, "Jméno *" %>
+            <%= form.label :first_name, "Jméno", class: 'required' %>
           </div>
 
           <div class="input-field">
             <%= form.text_field :last_name, class: 'validate', required: true, ariaRequired: true %>
-            <%= form.label :last_name, "Přijmení *" %>
+            <%= form.label :last_name, "Přijmení", class: 'required' %>
           </div>
 
           <div class="phone-row">
@@ -34,13 +34,13 @@
 
             <div class="input-field">
               <%= form.telephone_field :phone, class: 'validate', required: true, ariaRequired: true %>
-              <%= form.label :phone, "Mobil *" %>
+              <%= form.label :phone, "Mobil", class: 'required' %>
             </div>
           </div>
 
           <div class="input-field">
             <%= form.text_field :email, class: 'validate', required: false, ariaRequired: true %>
-            <%= form.label :email, "Email *" %>
+            <%= form.label :email, "Email", class: 'required' %>
           </div>
 
           <div class="address-title">
@@ -56,7 +56,7 @@
 
           <div class="input-field">
             <%= form.text_field :street_search, class: 'validate autocomplete', required: true, ariaRequired: true %>
-            <%= form.label :street_search, "Vyhledejte vaši adresu *"  %>
+            <%= form.label :street_search, "Vyhledejte vaši adresu", class: 'required' %>
           </div>
 
           <%= form.hidden_field :street %>
@@ -78,13 +78,13 @@
           <div class="checkbox-row">
             <label>
               <%= form.check_box :terms_of_service %>
-              <span>Souhlasím s podmínkami <%= link_to 'užívání', 'podminky_dobrovolnika_pomuzemesi.pdf', target: '_blank' %> a <%= link_to 'ochrany osobních údajů', 'podminky_ochrany_osobnich_udaju_pomuzemesi.pdf', target: '_blank' %></span>
+              <span class="text-required">Souhlasím s podmínkami <%= link_to 'užívání', 'podminky_dobrovolnika_pomuzemesi.pdf', target: '_blank' %> a <%= link_to 'ochrany osobních údajů', 'podminky_ochrany_osobnich_udaju_pomuzemesi.pdf', target: '_blank' %></span>
             </label>
           </div>
           <div class="checkbox-row">
             <label>
               <%= form.check_box :age_confirmed %>
-              <span>Prohlašuji, že jsem osoba starší 18 let</span>
+              <span class="text-required">Prohlašuji, že jsem osoba starší 18 let</span>
             </label>
           </div>
 

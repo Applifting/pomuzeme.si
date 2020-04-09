@@ -110,6 +110,16 @@
 
       .checkbox-row {
         margin: 30px 0;
+
+        .text-required:after {
+          content: " *";
+          color: red;
+          transform: unset;
+          -webkit-transform: unset;
+          position: unset;
+          top: unset;
+          left: unset;
+        }
       }
 
       .address-row {
@@ -129,6 +139,16 @@
       }
 
       .input-field {
+        label.required:after {
+          display: inline;
+          content: " *";
+          color: red;
+          opacity: 1;
+          position: unset;
+          left: unset;
+          top: unset;
+        }
+
         textarea {
           border-width: 0 1px 1px 0;
           margin-top: 14px;
