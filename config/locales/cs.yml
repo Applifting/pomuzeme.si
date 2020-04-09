@@ -68,7 +68,7 @@ cs:
         city_part: Městská část
         zipcode: PSČ
         distance: Vzdalenost
-        phone: Telefonní číslo
+        phone: Mobil
         email: E-mail
         confirmation_code: Ověřovací kód
         addresses: Adresy
