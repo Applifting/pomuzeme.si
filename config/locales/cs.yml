@@ -56,6 +56,7 @@ cs:
       volunteer_label: Štítek
       request: Poptávka
       organisation_request: Poptávka
+      news: Aktuality
     attributes:
       volunteer:
         first_name: Jméno
@@ -67,7 +68,7 @@ cs:
         city_part: Městská část
         zipcode: PSČ
         distance: Vzdalenost
-        phone: Telefonní číslo
+        phone: Mobil
         email: E-mail
         confirmation_code: Ověřovací kód
         addresses: Adresy
@@ -76,6 +77,17 @@ cs:
         confirmed?: Potvrzen?
         description: Jak může pomoci
         created_at: Vytvořen
+        updated_at: Upraven
+      news:
+        outlet: Médium
+        created_at: Publikovat po
+        created_at_hint: Pokud je nevyplněno, je publikováno hned.
+        publication_type: Umístit do
+        publication_types:
+          from_media: Napsali o nás
+          news: Aktualita
+        body: Text
+        title: Titulek
         updated_at: Upraven
       group:
         name: Název
@@ -228,7 +240,7 @@ cs:
               terms_of_service_required: "Pro registraci je potřeba souhlasit se zpracováním údajů."
               recaptcha_not_valid: 'Oveření recaptcha je neplatné.'
             phone:
-              improbable_phone: není správně
+              improbable_phone: zadejte číslo v mezinárodním formátu, bez mezer
             confirmation_code:
               not_matching: "se neshoduje"
               expired: "vypršel"
@@ -236,10 +248,14 @@ cs:
         organisation:
           attributes:
             contact_person_phone:
-              improbable_phone: není správně
+              improbable_phone: zadejte číslo v mezinárodním formátu, bez mezer
         address:
           base:
             inaccurate_address: Nepřesná adresa. Prosíme vyberte adresu z našeptávače.
+        request:
+          attributes:
+            subscriber_phone:
+              improbable_phone: zadejte číslo v mezinárodním formátu, bez mezer
     messages:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
 
@@ -251,8 +267,8 @@ cs:
     request:
       offer: "%{identifier} %{text} Prosíme, odpovězte ANO / NE"
       unrecognized: Máte-li o poptávku zájem, odpovězte ANO nebo NE
-      confirmed: Díky za potvrzení, koordinátor %{organisation} se vám ozve s detaily.
-      rejected: Poptávka organizace %{organisation} byla odmítnuta.
+      confirmed: Díky za potvrzení poptávky %{identifier}, koordinátor %{organisation} se vám ozve s detaily.
+      rejected: Poptávka %{identifier} organizace %{organisation} byla odmítnuta.
       over_capacity: Moc děkujeme za zájem, na poptávku organizace %{organisation} se již našlo dostatek dobrovolníků. Počkejte na další.
   errors:
     messages:

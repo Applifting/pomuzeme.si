@@ -132,7 +132,7 @@ h2 {
   font-weight: 500;
   font-size: 38px;
   line-height: 150%;
-  margin: 16px 0;
+  margin: 16px 0px;
   color: $heading-color;
 
   @include lg {
@@ -150,7 +150,7 @@ h3 {
   font-weight: 600;
   font-size: 26px;
   line-height: 160%;
-  margin: 16px 0;
+  margin: 16px 0px;
 
   @include lg {
     font-size: 20px;

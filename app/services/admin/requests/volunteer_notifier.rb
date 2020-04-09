@@ -27,11 +27,7 @@ module Admin
       end
 
       def sms_text
-        @sms_text ||= I18n.t 'sms.request.offer', identifier: identifier, text: request.text
-      end
-
-      def identifier
-        @identifier ||= [request.organisation.abbreviation, ('%04d' % request.id)].join '-'
+        @sms_text ||= I18n.t 'sms.request.offer', identifier: request.identifier, text: request.text
       end
     end
   end

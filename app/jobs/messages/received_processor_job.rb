@@ -39,11 +39,10 @@ module Messages
     end
 
     def confirm_response(requested_volunteer)
-      if requested_volunteer.accepted?
-        create_message I18n.t('sms.request.confirmed', organisation: requested_volunteer.request.organisation.name)
-      else
-        create_message I18n.t('sms.request.rejected', organisation: requested_volunteer.request.organisation.name)
-      end
+      msg_type = requested_volunteer.accepted? ? 'sms.request.confirmed' : 'sms.request.rejected'
+      create_message I18n.t(msg_type,
+                            identifier: requested_volunteer.request.indentifier,
+                            organisation: requested_volunteer.request.organisation.name)
     end
 
     def create_message(text)

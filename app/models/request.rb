@@ -71,6 +71,10 @@ class Request < ApplicationRecord
     text.truncate TITLE_MAX_LENGTH
   end
 
+  def identifier
+    @identifier ||= [organisation.abbreviation, ('%04d' % id)].join '-'
+  end
+
   private
 
   def address_presence
