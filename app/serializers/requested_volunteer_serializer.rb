@@ -91,6 +91,7 @@ class RequestedVolunteerSerializer < ActiveModel::Serializer
   end
 
   def address
+    # TODO: add another address serializer with restricted access
     return unless show_extended? && object.visible_sensitive
 
     ActiveModelSerializers::SerializableResource.new object.request.address
