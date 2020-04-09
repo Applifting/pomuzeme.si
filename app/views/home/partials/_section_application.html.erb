@@ -1,0 +1,44 @@
+<div class="wave-container">
+  <%= image_tag asset_path('bg-wave.svg'), class: 'wave' %>
+</div>
+
+<section class="section-application">
+  <div class="section">
+    <div class="application-content">
+      <div class="column-left">
+        <h2>Máme mobilní aplikaci</h2>
+        <ul class="application-list">
+          <li class="list-item">
+            <div class="list-item-content">
+              Dobrovolníci mají přehledný seznam přijatých úkolů s detaily kontakty nebo adresa
+            </div>
+          </li>
+          <li class="list-item">
+            <div class="list-item-content">
+              Organizace mají lepší přehled, kdo se může poptávkám věnovat
+            </div>
+          </li>
+          <li class="list-item">
+            <div class="list-item-content">
+              Integrace s Google Maps
+            </div>
+          </li>
+        </ul>
+        <div class="phone-container-mobile">
+          <%= image_tag asset_path('phone.svg'), class: 'phone' %>
+        </div>
+        <div class="store-buttons">
+          <a href="https://www.apple.com/ios/app-store/"><%= image_tag asset_path('apple-store.svg'), class: 'apple-store' %></a>
+          <a href="https://play.google.com/"><%= image_tag asset_path('google-play.svg'), class: 'google-play' %></a>
+        </div>
+      </div>
+      <div class="column-right">
+        <%= image_tag asset_path('phone.svg'), class: 'phone' %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wave-container">
+  <%= image_tag asset_path('bg-wave.svg'), class: 'wave bottom' %>
+</div>

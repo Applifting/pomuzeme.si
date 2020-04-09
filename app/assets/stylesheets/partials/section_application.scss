@@ -1,0 +1,116 @@
+@import "../variables";
+
+.section-application {
+  padding-top: 44px;
+  background-color: $background-dark;
+
+  .section {
+    @include lg {
+      padding: 0 34px;
+    }
+
+    .application-content {
+      display: flex;
+      padding: 0 0 54px;
+
+      @include lg {
+        flex-direction: column;
+      }
+
+      .column-left {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 500px;
+
+        @include lg {
+          width: 100%;
+        }
+
+        .application-list {
+          font-family: Montserrat, serif;
+          color: #50350D;
+
+          .list-item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            &-content {
+              font-size: 20px;
+              padding-top: 8px;
+              padding-left: 12px;
+              width: 100%;
+
+              @include lg {
+                font-size: 16px;
+              }
+            }
+          }
+        }
+
+        .application-list .list-item:before {
+          content: "";
+          background-size: 16px 21px;
+          background-image: url("blue-check.svg");
+          background-repeat: no-repeat;
+          height: 16px;
+          width: 21px;
+        }
+
+        .phone-container-mobile {
+          display: none;
+
+          @include lg {
+            display: flex;
+            justify-content: center;
+            padding: 36px 0;
+
+            .phone {
+              width: 150px;
+            }
+          }
+        }
+
+        .store-buttons {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          max-width: 360px;
+          margin-top: 48px;
+          width: 100%;
+
+          .apple-store, .google-play {
+            height: 48px;
+          }
+
+          @include lg {
+            max-width: 260px;
+            margin: 24px auto 0;
+
+            .apple-store, .google-play {
+              height: 36px;
+            }
+          }
+        }
+      }
+
+      .column-right {
+        display: flex;
+        justify-content: center;
+        padding: 36px 0;
+        margin: auto;
+
+        .phone {
+          width: 300px;
+        }
+      }
+
+      @include lg {
+        .column-right {
+          display: none;
+        }
+      }
+    }
+  }
+}
