@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Address, type: :model do
-  describe 'validations' do
+  context 'validations' do
     subject { build(:address) }
 
     it { is_expected.to validate_presence_of(:city) }
@@ -15,11 +15,11 @@ RSpec.describe Address, type: :model do
     it { is_expected.to validate_presence_of(:geo_provider) }
   end
 
-  describe 'associations' do
+  context 'associations' do
     it { should belong_to(:addressable) }
   end
 
-  describe 'initialization' do
+  context 'initialization' do
     subject { Address.new }
 
     it 'assigns default values' do
@@ -30,7 +30,7 @@ RSpec.describe Address, type: :model do
     end
   end
 
-  describe '.with_calculated_distance' do
+  context '.with_calculated_distance' do
     let(:coordinate) { Geography::Point.from_coordinates longitude: 14.4548664, latitude: 50.0941811 }
     let(:coordinate_target) { Geography::Point.from_coordinates longitude: 14.4615350, latitude: 50.0952747 }
     let(:address) { create(:address, coordinate: coordinate, addressable: create(:user)) }
@@ -46,7 +46,7 @@ RSpec.describe Address, type: :model do
     end
   end
 
-  describe '.new_from_string' do
+  context '.new_from_string' do
     before do
       allow(Geocoder).to receive(:search).and_return([geocoder_search_mock])
     end
@@ -67,7 +67,7 @@ RSpec.describe Address, type: :model do
     end
   end
 
-  describe '#only_address_errors?' do
+  context '#only_address_errors?' do
     subject { build :address, addressable: create(:user) }
 
     it 'is truthy when address only has some errors' do
@@ -85,7 +85,7 @@ RSpec.describe Address, type: :model do
     end
   end
 
-  describe '#to_s' do
+  context '#to_s' do
     subject { build :address }
 
     it 'has expected format' do

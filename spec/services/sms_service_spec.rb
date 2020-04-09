@@ -3,7 +3,7 @@ require 'rails_helper'
 describe SmsService::Manager do
   before(:all) { I18n.locale = :cs }
 
-  describe '.send_welcome_msg' do
+  context '.send_welcome_msg' do
     let(:standard_text) { I18n.t 'sms.welcome' }
     let(:partner_text)  { I18n.transliterate I18n.t('sms.welcome_channel', group_name: 'Clovek', group_slug: 'clovek') }
     let(:group)         { Group.new name: 'Clovek', slug: 'clovek' }

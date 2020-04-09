@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Group, type: :model do
-  describe 'validations' do
+  context 'validations' do
     subject { build(:group) }
 
     it { is_expected.to validate_presence_of(:name) }
@@ -12,7 +12,7 @@ RSpec.describe Group, type: :model do
     it { is_expected.to validate_uniqueness_of(:slug) }
   end
 
-  describe 'associations' do
+  context 'associations' do
     it { should have_many(:labels) }
     it { should have_many(:organisation_groups) }
     it { should have_many(:organisations) }
@@ -20,7 +20,7 @@ RSpec.describe Group, type: :model do
     it { should have_many(:volunteers) }
   end
 
-  describe '#add_exclusive_volunteer' do
+  context '#add_exclusive_volunteer' do
     let(:group) { create :group }
     let(:volunteer) { create :volunteer }
 

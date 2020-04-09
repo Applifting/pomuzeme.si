@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Request, type: :model do
-  describe 'validations' do
+  context 'validations' do
     subject { build(:request) }
 
     it { is_expected.to validate_presence_of(:text) }
@@ -21,13 +21,13 @@ RSpec.describe Request, type: :model do
     it { should belong_to(:organisation) }
   end
 
-  describe 'Reccord creation' do
+  context 'Reccord creation' do
     it 'creates a new record with created state if not specified' do
       expect(create(:request, state: nil)).to be_created
     end
   end
 
-  describe '#state_last_updated_at' do
+  context '#state_last_updated_at' do
     let(:params) do
       {
         organisation: build(:organisation),
@@ -76,7 +76,7 @@ RSpec.describe Request, type: :model do
     end
   end
 
-  describe 'scopes' do
+  context 'scopes' do
     context '.sorted_state' do
       it 'returns all requests sorted by state and state_last_updated_at' do
         request1 = create(:request, state: :created, state_last_updated_at: '2020-01-01')

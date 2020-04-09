@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'validations' do
+  context 'validations' do
     subject { build(:user) }
 
     it { is_expected.to validate_presence_of(:first_name) }
@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:requests) }
   end
 
-  describe '#coordinator_organisation_requests' do
+  context '#coordinator_organisation_requests' do
     let(:user) { create(:user) }
     let(:organisation_1) { create(:organisation) }
     let(:organisation_2) { create(:organisation, contact_person_phone: '+420 444 444 444') }

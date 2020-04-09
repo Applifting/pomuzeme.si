@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Organisation do
-  describe 'validations' do
+  context 'validations' do
     subject { build(:organisation) }
 
     it { is_expected.to validate_presence_of(:name) }
@@ -16,7 +16,7 @@ describe Organisation do
       .for(:contact_person_email) }
   end
 
-  describe '#to_s' do
+  context '#to_s' do
     subject(:organisation) { create(:organisation) }
     let(:expected_result) do
       "#{organisation.name} ~ #{organisation.abbreviation}"

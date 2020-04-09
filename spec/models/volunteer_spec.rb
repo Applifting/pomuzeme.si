@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Volunteer do
-  describe 'validations' do
+  context 'validations' do
     subject { build(:volunteer) }
 
     it { is_expected.to validate_presence_of(:first_name) }
@@ -12,7 +12,7 @@ describe Volunteer do
     it { is_expected.to allow_values('test@example.com', '').for(:email) }
   end
 
-  describe '#with_existing_record' do
+  context '#with_existing_record' do
     let_it_be(:volunteer) { create(:volunteer, phone: '+420 666 666 666') }
 
     it 'returns self if the record with the provided phone does not exist' do
