@@ -9,10 +9,61 @@
   }
 
   h2 {
-    margin: 0;
+    margin: 0 0 48px;
     text-align: center;
     font-family: Montserrat, serif;
     font-style: normal;
     font-weight: 600;
+
+    @include lg {
+      margin: 0 0 24px;
+    }
+  }
+
+  .section {
+    padding: 0;
+
+    .col.s12 {
+      .tabs {
+        background: none;
+        height: 70px;
+        max-width: 900px;
+
+        .tab {
+          height: 70px;
+          text-transform: none;
+
+          a.link {
+            display: flex;
+            color: #CFBDA2;
+            font-size: 20px;
+            font-family: Montserrat, serif;
+            font-style: normal;
+            font-weight: 500;
+            align-items: center;
+            justify-content: center;
+            white-space: normal;
+            line-height: unset;
+
+            &:focus {
+              background: none;
+            }
+
+            &.active {
+              color: #50350D;
+            }
+
+            @include lg {
+              font-size: 14px;
+              line-height: 20px;
+            }
+          }
+        }
+
+        .indicator {
+          background: #50350D;
+        }
+      }
+    }
   }
 }
