@@ -122,18 +122,43 @@
       }
     }
 
-    .tab-content .logos-container {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      align-content: center;
-      justify-items: center;
-      width: 100%;
+    .tab-content {
+      .logos-container, .developers {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
 
-      .partner-logo {
+      .logos-container .partner-logo {
         padding: 32px;
+      }
+
+      .developers {
+        padding-top: 16px;
+
+        .developer {
+          margin: 12px;
+          width: 180px;
+
+          .card {
+            background: $background-light;
+
+            .card-content {
+              padding: 8px;
+
+              .card-title {
+                color: #50350D !important;
+                font-family: Montserrat, serif;
+                font-size: 18px;
+                margin: 0;
+                text-align: center;
+              }
+            }
+          }
+        }
       }
     }
   }
