@@ -2,10 +2,10 @@
 
 .section-involvement {
   background-color: $background-dark;
-  padding: 120px 0;
+  padding: 120px 0 60px;
 
   @include lg {
-    padding: 80px 0;
+    padding: 80px 0 40px;
   }
 
   h2 {
@@ -63,6 +63,21 @@
         .indicator {
           background: #50350D;
         }
+      }
+    }
+
+    .tab-content .logos-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      justify-items: center;
+      width: 100%;
+
+      .partner-logo {
+        padding: 32px;
       }
     }
   }

@@ -9,19 +9,35 @@
       <div class="col s12">
         <ul class="tabs">
           <li class="tab col s4">
-            <a class="link" href="#partners">Partneři</a>
+            <a class="link" href="#tab-partners">Partneři</a>
           </li>
           <li class="tab col s4">
-            <a class="active link" href="#organizations">Dobročinné organizace</a>
+            <a class="active link" href="#tab-organizations">Dobročinné organizace</a>
           </li>
           <li class="tab col s4">
-            <a class="link" href="#development-team">Vývojový tým</a>
+            <a class="link" href="#tab-development-team">Vývojový tým</a>
           </li>
         </ul>
       </div>
-      <div id="partners" class="col s12">Partneři</div>
-      <div id="organizations" class="col s12">Dobročinné organizace</div>
-      <div id="development-team" class="col s12">Vývojový tým</div>
+      <div id="tab-partners" class="tab-content">
+        <div class="logos-container">
+          <%= image_tag asset_path('logo-cadstudio.svg'), class: 'partner-logo' %>
+          <%= image_tag asset_path('logo-nethost.svg'), class: 'partner-logo' %>
+          <%= image_tag asset_path('logo-o2.svg'), class: 'partner-logo' %>
+          <%= image_tag asset_path('logo-sedlakova.svg'), class: 'partner-logo' %>
+          <%= image_tag asset_path('logo-trimed.svg'), class: 'partner-logo' %>
+        </div>
+      </div>
+      <div id="tab-organizations" class="tab-content">
+        <div class="logos-container">
+          <%= image_tag asset_path('logo-charita.svg'), class: 'partner-logo' %>
+          <%= image_tag asset_path('logo-diakonie.svg'), class: 'partner-logo' %>
+          <%= image_tag asset_path('logo-teologicka-fakulta.svg'), class: 'partner-logo' %>
+        </div>
+      </div>
+      <div id="tab-development-team" class="tab-container">
+
+      </div>
     </div>
   </div>
 </section>
