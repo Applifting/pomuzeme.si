@@ -35,7 +35,7 @@
 
           a.link {
             display: flex;
-            color: #CFBDA2;
+            color: $secondary-button-color;
             font-size: 20px;
             font-family: Montserrat, serif;
             font-style: normal;
@@ -50,7 +50,7 @@
             }
 
             &.active {
-              color: #50350D;
+              color: $text-color;
             }
 
             @include lg {
@@ -61,7 +61,7 @@
         }
 
         .indicator {
-          background: #50350D;
+          background: $text-color;
         }
       }
     }
@@ -94,7 +94,7 @@
               padding: 8px;
 
               .card-title {
-                color: #50350D !important;
+                color: $text-color !important;
                 font-family: Montserrat, serif;
                 font-size: 18px;
                 margin: 0;
