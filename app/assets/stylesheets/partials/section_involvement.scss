@@ -121,5 +121,20 @@
         }
       }
     }
+
+    .tab-content .logos-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+      justify-items: center;
+      width: 100%;
+
+      .partner-logo {
+        padding: 32px;
+      }
+    }
   }
 }
