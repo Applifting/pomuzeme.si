@@ -89,6 +89,7 @@
 
           .card {
             background: $background-light;
+            margin: 0;
 
             .card-content {
               padding: 8px;
@@ -96,7 +97,7 @@
               .card-title {
                 color: $text-color !important;
                 font-family: Montserrat, serif;
-                font-size: 18px;
+                font-size: 16px;
                 margin: 0;
                 text-align: center;
               }
