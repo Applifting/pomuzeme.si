@@ -2,6 +2,8 @@ var confirmationModal = M.Modal.getInstance(document.getElementById('confirmatio
 var confirmationErrors = $('#confirmation-errors-list');
 var thankYouModal = M.Modal.getInstance(document.getElementById('thank-you'));
 
+// reset reCaptcha token
+executeRecaptchaForConfirmation();
 // clear old errors
 confirmationErrors.empty();
 
@@ -16,6 +18,7 @@ $('#volunteer_email').val('')
 $('#volunteer_street').val('')
 $('#volunteer_city').val('')
 $('#volunteer_zipcode').val('')
+$('#volunteer_street_search').val('')
 $('#volunteer_terms_of_service').prop('checked', false)
 $('#volunteer_age_confirmed').prop('checked', false)
 

@@ -1,6 +1,8 @@
 var registrationModal = $('#registration');
 var registrationErrors = $('#registration-errors-list');
 
+// reset reCaptcha token
+executeRecaptchaForLogin();
 // clear old errors
 registrationErrors.empty();
 

@@ -2,7 +2,9 @@ var registrationModal = M.Modal.getInstance(document.getElementById('registratio
 var registrationErrors = $('#registration-errors-list');
 var confirmationModal = M.Modal.getInstance(document.getElementById('confirmation'));
 
-
+// reset reCaptcha token
+executeRecaptchaForLogin();
+executeRecaptchaForConfirmation();
 // clear old errors
 registrationErrors.empty();
 
