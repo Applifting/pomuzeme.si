@@ -32,6 +32,7 @@ module Admin
 
       def notify_push(requested_volunteer)
         Push::Requests::AssignerService.new(@request.id, [requested_volunteer.volunteer]).perform
+        requested_volunteer.notified!
       end
 
       def sms_text
