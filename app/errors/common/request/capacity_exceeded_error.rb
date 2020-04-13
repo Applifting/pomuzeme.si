@@ -1,4 +1,4 @@
-module Api
+module Common
   module Request
     class CapacityExceededError < StandardError
     end

@@ -6,7 +6,8 @@ class ApiController < ApplicationController
   before_action :authorize_request, :must_be_registered
 
   rescue_from StandardError, with: :unexpected_error
-  rescue_from Api::AuthorizationError, with: :authorization_error
+  rescue_from AuthorisationError, with: :authorization_error
+  rescue_from Api::AuthorisationError, with: :authorization_error
   rescue_from Api::RegistrationError, with: :registration_error
   rescue_from Api::InvalidArgumentError, with: :invalid_argument_error
   rescue_from Api::Address::UnknownLocationError, with: :address_invalid

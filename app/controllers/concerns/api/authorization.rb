@@ -9,7 +9,7 @@ module Api
     def authorize_request
       @current_volunteer = ::Volunteer.find Api::JsonWebToken.decode(request.headers['HTTP_AUTHORIZATION'].split(' ').last)[:volunteer_id]
     rescue StandardError
-      raise Api::AuthorizationError
+      raise Api::AuthorisationError
     end
 
     def must_be_registered

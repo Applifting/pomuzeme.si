@@ -1,6 +1,6 @@
 class Api::V1::Volunteer::RequestsController < ApiController
 
-  rescue_from Api::Request::CapacityExceededError, with: :capacity_exceeded_response
+  rescue_from Common::Request::CapacityExceededError, with: :capacity_exceeded_response
 
   def index
     json_response current_volunteer.requested_volunteers.eager_load(request: :address)
@@ -8,7 +8,7 @@ class Api::V1::Volunteer::RequestsController < ApiController
 
   def respond
     request = Request.find permitted_params[:id]
-    Api::Volunteer::RequestResponse.new(current_volunteer, request, permitted_params).perform
+    Common::Request::ResponseProcessor.new(request, current_volunteer, permitted_params[:accept]).perform
     head :ok
   end
 
