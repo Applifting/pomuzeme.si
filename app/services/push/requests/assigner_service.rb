@@ -1,6 +1,16 @@
 module Push
   module Requests
     class AssignerService < BaseService
+
+      def perform
+        super
+        mark_as_notified
+      end
+
+      def mark_as_notified
+        RequestedVolunteer.where(request: request, volunteer_id: volunteers.map(&:id)).each &:notified!
+      end
+
       private
 
       def payload
