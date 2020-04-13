@@ -24,6 +24,10 @@ class RequestedVolunteer < ApplicationRecord
     to_be_notified: 6
   }
 
+  def should_receive_push_update?
+    (notified? || accepted?) && volunteer.fcm_active?
+  end
+
   private
 
   def update_timestamps

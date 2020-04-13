@@ -2,6 +2,7 @@ module Admin
   module Requests
     class VolunteerNotifier
       attr_reader :user, :request
+
       def initialize(user, request)
         @user = user
         @request = request
@@ -18,12 +19,19 @@ module Admin
       private
 
       def notify(requested_volunteer)
-        # TODO: handle notification type after FCM is merged
+        requested_volunteer.volunteer.fcm_active? ? notify_push(requested_volunteer) : notify_sms(requested_volunteer)
+        requested_volunteer.pending_notification!
+      end
+
+      def notify_sms(requested_volunteer)
         Message.outgoing.sms.message_type_request_offer.create! request: request,
                                                                 text: sms_text,
                                                                 volunteer_id: requested_volunteer.volunteer_id,
                                                                 creator: user
-        requested_volunteer.pending_notification!
+      end
+
+      def notify_push(requested_volunteer)
+        Push::Requests::AssignerService.new(@request.id, [requested_volunteer.volunteer]).perform
       end
 
       def sms_text

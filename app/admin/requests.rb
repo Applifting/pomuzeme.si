@@ -53,9 +53,10 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     private
 
     def notify_volunteers_updated
-      return if resource.volunteers.fcm_active.empty?
+      notifiable_volunteers = resource.requested_volunteers.select { |rv| rv.should_receive_push_update? && rv.volunteer }.compact
+      return if notifiable_volunteers.blank?
 
-      Push::Requests::UpdaterService.new(resource.id, resource.volunteers.fcm_active).perform
+      Push::Requests::UpdaterService.new(resource.id, notifiable_volunteers).perform
     end
   end
 

@@ -19,7 +19,7 @@ class Message < ApplicationRecord
 
   # Hooks
   after_commit :send_outgoing_message, on: :create, if: :outgoing? # perform job outside transaction
-  after_commit :process_incoming_message, on: :create, if: :incoming? # perform job outside transaction
+  after_commit :process_incoming_message, on: :create, if: :incoming? # perform job outside transaction, TODO: move to sms receiver
   after_commit :process_state_changed, on: :update, if: :saved_change_to_state?
 
   # Scopes
