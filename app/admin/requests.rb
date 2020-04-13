@@ -53,7 +53,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     private
 
     def notify_volunteers_updated
-      notifiable_volunteers = resource.requested_volunteers.select { |rv| rv.should_receive_push_update? && rv.volunteer }.compact
+      notifiable_volunteers = resource.requested_volunteers.select { |rv| rv.should_receive_push_update? }.map(&:volunteer)
       return if notifiable_volunteers.blank?
 
       Push::Requests::UpdaterService.new(resource.id, notifiable_volunteers).perform
