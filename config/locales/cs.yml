@@ -194,6 +194,8 @@ cs:
           accepted: Potvrzen
           rejected: Odmítl
           removed: Odebrán
+      message:
+        channel: Komunikační kanál
     errors:
       format: "%{attribute} %{message}"
       messages:
@@ -275,3 +277,8 @@ cs:
       invalid_zipcode: nebylo rozpoznano.
     authorisation:
       not_authorised_for_resource: "K této položce nemáte oprávnění [%{action}: %{subject}]."
+
+  request:
+    responses:
+      accept: Poptávka přijata
+      rejected: Poptávka odmítnuta

@@ -46,8 +46,12 @@ module Messages
     end
 
     def create_message(text)
-      Message.outgoing.sms.message_type_other.create! text: text,
-                                                      volunteer_id: message.volunteer_id
+      MessagingService.create_message direction: :outgoing,
+                                      message_type: :other,
+                                      channel: :sms,
+                                      text: text,
+                                      volunteer_id: message.volunteer_id,
+                                      creator: user
     end
 
     def response

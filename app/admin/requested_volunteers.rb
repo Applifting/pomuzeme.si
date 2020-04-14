@@ -15,7 +15,6 @@ ActiveAdmin.register RequestedVolunteer do
 
     def update
       super do |success, failure|
-        notify_volunteer_updated if success.present?
         success.html { redirect_to admin_organisation_request_path(resource.request_id) }
         failure.html { render :new }
       end
@@ -26,14 +25,6 @@ ActiveAdmin.register RequestedVolunteer do
         success.html { redirect_to admin_organisation_request_path(resource.request_id) }
         failure.html { render :new }
       end
-    end
-
-    private
-
-    def notify_volunteer_updated
-      return unless resource.should_receive_push_update?
-
-      Push::Requests::UpdaterService.new(resource.request_id, [resource.volunteer]).perform
     end
   end
 end

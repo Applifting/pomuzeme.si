@@ -51,8 +51,9 @@ Rpush.reflect do |on|
   # end
 
   # Called when a notification is successfully delivered.
-  # on.notification_delivered do |notification|
-  # end
+  on.notification_delivered do |notification|
+    PushService.handle_response notification
+  end
 
   # Called when notification delivery failed.
   # Call 'error_code' and 'error_description' on the notification for the cause.
