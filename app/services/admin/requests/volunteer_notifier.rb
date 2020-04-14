@@ -19,8 +19,8 @@ module Admin
       private
 
       def notify(requested_volunteer)
-        requested_volunteer.volunteer.fcm_active? ? notify_push(requested_volunteer) : notify_sms(requested_volunteer)
         requested_volunteer.pending_notification!
+        requested_volunteer.volunteer.fcm_active? ? notify_push(requested_volunteer) : notify_sms(requested_volunteer)
       end
 
       def notify_sms(requested_volunteer)
