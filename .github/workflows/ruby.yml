@@ -49,9 +49,9 @@ jobs:
         apt-get -yqq install libpq-dev libgeos-dev
     - name: Bundle install
       run: |
-        bundle config path vendor/bundle
         gem install bundler
         gem install rgeo -- --with-geos-dir=/usr/lib
+        bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
     - name: Setup Database
       run: |
