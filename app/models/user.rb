@@ -43,11 +43,13 @@ class User < ApplicationRecord
   def group_coordinators
     User.joins(:roles).where(roles: { name: :coordinator,
                                       resource_type: :Organisation,
-                                      resource_id: coordinating_organisation_ids })
+                                      resource_id: Organisation.user_group_organisations(self) })
   end
 
   def organisation_coordinators
-    User.with_role(:coordinator, organisation_group)
+    User.joins(:roles).where(roles: { name: :coordinator,
+                                      resource_type: :Organisation,
+                                      resource_id: coordinating_organisation_ids })
   end
 
   def group_volunteers
