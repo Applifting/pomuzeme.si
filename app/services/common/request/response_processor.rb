@@ -51,7 +51,7 @@ module Common
       end
 
       def message_text
-        is_accepted ? I18n.t('request.responses.accept') : I18n.t('request.responses.rejected')
+        request_accepted? ? I18n.t('request.responses.accept') : I18n.t('request.responses.rejected')
       end
 
       def validate_capacity!
