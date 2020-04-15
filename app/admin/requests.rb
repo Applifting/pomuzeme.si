@@ -58,7 +58,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   end
 
   member_action :notify_volunteers, method: :post do
-    Admin::Requests::VolunteerNotifier.new(current_user, resource).perform
+    Admin::Requests::VolunteerNotifier.new(current_user, resource).notify_assigned
     flash[:notice] = 'Dobrovolníci osloveni'
     redirect_to admin_organisation_request_path(resource)
   end
