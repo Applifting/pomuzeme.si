@@ -32,6 +32,12 @@ jobs:
       password: postgres
 
     steps:
+    - uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
     - uses: actions/checkout@v2
     - uses: borales/actions-yarn@v2.1.0  # Yarn packages
       with:
@@ -43,6 +49,7 @@ jobs:
         apt-get -yqq install libpq-dev libgeos-dev
     - name: Bundle install
       run: |
+        bundle config path vendor/bundle
         gem install bundler
         gem install rgeo -- --with-geos-dir=/usr/lib
         bundle install --jobs 4 --retry 3
