@@ -17,6 +17,8 @@ RSpec.describe User, type: :model do
     it { should have_many(:created_requests) }
     it { should have_many(:closed_requests) }
     it { should have_many(:requests) }
+    it { should have_many(:organisation_requests) }
+    it { should have_many(:coordinating_groups) }
   end
 
   context '#coordinator_organisation_requests' do
@@ -33,6 +35,50 @@ RSpec.describe User, type: :model do
 
     it 'returns only user organisation' do
       expect(user.coordinator_organisation_requests).to match_array([request_2, request_1])
+    end
+  end
+
+  context '#to_s' do
+    let(:user) { build :user }
+
+    it 'is made of name' do
+      expect(user.to_s).to eq([user.first_name, user.last_name].compact.join(' '))
+    end
+  end
+
+  context '#title' do
+    let(:user) { build :user }
+
+    it 'is alias for #to_s' do
+      expect(user.title).to eq user.to_s
+    end
+  end
+
+  context '#admin?' do
+    let(:user) { build :user }
+
+    it 'is truthy if user has super_admin role' do
+      allow_any_instance_of(User).to receive(:roles_name).and_return(['super_admin'])
+      expect(user.admin?).to be_truthy
+    end
+
+    it 'is falsey if user does not have super_admin role' do
+      allow_any_instance_of(User).to receive(:roles_name).and_return(['coordinator'])
+      expect(user.admin?).to be_falsey
+    end
+  end
+
+  context '#coordinator?' do
+    let(:user) { build :user }
+
+    it 'is truthy if user has coordinator role' do
+      allow_any_instance_of(User).to receive(:roles_name).and_return(['coordinator'])
+      expect(user.coordinator?).to be_truthy
+    end
+
+    it 'is falsey if user does not have coordinator role' do
+      allow_any_instance_of(User).to receive(:roles_name).and_return(['super_admin'])
+      expect(user.coordinator?).to be_falsey
     end
   end
 end
