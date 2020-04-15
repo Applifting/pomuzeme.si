@@ -4,7 +4,7 @@ module PushService
       class Client
         def self.send(payload_data, notification_data, receivers)
           Rpush::Gcm::Notification.new.tap do |n|
-            n.app = Rpush::Gcm::App.find_by_name 'test_app' #(ENV['PUSH_APP_NAME'])
+            n.app = Rpush::Gcm::App.find_by_name ENV['PUSH_APP_NAME']
             n.registration_ids = receivers
             n.data = payload_data.merge flutter_payload
             n.priority = 'normal'
