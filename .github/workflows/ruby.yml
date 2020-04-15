@@ -30,7 +30,7 @@ jobs:
       RAILS_ENV: test
       username: postgres
       password: postgres
-
+      BUNDLE_PATH: vendor/bundle
     steps:
     - uses: actions/cache@v1
       with:
