@@ -50,8 +50,7 @@ module Messages
                                       message_type: :other,
                                       channel: :sms,
                                       text: text,
-                                      volunteer_id: message.volunteer_id,
-                                      creator: user
+                                      volunteer_id: message.volunteer_id
     end
 
     def response
