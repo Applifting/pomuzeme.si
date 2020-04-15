@@ -10,7 +10,7 @@ module Messages
     rescue StandardError => e
       Raven.capture_exception e
     ensure
-      Messages::ReceiverJob.perform_later unless already_performing? || already_enqueued?
+      Messages::ReceiverJob.set(wait: (rand * 10).seconds).perform_later unless already_enqueued? || already_scheduled?
     end
 
     def perform
@@ -19,6 +19,8 @@ module Messages
 
       counter = 0
       while (counter < REPEAT_COUNT) || ((Time.current - start_time) < TIMEOUT.seconds)
+        break if already_enqueued? || already_scheduled?
+
         counter += 1
         receive_sms
       end
@@ -31,19 +33,16 @@ module Messages
         SmsService.receive
       else
         puts 'Calling receiver service'
-        sleep 10
+        sleep 0.1
       end
     end
 
-    def already_performing?
-      Sidekiq::Workers.new.to_a.any? do |worker|
-        data = worker.try :[], 2 # data are third element of worker array
-        (data&.dig('payload', 'queue') == 'receiver_queue') && (data&.dig('payload', 'jid') != provider_job_id)
-      end
+    def already_scheduled?
+      Sidekiq::ScheduledSet.new.scan("Messages::ReceiverJob").any?
     end
 
     def already_enqueued?
-      Sidekiq::ScheduledSet.new.scan("Messages::ReceiverJob").any?
+      Sidekiq::Queue.new('receiver_queue').any?
     end
   end
 end

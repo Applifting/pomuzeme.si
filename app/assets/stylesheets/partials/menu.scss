@@ -152,13 +152,14 @@
         .desktop-menu {
           display: flex;
           flex-direction: row;
-          justify-content: space-between;
+          justify-content: flex-end;
           width: 100%;
 
           .menu-item {
             transition: none;
             float: none;
             height: auto;
+            padding: 0 18px;
 
             .link {
               font-family: Montserrat, serif;
