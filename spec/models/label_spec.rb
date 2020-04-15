@@ -21,7 +21,18 @@ RSpec.describe Label, type: :model do
     let!(:label_bbb) { create :label, name: 'bbb', group: group }
 
     context '.managable_by' do
-      skip 'implement after proper user tests'
+      let(:group) { create :group }
+      let!(:user) { create :user }
+
+      it 'returns managable labels by users according to assigned organisations' do
+        allow(user).to receive(:coordinating_groups).and_return(Group.where(id: group.id))
+        expect(Label.managable_by(user)).to include label_ccc
+      end
+
+      it 'does not return labels outside assigned organisations' do
+        allow(user).to receive(:coordinating_groups).and_return(Group.none)
+        expect(Label.managable_by(user)).to be_empty
+      end
     end
 
     context '.alphabetically' do
