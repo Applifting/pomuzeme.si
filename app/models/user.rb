@@ -35,6 +35,7 @@ class User < ApplicationRecord
   end
   alias title to_s
 
+  # TODO: think about different name, which is not misleading
   def organisation_group
     @organisation_group ||= coordinating_groups.take
   end

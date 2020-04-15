@@ -27,10 +27,21 @@ describe Organisation do
   context 'scopes' do
     context '.user_group_organisations' do
       let(:user) { create :user }
-      let!(:organisation) { create :organisation }
+      let(:organisation) { create :organisation }
+      let(:group) { create :group}
+      let!(:organisation_group) { OrganisationGroup.create! group: group, organisation: organisation }
       let!(:another_organisation) { create :organisation }
+
+      before do
+        allow_any_instance_of(User).to receive(:organisation_group).and_return(group)
+      end
+
       it 'returns organisation belonging to users organisation group' do
-        skip 'finish with organisation group implemented'
+        expect(Organisation.user_group_organisations(user)).to include(organisation)
+      end
+
+      it 'does not return organisations outside users organisation group' do
+        expect(Organisation.user_group_organisations(user)).not_to include(another_organisation)
       end
     end
   end
