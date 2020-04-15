@@ -14,7 +14,8 @@ describe OrganisationGroup do
       organisation_group = subject.dup
       organisation_group.group = create(:group_applifting)
       expect(organisation_group.valid?).to be_truthy
-    end  end
+    end
+  end
 
   context 'associations' do
     it { should belong_to(:group) }
@@ -25,7 +26,7 @@ describe OrganisationGroup do
     subject { create(:organisation_group) }
 
     it 'returns name of associated organisation' do
-      expect(OrganisationGroup.has_attribute? :organisation_name).to be_falsey
+      expect(OrganisationGroup.has_attribute?(:organisation_name)).to be_falsey
       expect(subject.organisation_name).to eq subject.organisation.name
     end
   end
