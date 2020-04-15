@@ -1,5 +1,5 @@
 Rails.logger.debug 'initializer started'
-return unless defined?(Rails::Server)
+# return unless defined?(Rails::Server)
 Rails.logger.debug 'rails server defined'
 
 require 'sidekiq/api'
