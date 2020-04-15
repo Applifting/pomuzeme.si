@@ -1,3 +1,5 @@
+return if Rails.env.test?
+
 require 'sidekiq/api'
 
 Sidekiq.configure_client do |_config|
