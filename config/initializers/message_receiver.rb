@@ -1,3 +1,4 @@
+Rails.logger.debug Rails.env
 return if Rails.env.test?
 
 require 'sidekiq/api'
