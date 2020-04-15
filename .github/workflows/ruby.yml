@@ -38,7 +38,7 @@ jobs:
         path: vendor/bundle
         key: ${{ runner.os }}-bundle-gems-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
-          ${{ runner.os }}-gems-
+          ${{ runner.os }}-bundle-gems-
     - uses: actions/checkout@v2
     - uses: borales/actions-yarn@v2.1.0  # Yarn packages
       with:
