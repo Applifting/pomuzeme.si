@@ -41,7 +41,7 @@ module Messages
     def confirm_response(requested_volunteer)
       msg_type = requested_volunteer.accepted? ? 'sms.request.confirmed' : 'sms.request.rejected'
       create_message I18n.t(msg_type,
-                            identifier: requested_volunteer.request.indentifier,
+                            identifier: requested_volunteer.request.identifier,
                             organisation: requested_volunteer.request.organisation.name)
     end
 
