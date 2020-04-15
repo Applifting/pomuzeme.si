@@ -15,6 +15,7 @@ module Common
           validate_capacity!
           requested_volunteer.update!(state: request_accepted? ? :accepted : :rejected)
           request.update! state: resolve_request_state
+          log_response_message
         end
       end
 
@@ -39,6 +40,18 @@ module Common
         return :pending_confirmation if original_request_accepted_size + 1 == request.required_volunteer_count # Current acceptance fills capacity
 
         :searching_capacity
+      end
+
+      def log_response_message
+        Message.create! volunteer: volunteer,
+                        request: request,
+                        text: message_text,
+                        direction: :incoming,
+                        state: :received
+      end
+
+      def message_text
+        is_accepted ? I18n.t('request.responses.accept') : I18n.t('request.responses.rejected')
       end
 
       def validate_capacity!

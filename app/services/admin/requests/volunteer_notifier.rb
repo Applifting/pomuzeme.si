@@ -1,6 +1,7 @@
 module Admin
   module Requests
     class VolunteerNotifier
+
       attr_reader :user, :request
 
       def initialize(user, request)
@@ -8,34 +9,63 @@ module Admin
         @request = request
       end
 
-      def perform
-        ActiveRecord::Base.transaction do
-          request.requested_volunteers.to_be_notified.eager_load(:volunteer).each do |requested_volunteer|
-            notify requested_volunteer
-          end
+      def notify_assigned
+        request.requested_volunteers.to_be_notified.eager_load(:volunteer).each do |requested_volunteer|
+          notification_of_assigned requested_volunteer
+        end
+      end
+
+      def notify_updated
+        request.requested_volunteers.eager_load(:volunteer).each do |requested_volunteer|
+          next unless requested_volunteer.should_receive_push_update?
+
+          notification_of_updated requested_volunteer
         end
       end
 
       private
 
-      def notify(requested_volunteer)
+      def notification_of_assigned(requested_volunteer)
         requested_volunteer.pending_notification!
-        requested_volunteer.volunteer.fcm_active? ? notify_push(requested_volunteer) : notify_sms(requested_volunteer)
+        MessagingService.create_message direction: :outgoing,
+                                        message_type: :request_offer,
+                                        request: request,
+                                        channel: resolve_channel(requested_volunteer),
+                                        text: resolve_text(requested_volunteer),
+                                        volunteer_id: requested_volunteer.volunteer_id,
+                                        creator: user
       end
 
-      def notify_sms(requested_volunteer)
-        Message.outgoing.sms.message_type_request_offer.create! request: request,
-                                                                text: sms_text,
-                                                                volunteer_id: requested_volunteer.volunteer_id,
-                                                                creator: user
+      def notification_of_updated(requested_volunteer)
+        MessagingService.create_message direction: :outgoing,
+                                        message_type: :request_update,
+                                        request: request,
+                                        channel: :push,
+                                        text: push_text_updated,
+                                        volunteer_id: requested_volunteer.volunteer_id,
+                                        creator: user
       end
 
-      def notify_push(requested_volunteer)
-        Push::Requests::AssignerService.new(request.id, [requested_volunteer.volunteer]).perform
+      def resolve_text(requested_volunteer)
+        requested_volunteer.volunteer.fcm_active? ? push_text_assigned : sms_text_assigned
       end
 
-      def sms_text
-        @sms_text ||= I18n.t 'sms.request.offer', identifier: request.identifier, text: request.text
+      def resolve_channel(requested_volunteer)
+        requested_volunteer.volunteer.fcm_active? ? :push : :sms
+      end
+
+      def sms_text_assigned
+        I18n.t 'sms.request.offer', identifier: request.identifier, text: request.text
+      end
+
+      def push_text_assigned
+        I18n.t 'push.notifications.request.new.body', description: request.text,
+                                                      organisation: request.organisation.name
+      end
+
+      def push_text_updated
+        I18n.t 'push.notifications.request.update.body', description: request.text,
+                                                      organisation: request.organisation.name
       end
     end
   end
