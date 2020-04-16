@@ -3,7 +3,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start 'rails'
 
 if ENV['CI'] == 'true'
   require 'codecov'

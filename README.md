@@ -4,6 +4,10 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-18-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
+<!-- CODECOV-BADGE:START - Do not remove or modify this section -->
+[![codecov](https://codecov.io/gh/Applifting/pomuzeme.si/branch/master/graph/badge.svg)](https://codecov.io/gh/Applifting/pomuzeme.si)
+<!-- CODECOV-BADGE:END -->
+
 An open-source platform which aims to simplify and streamline the coordination of volunteers. Through the platform, local organizations can reach volunteers in the area where assistance is needed. This project originated as a voluntary initiative in connection with the COVID-19 infection.
 
 ## Getting Started
