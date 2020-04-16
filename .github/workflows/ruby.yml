@@ -36,6 +36,14 @@ jobs:
     - uses: borales/actions-yarn@v2.1.0  # Yarn packages
       with:
         cmd: install
+    - uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+        file: ./coverage.xml # optional
+        flags: unittests # optional
+        name: codecov-umbrella # optional
+        fail_ci_if_error: true # optional (default = false)
+
 
     - name: Install required dependencies and packages for PostGIS/GEOS
       run: |
