@@ -30,7 +30,6 @@ jobs:
       RAILS_ENV: test
       username: postgres
       password: postgres
-      CI: true
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
     steps:
@@ -59,7 +58,7 @@ jobs:
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./coverage.xml
+        file: ./coverage/.resultset.json
         flags: unittests
         name: codecov-umbrella
         fail_ci_if_error: true
