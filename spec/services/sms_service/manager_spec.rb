@@ -20,4 +20,16 @@ describe SmsService::Manager do
       described_class.send_welcome_msg '1234', group
     end
   end
+
+  describe '.send_verification_code' do
+    let(:phone) { '420111222333' }
+    let(:code) { 'ABCD' }
+    let(:message_text) { I18n.t('sms.verification', code: code) }
+
+    it 'sends message with verification code to phone' do
+      expect(described_class).to receive(:sms_gateway).with(phone, message_text)
+
+      described_class.send_verification_code phone, code
+    end
+  end
 end
