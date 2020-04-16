@@ -30,6 +30,7 @@ jobs:
       RAILS_ENV: test
       username: postgres
       password: postgres
+      CI: true
 
     steps:
     - uses: actions/checkout@v2
