@@ -33,7 +33,7 @@ jobs:
       # If we were running the job on the VM this would be localhost
       DATABASE_URL: postgis://postgres:@postgres:5432/pomuzeme_si_test
       RAILS_ENV: test
-      REDIS_URL: redis://127.0.0.1:6379/0
+      REDIS_URL: redis://redis:6379/0
       username: postgres
       password: postgres
 
