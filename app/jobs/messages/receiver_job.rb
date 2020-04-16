@@ -6,11 +6,13 @@ module Messages
     TIMEOUT = 30 # seconds
 
     around_perform do |job, block|
-      block.call
-    rescue StandardError => e
-      Raven.capture_exception e
-    ensure
-      Messages::ReceiverJob.set(wait: (rand * 10).seconds).perform_later unless already_enqueued? || already_scheduled?
+      PgLock.new(name: lock_key, attempts: 1, ttl: false).lock! do
+        block.call
+      rescue StandardError => e
+        Raven.capture_exception e
+      ensure
+        Messages::ReceiverJob.perform_later unless already_enqueued? || already_scheduled? || repeating?
+      end
     end
 
     def perform
@@ -26,6 +28,10 @@ module Messages
       end
     end
 
+    def lock_key
+      self.class.name
+    end
+
     private
 
     def receive_sms
@@ -39,6 +45,10 @@ module Messages
 
     def already_scheduled?
       Sidekiq::ScheduledSet.new.scan("Messages::ReceiverJob").any?
+    end
+
+    def repeating?
+      Sidekiq::RetrySet.new.scan("Messages::ReceiverJob").any?
     end
 
     def already_enqueued?

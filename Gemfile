@@ -135,3 +135,6 @@ gem 'rpush'
 
 # background job processing
 gem 'sidekiq'
+
+# job locking mechanism
+gem 'pg_lock'
