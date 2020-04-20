@@ -187,6 +187,7 @@ cs:
         first_name: Jméno
         volunteer: Dobrovolník
         state: Stav dobrovolníka v poptávce
+        visible_sensitive: Odkrýt podrobnosti
         states:
           to_be_notified: Oslovit
           pending_notification: Odesílání zprávy

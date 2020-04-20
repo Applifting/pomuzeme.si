@@ -39,7 +39,7 @@ class Volunteer < ApplicationRecord
   scope :assigned_to_request, ->(request_id) { left_joins(:requested_volunteers).where(requested_volunteers: { request_id: request_id }) }
   scope :blocked, -> { left_joins(:requests).where(requested_volunteers: { state: :accepted }, requests: { block_volunteer_until: Time.now.. }) }
   scope :not_blocked, -> { where.not(id: blocked) }
-  scope :fcm_active, -> { where('preferences @> ?', { notifications_to_app: true }.to_json) }
+  scope :push_notification_active, -> { where('preferences @> ?', { notifications_to_app: true }.to_json) }
 
   attr_accessor :address_search_input
 
@@ -64,9 +64,11 @@ class Volunteer < ApplicationRecord
     end
   end
 
-  def fcm_active?
+  def push_notifications?
     preferences.try(:[], 'notifications_to_app')
   end
+  # TODO: handle recognition of inactive users with FCM token
+  alias fcm_active? push_notifications?
 
   def accessed_organisations
     Organisation.left_joins(:organisation_groups).where(organisation_groups: { group_id: group_ids })

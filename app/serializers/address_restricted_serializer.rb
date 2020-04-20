@@ -1,4 +1,6 @@
 class AddressRestrictedSerializer < ActiveModel::Serializer
-  attributes :city,
+  attributes :street,
+             :street_number,
+             :city,
              :city_part
 end

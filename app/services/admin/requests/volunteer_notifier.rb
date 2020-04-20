@@ -17,7 +17,7 @@ module Admin
 
       def notify_updated
         request.requested_volunteers.eager_load(:volunteer).each do |requested_volunteer|
-          next unless requested_volunteer.should_receive_push_update?
+          next unless should_receive_push_update? requested_volunteer
 
           notification_of_updated requested_volunteer
         end
@@ -47,11 +47,11 @@ module Admin
       end
 
       def resolve_text(requested_volunteer)
-        requested_volunteer.volunteer.fcm_active? ? push_text_assigned : sms_text_assigned
+        requested_volunteer.volunteer.push_notifications? ? push_text_assigned : sms_text_assigned
       end
 
       def resolve_channel(requested_volunteer)
-        requested_volunteer.volunteer.fcm_active? ? :push : :sms
+        requested_volunteer.volunteer.push_notifications? ? :push : :sms
       end
 
       def sms_text_assigned
@@ -66,6 +66,10 @@ module Admin
       def push_text_updated
         I18n.t 'push.notifications.request.update.body', description: request.text,
                                                       organisation: request.organisation.name
+      end
+
+      def should_receive_push_update?(requested_volunteer)
+        (requested_volunteer.notified? || requested_volunteer.accepted?) && requested_volunteer.volunteer.push_notifications?
       end
     end
   end
