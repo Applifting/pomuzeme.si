@@ -1,6 +1,8 @@
 module Api
   module Volunteer
     class UpdatePreferences
+      REQUIRED_PARAMS = %i(notifications_to_app sound)
+
       def initialize(volunteer, params)
         @volunteer = volunteer
         @params = params
@@ -17,7 +19,8 @@ module Api
       private
 
       def validate_params!
-        return if @params.has_key?(:notifications_to_app)
+        puts @params.keys
+        return if @params.keys.all? { |param| param.to_sym.in? REQUIRED_PARAMS }
 
         raise InvalidArgumentError
       end
