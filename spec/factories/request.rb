@@ -10,5 +10,9 @@ FactoryBot.define do
     creator
     state_last_updated_at { DateTime.now }
     block_volunteer_until { nil }
+
+    after(:build) do |request|
+      request.address = build(:address, addressable: request)
+    end
   end
 end

@@ -10,12 +10,19 @@ if can?(:manage, Request) && resource.requested_volunteers.to_be_notified.presen
 end
 
 table_for resource.requested_volunteers.includes(:volunteer).order(:state).map(&:decorate) do
-  column :full_name, &:volunteer_name_link
-  column :phone
-  column :state do |requested_volunteer|
+  column I18n.t('activerecord.attributes.volunteer.full_name'), :full_name, &:volunteer_name_link
+  column I18n.t('activerecord.attributes.volunteer.phone'), :phone
+  column I18n.t('activerecord.attributes.requested_volunteer.state') do |requested_volunteer|
     best_in_place requested_volunteer, :state, as: :select,
                                                collection: I18n.t('activerecord.attributes.requested_volunteer.states'),
                                                url: admin_organisation_request_requested_volunteer_path(resource, requested_volunteer)
+  end
+  column I18n.t('activerecord.attributes.requested_volunteer.visible_sensitive'), :visible_sensitive do |requested_volunteer|
+    next '-' unless requested_volunteer.volunteer.fcm_active?
+    best_in_place requested_volunteer, :visible_sensitive, as: :checkbox,
+                                                           collection: {false: I18n.t('active_admin.status_tag.no'), true: I18n.t('active_admin.status_tag.yes')},
+                                                           url: admin_organisation_request_requested_volunteer_path(resource, requested_volunteer)
+
   end
   if current_user.admin?
     column '' do |requested_volunteer|

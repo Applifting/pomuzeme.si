@@ -13,3 +13,4 @@ FactoryBot.define do
     geo_provider { 'google_places' }
   end
 end
+end

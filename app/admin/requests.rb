@@ -8,7 +8,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
 
   permit_params :closed_note, :coordinator_id, :created_by_id, :fullfillment_date, :organisation_id,
                 :required_volunteer_count, :state, :subscriber, :subscriber_phone, :subscriber_email,
-                :text, :block_volunteer_until,
+                :text, :long_text, :block_volunteer_until,
                 address_attributes: %i[street_number street city city_part postal_code country_code
                                        latitude longitude geo_entry_id]
 
@@ -40,13 +40,25 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
 
   # Controller
   controller do
+    def update
+      super do |success, _failure|
+        notify_volunteers_updated if success.present?
+      end
+    end
+
     def scoped_collection
       super.includes(:address, :coordinator, :organisation)
+    end
+
+    private
+
+    def notify_volunteers_updated
+      Admin::Requests::VolunteerNotifier.new(current_user, resource).notify_updated
     end
   end
 
   member_action :notify_volunteers, method: :post do
-    Admin::Requests::VolunteerNotifier.new(current_user, resource).perform
+    Admin::Requests::VolunteerNotifier.new(current_user, resource).notify_assigned
     flash[:notice] = 'Dobrovolníci osloveni'
     redirect_to admin_organisation_request_path(resource)
   end
@@ -81,6 +93,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
             row :subscriber
             row :subscriber_phone
             row :subscriber_email
+            row :long_text
           end
         else
           para 'Tyto údaje může zobrazit pouze koordinátor organizace, která poptávku spravuje.', class: :small
@@ -124,6 +137,8 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   form do |f|
     javascript_for(*location_autocomplete(callback: 'InitRequestAutocomplete'))
 
+    f.semantic_errors
+
     f.inputs 'Poptávka služby' do
       f.input :text, as: :text, hint: 'Tento popis dostane dobrovolník do aplikace / SMS'
       f.input :required_volunteer_count, input_html: { value: object.required_volunteer_count.nil? ? 1 : resource.required_volunteer_count }
@@ -151,6 +166,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
         address_form.input :longitude, as: :hidden
         address_form.input :geo_entry_id, as: :hidden
       end
+      f.input :long_text, as: :text, hint: 'Tento popis bude dostupny pouze vybranym dobrovolnikum v aplikaci'
     end
 
     f.inputs 'Koordinace' do

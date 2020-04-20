@@ -3,7 +3,7 @@
 module SmsService
   attr_reader :connector
 
-  def self.send(message_object)
+  def self.send_message(message_object)
     response = Connector::O2.send_message(message_object.phone, message_object.text, delivery_report: true)
 
     block_given? ? yield(response) : response

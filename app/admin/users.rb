@@ -3,10 +3,11 @@
 ActiveAdmin.register User do
   decorate_with UserDecorator
 
-  permit_params :email, :password, :password_confirmation, :first_name, :last_name
+  permit_params :email, :password, :password_confirmation, :first_name, :last_name, :phone
 
   # Filters
   filter :email
+  filter :phone
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at
@@ -36,11 +37,22 @@ ActiveAdmin.register User do
     render 'admin/modal/close'
   end
 
+  controller do
+    def update
+      if params[:user][:password].blank?
+        %w(password password_confirmation).each { |p| params[:user].delete(p) }
+      end
+
+      super
+    end
+  end
+
   index do
     id_column
     column :first_name
     column :last_name
     column :email
+    column :phone
     if current_user.cached_admin?
       column :created_at
       column :updated_at
@@ -56,6 +68,7 @@ ActiveAdmin.register User do
         row :first_name
         row :last_name
         row :email
+        row :phone
         row :created_at
         row :updated_at
       end
@@ -71,6 +84,7 @@ ActiveAdmin.register User do
       f.input :first_name
       f.input :last_name
       f.input :email
+      f.input :phone
       f.input :password
       f.input :password_confirmation
     end
