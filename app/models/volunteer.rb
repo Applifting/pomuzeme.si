@@ -67,8 +67,11 @@ class Volunteer < ApplicationRecord
   def push_notifications?
     preferences.try(:[], 'notifications_to_app')
   end
+
   # TODO: handle recognition of inactive users with FCM token
-  alias fcm_active? push_notifications?
+  def fcm_active?
+    fcm_token.present?
+  end
 
   def accessed_organisations
     Organisation.left_joins(:organisation_groups).where(organisation_groups: { group_id: group_ids })
