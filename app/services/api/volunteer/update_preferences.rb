@@ -19,7 +19,6 @@ module Api
       private
 
       def validate_params!
-        puts @params.keys
         return if @params.keys.all? { |param| param.to_sym.in? REQUIRED_PARAMS }
 
         raise InvalidArgumentError
