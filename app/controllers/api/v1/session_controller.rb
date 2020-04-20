@@ -27,7 +27,7 @@ class Api::V1::SessionController < ApiController
 
   def volunteer_from_params
     # normalized_phone = PhonyRails.normalize_number(permitted_params[:phone_number], country_code: 'cz')
-    # Volunteer.find_by(phone: normalized_phone) ||˚ Volunteer.create!(first_name: '', last_name: '', email: '', phone: normalized_phone, pending_registration: true)
+    # Volunteer.find_by(phone: normalized_phone) || Volunteer.create!(first_name: '', last_name: '', email: '', phone: normalized_phone, pending_registration: true)
     Volunteer.find_by phone: PhonyRails.normalize_number(permitted_params[:phone_number], country_code: 'cz')
   rescue Phony::NormalizationError
     nil
