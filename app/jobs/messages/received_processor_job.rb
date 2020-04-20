@@ -6,13 +6,13 @@ module Messages
       @message = message
 
       # Process response message in context of requested volunteer associations waiting for response
-      RequestedVolunteer.where(volunteer_id: message.volunteer_id, state: :notified).each do |requested_volunteer|
+      RequestedVolunteer.eager_load(:request, :volunteer).where(volunteer_id: message.volunteer_id, state: :notified).each do |requested_volunteer|
         return invalid_response unless valid_response?
 
-        Admin::Requests::VolunteerResponseProcessor.new(requested_volunteer, response).perform
+        Common::Request::ResponseProcessor.new(requested_volunteer.request, requested_volunteer.volunteer, response).perform
         confirm_response requested_volunteer
         mark_message_as_read
-      rescue Admin::Requests::CapacityExceededError
+      rescue Common::Request::CapacityExceededError
         capacity_exceeded_response requested_volunteer
       end
     end
@@ -46,8 +46,11 @@ module Messages
     end
 
     def create_message(text)
-      Message.outgoing.sms.message_type_other.create! text: text,
-                                                      volunteer_id: message.volunteer_id
+      MessagingService.create_message direction: :outgoing,
+                                      message_type: :other,
+                                      channel: :sms,
+                                      text: text,
+                                      volunteer_id: message.volunteer_id
     end
 
     def response

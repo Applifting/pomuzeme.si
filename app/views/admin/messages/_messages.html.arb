@@ -14,6 +14,7 @@ panel 'Konverzace s dobrovolníkem' do
                   seen_date = msg&.read_at
                   div(span, class: 'unread-dot') unless seen_date
                   span [msg.creator.to_s, msg.created_at.strftime('%H:%M')].compact.join(' '), class: 'msg-time'
+                  span "| #{Message.human_attribute_name(:channel)}: #{msg.channel}", class: 'msg-channel' if msg.channel.present?
                   if seen_date
                     div("přečteno před #{distance_of_time_in_words(seen_date, Time.zone.now)}",
                         class: 'msg-time tooltip',

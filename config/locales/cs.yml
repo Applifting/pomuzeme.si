@@ -154,6 +154,7 @@ cs:
         name: Štítek
       request:
         text: Popis
+        long_text: Detailni popis
         closer: Uzavřel
         closed_at: Datum uzavření
         closed_note: Poznámka k uzavření
@@ -186,6 +187,7 @@ cs:
         first_name: Jméno
         volunteer: Dobrovolník
         state: Stav dobrovolníka v poptávce
+        visible_sensitive: Odkrýt podrobnosti
         states:
           to_be_notified: Oslovit
           pending_notification: Odesílání zprávy
@@ -193,6 +195,8 @@ cs:
           accepted: Potvrzen
           rejected: Odmítl
           removed: Odebrán
+      message:
+        channel: Komunikační kanál
     errors:
       format: "%{attribute} %{message}"
       messages:
@@ -260,6 +264,7 @@ cs:
 
   sms:
     verification: "Overovaci kod pro overeni registrace na portalu pomuzeme.si je: %{code}"
+    mobile_authorization: "Overovaci kod pro prihlaseni do aplikace pomuzeme.si je: %{code}"
     welcome: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se ozve jedna z organizaci ve vasem okoli a zapoji vas do deni. Reknete o nas i pratelum? Pomuzeme.si
     welcome_channel: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se vám ozve %{group_name} a zapoji vas do deni. Reknete o nas i pratelum? pomuzeme.si/%{group_slug}
     request:
@@ -273,3 +278,8 @@ cs:
       invalid_zipcode: nebylo rozpoznano.
     authorisation:
       not_authorised_for_resource: "K této položce nemáte oprávnění [%{action}: %{subject}]."
+
+  request:
+    responses:
+      accept: Poptávka přijata
+      rejected: Poptávka odmítnuta

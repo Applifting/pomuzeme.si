@@ -6,6 +6,11 @@ module SmsService
         sms_gateway(phone, msg)
       end
 
+      def send_authorization_code(code, phone)
+        msg = I18n.t('sms.mobile_authorization', code: code)
+        sms_gateway(phone, msg)
+      end
+
       def send_welcome_msg(phone, group = nil)
         if group.present?
           send_partner_welcome_msg(phone, group)
