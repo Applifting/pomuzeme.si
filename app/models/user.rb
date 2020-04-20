@@ -35,6 +35,7 @@ class User < ApplicationRecord
   end
   alias title to_s
 
+  # TODO: think about different name, which is not misleading
   def organisation_group
     @organisation_group ||= coordinating_groups.take
   end
@@ -42,11 +43,13 @@ class User < ApplicationRecord
   def group_coordinators
     User.joins(:roles).where(roles: { name: :coordinator,
                                       resource_type: :Organisation,
-                                      resource_id: coordinating_organisation_ids })
+                                      resource_id: Organisation.user_group_organisations(self) })
   end
 
   def organisation_coordinators
-    User.with_role(:coordinator, organisation_group)
+    User.joins(:roles).where(roles: { name: :coordinator,
+                                      resource_type: :Organisation,
+                                      resource_id: coordinating_organisation_ids })
   end
 
   def group_volunteers

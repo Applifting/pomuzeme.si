@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe SmsConfirmable do
-  describe '#confirmed?' do
+  context '#confirmed?' do
     subject(:confirmable) { build(:volunteer, confirmed_at: confirmed_at) }
 
     context 'confirmed_at is not set' do
@@ -17,7 +17,7 @@ describe SmsConfirmable do
     end
   end
 
-  describe '#confirm_with' do
+  context '#confirm_with' do
     let(:confirmed_at) { nil }
     let(:sms_confirmation_code) { confirmation_code }
     let(:confirmation_code) { 'ABCD' }
@@ -88,7 +88,7 @@ describe SmsConfirmable do
     end
   end
 
-  describe '#obtain_confirmation_code' do
+  context '#obtain_confirmation_code' do
     let(:confirmed_at) { nil }
     let(:confirmation_code) { nil }
     let(:confirmation_valid_to) { nil }

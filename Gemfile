@@ -77,7 +77,8 @@ group :test do
   gem 'test-prof', '~> 0.10'
   # One liner matchers
   gem 'shoulda-matchers', '~> 4.3'
-  # Fake data
+  # Check coverage
+  gem 'simplecov', require: false
 end
 
 group :production do

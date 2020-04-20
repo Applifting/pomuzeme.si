@@ -22,12 +22,18 @@ jobs:
         - 5432:5432
         # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: --entrypoint redis-server
 
     env:
       # Use PostgreSQL for the host here because we have specified a container for the job.
       # If we were running the job on the VM this would be localhost
       DATABASE_URL: postgis://postgres:@postgres:5432/pomuzeme_si_test
       RAILS_ENV: test
+      REDIS_URL: redis://redis:6379/0
       username: postgres
       password: postgres
 
@@ -36,7 +42,6 @@ jobs:
     - uses: borales/actions-yarn@v2.1.0  # Yarn packages
       with:
         cmd: install
-
     - name: Install required dependencies and packages for PostGIS/GEOS
       run: |
         apt-get update -y

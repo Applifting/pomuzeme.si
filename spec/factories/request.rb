@@ -9,5 +9,6 @@ FactoryBot.define do
     subscriber_phone { "+420#{rand(111111111...999999999)}" }
     creator
     state_last_updated_at { DateTime.now }
+    block_volunteer_until { nil }
   end
 end
