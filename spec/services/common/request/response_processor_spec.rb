@@ -10,6 +10,7 @@ describe Common::Request::ResponseProcessor do
     let(:different_request) { create :request }
 
     it 'raises exception if volunteer does not have access to request' do
+      expect(Message).not_to receive(:create!)
       expect { Common::Request::ResponseProcessor.new(different_request, volunteer, nil).perform }
         .to raise_error(AuthorisationError)
     end
@@ -47,6 +48,7 @@ describe Common::Request::ResponseProcessor do
     end
 
     it 'raises exception if capacity would be exceeded' do
+      expect(Message).not_to receive(:create!)
       allow_any_instance_of(Common::Request::ResponseProcessor)
           .to receive(:original_request_accepted_size).and_return(request.required_volunteer_count)
       expect { Common::Request::ResponseProcessor.new(request, volunteer, true).perform }
