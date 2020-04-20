@@ -17,18 +17,37 @@ Rails.application.routes.draw do
     post :resend, on: :collection
   end
 
+  namespace :api do
+    namespace :v1 do
+      post '/geo/fulltext', to: 'geolocation#fulltext'
+      post '/session/new', to: 'session#new'
+      post '/session/create', to: 'session#create'
+      post '/session/refresh', to: 'session#refresh'
+      namespace :organisations do
+        get '/', action: :index
+      end
+      namespace :volunteer do
+        get 'organisations'
+        get 'profile'
+        put 'profile', action: :update_profile
+        put 'register'
+        get 'preferences'
+        put 'preferences', action: :update_preferences
+        namespace :requests do
+          get '/', action: :index
+          post '/:id/respond', action: :respond
+        end
+        resources :addresses, except: %i[edit new]
+
+      end
+    end
+  end
+
   root 'home#index'
+  get '/:slug', param: :slug, to: 'home#partner_signup', slug: /(?!.*?admin).*/
 
   namespace :docs do
     get '/partner-kit', to: redirect { 'https://drive.google.com/drive/folders/1w9_PVRbZ9VvE10zY0sR26f6SlmLq0xZn' }
     get '/letak-linky-pomoci', to: redirect { 'https://d113nbfwgx4fgo.cloudfront.net/leaflet-diakonie.pdf' }
   end
-
-  namespace :api do
-    namespace :v1 do
-      post '/geo/fulltext', to: 'geolocation#fulltext'
-    end
-  end
-
-  get '/:slug', param: :slug, to: 'home#partner_signup', slug: /(?!.*?admin).*/
 end

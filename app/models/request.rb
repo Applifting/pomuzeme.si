@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Request < ApplicationRecord
+  TITLE_MAX_LENGTH = 30
+
   # Hooks
   before_validation :set_state, :set_state_last_updated_at
 
@@ -22,6 +24,7 @@ class Request < ApplicationRecord
   validates :text, presence: true, length: { maximum: 160 }
   validates :subscriber, presence: true, length: { maximum: 150 }
   validates :closed_note, length: { maximum: 500 }
+  validate :address_presence
 
   # Attributes
   accepts_nested_attributes_for :address
@@ -62,7 +65,21 @@ class Request < ApplicationRecord
     self.state_last_updated_at = DateTime.now
   end
 
+  def text_title
+    return text if text.size <= TITLE_MAX_LENGTH
+
+    text.truncate TITLE_MAX_LENGTH
+  end
+
   def identifier
     @identifier ||= [organisation.abbreviation, ('%04d' % id)].join '-'
+  end
+
+  private
+
+  def address_presence
+    return if address.present? && address.valid?
+
+    errors.add :base, I18n.t('activerecord.errors.models.address.base.inaccurate_address')
   end
 end

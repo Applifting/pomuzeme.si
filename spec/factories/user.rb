@@ -5,6 +5,7 @@ FactoryBot.define do
     first_name { 'First' }
     last_name { 'Last '}
     email { FFaker::Internet.email }
+    phone { FFaker::PhoneNumberDE.international_phone_number }
     password { 'Test1234 '}
   end
 end

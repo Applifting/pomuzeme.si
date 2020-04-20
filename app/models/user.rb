@@ -25,6 +25,7 @@ class User < ApplicationRecord
   # Validations
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :phone, phony_plausible: true, uniqueness: true, presence: true
 
   def organisation_colleagues
     coordinating_organisations.map(&:coordinators).flatten.uniq

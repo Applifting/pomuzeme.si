@@ -57,7 +57,8 @@ class VolunteersController < ApplicationController
     coordinate = Geography::Point.from_coordinates latitude: address_params[:geo_coord_y].to_d,
                                                    longitude: address_params[:geo_coord_x].to_d
     address_params.except(:geo_coord_x, :geo_coord_y).merge(coordinate: coordinate,
-                                                            geo_provider: 'google_places')
+                                                            geo_provider: 'google_places',
+                                                            default: true)
   end
 
   def confirm_params
@@ -112,7 +113,7 @@ class VolunteersController < ApplicationController
     # TEMPORARY DISABLED
     # score_threshold = ENV['RECAPTCHA_THRESHOLD']&.to_f
     # if score_threshold.present?
-    #  recaptcha = verify_recaptcha(action: 'login', minimum_score: score_threshold)
+    # recaptcha = verify_recaptcha(action: 'login', minimum_score: score_threshold)
     #  volunteer.errors[:recaptcha] << 'je neplatné' unless recaptcha
     #  recaptcha
     # else

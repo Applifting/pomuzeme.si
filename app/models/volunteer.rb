@@ -21,14 +21,14 @@ class Volunteer < ApplicationRecord
   phony_normalized_method :phone, default_country_code: 'CZ'
 
   # Validations
-  validates :first_name, :last_name, :phone, presence: true
-  validates :phone, phony_plausible: true, uniqueness: true
+  validates :first_name, :last_name, presence: true, unless: -> { registration_in_progress? }
+  validates :phone, phony_plausible: true, uniqueness: true, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { email&.present? }
 
   # Scopes
   scope :with_calculated_distance, lambda { |center_point|
     joins(:addresses).joins(format(NEAREST_ADDRESSES_SQL, longitude: center_point.longitude, latitude: center_point.latitude))
-                     .select('volunteers.*', 'ST_Distance(addresses.coordinate, ref_geom) as distance_meters')
+                     .select('volunteers.*', 'addresses.id AS distance_address_id', 'ST_Distance(addresses.coordinate, ref_geom) as distance_meters')
                      .order('distance_meters ASC')
   }
   scope :with_labels, ->(label_ids) { joins(:volunteer_labels).where(volunteer_labels: { label_id: label_ids }).distinct }
@@ -39,6 +39,7 @@ class Volunteer < ApplicationRecord
   scope :assigned_to_request, ->(request_id) { left_joins(:requested_volunteers).where(requested_volunteers: { request_id: request_id }) }
   scope :blocked, -> { left_joins(:requests).where(requested_volunteers: { state: :accepted }, requests: { block_volunteer_until: Time.now.. }) }
   scope :not_blocked, -> { where.not(id: blocked) }
+  scope :push_notification_active, -> { where('preferences @> ?', { notifications_to_app: true }.to_json) }
 
   attr_accessor :address_search_input
 
@@ -61,6 +62,23 @@ class Volunteer < ApplicationRecord
     Rails.cache.fetch :volunteer_count do
       Volunteer.confirmed.size
     end
+  end
+
+  def push_notifications?
+    preferences.try(:[], 'notifications_to_app')
+  end
+
+  # TODO: handle recognition of inactive users with FCM token
+  def fcm_active?
+    fcm_token.present?
+  end
+
+  def accessed_organisations
+    Organisation.left_joins(:organisation_groups).where(organisation_groups: { group_id: group_ids })
+  end
+
+  def registration_in_progress?
+    confirmed_at.nil? && pending_registration?
   end
 
   private
