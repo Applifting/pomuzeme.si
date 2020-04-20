@@ -16,15 +16,15 @@ module MessagingService
       [
           @text,
           ("[#{creator_signature}]" if message_has_creator?)
-      ].join(' ')
+      ].compact.join(' ')
     end
 
     def message_has_creator?
-      message.creator.present?
+      message.created_by_id.present?
     end
 
     def creator_signature
-      [@creator.to_s, @request_organisation&.name].compact.join(', ')
+      [@creator, @request_organisation&.name].compact.join(', ')
     end
   end
 end
