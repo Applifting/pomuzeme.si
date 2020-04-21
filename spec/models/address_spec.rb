@@ -73,7 +73,7 @@ RSpec.describe Address, type: :model do
   context '#only_address_errors?' do
     subject { build :address, addressable: create(:user) }
 
-    it 'is truthy when address only has some errors' do
+    it 'is true when address only has some errors' do
       subject.city = nil
       expect(subject.valid?).to be false
       expect(subject.only_address_errors?).to be true
