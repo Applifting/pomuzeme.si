@@ -5,6 +5,15 @@ SimpleCov.start
 
 require File.expand_path('../config/environment', __dir__)
 
+require 'simplecov'
+SimpleCov.start 'rails' do
+  add_filter 'app/admin' # ignore ActiveAdmin pages
+end
+
+if ENV['CI'] == 'true'
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
 # Prevent database truncation if the environment is production
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
