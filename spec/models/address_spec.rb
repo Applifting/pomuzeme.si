@@ -51,7 +51,7 @@ RSpec.describe Address, type: :model do
 
   context '.new_from_string' do
     before do
-      allow(Geocoder).to receive(:search).and_return([geocoder_search_mock])
+      allow(Geocoder).to receive(:search).and_return(geocoder_search_mock)
     end
 
     it 'initializes address with geocoder result' do
@@ -64,8 +64,8 @@ RSpec.describe Address, type: :model do
       expect(address.city_part).to eq get_component('neighborhood', 'long_name')
       expect(address.postal_code).to eq get_component('postal_code', 'long_name')
       expect(address.country_code).to eq get_component('country', 'short_name').downcase
-      expect(address.geo_entry_id).to eq geocoder_search_mock.data['place_id']
-      expect(address.geo_unit_id).to eq geocoder_search_mock.data['place_id']
+      expect(address.geo_entry_id).to eq geocoder_search_mock.first.data['place_id']
+      expect(address.geo_unit_id).to eq geocoder_search_mock.first.data['place_id']
       expect(address.geo_provider).to eq 'google_places'
     end
   end
@@ -100,7 +100,7 @@ RSpec.describe Address, type: :model do
   private
 
   def get_component(type, property)
-    component = geocoder_search_mock.data['address_components'].find { |c| c['types'].include?(type) } || {}
+    component = geocoder_search_mock.first.data['address_components'].find { |c| c['types'].include?(type) } || {}
     component[property]
   end
 end
