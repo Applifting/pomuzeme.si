@@ -18,8 +18,8 @@ RSpec.describe Message, type: :model do
   context 'enums' do
     it { should define_enum_for(:state).with_values(pending: 1, sent: 2, received: 3) }
     it { should define_enum_for(:direction).with_values(outgoing: 1, incoming: 2) }
-    it { should define_enum_for(:channel).with_values(sms: 1) }
-    it { should define_enum_for(:message_type).with_values(other: 1, request_offer: 2).with_prefix(:message_type) }
+    it { should define_enum_for(:channel).with_values(sms: 1, push: 2) }
+    it { should define_enum_for(:message_type).with_values(other: 1, request_offer: 2, request_update: 3).with_prefix(:message_type) }
   end
 
   context 'scopes' do
