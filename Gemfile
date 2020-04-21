@@ -79,6 +79,7 @@ group :test do
   gem 'shoulda-matchers', '~> 4.3'
   # Check coverage
   gem 'simplecov', require: false
+  gem 'codecov', require: false
 end
 
 group :production do
