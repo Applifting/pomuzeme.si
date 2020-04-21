@@ -54,15 +54,15 @@ jobs:
         apt-get update -y
         apt-get -yqq install libpq-dev libgeos-dev
     - name: Bundle install
+      # first bundle command fixes Illegal instructionin ffi/library.rb - https://northsail.io/articles/ruby-sassc-illegal-instruction
       run: |
         gem install bundler
         gem install rgeo -- --with-geos-dir=/usr/lib
+        bundle config --local build.sassc --disable-march-tune-native
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
     - name: Setup Database
-      # first command fixes Illegal instructionin ffi/library.rb - https://northsail.io/articles/ruby-sassc-illegal-instruction
       run: |
-        bundle config --local build.sassc --disable-march-tune-native
         bundle exec rake db:create
         bundle exec rake db:migrate
     - name: Run RSpec
