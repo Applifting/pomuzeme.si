@@ -52,7 +52,7 @@ describe MessagingService::Callbacks do
       message.update channel_msg_id: '42', state: 'sent'
       delivery_time = 1.hour.ago
       expect { MessagingService::Callbacks.delivery_report_received message_response(message_id: '42', timestamp: delivery_time) }
-        .to change { message.reload.read_at&.iso8601 }.from(nil).to(delivery_time.iso8601)
+        .to change { message.reload.read_at&.iso8601 }.from(nil).to(delivery_time.iso8601) # use iso8601 to resolve DB rounding of miliseconds
     end
   end
 
