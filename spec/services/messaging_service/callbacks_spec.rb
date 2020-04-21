@@ -23,14 +23,14 @@ describe MessagingService::Callbacks do
     end
 
     it 'marks requested volunteer as notified is message is request offer type' do
-      expect(message.message_type_request_offer?).to be_truthy
+      expect(message.message_type_request_offer?).to be true
       expect { MessagingService::Callbacks.message_sent(message_object, message_response(message_id: '12345')) }
         .to change { requested_volunteer.reload.state }.from('pending_notification').to('notified')
     end
 
     it 'does not change requested volunteer state if message is not request offer type' do
       message.message_type_other!
-      expect(message.message_type_request_offer?).to be_falsey
+      expect(message.message_type_request_offer?).to be false
       expect { MessagingService::Callbacks.message_sent(message_object, message_response(message_id: '12345')) }
         .not_to change { requested_volunteer.reload.state }
     end

@@ -36,8 +36,8 @@ RSpec.describe Address, type: :model do
     let(:address) { create(:address, coordinate: coordinate, addressable: create(:user)) }
 
     it 'adds attribute to address model instance' do
-      expect(Address.has_attribute?(:distance_meters)).to be_falsey
-      expect(Address.with_calculated_distance(address.coordinate).first.has_attribute?(:distance_meters)).to be_truthy
+      expect(Address.has_attribute?(:distance_meters)).to be false
+      expect(Address.with_calculated_distance(address.coordinate).first.has_attribute?(:distance_meters)).to be true
     end
 
     it 'calculates distance in meters' do
@@ -53,7 +53,7 @@ RSpec.describe Address, type: :model do
 
     it 'initializes address with geocoder result' do
       address = Address.new_from_string 'Applifting'
-      expect(address.persisted?).to be_falsey
+      expect(address.persisted?).to be false
 
       expect(address.street_number).to eq get_component('street_number', 'long_name')
       expect(address.street).to eq get_component('route', 'long_name')
@@ -72,16 +72,16 @@ RSpec.describe Address, type: :model do
 
     it 'is truthy when address only has some errors' do
       subject.city = nil
-      expect(subject.valid?).to be_falsey
-      expect(subject.only_address_errors?).to be_truthy
+      expect(subject.valid?).to be false
+      expect(subject.only_address_errors?).to be true
     end
 
     it 'is false when addressable errors are present' do
       subject.city = nil
       subject.addressable.email = nil
-      expect(subject.valid?).to be_falsey
-      expect(subject.addressable.valid?).to be_falsey
-      expect(subject.only_address_errors?).to be_falsey
+      expect(subject.valid?).to be false
+      expect(subject.addressable.valid?).to be false
+      expect(subject.only_address_errors?).to be false
     end
   end
 

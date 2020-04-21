@@ -21,12 +21,12 @@ describe MessagingService::OutgoingMessage do
   describe '#message_has_creator?' do
     it 'is truthy if creator is present' do
       allow(message).to receive(:created_by_id).and_return(create(:user).id)
-      expect(outgoing_message.message_has_creator?).to be_truthy
+      expect(outgoing_message.message_has_creator?).to be true
     end
 
     it 'is falsey if creator is missing' do
       allow(message).to receive(:created_by_id).and_return(nil)
-      expect(outgoing_message.message_has_creator?).to be_falsey
+      expect(outgoing_message.message_has_creator?).to be false
     end
   end
 

@@ -42,8 +42,8 @@ describe Volunteer do
       let(:coordinate_target) { Geography::Point.from_coordinates longitude: 14.4615350, latitude: 50.0952747 }
 
       it 'adds attribute to address model instance' do
-        expect(Volunteer.has_attribute?(:distance_meters)).to be_falsey
-        expect(Volunteer.with_calculated_distance(coordinate_target).first.has_attribute?(:distance_meters)).to be_truthy
+        expect(Volunteer.has_attribute?(:distance_meters)).to be false
+        expect(Volunteer.with_calculated_distance(coordinate_target).first.has_attribute?(:distance_meters)).to be true
       end
 
       it 'calculates distance in meters' do
