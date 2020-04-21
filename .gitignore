@@ -41,3 +41,6 @@ yarn-debug.log*
 
 # ignore DB schema
 /db/schema.rb
+
+# ignore test coverage directory
+/coverage

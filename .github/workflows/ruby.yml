@@ -22,12 +22,18 @@ jobs:
         - 5432:5432
         # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: --entrypoint redis-server
 
     env:
       # Use PostgreSQL for the host here because we have specified a container for the job.
       # If we were running the job on the VM this would be localhost
       DATABASE_URL: postgis://postgres:@postgres:5432/pomuzeme_si_test
       RAILS_ENV: test
+      REDIS_URL: redis://redis:6379/0
       username: postgres
       password: postgres
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -38,21 +44,22 @@ jobs:
     - uses: actions/cache@v1
       with:
         path: vendor/bundle
-        key: ${{ runner.os }}-bundle-gems-${{ hashFiles('**/Gemfile.lock') }}
+        key: ${{ runner.os }}-bundle-gem-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
-          ${{ runner.os }}-bundle-gems-
+          ${{ runner.os }}-bundle-gem-
     - uses: borales/actions-yarn@v2.1.0  # Yarn packages
       with:
         cmd: install
-
     - name: Install required dependencies and packages for PostGIS/GEOS
       run: |
         apt-get update -y
         apt-get -yqq install libpq-dev libgeos-dev
     - name: Bundle install
+      # first bundle command fixes Illegal instructionin ffi/library.rb - https://northsail.io/articles/ruby-sassc-illegal-instruction
       run: |
         gem install bundler
         gem install rgeo -- --with-geos-dir=/usr/lib
+        bundle config --local build.sassc --disable-march-tune-native
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
     - name: Setup Database

@@ -4,6 +4,7 @@ class Volunteer < ApplicationRecord
 
   NEAREST_ADDRESSES_SQL = 'CROSS JOIN (SELECT ST_SetSRID(ST_MakePoint(%{longitude}, %{latitude}), 4326)::geography AS ref_geom) AS r'.freeze
   AVAILABLE_VOLUNTEERS_CONDITIONS = 'group_volunteers.id is null OR group_volunteers.is_exclusive = false OR (group_volunteers.is_exclusive = true and group_volunteers.group_id = %{group_id})'.freeze
+  # TODO: is exclusivity check here really necessary?
   NOT_RECRUITED_BY_CONDITIONS = 'group_volunteers.id is null OR (group_volunteers.is_exclusive = false and group_volunteers.group_id != %{group_id})'.freeze
 
   # Associations
@@ -41,13 +42,13 @@ class Volunteer < ApplicationRecord
   scope :not_blocked, -> { where.not(id: blocked) }
   scope :push_notification_active, -> { where('preferences @> ?', { notifications_to_app: true }.to_json) }
 
+  after_commit :invalidate_volunteer_count_cache
+
   attr_accessor :address_search_input
 
   def verify!
-    update confirmed_at: Time.zone.now
+    update! confirmed_at: Time.zone.now if confirmed_at.nil?
   end
-
-  after_commit :invalidate_volunteer_count_cache
 
   def with_existing_record
     Volunteer.unconfirmed.where(phone: normalized_phone).take || self

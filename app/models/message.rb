@@ -21,6 +21,6 @@ class Message < ApplicationRecord
   scope :for_request, ->(request_id, volunteer_id) { where(format(MESSAGES_FOR_REQUEST_SQL, request_id: request_id, volunteer_id: volunteer_id)) }
 
   def mark_as_read
-    update read_at: Time.zone.now
+    update read_at: Time.zone.now if read_at.nil?
   end
 end

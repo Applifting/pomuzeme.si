@@ -6,7 +6,7 @@ ActiveAdmin.register_page 'Dashboard' do
       columns do
         column do
           panel 'Nábor' do
-            count = GroupVolunteer.in_progress.in_recruitment_with_organisations(current_user.coordinating_organisations.select(:id)).count
+            count = GroupVolunteer.in_progress.in_recruitment_with(current_user.coordinating_groups.id).count
 
             a href: admin_recruitments_path do
               para 'dobrovolníci v náboru', class: :small
