@@ -130,10 +130,6 @@ GEM
     cloudflare-rails (0.6.0)
       httparty
       rails (>= 5.0, < 6.1.0)
-    codecov (0.1.16)
-      json
-      simplecov
-      url
     coderay (1.1.2)
     coffee-rails (5.0.0)
       coffee-script (>= 2.2.0)
@@ -420,7 +416,6 @@ GEM
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
-    url (0.3.2)
     validates_zipcode (0.2.4)
       activemodel (>= 3.2.0)
     warden (1.2.8)
@@ -466,7 +461,6 @@ DEPENDENCIES
   cancancan
   capybara (>= 2.15)
   cloudflare-rails
-  codecov
   csv
   devise
   devise-i18n
@@ -499,6 +493,7 @@ DEPENDENCIES
   sentry-raven
   shoulda-matchers (~> 4.3)
   sidekiq
+  simplecov
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets (= 3.7.2)
