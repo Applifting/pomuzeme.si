@@ -43,9 +43,9 @@ jobs:
     - uses: actions/cache@v1
       with:
         path: vendor/bundle
-        key: ${{ runner.os }}-bundle-gems-${{ hashFiles('**/Gemfile.lock') }}
+        key: ${{ runner.os }}-bundle-gem-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
-          ${{ runner.os }}-bundle-gems-
+          ${{ runner.os }}-bundle-gem-
     - uses: borales/actions-yarn@v2.1.0  # Yarn packages
       with:
         cmd: install
