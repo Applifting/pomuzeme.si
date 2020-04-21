@@ -159,57 +159,58 @@ RSpec.describe Request, type: :model do
     end
   end
 
-  context 'Reccord creation' do
+  describe 'Validation hooks' do
     it 'creates a new record with created state if not specified' do
       expect(create(:request, state: nil)).to be_created
     end
-  end
 
-  context '#state_last_updated_at' do
-    let(:params) do
-      {
-          organisation: build(:organisation),
-          text: 'Request for 5 volunteers',
-          required_volunteer_count: 5,
-          subscriber: 'Subscriber',
-          subscriber_phone: '+420 555 555 555',
-          creator: build(:user),
-          state: :created,
-      }
-    end
-    let(:travel_time) { Time.zone.local(2020, 05, 05, 20, 00, 00) }
 
-    context 'during creation' do
-      before do
-        travel_to travel_time
+    describe '#state_last_updated_at' do
+      let(:params) do
+        {
+            organisation: build(:organisation),
+            text: 'Request for 5 volunteers',
+            required_volunteer_count: 5,
+            subscriber: 'Subscriber',
+            subscriber_phone: '+420 555 555 555',
+            creator: build(:user),
+            state: :created,
+        }
+      end
+      let(:travel_time) { Time.zone.local(2020, 05, 05, 20, 00, 00) }
+
+      context 'when record is created' do
+        before do
+          travel_to travel_time
+        end
+
+        after do
+          travel_back
+        end
+
+        subject { described_class.create(params) }
+
+        it 'sets the value as provided in the params' do
+          params[:state_last_updated_at] = travel_time.iso8601
+
+          expect(subject.state_last_updated_at).to eq(travel_time)
+        end
+
+        it 'sets the value to now if not provided in the params' do
+          expect(subject.state_last_updated_at).to eq(travel_time)
+        end
       end
 
-      after do
-        travel_back
-      end
+      context 'when record is updated' do
+        let(:request) { create(:request) }
 
-      subject { described_class.create(params) }
+        it 'does not change the value if state was not changed' do
+          expect { request.update(text: 'new text' ) }.not_to change { request.state_last_updated_at }
+        end
 
-      it 'sets the value as provided in the params' do
-        params[:state_last_updated_at] = travel_time.iso8601
-
-        expect(subject.state_last_updated_at).to eq(travel_time)
-      end
-
-      it 'sets the value to now if not provided in the params' do
-        expect(subject.state_last_updated_at).to eq(travel_time)
-      end
-    end
-
-    context 'during update' do
-      let(:request) { create(:request) }
-
-      it 'does not change the value if state was not changed' do
-        expect { request.update(text: 'new text' ) }.not_to change { request.state_last_updated_at }
-      end
-
-      it 'does changes the value if state was changed' do
-        expect { request.update(state: :closed ) }.to change { request.state_last_updated_at }
+        it 'does changes the value if state was changed' do
+          expect { request.update(state: :closed ) }.to change { request.state_last_updated_at }
+        end
       end
     end
   end
