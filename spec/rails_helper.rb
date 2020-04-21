@@ -5,6 +5,7 @@ require File.expand_path('../config/environment', __dir__)
 require 'simplecov'
 SimpleCov.start 'rails' do
   add_filter 'app/admin' # ignore ActiveAdmin pages
+  add_filter 'app/errors' # errors classes
 end
 
 if ENV['CI'] == 'true'
