@@ -30,12 +30,12 @@ describe Volunteer do
     shared_context 'volunteers with group' do
       let(:group) { create :group }
       let(:group_applifting) { create :group_applifting }
-      let(:exclusive_volunteer) { create :volunteer }
-      let!(:group_exclusive_volunteer) { create :group_volunteer, volunteer: exclusive_volunteer, group: group, is_exclusive: true}
-      let(:another_exclusive_volunteer) { create :volunteer }
-      let!(:another_group_exclusive_volunteer) { create :group_volunteer, volunteer: another_exclusive_volunteer, group: group_applifting, is_exclusive: true}
-      let(:non_exclusive_volunteer) { create :volunteer }
-      let!(:group_non_exclusive_volunteer) { create :group_volunteer, volunteer: non_exclusive_volunteer, group: group, is_exclusive: false}
+      let(:group_exclusive_volunteer) { create :group_volunteer, group: group, is_exclusive: true}
+      let!(:exclusive_volunteer) { group_exclusive_volunteer.volunteer }
+      let(:another_group_exclusive_volunteer) { create :group_volunteer, group: group_applifting, is_exclusive: true}
+      let!(:another_exclusive_volunteer) { another_group_exclusive_volunteer.volunteer }
+      let(:group_non_exclusive_volunteer) { create :group_volunteer, group: group, is_exclusive: false}
+      let!(:non_exclusive_volunteer) { group_non_exclusive_volunteer.volunteer }
     end
 
     context 'with_calculated_distance' do

@@ -124,15 +124,16 @@ RSpec.describe User, type: :model do
   end
 
   context '#coordinator?' do
-    let(:user) { build :user }
+    let(:user) { create :user }
+    let(:organisation) { create :organisation }
 
     it 'is truthy if user has coordinator role' do
-      allow_any_instance_of(User).to receive(:roles_name).and_return(['coordinator'])
+      user.grant :coordinator, organisation
       expect(user.coordinator?).to be_truthy
     end
 
     it 'is falsey if user does not have coordinator role' do
-      allow_any_instance_of(User).to receive(:roles_name).and_return(['super_admin'])
+      user.grant :super_admin, organisation
       expect(user.coordinator?).to be_falsey
     end
   end
