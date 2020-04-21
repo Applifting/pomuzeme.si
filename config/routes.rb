@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # Redirect from faulty link to the actual document
+  get '/ochrana-osobnich-udaju.pdf', to: redirect { 'podminky_ochrany_osobnich_udaju_pomuzemesi.pdf' }
+
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
@@ -38,7 +41,6 @@ Rails.application.routes.draw do
           post '/:id/respond', action: :respond
         end
         resources :addresses, except: %i[edit new]
-
       end
     end
   end
