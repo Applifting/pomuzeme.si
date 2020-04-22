@@ -1,9 +1,6 @@
 require 'rails_helper'
-require 'support/api_helper'
 
 RSpec.describe 'Api::V1::SessionControllers', type: :request do
-  include ApiHelper
-
   describe 'POST /api/v1/session/new' do
     context 'with registered volunteer number' do
       let(:volunteer) { create :volunteer, :confirmed }
@@ -132,7 +129,7 @@ RSpec.describe 'Api::V1::SessionControllers', type: :request do
   end
 
   describe 'POST /api/v1/session/refresh' do
-    context 'authorized' do
+    context 'as authorized volunteer' do
       let(:volunteer) { create :volunteer, :confirmed }
 
       it 'returns refreshed user token' do
@@ -148,7 +145,7 @@ RSpec.describe 'Api::V1::SessionControllers', type: :request do
       end
     end
 
-    context 'unauthorized' do
+    context 'as unauthorized volunteer' do
       it 'returns not found error' do
         post api_v1_session_refresh_path
         expect(response.body).to include_json(error_key: 'UNAUTHORIZED_RESOURCE')
