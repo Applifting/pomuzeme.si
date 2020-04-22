@@ -10,5 +10,19 @@ FactoryBot.define do
     after :build do |volunteer|
       volunteer.addresses << build(:address)
     end
+
+    trait :confirmed do
+      confirmed_at { DateTime.now }
+    end
+
+    trait :unconfirmed do
+      confirmed_at { }
+    end
+
+    trait :initialized_authorization do
+      authorization_code { '3141' }
+      authorization_code_valid_to { 1.minute.from_now }
+      authorization_code_attempts { 3 }
+    end
   end
 end

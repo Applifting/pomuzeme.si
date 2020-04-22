@@ -72,6 +72,7 @@ group :test do
 
   # Support for testing
   gem 'rspec-rails', '~> 3.9'
+  gem 'rspec-json_expectations'
   gem 'factory_bot_rails', '~> 5.1'
   # More performant tests
   gem 'test-prof', '~> 0.10'

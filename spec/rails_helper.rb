@@ -17,6 +17,7 @@ end
 # Prevent database truncation if the environment is production
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
+require "rspec/json_expectations"
 require 'test_prof/recipes/rspec/let_it_be'
 
 # Checks for pending migrations and applies them before tests are run.
