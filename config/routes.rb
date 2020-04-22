@@ -38,7 +38,7 @@ Rails.application.routes.draw do
         put 'preferences', action: :update_preferences
         namespace :requests do
           get '/', action: :index
-          post '/:id/respond', action: :respond
+          post '/:id/respond', action: :respond, as: :respond
         end
         resources :addresses, except: %i[edit new]
       end
