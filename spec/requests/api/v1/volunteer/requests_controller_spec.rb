@@ -28,7 +28,7 @@ RSpec.describe 'Api::V1::Volunteer::RequestsController', type: :request do
         let!(:requested_volunteer_accepted) { create :requested_volunteer, volunteer: volunteer, state: :accepted }
         let!(:requested_volunteer_rejected) { create :requested_volunteer, volunteer: volunteer, state: :rejected }
 
-        it 'is not returned in response' do
+        it 'returns all accessible requests' do
           authorized_get volunteer: volunteer,
                          path: api_v1_volunteer_requests_path
           expect(response.body).to eq [RequestedVolunteerSerializer.new(requested_volunteer_notified),
