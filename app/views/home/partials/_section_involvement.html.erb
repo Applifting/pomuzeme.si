@@ -21,21 +21,21 @@
       </div>
       <div id="tab-partners" class="tab-content">
         <div class="logos-container">
-          <%= image_tag asset_path('logo-cadstudio.svg'), class: 'partner-logo' %>
-          <%= image_tag asset_path('logo-nethost.svg'), class: 'partner-logo' %>
-          <%= image_tag asset_path('logo-o2.svg'), class: 'partner-logo' %>
-          <%= image_tag asset_path('logo-sedlakova.svg'), class: 'partner-logo' %>
-          <%= image_tag asset_path('logo-trimed.svg'), class: 'partner-logo' %>
+          <%= content_tag(:div, link_to(image_tag(asset_path('logo-cadstudio.svg', alt: 'podpořili projekt pomuzeme.si záštitou', title: 'Cadstudio')), 'https://www.cadstudio.cz', target: '_blank'), class: 'partner-logo') %>
+          <%= content_tag(:div, link_to(image_tag(asset_path('logo-nethost.svg', alt: 'podpořili projekt pomuzeme.si SMS branou', title: 'Nethost')), 'https://www.nethost.cz', target: '_blank'), class: 'partner-logo') %>
+          <%= content_tag(:div, link_to(image_tag(asset_path('logo-o2.svg', alt: 'podpořili projekt pomuzeme.si SMS branou', title: 'O2')), 'https://www.o2.cz/', trget: '_blank'), class: 'partner-logo') %>
+          <%= content_tag(:div, link_to(image_tag(asset_path('logo-sedlakova.svg', alt: 'podpořili projekt pomuzeme.si advokátními službami', title: 'Sedlákova Legl')), 'https://sedlakovalegal.com/', target: '_blank'), class: 'partner-logo') %>
+          <%= content_tag(:div, link_to(image_tag(asset_path('logo-trimed.svg', alt: 'podpořili projekt pomuzeme.si záštitou', title: 'Trimed')), 'https://www.trimed.cz/', target: '_blank'), class: 'partner-logo') %>
+          <%= content_tag(:div, link_to(image_tag(asset_path('logo-teologicka-fakulta.svg', alt: 'podpořili projekt pomuzeme.si záštitou', title: 'Evangelická teologická fakulta')), 'https://etf.cuni.cz', target: '_blank'), class: 'partner-logo') %>
+          <%= content_tag(:div, link_to(image_tag(asset_path('logo-sestry-v-zaloze.svg', alt: 'podpořili projekt pomuzeme.si referencí ze svého webu', title: 'Sesty v záloze')), 'https://www.sestryvzaloze.info/', target: '_blank'), class: 'org-logo') %>
         </div>
       </div>
       <div id="tab-organizations" class="tab-content">
         <div class="logos-container">
-          <%= image_tag asset_path('logo-charita.svg'), class: 'partner-logo' %>
-          <%= image_tag asset_path('logo-diakonie.svg'), class: 'partner-logo' %>
-          <%= image_tag asset_path('logo-duhovy-tandem.svg'), class: 'partner-logo' %>
-          <%= image_tag asset_path('logo-hero-clan.svg'), class: 'partner-logo' %>
-          <%= image_tag asset_path('logo-sestry-v-zaloze.svg'), class: 'partner-logo' %>
-          <%= image_tag asset_path('logo-teologicka-fakulta.svg'), class: 'partner-logo' %>
+          <%= content_tag(:div, link_to(image_tag(asset_path('logo-charita.svg', alt: 'dobrovolnická organizace zapojená do pomuzeme.si', title: 'Městská Charita Čské Budějovice')), 'https://mchcb.cz', target: '_blank'), class: 'partner-logo') %>
+          <%= content_tag(:div, link_to(image_tag(asset_path('logo-diakonie.svg', alt: 'dobrovolnická organizace zapojená do pomuzeme.si', title: 'Diakonie ČCE')), 'https://www.diakonie.cz/', target: '_blank'), class: 'partner-logo') %>
+          <%= content_tag(:div, link_to(image_tag(asset_path('logo-duhovy-tandem.svg', alt: 'dobrovolnická organizace zapojená do pomuzeme.si', title: 'Duhový Tandem')), 'http://duhovytandem.cz/', target: '_blank'), class: 'partner-logo') %>
+          <%= content_tag(:div, link_to(image_tag(asset_path('logo-hero-clan.svg', alt: 'dobrovolnická organizace zapojená do pomuzeme.si', title: 'Hero Clan')), 'https://www.heroclan.cz', target: '_blank'), class: 'partner-logo') %>
         </div>
       </div>
       <div id="tab-development-team" class="tab-content">
