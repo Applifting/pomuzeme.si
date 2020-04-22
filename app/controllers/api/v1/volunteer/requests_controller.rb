@@ -3,7 +3,7 @@ class Api::V1::Volunteer::RequestsController < ApiController
   rescue_from Common::Request::CapacityExceededError, with: :capacity_exceeded_response
 
   def index
-    json_response current_volunteer.requested_volunteers.eager_load(request: :address)
+    json_response current_volunteer.requested_volunteers.eager_load(request: :address).visible_by_volunteer
   end
 
   def respond

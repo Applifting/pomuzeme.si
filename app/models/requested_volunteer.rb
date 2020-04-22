@@ -12,7 +12,7 @@ class RequestedVolunteer < ApplicationRecord
 
   # Scopes
   scope :with_organisations, ->(*organisation_ids) { joins(:request).where(requests: { organisation_id: organisation_ids }) }
-
+  scope :visible_by_volunteer, -> { where(state: %w[notified accepted rejected]) }
   before_save :update_timestamps
 
   enum state: {
