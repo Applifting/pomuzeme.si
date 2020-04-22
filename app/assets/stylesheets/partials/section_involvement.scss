@@ -140,24 +140,30 @@
         padding-top: 16px;
 
         .developer {
+          background-image: url("volunteer-background.svg");
+          display: flex;
           margin: 12px;
-          width: 180px;
+          width: 186px;
+          height: 216px;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
 
-          .card {
-            background: $background-light;
+          .photo {
+            border-radius: 50%;
+            width: 64px;
+          }
+
+          .name {
+            font-family: Montserrat, serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            margin: 8px 0 0;
+          }
+
+          .role {
             margin: 0;
-
-            .card-content {
-              padding: 8px;
-
-              .card-title {
-                color: $text-color !important;
-                font-family: Montserrat, serif;
-                font-size: 16px;
-                margin: 0;
-                text-align: center;
-              }
-            }
           }
         }
       }
