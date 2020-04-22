@@ -10,9 +10,8 @@ RSpec.describe 'Api::V1::OrganisationsController', type: :request do
       it 'returns serialized organisations' do
         authorized_get volunteer: volunteer,
                        path: api_v1_organisations_path
-        parsed_response = JSON.parse response.body
-        expect(parsed_response).to eq [OrganisationSerializer.new(organisation_1).as_json.stringify_keys,
-                                       OrganisationSerializer.new(organisation_2).as_json.stringify_keys]
+        expect(response.body).to eq [OrganisationSerializer.new(organisation_1),
+                                     OrganisationSerializer.new(organisation_2)].to_json
       end
 
       it 'returns status code 200' do
