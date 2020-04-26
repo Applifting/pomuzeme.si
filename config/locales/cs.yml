@@ -283,3 +283,10 @@ cs:
     responses:
       accept: Poptávka přijata
       rejected: Poptávka odmítnuta
+
+  landingpage:
+    mainheader:
+      iwanttohelp: Chci pomáhat
+      coronavirus: Koronavirus?!
+      together: Spolu to dáme
+      motto: Pomáháme dostat dobrovolníky tam, kde jsou třeba.

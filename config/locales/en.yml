@@ -90,3 +90,10 @@ en:
               not_matching: 'is not matching'
               expired: 'is expired'
               confirmed: 'is already confirmed'
+
+  landingpage:
+    mainheader:
+      iwanttohelp: I want to help
+      coronavirus: Coronavirus?!
+      together: We'll make it through together
+      motto: Getting volunteers where they're needed.

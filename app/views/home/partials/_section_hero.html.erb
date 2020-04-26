@@ -20,13 +20,13 @@
     <div class="column-left">
       <h1>
         <span class="lighter">
-          Koronavirus?!
+          <%= I18n.t 'landingpage.mainheader.coronavirus' %>
           <img id="virus" src="<%= asset_path "virus.svg" %>" />
         </span>
-        <div>Spolu to dáme</div>
+        <div><%= I18n.t 'landingpage.mainheader.together' %></div>
       </h1>
       <p>
-        Pomáháme dostat dobrovolníky tam, kde jsou třeba.
+        <%= I18n.t 'landingpage.mainheader.motto' %>
       </p>
       <div class="button-group">
         <button id="chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
