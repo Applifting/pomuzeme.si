@@ -1,25 +1,25 @@
 <section id="pro-organizace" class="section-partner-contact section">
-  <h3>Jste organizace, která pracuje s dobrovolníky?</h3>
+  <h3><%= I18n.t 'landingpage.contact.title' %></h3>
   <div class="about_app">
-    <p>Máme pro vás kompletní řešení, které vám pomůže:</p>
+    <p><%= I18n.t 'landingpage.contact.subtitle' %>:</p>
     <ul>
-      <li>koordinovat rozdělení poptávek mezi dobrovolníky na základě lokality</li>
-      <li>pracovat s dobrovolníky, které si do aplikace nahrajete *</li>
-      <li>získat přehled o aktuální dostupnosti dobrovolníků</li>
-      <li>získat nové dobrovolníky, pokud jich nemáte dostatek, a organizovat jejich nábor</li>
+      <li><%= I18n.t 'landingpage.contact.point1' %></li>
+      <li><%= I18n.t 'landingpage.contact.point2' %> *</li>
+      <li><%= I18n.t 'landingpage.contact.point3' %></li>
+      <li><%= I18n.t 'landingpage.contact.point4' %></li>
     </ul>
-    <p class="asterix">* k dobrovolníkům, které si do aplikace nahrajete, budete mít výhradní přístup jen vy</p>
+    <p class="asterix">* <%= I18n.t 'landingpage.contact.asterix' %></p>
   </div>
   <p>
-    Kontaktní email: <a> info@pomuzeme.si </a>
+    <%= I18n.t 'landingpage.contact.contactushere' %>: <a> <%= I18n.t 'landingpage.contact.email' %> </a>
   </p>
   <div>
     <a href="<%= ENV['REGISTER_ORG_URL']%>" target="_blank" rel="noopener noreferrer" class="main-button secondary" style="max-width: 340px">
-      Registrovat organizaci
+      <%= I18n.t 'landingpage.buttons.registerorganisation' %>
     </a>
     </br>
     <a href="/admin" target="_blank" rel="noopener noreferrer">
-    Přihlášení organizace
+      <%= I18n.t 'landingpage.contact.organisationlogin' %>
     </a>
   </div>
 </section>

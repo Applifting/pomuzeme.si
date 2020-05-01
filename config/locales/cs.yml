@@ -285,8 +285,77 @@ cs:
       rejected: Poptávka odmítnuta
 
   landingpage:
+    navbar:
+      wehelp: pomuzeme.si
+      aboutus: O NÁS
+      howdoesitwork: JAK TO FUNGUJE
+      news: AKTUÁLNĚ
+      partners: PARTNEŘI
+      iwanttohelp: CHCI POMÁHAT
     mainheader:
       iwanttohelp: Chci pomáhat
       coronavirus: Koronavirus?!
       together: Spolu to dáme
       motto: Pomáháme dostat dobrovolníky tam, kde jsou třeba.
+    orgs:
+      joinedorganisations: Zapojené dobrovolnické organizace
+      supportedby: Projekt podporují
+    buttons:
+      iwanttohelp: Chci pomáhat
+      organisevolunteers: Organizuji dobrovolníky
+      requirevolunteers: Potřebuji dobrovolníky
+      registerorganisation: Registrovat organizaci
+    intro:
+      title: Proč Pomůžeme.si?
+      description: Umožňujeme lidem snadno a rychle dostat svou pomoc k těm, kteří ji potřebují. Koordinaci dobrovolníků a neziskovek děláme efektivnější. Hledáme dobrovolníky organizacím, které jsou v souvislosti s koronavirem přetížené. Jedeme v tom společně. Pomůžeme.si.
+      countertitle: Kolik nás už pomáhá?
+      registeredvolunteers: Registrovaných dobrovolníků
+      charitableorganisations: Dobročinných organizací
+    guide:
+      howdoesitwork: Jak to celé funguje?
+      iwanttovolunteer: Chci pomáhat jako dobrovolník!
+      stepone: Zaregistrujete se jako dobrovolník
+      steptwo: Budou vás kontaktovat dobročinné organizace z okolí
+      stepthree: Společně se domluvíte na konkrétní pomoci potřebným
+    contact:
+      title: Jste organizace, která pracuje s dobrovolníky?
+      subtitle: Máme pro vás kompletní řešení, které vám pomůže
+      point1: koordinovat rozdělení poptávek mezi dobrovolníky na základě lokality
+      point2: pracovat s dobrovolníky, které si do aplikace nahrajete
+      point3: získat přehled o aktuální dostupnosti dobrovolníků
+      point4: získat nové dobrovolníky, pokud jich nemáte dostatek, a organizovat jejich nábor
+      asterix: k dobrovolníkům, které si do aplikace nahrajete, budete mít výhradní přístup jen vy
+      contactushere: Kontaktní email
+      email: info@pomuzeme.si
+      organisationlogin: Přihlášení organizace
+    news:
+      mentionedus: Napsali o nás
+      title: Aktuality
+    footer:
+      whatiswehelp: Co je vlastně Pomůžeme.si?
+      wehelpdescription: Jde o platformu, která je určena ke snazší organizaci dobrovolníků v rámci epidemie infekčního onemocnění COVID-19. Spojuje ty, kteří chtějí nezištně pomáhat, s lidmi, kteří si z nejrůznějších důvodů nemohou obstarat základní potřeby, jako je nákup nebo třeba venčení psa.
+      whoisbehind: Kdo za projektem stojí?
+      whoisbehinddescription: Applifting - softwarové studio z pražského Karlína, které už 6 let dělá věci jinak. Je nás přes 90 a fungujeme bez manažerů. Nejraději vyrábíme aplikace, které lidem zjednodušují život. Vyvinuli jsme třeba systém pro rychlejší mezinárodní výměnu orgánů k transplantaci. Nebo zabezpečení bankovní aplikace, kterou používají miliony uživatelů napříč Evropou.
+  
+  modals:
+    registration:
+      thanks: Patří vám velké díky!
+      thankssubtitle: Je skvělé, že chcete pomáhat. Jedeme v tom společně. Pomůžeme.si.
+      title: Vyplňte potřebné údaje
+      phoneprefix: 420
+      addresstitle: Adresa
+      ageconfirmation: Prohlašuji, že jsem osoba starší 18 let
+    confirmation:
+      verifytitle: Ověření čísla
+      verifysubtitle: Na telefonní číslo jsme vám odeslali ověřovací kód. Vyplňte jej níže.
+      notreceived: Nepřišel vám ověřovací kód?
+    thankyou:
+      title: Děkujeme že chcete pomáhat
+      subtitle: Nyní na vás mají kontakt dobročinné organizace z&nbsp;vašeho blízkého okolí. Mějte trpělivost a některá z nich se vám ozve.
+      helpinmeantime: Mezitím můžete pomoct i tím, že iniciativu budete sdílet!
+  
+  admin:
+    groups:
+      title: Přidat organizaci do skupiny
+    users:
+      addrole: Přidat roli

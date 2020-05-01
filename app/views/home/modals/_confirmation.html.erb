@@ -4,27 +4,27 @@
     <%= image_tag asset_path('close.svg'), class: 'close modal-close'  %>
 
     <section class="modal-card-body">
-      <h3>Ověření čísla</h3>
+      <h3><%= I18n.t 'modals.confirmation.verifytitle' %></h3>
       <p>
-        Na telefonní číslo jsme vám odeslali ověřovací kód. Vyplňte jej níže.
+        <%= I18n.t 'modals.confirmation.verifysubtitle' %>
       </p>
       <%= form_with id: 'confirmation-form', url: confirm_volunteer_path, remote: true do |form| %>
-        <div class="input-field">
-          <%= form.number_field :confirmation_code, id: 'validation-code', class: 'validate', required: true, max: 9999, 'data-length': 4 %>
-          <%= form.label :confirmation_code, I18n.t('activerecord.attributes.volunteer.confirmation_code') %>
-        </div>
+      <div class="input-field">
+        <%= form.number_field :confirmation_code, id: 'validation-code', class: 'validate', required: true, max: 9999, 'data-length': 4 %>
+        <%= form.label :confirmation_code, I18n.t('activerecord.attributes.volunteer.confirmation_code') %>
+      </div>
 
-        <div class="confirmation-errors">
-          <ul id="confirmation-errors-list" class="error-list">
+      <div class="confirmation-errors">
+        <ul id="confirmation-errors-list" class="error-list">
 
-          </ul>
-        </div>
+        </ul>
+      </div>
 
-        <p class="smaller">
-          Nepřišel vám ověřovací kód? <%= link_to 'Zkusit znovu', resend_volunteer_path, remote: true, method: :post  %>
-        </p>
+      <p class="smaller">
+        <%= I18n.t 'modals.confirmation.notreceived' %> <%= link_to 'Zkusit znovu', resend_volunteer_path, remote: true, method: :post  %>
+      </p>
 
-        <%= form.submit 'Dokončit registraci', class: 'form-button', data: { disable_with: "Dokončit registraci..." } %>
+      <%= form.submit 'Dokončit registraci', class: 'form-button', data: { disable_with: "Dokončit registraci..." } %>
       <% end %>
     </section>
   </div>

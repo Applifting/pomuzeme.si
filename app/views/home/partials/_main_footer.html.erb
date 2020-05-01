@@ -1,22 +1,17 @@
 <footer class="main-footer">
   <div class="footer-content section">
     <div class="column-left">
-      <h4>Co je vlastně Pomůžeme.si?</h4>
+      <h4><%= I18n.t 'landingpage.footer.whatiswehelp' %></h4>
       <p class="body1">
-        Jde o&nbsp;platformu, která je určena ke snazší organizaci dobrovolníků v&nbsp;rámci epidemie infekčního
-        onemocnění COVID-19. Spojuje ty, kteří chtějí nezištně pomáhat, s&nbsp;lidmi, kteří si z&nbsp;nejrůznějších
-        důvodů nemohou obstarat základní potřeby, jako je nákup nebo třeba venčení psa.
+        <%= I18n.t 'landingpage.footer.wehelpdescription' %>
       </p>
     </div>
     <div class="divider-vertical"></div>
     <div class="column-right">
       <%= image_tag asset_path('applifting-rocket.svg'), class: "rocket" %>
-      <h4>Kdo za projektem stojí?</h4>
+      <h4><%= I18n.t 'landingpage.footer.whoisbehind' %></h4>
       <p class="body1">
-        Applifting - softwarové studio z&nbsp;pražského Karlína, které už 6 let dělá věci jinak. Je nás přes 90 a
-        fungujeme bez manažerů. Nejraději vyrábíme aplikace, které lidem zjednodušují život. Vyvinuli jsme třeba systém
-        pro rychlejší mezinárodní výměnu orgánů k&nbsp;transplantaci. Nebo zabezpečení bankovní aplikace, kterou
-        používají miliony uživatelů napříč Evropou.
+        <%= I18n.t 'landingpage.footer.whoisbehinddescription' %>
       </p>
       <div class="contact-item">
         <%= image_tag asset_path('web-icon.svg') %>
@@ -24,7 +19,7 @@
       </div>
       <div class="contact-item">
         <%= image_tag asset_path('email-icon.svg') %>
-        <a href="mailto:info@pomuzeme.si ">info@pomuzeme.si </a>
+        <a href="mailto:info@pomuzeme.si "><%= I18n.t 'landingpage.contact.email' %> </a>
       </div>
     </div>
   </div>

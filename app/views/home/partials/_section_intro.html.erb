@@ -6,11 +6,9 @@
   <div class="section">
     <div class="intro-content">
       <div class="column-left">
-        <h2>Proč Pomůžeme.si?</h2>
+        <h2><%= I18n.t 'landingpage.intro.title' %></h2>
         <p>
-          Umožňujeme lidem snadno a rychle dostat svou pomoc k&nbsp;těm, kteří ji potřebují. Koordinaci dobrovolníků a
-          neziskovek děláme efektivnější. Hledáme dobrovolníky organizacím, které jsou v&nbsp;souvislosti s&nbsp;koronavirem
-          přetížené. Jedeme v&nbsp;tom společně. Pomůžeme.si.
+          <%= I18n.t 'landingpage.intro.description' %>
         </p>
       </div>
       <div class="column-right">
@@ -23,21 +21,21 @@
 
 <section class="section-counts">
   <div class="section">
-    <h2 class="counts-header">Kolik nás už pomáhá?</h2>
+    <h2 class="counts-header"><%= I18n.t 'landingpage.intro.countertitle' %></h2>
 
     <div class="supporters-counts-wrapper">
       <div class="supporters-counts-item">
         <div class="count">
           <%= @volunteer_count %>
         </div>
-        <div class="count-label">Registrovaných dobrovolníků</div>
+        <div class="count-label"><%= I18n.t 'landingpage.intro.registeredvolunteers' %></div>
       </div>
 
       <div class="supporters-counts-item">
         <div class="count">
           <%= @organisations_count %>
         </div>
-        <div class="count-label">Dobročinných organizací</div>
+        <div class="count-label"><%= I18n.t 'landingpage.intro.charitableorganisations' %></div>
       </div>
     </div>
   </div>

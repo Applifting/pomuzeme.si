@@ -1,13 +1,13 @@
 <section id="partners" class="section">
   <div class="section-orgs">
-    <div class="text">Zapojené dobrovolnické organizace</div>
+    <div class="text"><%= I18n.t 'landingpage.orgs.joinedorganisations' %></div>
     <div class="section">
       <%= content_tag(:div, link_to(image_tag(asset_path('logo-diakonie.svg', alt: 'dobrovolnická organizace zapojená do pomuzeme.si', title: 'Diakonie ČCE')),'https://www.diakonie.cz/', target: '_blank'), class: 'org-logo') %>
       <%= content_tag(:div, link_to(image_tag(asset_path('logo-charita.svg', alt: 'dobrovolnická organizace zapojená do pomuzeme.si', title: 'Městská Charita Čské Budějovice')), 'https://mchcb.cz', target: '_blank'), class: 'org-logo') %>
       <%= content_tag(:div, link_to(image_tag(asset_path('logo-hero-clan.svg', alt: 'dobrovolnická organizace zapojená do pomuzeme.si', title: 'Hero Clan')), 'https://www.heroclan.cz', target: '_blank'), class: 'org-logo') %>
       <%= content_tag(:div, link_to(image_tag(asset_path('logo-duhovy-tandem.svg', alt: 'dobrovolnická organizace zapojená do pomuzeme.si', title: 'Duhový Tandem')), 'http://duhovytandem.cz/', target: '_blank'), class: 'org-logo') %>
     </div>
-    <div class="text">Projekt podporují</div>
+    <div class="text"><%= I18n.t 'landingpage.orgs.supportedby' %></div>
     <div class="section">
       <%= content_tag(:div, link_to(image_tag(asset_path('logo-o2.svg', alt: 'podpořili projekt pomuzeme.si SMS branou', title: 'O2')), 'https://www.o2.cz/', trget: '_blank'), class: 'org-logo') %>
       <%= content_tag(:div, link_to(image_tag(asset_path('logo-sedlakova.svg', alt: 'podpořili projekt pomuzeme.si advokátními službami', title: 'Sedlákova Legl')), 'https://sedlakovalegal.com/', target: '_blank'), class: 'org-logo') %>

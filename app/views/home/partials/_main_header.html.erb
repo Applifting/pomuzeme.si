@@ -13,7 +13,7 @@
         <%= render 'home/partials/menu_items' unless @partner_signup_group %>
       </ul>
       <button class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
-        Chci pomáhat
+        <%= I18n.t 'landingpage.buttons.iwanttohelp' %>
       </button>
     </nav>
   </div>
@@ -27,7 +27,7 @@
       <ul id="js-desktop-menu-list" class="desktop-menu">
         <%= render 'home/partials/menu_items' unless @partner_signup_group %>
         <li class="menu-item">
-          <a href="javascript:void(0);" class="link wanna-join modal-trigger" data-target="registration">CHCI POMÁHAT</a>
+          <a href="javascript:void(0);" class="link wanna-join modal-trigger" data-target="registration"><%= I18n.t 'landingpage.navbar.iwanttohelp' %></a>
         </li>
       </ul>
     </nav>

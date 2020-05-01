@@ -1,13 +1,13 @@
-<h3>Přidat organizaci do skupiny</h2>
+<h3><%= I18n.t 'admin.groups.title' %></h2>
 
-<div style="width: 400px">
-  <%= semantic_form_for @resource, remote: true, url: @url, method: (@resource.persisted? ? :patch : :post) do |f| %>
+  <div style="width: 400px">
+    <%= semantic_form_for @resource, remote: true, url: @url, method: (@resource.persisted? ? :patch : :post) do |f| %>
     <%= f.inputs do %>
-      <%= f.input :organisation_id, as: :hidden, input_html: { value: @resource.organisation_id } %>
-      <%= f.input :organisation, as: :select, label: 'Organizace', collection: @available_organisations %>
+    <%= f.input :organisation_id, as: :hidden, input_html: { value: @resource.organisation_id } %>
+    <%= f.input :organisation, as: :select, label: 'Organizace', collection: @available_organisations %>
     <% end %>
     <%= f.actions do %>
-      <%= f.action :submit, label: 'Uložit' %>
+    <%= f.action :submit, label: 'Uložit' %>
     <% end %>
-  <% end %>
-</div>
+    <% end %>
+  </div>

@@ -18,7 +18,7 @@ module PomuzemeSi
 
     config.time_zone = ENV.fetch('TZ_ISO', 'Europe/Prague')
 
-    config.i18n.default_locale = ENV.fetch('LOCALE', 'cs')
+    config.i18n.default_locale = ENV.fetch('LOCALE', 'en')
     config.i18n.available_locales = %i[
       cs
       en
