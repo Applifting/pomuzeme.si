@@ -2,7 +2,7 @@
   <div class="mobile-menu">
     <div class="menu-top-row">
       <a href="javascript:void(0);" class="link slide-link">
-        <%= image_tag asset_path('pomuzemesi.svg'), class: 'main-logo'  %>
+        <%= image_tag asset_path(I18n.t('landingpage.navbar.logo')), class: 'main-logo'  %>
       </a>
       <a id="js-close-menu-button" class="close-button">
         <i class="material-icons">close</i>
@@ -21,7 +21,7 @@
 <div id="js-main-header-container" class="main-header-container">
   <header class="main-header section">
     <a href="javascript:void(0);" class="link slide-link">
-      <%= image_tag asset_path('pomuzemesi.svg'), class: 'main-logo'  %>
+      <%= image_tag asset_path(I18n.t('landingpage.navbar.logo')), class: 'main-logo'  %>
     </a>
     <nav class="navigation">
       <ul id="js-desktop-menu-list" class="desktop-menu">

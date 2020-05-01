@@ -101,7 +101,7 @@ en:
 
   landingpage:
     navbar:
-      wehelp: wehelp.uk.com
+      logo: pomuzemesi.svg
       aboutus: About us
       howdoesitwork: How does it work
       news: News
@@ -159,11 +159,23 @@ en:
       title: Please fill in your details
       phoneprefix: 44
       addresstitle: Address
+      addresshelper: We are using your address in order to connect you with help-seeking charities in your area!
+      consenttoterms: I agree with the terms of
+      usage: usage
+      usagepdf: podminky_dobrovolnika_pomuzemesi.pdf
+      and: and
+      protectionofdata: protection of my personal data
+      protectionofdatapdf: podminky_ochrany_osobnich_udaju_pomuzemesi.pdf
       ageconfirmation: I confirm I am aged 18 or older
+      register: Register
+      disabledregister: Register...
     confirmation:
       verifytitle: Verify your phone number
       verifysubtitle: We have sent a code to your phone number. Please enter the code below to verify.
-      notreceived: Have you not received a code? Try again
+      notreceived: Have you not received a code?
+      tryagain: Try again
+      finishregistration: Finish registration
+      disabledfinishregistration: Finish registration...
     thankyou:
       title: Thank you for your willingness to help others
       subtitle: Non-profit organisations in your local area will now have your contact details. Please remain patient, some of them will surely contact you soon!
@@ -174,3 +186,21 @@ en:
       title: Add an organisation to a group
     users:
       addrole: Add a new role
+  
+  socials:
+    facebooklink: https://www.facebook.com/sharer/sharer.php?u=pomuzemesi.cz
+    twitterlink: http://twitter.com/share?url=https://pomuzemesi.cz
+
+  application:
+    title: WeHelp.uk.com
+    meta:
+      title: WeHelp.uk.com | Coronavirus?! We'll make it through
+      description: Getting volunteers where they're needed.
+      og:
+        url: https://pomuzeme.si/
+        title: WeHelp.uk.com | Coronavirus?! We'll make it through
+        description: Getting volunteers where they're needed.
+        image: https://pomuzemesi.cz/thumbnail.png
+      twitter:
+        title: WeHelp.uk.com | Coronavirus?! We'll make it through
+        image: https://pomuzemesi.cz/thumbnail.png

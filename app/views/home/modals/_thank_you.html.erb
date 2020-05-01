@@ -19,13 +19,13 @@
       <p class="social-text"><%= I18n.t 'modals.thankyou.helpinmeantime' %></p>
 
       <div class="social-sites">
-        <a class="site" href="https://www.facebook.com/sharer/sharer.php?u=pomuzemesi.cz" target="_blank">
+        <a class="site" href="<%= I18n.t 'socials.facebooklink' %>" target="_blank">
           <div class="circle">
             <%= image_tag asset_path('social-facebook.svg')  %>
           </div>
           <div class="label">Facebook</div>
         </a>
-        <a class="site" href="http://twitter.com/share?url=https://pomuzemesi.cz" target="_blank">
+        <a class="site" href="<%= I18n.t 'socials.twitterlink' %>" target="_blank">
           <div class="circle">
             <%= image_tag asset_path('social-twitter.svg')  %>
           </div>

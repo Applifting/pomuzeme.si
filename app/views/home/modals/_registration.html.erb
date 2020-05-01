@@ -46,7 +46,7 @@
         <div class="address-title">
           <span><%= I18n.t 'modals.registration.addresstitle' %></span>
 
-          <img src="<%= asset_pack_path('media/images/tooltip.svg') %>" class="tooltipped" data-position="top" data-tooltip="Díky adrese vás propojíme právě s těmi dobročinnými organizacemi, které se nacházejí ve vaší lokalitě." />
+          <img src="<%= asset_pack_path('media/images/tooltip.svg') %>" class="tooltipped" data-position="top" data-tooltip="<%= I18n.t 'modals.registration.addresshelper' %>" />
         </div>
 
         <div class="input-field">
@@ -73,7 +73,7 @@
         <div class="checkbox-row">
           <label>
             <%= form.check_box :terms_of_service %>
-            <span class="text-required">Souhlasím s podmínkami <%= link_to 'užívání', 'podminky_dobrovolnika_pomuzemesi.pdf', target: '_blank' %> a <%= link_to 'ochrany osobních údajů', 'podminky_ochrany_osobnich_udaju_pomuzemesi.pdf', target: '_blank' %></span>
+            <span class="text-required"><%= I18n.t 'modals.registration.consenttoterms' %> <%= link_to I18n.t('modals.registration.usage'), I18n.t('modals.registration.usagepdf'), target: '_blank' %> <%= I18n.t 'modals.registration.and' %> <%= link_to I18n.t('modals.registration.protectionofdata'), I18n.t('modals.registration.protectionofdatapdf'), target: '_blank' %></span>
           </label>
         </div>
         <div class="checkbox-row">
@@ -89,7 +89,7 @@
           </ul>
         </div>
 
-        <%= form.submit 'Zaregistrovat se', class: 'form-button', data: { disable_with: "Zaregistrovat se..." } %>
+        <%= form.submit I18n.t('modals.registration.register'), class: 'form-button', data: { disable_with: I18n.t("modals.registration.disabledregister") } %>
         <%= recaptcha_v3(action: 'login') %>
         <% end %>
       </div>

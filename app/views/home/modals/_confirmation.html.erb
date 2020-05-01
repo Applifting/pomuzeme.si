@@ -21,10 +21,10 @@
       </div>
 
       <p class="smaller">
-        <%= I18n.t 'modals.confirmation.notreceived' %> <%= link_to 'Zkusit znovu', resend_volunteer_path, remote: true, method: :post  %>
+        <%= I18n.t 'modals.confirmation.notreceived' %> <%= link_to I18n.t('modals.confirmation.tryagain'), resend_volunteer_path, remote: true, method: :post  %>
       </p>
 
-      <%= form.submit 'Dokončit registraci', class: 'form-button', data: { disable_with: "Dokončit registraci..." } %>
+      <%= form.submit I18n.t('modals.confirmation.finishregistration'), class: 'form-button', data: { disable_with: I18n.t("modals.confirmation.disabledfinishregistration") } %>
       <% end %>
     </section>
   </div>

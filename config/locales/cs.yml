@@ -286,7 +286,7 @@ cs:
 
   landingpage:
     navbar:
-      wehelp: pomuzeme.si
+      logo: pomuzemesi.svg
       aboutus: O NÁS
       howdoesitwork: JAK TO FUNGUJE
       news: AKTUÁLNĚ
@@ -344,11 +344,23 @@ cs:
       title: Vyplňte potřebné údaje
       phoneprefix: 420
       addresstitle: Adresa
+      addresshelper: Díky adrese vás propojíme právě s těmi dobročinnými organizacemi, které se nacházejí ve vaší lokalitě.
+      consenttoterms: Souhlasím s podmínkami 
+      usage: užívání
+      usagepdf: podminky_dobrovolnika_pomuzemesi.pdf
+      and: a
+      protectionofdata: ochrany osobních údajů
+      protectionofdatapdf: podminky_ochrany_osobnich_udaju_pomuzemesi.pdf
       ageconfirmation: Prohlašuji, že jsem osoba starší 18 let
+      register: Zaregistrovat se
+      disabledregister: Zaregistrovat se...
     confirmation:
       verifytitle: Ověření čísla
       verifysubtitle: Na telefonní číslo jsme vám odeslali ověřovací kód. Vyplňte jej níže.
       notreceived: Nepřišel vám ověřovací kód?
+      tryagain: Zkusit znovu
+      finishregistration: Dokončit registraci
+      disabledfinishregistration: Dokončit registraci...
     thankyou:
       title: Děkujeme že chcete pomáhat
       subtitle: Nyní na vás mají kontakt dobročinné organizace z&nbsp;vašeho blízkého okolí. Mějte trpělivost a některá z nich se vám ozve.
@@ -359,3 +371,21 @@ cs:
       title: Přidat organizaci do skupiny
     users:
       addrole: Přidat roli
+  
+  socials:
+    facebooklink: https://www.facebook.com/sharer/sharer.php?u=pomuzemesi.cz
+    twitterlink: http://twitter.com/share?url=https://pomuzemesi.cz
+  
+  application:
+    title: Pomůžeme.si
+    meta:
+      title: Pomůžeme.si | Koronavirus?! Spolu to dáme
+      description: Pomáháme dostat dobrovolníky tam, kde jsou třeba.
+      og:
+        url: https://pomuzeme.si/
+        title: Pomůžeme.si | Koronavirus?! Spolu to dáme
+        description: Pomáháme dostat dobrovolníky tam, kde jsou třeba.
+        image: https://pomuzemesi.cz/thumbnail.png
+      twitter:
+        title: Pomůžeme.si | Koronavirus?! Spolu to dáme
+        image: https://pomuzemesi.cz/thumbnail.png
