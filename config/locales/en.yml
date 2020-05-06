@@ -101,7 +101,7 @@ en:
 
   landingpage:
     navbar:
-      logo: pomuzemesi.svg
+      logo: wehelp.svg
       aboutus: About us
       howdoesitwork: How does it work
       news: News
@@ -151,7 +151,7 @@ en:
       wehelpdescription: This platform aims to connect volunteers wishing to help with the people in need who are, for any particular reason, unable to obtain basic necessities or perform activities such as shopping for food or walking the dog.
       whoisbehind: Who is behind this project?
       whoisbehinddescription: Applifting - software development studio from Karlin, Prague which has been doing things in a slightly different manner for 6 years now. We are a team of more than 90 people co-operating without a single manager. We love to create apps that simplify other people's lives. For instance, we developed a platform for a more efficient international exchange of organ transplants; or built the security of a banking app used by millions of users across Europe.
-  
+
   modals:
     registration:
       thanks: Thank you!
@@ -180,13 +180,13 @@ en:
       title: Thank you for your willingness to help others
       subtitle: Non-profit organisations in your local area will now have your contact details. Please remain patient, some of them will surely contact you soon!
       helpinmeantime: In the meantime, you can raise more awareness by sharing it through social media.
-  
+
   admin:
     groups:
       title: Add an organisation to a group
     users:
       addrole: Add a new role
-  
+
   socials:
     facebooklink: https://www.facebook.com/sharer/sharer.php?u=pomuzemesi.cz
     twitterlink: http://twitter.com/share?url=https://pomuzemesi.cz
@@ -196,11 +196,14 @@ en:
     meta:
       title: WeHelp.uk.com | Coronavirus?! We'll make it through
       description: Getting volunteers where they're needed.
-      og:
-        url: https://pomuzeme.si/
-        title: WeHelp.uk.com | Coronavirus?! We'll make it through
-        description: Getting volunteers where they're needed.
-        image: https://pomuzemesi.cz/thumbnail.png
-      twitter:
-        title: WeHelp.uk.com | Coronavirus?! We'll make it through
-        image: https://pomuzemesi.cz/thumbnail.png
+    og:
+      url: https://pomuzeme.si/
+      title: WeHelp.uk.com | Coronavirus?! We'll make it through
+      description: Getting volunteers where they're needed.
+      image: https://pomuzemesi.cz/thumbnail.png
+    twitter:
+      title: WeHelp.uk.com | Coronavirus?! We'll make it through
+      image: https://pomuzemesi.cz/thumbnail.png
+    favicon:
+      big: uk-favicon-32x32.png
+      small: uk-favicon-16x16.png

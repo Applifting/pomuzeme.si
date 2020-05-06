@@ -381,11 +381,14 @@ cs:
     meta:
       title: Pomůžeme.si | Koronavirus?! Spolu to dáme
       description: Pomáháme dostat dobrovolníky tam, kde jsou třeba.
-      og:
-        url: https://pomuzeme.si/
-        title: Pomůžeme.si | Koronavirus?! Spolu to dáme
-        description: Pomáháme dostat dobrovolníky tam, kde jsou třeba.
-        image: https://pomuzemesi.cz/thumbnail.png
-      twitter:
-        title: Pomůžeme.si | Koronavirus?! Spolu to dáme
-        image: https://pomuzemesi.cz/thumbnail.png
+    og:
+      url: https://pomuzeme.si/
+      title: Pomůžeme.si | Koronavirus?! Spolu to dáme
+      description: Pomáháme dostat dobrovolníky tam, kde jsou třeba.
+      image: https://pomuzemesi.cz/thumbnail.png
+    twitter:
+      title: Pomůžeme.si | Koronavirus?! Spolu to dáme
+      image: https://pomuzemesi.cz/thumbnail.png
+    favicon:
+      big: favicon-32x32.png
+      small: favicon-16x16.png
