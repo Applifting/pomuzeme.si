@@ -15,7 +15,7 @@
             <a class="active link" href="#tab-organizations">Dobročinné organizace</a>
           </li>
           <li class="tab col s4">
-            <a class="link" href="#tab-development-team">Vývojový tým</a>
+            <a class="link" href="#tab-development-team">Projektový tým</a>
           </li>
         </ul>
       </div>
@@ -39,57 +39,23 @@
         </div>
       </div>
       <div id="tab-development-team" class="tab-content">
+        <div class="intro">
+          <p>Tento projekt by nevznikl bez úsilí mnoha dobrovolníků. Všem moc děkujeme.</p>
+        </div>
         <div class="developers">
-          <div class="developer">
-            <%= image_tag asset_path('volunteers/landovsky.jpeg'), class: 'photo' %>
-            <h4 class="name">Tomáš Landovský</h4>
-            <p class="role">hlavní kordinátor projektu</p>
-          </div>
-          <div class="developer">
-            <%= image_tag asset_path('volunteers/landovsky.jpeg'), class: 'photo' %>
-            <h4 class="name">Tomáš Landovský</h4>
-            <p class="role">hlavní kordinátor projektu</p>
-          </div>
-          <div class="developer">
-            <%= image_tag asset_path('volunteers/landovsky.jpeg'), class: 'photo' %>
-            <h4 class="name">Tomáš Landovský</h4>
-            <p class="role">hlavní kordinátor projektu</p>
-          </div>
-          <div class="developer">
-            <%= image_tag asset_path('volunteers/landovsky.jpeg'), class: 'photo' %>
-            <h4 class="name">Tomáš Landovský</h4>
-            <p class="role">hlavní kordinátor projektu</p>
-          </div>
-          <div class="developer">
-            <%= image_tag asset_path('volunteers/landovsky.jpeg'), class: 'photo' %>
-            <h4 class="name">Tomáš Landovský</h4>
-            <p class="role">hlavní kordinátor projektu</p>
-          </div>
-          <div class="developer">
-            <%= image_tag asset_path('volunteers/landovsky.jpeg'), class: 'photo' %>
-            <h4 class="name">Tomáš Landovský</h4>
-            <p class="role">hlavní kordinátor projektu</p>
-          </div>
-          <div class="developer">
-            <%= image_tag asset_path('volunteers/landovsky.jpeg'), class: 'photo' %>
-            <h4 class="name">Tomáš Landovský</h4>
-            <p class="role">hlavní kordinátor projektu</p>
-          </div>
-          <div class="developer">
-            <%= image_tag asset_path('volunteers/landovsky.jpeg'), class: 'photo' %>
-            <h4 class="name">Tomáš Landovský</h4>
-            <p class="role">hlavní kordinátor projektu</p>
-          </div>
-          <div class="developer">
-            <%= image_tag asset_path('volunteers/landovsky.jpeg'), class: 'photo' %>
-            <h4 class="name">Tomáš Landovský</h4>
-            <p class="role">hlavní kordinátor projektu</p>
-          </div>
-          <div class="developer">
-            <%= image_tag asset_path('volunteers/landovsky.jpeg'), class: 'photo' %>
-            <h4 class="name">Tomáš Landovský</h4>
-            <p class="role">hlavní kordinátor projektu</p>
-          </div>
+          <% @project_volunteers.each do |volunteer| %>
+            <div class="developer">
+              <%= image_tag asset_path('volunteers/' + volunteer.fetch(:photo, :generic)), class: 'photo' %>
+              <h4 class="name">
+                <% if volunteer[:url].present? %>
+                    <a href="<%= volunteer[:url] %>" target="_blank"><%= volunteer[:name] %></a>
+                <% else%>
+                    <%= volunteer[:name] %>
+                <% end %>
+              </h4>
+              <p class="role"><%= volunteer[:role] %></p>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

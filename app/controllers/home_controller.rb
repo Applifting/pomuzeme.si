@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   before_action :load_counts
+  before_action :load_project_volunteers
 
   def index
     session[:volunteer_id] = nil
@@ -24,5 +25,13 @@ class HomeController < ApplicationController
   def load_counts
     @volunteer_count      = Volunteer.cached_count
     @organisations_count  = Organisation.cached_count
+  end
+
+  def load_project_volunteers
+    @project_volunteers = Rails.cache.fetch :project_volunteers do
+      YAML.load_file('lib/assets/project_volunteers.yml')
+          .map(&:with_indifferent_access)
+          .sort_by { |v| v[:name] }
+    end
   end
 end
