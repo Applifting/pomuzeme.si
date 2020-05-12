@@ -15,6 +15,7 @@ ActiveAdmin.register RequestedVolunteer do
 
     def update
       super do |success, failure|
+        notify_volunteers_updated if success.present? && should_notify_update?
         success.html { redirect_to admin_organisation_request_path(resource.request_id) }
         failure.html { render :new }
       end
@@ -25,6 +26,17 @@ ActiveAdmin.register RequestedVolunteer do
         success.html { redirect_to admin_organisation_request_path(resource.request_id) }
         failure.html { render :new }
       end
+    end
+
+    private
+
+    def notify_volunteers_updated
+      Admin::Requests::VolunteerNotifier.new(current_user, resource.request).notify_updated
+    end
+
+    # send update only in case volunteer is has accepted request and sensitive information is visible
+    def should_notify_update?
+      resource.accepted? && resource.visible_sensitive?
     end
   end
 end
