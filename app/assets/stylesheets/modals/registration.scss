@@ -67,6 +67,10 @@
       padding: 48px 64px 64px;
       width: 50%;
 
+      &.no-padding {
+        padding: 0px;
+      }
+
       @include lg {
         width: 100%;
         box-shadow: none;
