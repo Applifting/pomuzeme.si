@@ -21,7 +21,7 @@ module Messages
       start_time = Time.current
 
       counter = 0
-      while (counter < REPEAT_COUNT || (Time.current - start_time) < TIMEOUT.seconds)
+      while counter < REPEAT_COUNT && (Time.current - start_time) < TIMEOUT.seconds
         Rails.logger.debug "MessageReceiverJob: loop number #{counter}, runtime #{Time.current - start_time} seconds"
         counter += 1
         receive_sms
