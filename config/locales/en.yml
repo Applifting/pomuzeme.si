@@ -122,8 +122,8 @@ en:
       registerorganisation: Register an Organisation
     intro:
       title: Why use WeHelp?
-      description: We enable you to provide your help quickly and easily to those that need it. We make the cooperation between volunteers and non-profit organisations more effective. We recommend volunteers to organisations that are currently overloaded due to the coronavirus situation. We will make it through together. WeHelp.
-      countertitle: How many of us are helping?
+      description: We enable you to provide your help quickly and easily to those that need it. We make the cooperation between volunteers and non-profit organisations more effective. We connect volunteers to organisations that are ready to help with the current emergency. We will make it through together. WeHelp.
+      countertitle: How many of us are helping globally?
       registeredvolunteers: Registered volunteers
       charitableorganisations: Charitable organisations
     guide:
@@ -195,11 +195,11 @@ en:
     title: WeHelp.uk.com
     meta:
       title: WeHelp.uk.com | Coronavirus?! We'll make it through
-      description: Getting volunteers where they're needed.
+      description: Getting volunteers to where they're needed.
     og:
       url: https://wehelp.uk.com/
       title: WeHelp.uk.com | Coronavirus?! We'll make it through
-      description: Getting volunteers where they're needed.
+      description: Getting volunteers to where they're needed.
       image: https://pomuzemesi.cz/thumbnail.png
     twitter:
       title: WeHelp.uk.com | Coronavirus?! We'll make it through
