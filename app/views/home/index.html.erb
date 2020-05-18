@@ -1,18 +1,18 @@
 <%= render 'home/partials/main_header' %>
 <% if @partner_signup_group %>
   <%= render 'home/partials/section_partner_channel' %>
-  <%= render 'home/partials/section_orgs' %>
+  <%= render "home/partials/#{ENV.fetch('COUNTRY', :cz)}/section_orgs" %>
   <%= render 'home/partials/section_intro' %>
 <% else %>
-  <%= render 'home/partials/section_hero' %>
-  <%= render 'home/partials/section_orgs' %>
-  <%= render 'home/partials/section_intro' %>
+  <%= render "home/partials/#{ENV.fetch('COUNTRY', :cz)}/section_hero" %>
+  <%= render "home/partials/#{ENV.fetch('COUNTRY', :cz)}/section_orgs" %>
+  <%= render "home/partials/#{ENV.fetch('COUNTRY', :cz)}/section_intro" %>
   <%= render 'home/partials/section_guide' %>
   <%= render 'home/partials/section_contact' %>
-  <%= render 'home/partials/section_news' %>
+  <%= render "home/partials/#{ENV.fetch('COUNTRY', :cz)}/section_news" %>
 <% end %>
 
-<%= render 'home/partials/main_footer' %>
+<%= render "home/partials/#{ENV.fetch('COUNTRY', :cz)}/main_footer" %>
 
 <%= render 'home/modals/registration' %>
 <%= render 'home/modals/confirmation' %>

@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <%= render "home/partials/#{ENV['COUNTRY']}/registration_form" %>
+      <%= render "home/partials/#{ENV.fetch('COUNTRY', :cz)}/registration_form" %>
     </section>
   </div>
 </div>
