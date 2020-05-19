@@ -1,4 +1,4 @@
-<%= render 'home/partials/main_header' %>
+<%= render "home/partials/#{ENV.fetch('COUNTRY', :cz)}/main_header" %>
 <% if @partner_signup_group %>
   <%= render 'home/partials/section_partner_channel' %>
   <%= render "home/partials/#{ENV.fetch('COUNTRY', :cz)}/section_orgs" %>
