@@ -15,8 +15,10 @@ ActiveAdmin.register RequestedVolunteer do
 
     def update
       super do |success, failure|
-        notify_volunteers_updated if success.present? && should_notify_update?
-        success.html { redirect_to admin_organisation_request_path(resource.request_id) }
+        success.html do
+          notify_volunteers_updated if should_notify_update?
+          redirect_to admin_organisation_request_path(resource.request_id)
+        end
         failure.html { render :new }
       end
     end
