@@ -3,7 +3,7 @@ module Messages
     queue_as :receiver_queue
 
     REPEAT_COUNT = 30
-    TIMEOUT = 30 # seconds
+    TIMEOUT      = 30 # seconds
 
     around_perform do |job, block|
       PgLock.new(name: lock_key, attempts: 1, ttl: false).lock! do
@@ -11,6 +11,7 @@ module Messages
       rescue StandardError => e
         Raven.capture_exception e
       ensure
+        Rails.logger.debug 'MessageReceiverJob finished'
         Messages::ReceiverJob.perform_later unless already_enqueued? || already_scheduled? || repeating?
       end
     end
@@ -20,9 +21,8 @@ module Messages
       start_time = Time.current
 
       counter = 0
-      while (counter < REPEAT_COUNT) || ((Time.current - start_time) < TIMEOUT.seconds)
-        break if already_enqueued? || already_scheduled?
-
+      while counter < REPEAT_COUNT && (Time.current - start_time) < TIMEOUT.seconds
+        Rails.logger.debug "MessageReceiverJob: loop number #{counter}, runtime #{Time.current - start_time} seconds"
         counter += 1
         receive_sms
       end
