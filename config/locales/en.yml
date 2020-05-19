@@ -118,7 +118,7 @@ en:
       members:
         diakonie:
           title: Diakonie ČCE
-          url: https://www.diakonie.cz/
+          url: https://www.diakonie.cz/en
           alt: &voluteering_org dobrovolnická organizace zapojená do pomuzeme.si
         hero_clan:
           title: Hero Clan
@@ -134,14 +134,14 @@ en:
           alt: donated legal services
         teologicka_fakulta:
           title: Theological faculty of the Charles University
-          url: https://tc.etf.cuni.cz/
+          url: https://tcc.etf.cuni.cz/
           alt: gave patronage of the project
     buttons:
       iwanttohelp: I want to help
       organisevolunteers: I organise volunteers
       requirevolunteers: Request volunteers
       registerorganisation: Register organisation
-      irepresentorganisation: I represent organisation
+      irepresentorganisation: I'm an organisation
     intro:
       title: Why use WeHelp?
       description: We enable you to provide your help quickly and easily to those that need it. We make the cooperation between volunteers and non-profit organisations more effective. We connect volunteers to organisations that are ready to help with the current emergency. We will make it through together. WeHelp.
