@@ -1,6 +1,6 @@
 module OrganisationHelper
   def logo_with_link(organisation_symbol)
-    logo = image_tag asset_path("logo-#{organisation_symbol}.svg"), alt: translate(:alt, organisation_symbol), title: translate(:title, organisation_symbol)
+    logo = image_tag asset_path('logo/' + organisation_symbol.to_s + '.svg'), alt: translate(:alt, organisation_symbol), title: translate(:title, organisation_symbol)
     link_to logo, translate(:url, organisation_symbol), target: '_blank'
   end
 
