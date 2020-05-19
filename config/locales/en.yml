@@ -139,8 +139,8 @@ en:
     buttons:
       iwanttohelp: I want to help
       organisevolunteers: I organise volunteers
-      requirevolunteers: I need volunteers
-      registerorganisation: Register an Organisation
+      requirevolunteers: Request volunteers
+      registerorganisation: Register organisation
       irepresentorganisation: I represent organisation
     intro:
       title: Why use WeHelp?
@@ -155,16 +155,20 @@ en:
       steptwo: You will be contacted by organisations in your local area
       stepthree: You will decide together on the most adequate form of help
     contact:
-      title: Are you an organisation looking for volunteers?
-      subtitle: We offer the complete solution which will help you to
-      point1: co-ordinate the demand for help between the volunteers based on location
-      point2: work with your existing volunteers list which you can load into the application
-      point3: get an overview of the current availability of volunteers
-      point4: gain new volunteers if you are in need of more help, and organise their onboarding
+      lookingforvolunteers: Looking for new volunteers?
+      coordinatingvolunteers: Need to coordinate existing volunteers?
+      title: I represent an organisation
+      subtitle: Our solution can help you
+      col1_point1: when you need volunteers for one-off event
+      col1_point2: we can connect you with volunteers for your cause
+      col2_point1: co-ordinate the demand for help between the volunteers based on location
+      col2_point2: work with your existing volunteers list which you can load into the application
+      col2_point3: get an overview of the current availability of volunteers
+      col2_point4: gain new volunteers if you are in need of more help, and organise their onboarding
       asterix: only you will be able to see and access the volunteers which you choose to upload to the application
       contactushere: Contact email
       email: info@pomuzeme.si
-      organisationlogin: Login for organisations
+      organisationlogin: Organisation login
     news:
       mentionedus: We were mentioned
       title: News

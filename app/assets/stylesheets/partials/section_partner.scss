@@ -3,8 +3,76 @@
 .section-partner-contact {
   text-align: center;
 
+  .login {
+    padding: 12px;
+  }
+
+  .partner-type-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    @include lg {
+      display: block;
+      padding: 0 34px;
+    }
+
+    @include sm {
+      padding: 0 34px;
+    }
+
+    @include md {
+      padding: 12px 0px;
+    }
+
+    .column-left {
+      width: 40%;
+      padding: 12px 32px;
+
+      @include lg {
+        padding: 0;
+        width: 100%;
+      }
+    }
+
+    .column-right {
+      width: 40%;
+      padding: 12px 32px;
+      border-left: 1px solid $secondary-button-color;
+      position: relative;
+
+      @include lg {
+        padding: 0;
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid $secondary-button-color;
+      }
+
+      h4, p, div {
+        position: relative;
+      }
+
+      h4 {
+        @include lg {
+          margin-top: 46px;
+        }
+      }
+    }
+
+    h4 {
+      @include lg {
+        margin-bottom: 30px;
+      }
+    }
+  }
+
   h3 {
     margin: 96px 0 24px;
+  }
+
+  h4 {
+    margin-bottom: 18px;
+    padding: 0 18px;
   }
 
   p {
@@ -22,11 +90,18 @@
     margin-bottom: 30px;
   }
 
-  .about_app {
+  .about_type {
     max-width: 500px;
+    padding: 0 28px;
     margin: auto;
     text-align: left;
     padding-bottom: 24px;
+    min-height: 308px;
+
+    @include lg {
+      min-height: auto;
+      padding: 0 28px 28px 28px;
+    }
 
     p {
       margin: 0;

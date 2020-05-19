@@ -356,12 +356,16 @@ cs:
       steptwo: Budou vás kontaktovat dobročinné organizace z okolí
       stepthree: Společně se domluvíte na konkrétní pomoci potřebným
     contact:
-      title: Jste organizace, která pracuje s dobrovolníky?
-      subtitle: Máme pro vás kompletní řešení, které vám pomůže
-      point1: koordinovat rozdělení poptávek mezi dobrovolníky na základě lokality
-      point2: pracovat s dobrovolníky, které si do aplikace nahrajete
-      point3: získat přehled o aktuální dostupnosti dobrovolníků
-      point4: získat nové dobrovolníky, pokud jich nemáte dostatek, a organizovat jejich nábor
+      lookingforvolunteers: Hledáte dobrovolníky jednorázově?
+      coordinatingvolunteers: Potřebujete koordinovat dobrovolníky?
+      title: Jste zástupce organizace?
+      subtitle: Pomocí naší platformy budete moci
+      col1_point1: pomůžeme vám najít a oslovit vhodné dobrovolníky pro vaše potřeby
+      col1_point2: stačí vyplnit poptávkový formulář
+      col2_point1: koordinovat rozdělení poptávek mezi dobrovolníky na základě lokality
+      col2_point2: pracovat s dobrovolníky, které si do aplikace nahrajete
+      col2_point3: získat přehled o aktuální dostupnosti dobrovolníků
+      col2_point4: získat nové dobrovolníky, pokud jich nemáte dostatek, a organizovat jejich nábor
       asterix: k dobrovolníkům, které si do aplikace nahrajete, budete mít výhradní přístup jen vy
       contactushere: Kontaktní email
       email: info@pomuzeme.si

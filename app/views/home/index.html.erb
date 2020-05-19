@@ -8,7 +8,7 @@
   <%= render "home/partials/#{ENV.fetch('COUNTRY', :cz)}/section_orgs" %>
   <%= render "home/partials/#{ENV.fetch('COUNTRY', :cz)}/section_intro" %>
   <%= render 'home/partials/section_guide' %>
-  <%= render 'home/partials/section_contact' %>
+  <%= render "home/partials/#{ENV.fetch('COUNTRY', :cz)}/section_contact" %>
   <%= render "home/partials/#{ENV.fetch('COUNTRY', :cz)}/section_news" %>
 <% end %>
 
