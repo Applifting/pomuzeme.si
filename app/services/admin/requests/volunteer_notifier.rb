@@ -2,23 +2,26 @@ module Admin
   module Requests
     class VolunteerNotifier
 
-      attr_reader :user, :request
+      attr_reader :user, :request, :requested_volunteer
 
-      def initialize(user, request)
+      def initialize(user, request, requested_volunteer = nil)
         @user = user
         @request = request
+        @requested_volunteer = requested_volunteer
       end
 
       def notify_assigned
+        return notification_of_assigned requested_volunteer unless requested_volunteer.nil?
+
         request.requested_volunteers.to_be_notified.eager_load(:volunteer).each do |requested_volunteer|
           notification_of_assigned requested_volunteer
         end
       end
 
       def notify_updated
-        request.requested_volunteers.eager_load(:volunteer).each do |requested_volunteer|
-          next unless should_receive_push_update? requested_volunteer
+        return notification_of_updated requested_volunteer unless requested_volunteer.nil?
 
+        request.requested_volunteers.eager_load(:volunteer).each do |requested_volunteer|
           notification_of_updated requested_volunteer
         end
       end
@@ -37,6 +40,8 @@ module Admin
       end
 
       def notification_of_updated(requested_volunteer)
+        return unless should_receive_push_update? requested_volunteer
+
         MessagingService.create_message direction: :outgoing,
                                         message_type: :request_update,
                                         request: request,

@@ -31,7 +31,7 @@ ActiveAdmin.register RequestedVolunteer do
     private
 
     def notify_volunteers_updated
-      Admin::Requests::VolunteerNotifier.new(current_user, resource.request).notify_updated
+      Admin::Requests::VolunteerNotifier.new(current_user, resource.request, resource).notify_updated
     end
 
     # send update only in case volunteer is has accepted request and sensitive information is visible
