@@ -10,7 +10,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 # GIS adapter for pg
 gem 'activerecord-postgis-adapter'
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 gem 'sprockets', '= 3.7.2'
