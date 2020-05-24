@@ -158,9 +158,11 @@ en:
       lookingforvolunteers: Looking for new volunteers?
       coordinatingvolunteers: Need to coordinate existing volunteers?
       title: I represent an organisation
-      subtitle: Our solution can help you
-      col1_point1: when you need volunteers for one-off event
-      col1_point2: we can connect you with volunteers for your cause
+      subtitle1: We can quickly help you to...
+      subtitle2: Our solution can help you...
+      col1_point1: increase the volunteer count without any account registration on our platform
+      col1_point2: connect with the right volunteers in your area for your cause
+      col1_point3: get the requested volunteers to where they are needed for your one-off event
       col2_point1: co-ordinate the demand for help between the volunteers based on location
       col2_point2: work with your existing volunteers list which you can load into the application
       col2_point3: get an overview of the current availability of volunteers
