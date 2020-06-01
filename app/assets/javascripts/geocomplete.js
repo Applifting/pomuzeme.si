@@ -18,46 +18,57 @@ function handleAutocompleteBlur(event, target) {
   }
 }
 
-function InitAutocomplete() {
-  $(document).ready(function() {
+window.initAutocompleteForResultElements = function(result_prefix){
+    console.log(result_prefix)
     var input = $(".geocomplete")
     var target = $("#" + input.data("target"))
     var autocomplete = new google.maps.places.Autocomplete(input[0])
-    autocomplete.setTypes(["address"])
+    autocomplete.setTypes([])
     autocomplete.setComponentRestrictions({country: "cz"})
     input[0].addEventListener('keypress', function keypressHandler(event) { handleAutocompleteKeypress(event, target) }, { passive: true })
     input[0].addEventListener('blur', function blurHandler(event) { handleAutocompleteBlur(event, target) }, { passive: true })
 
     autocomplete.addListener("place_changed", function() {
-      var place = autocomplete.getPlace()
-      var lat   = place.geometry.location.lat()
-      var lng   = place.geometry.location.lng()
-      var address = {}
-      if (place.address_components) {
-        const components = place.address_components
-        address = {
-          country_code: findProperty(components, "country", "short_name").toLowerCase(),
-          postal_code: findProperty(components, "postal_code", "long_name"),
-          city: findProperty(components, "locality", "long_name") || findProperty(components, "administrative_area_level_2", "long_name"),
-          city_part: findProperty(components, "neighborhood", "long_name"),
-          street: findProperty(components, "route", "long_name"),
-          street_number: findProperty(components, "street_number", "long_name"),
-          lat: lat,
-          lng: lng,
-          remote_provider_id: place.place_id || ""
+        var place = autocomplete.getPlace()
+        var lat   = place.geometry.location.lat()
+        var lng   = place.geometry.location.lng()
+        var address = {}
+        if (place.address_components) {
+            const components = place.address_components
+            address = {
+                country_code: findProperty(components, "country", "short_name").toLowerCase(),
+                postal_code: findProperty(components, "postal_code", "long_name"),
+                city: findProperty(components, "locality", "long_name") || findProperty(components, "administrative_area_level_2", "long_name"),
+                city_part: findProperty(components, "neighborhood", "long_name"),
+                street: findProperty(components, "route", "long_name"),
+                street_number: findProperty(components, "street_number", "long_name"),
+                lat: lat,
+                lng: lng,
+                remote_provider_id: place.place_id || ""
+            }
         }
-      }
-      $('#address_country_code').val(address.country_code)
-      $('#address_postal_code').val(address.postal_code)
-      $('#address_city').val(address.city)
-      $('#address_city_part').val(address.city_part || address.city)
-      $('#address_street').val(address.street)
-      $('#address_street_number').val(address.street_number)
-      $('#address_latitude').val(address.lat)
-      $('#address_longitude').val(address.lng)
-      $('#address_geo_entry_id').val(address.remote_provider_id)
+        $('#' + result_prefix +'_country_code').val(address.country_code)
+        $('#' + result_prefix +'_postal_code').val(address.postal_code)
+        $('#' + result_prefix +'_city').val(address.city)
+        $('#' + result_prefix +'_city_part').val(address.city_part || address.city)
+        $('#' + result_prefix +'_street').val(address.street)
+        $('#' + result_prefix +'_street_number').val(address.street_number)
+        $('#' + result_prefix +'_latitude').val(address.lat)
+        $('#' + result_prefix +'_longitude').val(address.lng)
+        $('#' + result_prefix +'_geo_entry_id').val(address.remote_provider_id)
     })
-  })
+}
+
+function InitAddressAutocomplete() {
+    $(document).ready(function() {
+        initAutocompleteForResultElements('address')
+    })
+}
+
+function InitRequestAutocomplete() {
+    $(document).ready(function() {
+        initAutocompleteForResultElements('request_address_attributes')
+    })
 }
 
 function InitFilterAutocomplete() {
@@ -65,7 +76,7 @@ function InitFilterAutocomplete() {
         var input = $(".geocomplete_filter")
         var target = $("#" + input.data("target"))
         var autocomplete = new google.maps.places.Autocomplete(input[0])
-        autocomplete.setTypes(["address"])
+        autocomplete.setTypes([])
         autocomplete.setComponentRestrictions({country: "cz"})
         input[0].addEventListener('keypress', function keypressHandler(event) { handleAutocompleteKeypress(event, target) }, { passive: true })
         input[0].addEventListener('blur', function blurHandler(event) { handleAutocompleteBlur(event, target) }, { passive: true })

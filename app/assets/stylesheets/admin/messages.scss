@@ -1,0 +1,161 @@
+.conversation {
+  width: 700px;
+
+  .msg {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  /*media body*/
+  .msg-wrapper {
+    flex: 1;
+  }
+
+  .msg-box {
+    background: #f9f9f9;
+    padding: 10px 15px;
+    border-color: black;
+    border-width: 2px;
+    border-radius: .25rem;
+    display: inline-block;
+    max-width: 800px;
+  }
+
+  .msg.coordinator .msg-box {
+    background: #00c89745;
+  }
+
+  .msg.coordinator .msg-wrapper {
+    margin-left:0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: flex-end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: flex-end;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: flex-end;
+    -ms-flex-align: flex-end;
+    align-items: flex-end;
+  }
+
+  .msg.body p, h3 {
+    text-align: justify;
+    margin-top: 10px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  .msg .body pre {
+    text-align: justify;
+    margin-top: 10px;
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  }
+
+  .msg .body img {
+    height: 16px;
+  }
+
+  .msg .body li {
+    list-style: disc;
+    margin-left: 20px;
+  }
+
+  .msg .body {
+    font-size: 13px;
+  }
+
+  .msg .msg-time {
+    text-align: right;
+    color: rgba(84, 84, 84, 0.67);
+    display: block;
+    font-size: 10px;
+    margin-top: 11px;
+  }
+
+  .msg .msg-channel {
+    text-align: right;
+    color: rgba(84, 84, 84, 0.67);
+    display: block;
+    font-size: 10px;
+    margin-top: 11px;
+    margin-left: 0.2rem;
+  }
+
+  .msg.volunteer .msg-time {
+    text-align: left;
+  }
+
+  .date-header {
+    position: relative;
+    text-align: center;
+    overflow:hidden;
+    font-size:14px;
+    margin:15px 0;
+    text-transform: capitalize;
+  }
+
+  .date-header::before {
+    background: gray;
+    content: "";
+    height: 1px;
+    right: 50%;
+    margin-right: 86px;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+  }
+
+  .date-header::after {
+    background: gray;
+    content: "";
+    height: 1px;
+    left: 50%;
+    margin-left: 86px;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+  }
+
+  .unread-dot {
+    height: 6px;
+    width: 6px;
+    background-color: blue;
+    border-radius: 50%;
+    display: inline-block;
+    margin-top: 14px;
+    margin-right: 5px;
+  }
+
+  .msg-time.tooltip {
+    color: rgba(84, 84, 84, 0.37);
+  }
+
+  .tooltip {
+    text-decoration: underline;
+    text-decoration-color: #8080807a;
+    text-decoration-style: dashed;
+    margin-left: 6px;
+  }
+
+  .tooltip::before {
+    content: '(';
+  }
+
+  .tooltip::after {
+    content: ')';
+  }
+}

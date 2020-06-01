@@ -1,6 +1,6 @@
 cs:
   active_admin:
-    dashboard: Úvod
+    dashboard: Přehled
     dashboard_welcome:
       welcome: "Vítejte v Active Admin. Toto je nástěnka."
       call_to_action: "Pro přidání sekcí na nástěnku se podívejte do souboru 'app/admin/dashboard.rb'"
@@ -73,6 +73,11 @@ cs:
       action_label: "%{title}"
       labels:
         destroy: "Vymazat"
+        assign_request: 'Přiřadit požadavek'
+      assign_request:
+        title: "Vybíráte dobrovolníky pro poptávku: %{request}"
+        description: seznam neobsahuje dobrovolníky, kteří jsou již v poptávce zařazeni
+        confirmation: "Opravdu chcete přidat dobrovolníky do poptávky?"
     comments:
       resource_type: "Typ zdroje"
       author_type: "Typ autora"
@@ -82,9 +87,11 @@ cs:
       resource: "Zdroj"
       no_comments_yet: "Žádný komentář"
       author_missing: "Anonymní"
-      title_content: "Komentáře administrátorů (%{count})"
+      title_content: "Komentáře (%{count})"
       errors:
         empty_text: "Komentář nebyl uložen, je prázdný."
+      delete: "Smazat"
+      delete_confirmation: "Opravdu si přejete odstranit komentář?"
     devise:
       email:
         title: "E-mail"
@@ -111,8 +118,17 @@ cs:
     access_denied:
       message: "Nemáte oprávnění k provedení této akce."
     scopes:
-      all: vše
-      in_progress: otevřené
+      all: Vše
+      volunteer_all: Všichni
+      volunteer_verified: Ověření
+      volunteer_public: Veřejní
+      recruitment_in_progress: Otevřený
+      recruitment_closed: Uzavřený
+      recruitment_all: Vše
+      recruitment_unassigned: Bez koordinátora
+      request_in_preparation: v přípravě
+      request_in_fulfillment: v plnění
+      request_check_fulfillment: ke kontrole
       closed: uzavřené
     index_list:
       table: "Tabulka"

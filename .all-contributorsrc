@@ -158,6 +158,24 @@
       "contributions": [
         "content"
       ]
+    },
+    {
+      "login": "pmalak",
+      "name": "Petr Malak",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/17003612?v=4",
+      "profile": "https://github.com/pmalak",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "pavelchlad",
+      "name": "Pavel Chlad",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/62309559?v=4",
+      "profile": "https://github.com/pavelchlad",
+      "contributions": [
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,

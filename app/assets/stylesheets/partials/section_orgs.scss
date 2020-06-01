@@ -1,0 +1,48 @@
+@import '../variables';
+
+.section-orgs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 66px $section-padding 44px;
+
+  @include sm {
+    flex-direction: column;
+  }
+
+  .section {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    flex-wrap: wrap;
+    padding: 8px 0 32px 0;
+  }
+
+  .org-logo {
+    display: flex;
+    align-content: center;
+    height: 63px;
+    margin: 8px 24px;
+
+    a {
+      display: flex;
+    }
+  }
+
+  .text {
+    font-size: 18px;
+    text-align: center;
+    line-height: 150%;
+
+    &.big-text {
+      width: 100%;
+      padding-left: 0 !important;
+      text-align: center;
+
+      @include sm {
+        padding-top: 32px;
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Geography::Point do
-  describe '#from_coordinates' do
+  context '#from_coordinates' do
     it 'creates geo point with passed values' do
       latitude = 50.0941811
       longitude = 14.4548664
@@ -12,9 +12,9 @@ describe Geography::Point do
     end
   end
 
-  describe '#from_s_jtsk' do
+  context '#from_s_jtsk' do
     # verify at http://martin.hinner.info/geo/
-    it 'converts S-JTSK coordinate into WGS-84' do
+    xit 'converts S-JTSK coordinate into WGS-84' do
       s_jtsk_x = -1061338.289999999
       s_jtsk_y = -648360.4600000009
 

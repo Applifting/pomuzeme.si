@@ -1,0 +1,7 @@
+// Some constants picked from active_admin/forms
+
+$sidebar-inner-content-width: $sidebar-width - ($section-padding * 2);
+$filter-field-seperator-width: 12px;
+$side-by-side-filter-input-width: ($sidebar-inner-content-width / 2) - ($text-input-horizontal-padding * 2) - $filter-field-seperator-width;
+$side-by-side-filter-select-width: ($sidebar-inner-content-width / 2) - $filter-field-seperator-width;
+$date-range-filter-input-width: ($sidebar-inner-content-width / 2) - ($filter-field-seperator-width / 2);

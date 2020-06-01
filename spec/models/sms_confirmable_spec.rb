@@ -4,20 +4,20 @@ describe SmsConfirmable do
   describe '#confirmed?' do
     subject(:confirmable) { build(:volunteer, confirmed_at: confirmed_at) }
 
-    context 'confirmed_at is not set' do
+    context 'given confirmed_at is not set, "confirmed?"' do
       let(:confirmed_at) { nil }
 
       it { expect(confirmable.confirmed?).to be_falsey }
     end
 
-    context 'confirmed_at is set' do
+    context 'given confirmed_at is set, "confirmed?"' do
       let(:confirmed_at) { Time.now }
 
       it { expect(confirmable.confirmed?).to be_truthy }
     end
   end
 
-  describe '#confirm_with' do
+  context '#confirm_with' do
     let(:confirmed_at) { nil }
     let(:sms_confirmation_code) { confirmation_code }
     let(:confirmation_code) { 'ABCD' }
@@ -36,7 +36,7 @@ describe SmsConfirmable do
       end.to change(confirmable, :confirmed_at).from(nil)
     end
 
-    context 'is already confirmed' do
+    context 'given model is already confirmed' do
       let(:confirmed_at) { 1.day.ago }
 
       it 'adds error to confirmable model' do
@@ -77,7 +77,7 @@ describe SmsConfirmable do
       end
     end
 
-    context 'code is expired' do
+    context 'given code is expired' do
       let(:confirmation_valid_to) { 5.minutes.ago }
 
       it 'adds error to confirmable model' do
@@ -86,7 +86,6 @@ describe SmsConfirmable do
           .to include('is expired')
       end
     end
-
   end
 
   describe '#obtain_confirmation_code' do
@@ -102,10 +101,10 @@ describe SmsConfirmable do
     end
 
     before do
-      allow_any_instance_of(Sms::Provider).to receive(:send_msg)
+      allow(SmsService).to receive(:send_text)
     end
 
-    context 'confirmed_at is set' do
+    context 'given confirmed_at is set' do
       let(:confirmed_at) { Time.now }
 
       it 'raises error' do
@@ -115,22 +114,24 @@ describe SmsConfirmable do
       end
     end
 
-   context 'confirmed_at is not set' do
+    context 'given confirmed_at is not set' do
       before do
         allow(subject).to receive(:can_obtain_code?).and_return(false)
       end
 
-      context 'and can obtain confirmation code' do
-        it do
-          expect do
-            confirmable.obtain_confirmation_code
-          end.to raise_error('Token regenerated too early')
-        end
+      it 'checks for code reneration rate limit' do
+        expect do
+          confirmable.obtain_confirmation_code
+        end.to raise_error('Token regenerated too early')
       end
     end
 
-    context 'and can obtain confirmation code' do
+    context 'given confirmation code is requested' do
       let(:sms_manager) { double(:sms_manager) }
+
+      before do
+        allow(SmsService::Manager).to receive(:send_verification_code).and_return(true)
+      end
 
       it 'updates confirmation_code on model' do
         expect do
@@ -145,8 +146,8 @@ describe SmsConfirmable do
       end
 
       it 'sends new SMS' do
-        allow(Sms::Manager).to receive(:new).and_return(sms_manager)
         expect(sms_manager).to receive(:send_verification_code).once
+        allow(SmsService::Manager).to receive(:send_verification_code).and_return(sms_manager.send_verification_code)
         confirmable.obtain_confirmation_code
       end
     end

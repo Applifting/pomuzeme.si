@@ -1,4 +1,21 @@
-<section class="section-hero section">
+<script type="text/javascript">
+  $(document).ready(function() {
+    const registerScroll = link => {
+      const id = link.dataset.target;
+      link.addEventListener('click', () =>
+          document.getElementById(id).scrollIntoView({behavior: 'smooth'})
+      );
+    };
+
+    const scrollables = document.querySelectorAll('.js-scrollable');
+
+    for (let scrollable of scrollables) {
+      registerScroll(scrollable);
+    }
+  });
+</script>
+
+<section id="home" class="section-hero section">
   <div class="hero-content">
     <div class="column-left">
       <h1>
@@ -11,9 +28,17 @@
       <p>
         Pomáháme dostat dobrovolníky tam, kde jsou třeba.
       </p>
-      <button id="chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
-        Chci pomáhat
-      </button>
+      <div class="button-group">
+        <button id="chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
+          Chci pomáhat
+        </button>
+        <button class="main-button tertiary">
+          <a href="javascript:void(0);" class="js-scrollable" data-target="pro-organizace">Organizuji dobrovolníky</a>
+        </button>
+        <button class="main-button tertiary">
+          <a href="<%= ENV['NEED_VOLUNTEERS_GOOGLE_FORM']%>" target="_blank">Potřebuji dobrovolníky</a>
+        </button>
+      </div>
     </div>
     <div class="column-right">
       <%= image_tag asset_path('hero.svg'), class: 'hero-image'  %>

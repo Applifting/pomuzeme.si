@@ -1,0 +1,10 @@
+cs:
+  push:
+    notifications:
+      request:
+        new:
+          title: Byla vám nabídnuta nová poptávka
+          body: "Organizace: %{organisation}\nPopis: %{description}"
+        update:
+          title: Poptávka byla aktualizovana
+          body: "Organizace: %{organisation}\nPopis: %{description}"

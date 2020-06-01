@@ -38,3 +38,9 @@ yarn-debug.log*
 
 # ignore .local files
 /.local
+
+# ignore DB schema
+/db/schema.rb
+
+# ignore test coverage directory
+/coverage

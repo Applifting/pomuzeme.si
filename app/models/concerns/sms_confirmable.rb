@@ -8,7 +8,9 @@ module SmsConfirmable
 
   CONFIRMATION_CODE_VALIDITY = 10 # minutes
   CONFIRMATION_CODE_LENGTH = 4
-  CONFIRMATION_CODE_REPEAT_BREAK = 30 # seconds
+  CONFIRMATION_CODE_REPEAT_BREAK = 5 # seconds
+  AUTHORIZATION_CODE_VALIDITY = 10 # minutes
+  AUTHORIZATION_CODE_ATTEMPTS = 5 # minutes
 
   def confirmed?
     !confirmed_at.nil?
@@ -22,18 +24,40 @@ module SmsConfirmable
     confirm!
   end
 
+  def authorize_with(sms_authorization_code)
+    return false if Time.now > authorization_code_valid_to # authorization time exceeded
+    return false if 0 > authorization_code_attempts # attempts count exceeded
+    if sms_authorization_code != authorization_code
+      update! authorization_code_attempts: authorization_code_attempts - 1
+      return false
+    end
+
+    true
+  end
+
   def obtain_confirmation_code
     raise StandardError, 'Token already generated' unless confirmed_at.nil?
     raise StandardError, 'Token regenerated too early' unless can_obtain_code?
 
     regenerate_confirmation_code!
-    Sms::Manager.new.send_verification_code confirmation_code, phone
+    SmsService::Manager.send_verification_code phone, confirmation_code
+  end
+
+  def obtain_authorization_code
+    regenerate_authorization_code!
+    SmsService::Manager.send_authorization_code authorization_code, phone
   end
 
   private
 
   def regenerate_confirmation_code!
     update! confirmation_code: random_code, confirmation_valid_to: CONFIRMATION_CODE_VALIDITY.minutes.from_now
+  end
+
+  def regenerate_authorization_code!
+    update! authorization_code: random_code,
+            authorization_code_valid_to: AUTHORIZATION_CODE_VALIDITY.minutes.from_now,
+            authorization_code_attempts: AUTHORIZATION_CODE_ATTEMPTS
   end
 
   def confirm!

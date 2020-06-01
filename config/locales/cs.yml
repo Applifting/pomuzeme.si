@@ -36,24 +36,27 @@ cs:
         recruitment_statuses:
           waiting_for_contact: Čeká na kontakt
           onboarding: Probíhá nábor
-          active: Dobrovolník aktivní
+          active: Dobrovolník aktivní (ověřený)
           inactive: Dobrovolník vyřazen
         source:
           migration: nahrání dat
-          channel: online kanál,
+          channel: online kanál
           public_pool: veřejný seznam
     models:
       volunteer: Dobrovolník
       organisation: Organizace
       user: Uživatel
       comment: Komentář
+      message: Zprávy
       group: Organizační skupina
       group_volunteer: Nábor
       recruitment: Nábor
       roles: Role
       label: Štítek
       volunteer_label: Štítek
-      request: Požadavek
+      request: Poptávka
+      organisation_request: Poptávka
+      news: Aktuality
     attributes:
       volunteer:
         first_name: Jméno
@@ -65,14 +68,26 @@ cs:
         city_part: Městská část
         zipcode: PSČ
         distance: Vzdalenost
-        phone: Telefonní číslo
+        phone: Mobil
         email: E-mail
         confirmation_code: Ověřovací kód
         addresses: Adresy
+        address: Adresa
         full_address: Adresa
         confirmed?: Potvrzen?
         description: Jak může pomoci
         created_at: Vytvořen
+        updated_at: Upraven
+      news:
+        outlet: Médium
+        created_at: Publikovat po
+        created_at_hint: Pokud je nevyplněno, je publikováno hned.
+        publication_type: Umístit do
+        publication_types:
+          from_media: Napsali o nás
+          news: Aktualita
+        body: Text
+        title: Titulek
         updated_at: Upraven
       group:
         name: Název
@@ -81,7 +96,9 @@ cs:
         created_at: Vytvořeno
         updated_at: Upraveno
       group_volunteer:
+        address: Adresa
         group: Skupina
+        coordinator_id: Koordinátor
         coordinator: Koordinátor
         recruitment_status: Stav náboru
         source: Zdroj dobrovolníka
@@ -93,7 +110,7 @@ cs:
         recruitment_statuses:
           waiting_for_contact: Čeká na kontakt
           onboarding: Probíhá nábor
-          active: Dobrovolník aktivní
+          active: Dobrovolník aktivní (ověřený)
           inactive: Dobrovolník vyřazen
         sources:
           channel: Vlastní nábor
@@ -118,6 +135,9 @@ cs:
         last_name: Příjmení
       address:
         full_address: Adresa
+        current_address: "Aktuální adresa: %{address}"
+        updated: Adresa byla aktualizovaná
+        new_address: Nová adresa
         street_number: Cislo domu
         street: Ulice
         city: Mesto
@@ -131,21 +151,52 @@ cs:
         updated_at: Upraveno
       volunteer_label:
         label: Štítek
+        name: Štítek
       request:
         text: Popis
+        long_text: Detailni popis
         closer: Uzavřel
         closed_at: Datum uzavření
         closed_note: Poznámka k uzavření
         closed_state: Uzavřeno stavem
         coordinator: Koordinátor
+        coordinator_id: Koordinátor
         creator: Vytvořil
-        fullfillment_date: Datum splnění
+        address: Adresa
+        full_address: Adresa
+        update_address: Nová adresa
+        fullfillment_date: Požadované datum vyřízení
+        block_volunteer_until: Blokace dobrovolníka do
         organisation: Organizace
         required_volunteer_count: Požadovaný počet dobrovolníků
+        accepted_volunteers_count: Potvrzení / požadovaní dobrovolníci
         state: Stav
         state_last_updated_at: Stav naposledy aktualizován
-        subscriber: Odběratel
-        subscriber_phone: Telefon odběratele
+        subscriber: Příjemce
+        subscriber_hidden: skrytý příjemce
+        subscriber_phone: Telefon příjemce
+        subscriber_email: Email příjemce
+        created_at: Vytvořeno
+        states:
+          created: Vytvořeno
+          searching_capacity: Naplňování kapacity
+          pending_confirmation: Potvrzování dobrovolníků
+          help_coordinated: Čeká na vyřízení
+          closed: Uzavřeno
+      requested_volunteer:
+        first_name: Jméno
+        volunteer: Dobrovolník
+        state: Stav dobrovolníka v poptávce
+        visible_sensitive: Odkrýt podrobnosti
+        states:
+          to_be_notified: Oslovit
+          pending_notification: Odesílání zprávy
+          notified: Osloven
+          accepted: Potvrzen
+          rejected: Odmítl
+          removed: Odebrán
+      message:
+        channel: Komunikační kanál
     errors:
       format: "%{attribute} %{message}"
       messages:
@@ -192,7 +243,7 @@ cs:
               terms_of_service_required: "Pro registraci je potřeba souhlasit se zpracováním údajů."
               recaptcha_not_valid: 'Oveření recaptcha je neplatné.'
             phone:
-              improbable_phone: není správně
+              improbable_phone: zadejte telefonní číslo (9 míst)
             confirmation_code:
               not_matching: "se neshoduje"
               expired: "vypršel"
@@ -200,20 +251,35 @@ cs:
         organisation:
           attributes:
             contact_person_phone:
-              improbable_phone: není správně
+              improbable_phone: zadejte číslo v mezinárodním formátu, bez mezer
         address:
           base:
             inaccurate_address: Nepřesná adresa. Prosíme vyberte adresu z našeptávače.
+        request:
+          attributes:
+            subscriber_phone:
+              improbable_phone: zadejte číslo v mezinárodním formátu, bez mezer
     messages:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
 
   sms:
     verification: "Overovaci kod pro overeni registrace na portalu pomuzeme.si je: %{code}"
+    mobile_authorization: "Overovaci kod pro prihlaseni do aplikace pomuzeme.si je: %{code}"
     welcome: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se ozve jedna z organizaci ve vasem okoli a zapoji vas do deni. Reknete o nas i pratelum? Pomuzeme.si
     welcome_channel: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se vám ozve %{group_name} a zapoji vas do deni. Reknete o nas i pratelum? pomuzeme.si/%{group_slug}
-
+    request:
+      offer: "%{identifier} %{text} Prosíme, odpovězte ANO / NE"
+      unrecognized: Máte-li o poptávku zájem, odpovězte ANO nebo NE
+      confirmed: Díky za potvrzení poptávky %{identifier}, koordinátor %{organisation} se vám ozve s detaily.
+      rejected: Poptávka %{identifier} organizace %{organisation} byla odmítnuta.
+      over_capacity: Moc děkujeme za zájem, na poptávku organizace %{organisation} se již našlo dostatek dobrovolníků. Počkejte na další.
   errors:
     messages:
       invalid_zipcode: nebylo rozpoznano.
     authorisation:
       not_authorised_for_resource: "K této položce nemáte oprávnění [%{action}: %{subject}]."
+
+  request:
+    responses:
+      accept: Poptávka přijata
+      rejected: Poptávka odmítnuta

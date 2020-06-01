@@ -1,0 +1,10 @@
+<div class="article-link-wrapper">
+  <div class="created-at"><%= I18n.l publications.created_at, format: :long %></div>
+  <a href="<%= publications.url %>" target="_blank" rel="noopener noreferrer">
+    <h5>
+      <span class="site-name"><%= publications.outlet %></span>
+      -
+      <span><%= publications.title %></span>
+    </h5>
+  </a>
+</div>

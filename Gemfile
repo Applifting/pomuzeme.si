@@ -31,6 +31,8 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'best_in_place', '~> 3.1', '>= 3.1.1'
+
 gem 'httparty'
 
 # cloudflare - heroku integration according to https://www.viget.com/articles/heroku-cloudflare-the-right-way/
@@ -49,13 +51,13 @@ gem 'recaptcha'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'pry-rails'
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'pry-rails'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -75,13 +77,16 @@ group :test do
   gem 'test-prof', '~> 0.10'
   # One liner matchers
   gem 'shoulda-matchers', '~> 4.3'
-  # Fake data
-  gem 'ffaker', '~> 2.14'
+  # Check coverage
+  gem 'simplecov', require: false
+  gem 'codecov', require: false
 end
 
 group :production do
   gem 'rails_autoscale_agent'
 end
+
+gem 'ffaker', '~> 2.14'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
@@ -98,6 +103,7 @@ gem 'devise'
 
 # authorization
 gem 'cancancan'
+gem 'jwt'
 
 # role management
 gem 'rolify'
@@ -107,10 +113,30 @@ gem 'active_admin-humanized_enum'
 gem 'activeadmin'
 gem 'arctic_admin'
 gem 'draper'
+gem 'active_admin_datetimepicker'
+gem 'activeadmin_json_editor'
+
+# geocoding
+gem 'geocoder'
 
 # localisation
 gem 'rails-i18n'
 gem 'devise-i18n'
 
-# geocoding
-gem 'geocoder'
+# email provider
+gem 'sendgrid-ruby'
+
+# data management
+gem 'csv'
+
+# serializers
+gem 'active_model_serializers'
+
+# push notifications
+gem 'rpush'
+
+# background job processing
+gem 'sidekiq'
+
+# job locking mechanism
+gem 'pg_lock'

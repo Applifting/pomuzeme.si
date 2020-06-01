@@ -1,5 +1,5 @@
 # require custom Arbre components from app/components/
-Dir[Rails.root.join('app/components/active_admin/inputs/*.rb')].each { |f| require f }
+Dir[Rails.root.join('app/components/active_admin/inputs/*.rb')].sort.each { |f| require f }
 Dir[Rails.root.join('app/components/active_admin/views/*.rb')].sort.each { |f| require f }
 
 ActiveAdmin.setup do |config|
@@ -275,7 +275,7 @@ ActiveAdmin.setup do |config|
   # Pagination is enabled by default for all resources.
   # You can control the default per page count for all resources here.
   #
-  # config.default_per_page = 30
+  config.default_per_page = 15
   #
   # You can control the max per page count too.
   #
@@ -333,4 +333,7 @@ ActiveAdmin.setup do |config|
   meta_tags_options = { viewport: 'width=device-width, initial-scale=1' }
   config.meta_tags = meta_tags_options
   config.meta_tags_for_logged_out_pages = meta_tags_options
+  # include jsonb editor
+  config.register_stylesheet 'active_admin/json_editor.css'
+  config.register_javascript 'active_admin/json_editor.js'
 end

@@ -37,9 +37,14 @@ ActiveAdmin.register GroupVolunteer do
       f.inputs 'O dobrovolníkovi' do
         volunteer = resource.volunteer.decorate
 
-        para [volunteer.full_name, volunteer.phone].join(', ')
-        para volunteer.full_address
-        para volunteer.description
+        panel '' do
+          attributes_table_for volunteer do
+            row :full_name, &:to_s
+            row :phone
+            row :full_address
+            row :description
+          end
+        end
       end
     end
 
@@ -51,7 +56,7 @@ ActiveAdmin.register GroupVolunteer do
                                    selected: recruitment_status,
                                    collection: enum_options_for_select(GroupVolunteer, :recruitment_statuses)
       f.input(:source, as: :hidden, input_html: { value: GroupVolunteer::SRC_PUBLIC_POOL }) if object.new_record?
-      f.input :coordinator_id, as: :select, collection: [[current_user.decorate.full_name, current_user.id]], select: 1
+      f.input :coordinator_id, as: :select, collection: current_user.organisation_colleagues, select: 1
       f.input :comments, as: :text, hint: 'Poznámky k náboru'
     end
     f.actions

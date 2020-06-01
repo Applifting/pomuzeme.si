@@ -8,7 +8,8 @@ module SeedHelper
       user.assign_attributes password: args[:password],
                              password_confirmation: args[:password_confirmation],
                              first_name: args[:first_name],
-                             last_name: args[:last_name]
+                             last_name: args[:last_name],
+                             phone: '+420' + rand(666_666_666..888_888_888).to_s
       user.save!
     end
   end
@@ -72,7 +73,19 @@ module SeedHelper
   end
 
   def self.create_request(**args)
-    request = Request.new(args)
+    assigned_volunteers_count = rand(0..args[:required_volunteer_count].to_i)
+
+    request = Request.new(args.except(:city, :street, :zipcode))
+    request.build_address city: args[:city],
+        city_part: args[:city],
+        street: args[:street],
+        street_number: args[:street],
+        postal_code: args[:zipcode],
+        geo_entry_id: 42, # fake data below, maybe make robust later
+        geo_unit_id: 42,
+        geo_provider: Address.geo_providers[:cadstudio],
+        coordinate: Geography::Point.from_coordinates(latitude: 50.0941253, longitude: 14.4548767)
+    request.volunteers = Volunteer.order("RANDOM()").limit(assigned_volunteers_count)
     request.save!
   end
 end
