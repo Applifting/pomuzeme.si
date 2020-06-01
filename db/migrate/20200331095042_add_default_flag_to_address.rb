@@ -6,7 +6,9 @@ class AddDefaultFlagToAddress < ActiveRecord::Migration[6.0]
 
     reversible do |dir|
       dir.up do
-        Address.update_all default: true
+        Address.where('addresses.id IN (SELECT MAX(addresses.id) from addresses GROUP BY addressable_id)')
+               .order('addresses.created_at DESC')
+               .update_all(default: true)
       end
     end
 
