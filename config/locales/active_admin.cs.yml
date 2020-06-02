@@ -126,10 +126,11 @@ cs:
       recruitment_closed: Uzavřený
       recruitment_all: Vše
       recruitment_unassigned: Bez koordinátora
-      request_in_preparation: v přípravě
-      request_in_fulfillment: v plnění
-      request_check_fulfillment: ke kontrole
-      closed: uzavřené
+      request_unread_msgs: Nepřečtené
+      request_in_preparation: V přípravě
+      request_in_fulfillment: V plnění
+      request_check_fulfillment: Ke kontrole
+      closed: Uzavřené
     index_list:
       table: "Tabulka"
       block: "Seznam"

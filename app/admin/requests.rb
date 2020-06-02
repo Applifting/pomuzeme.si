@@ -20,7 +20,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
 
   # Scopes
   # Experimental feature
-  scope :unread_msgs, default: true, if: -> { current_user.cached_admin? } do |scope|
+  scope :request_unread_msgs do |scope|
     scope.not_closed.has_unread_messages
   end
   scope :request_in_preparation, default: true do |scope|
