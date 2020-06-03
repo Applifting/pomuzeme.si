@@ -27,7 +27,7 @@ RSpec.describe 'Api::V1::SessionControllers', type: :request do
       end
     end
 
-    context 'with unregistered number' do
+    context 'with unregistered phone number' do
       it 'returns not found error' do
         post api_v1_session_new_path, params: { phone_number: '+420111222333' }
         expect(response.body).to include_json(error_key: 'VOLUNTEER_NOT_FOUND')
