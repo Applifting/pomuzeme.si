@@ -102,7 +102,7 @@ RSpec.describe 'Api::V1::Volunteer::AddressesController', type: :request do
   describe 'POST /api/v1/volunteer/address' do
     let(:params) { { place_id: 42, default: false } }
     context 'as authorized volunteer' do
-      context 'all data are provided' do
+      context 'required data are provided' do
         before { mock_geocoder_search }
 
         it 'new address is created' do
