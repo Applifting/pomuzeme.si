@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Api::V1::SessionControllers', type: :request do
   describe 'POST /api/v1/session/new' do
-    context 'with registered volunteer number' do
+    context 'with registered volunteer phone number' do
       let(:volunteer) { create :volunteer, :confirmed }
 
       it 'sends authorization code to volunteer' do
