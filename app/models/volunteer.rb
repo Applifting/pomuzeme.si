@@ -23,6 +23,7 @@ class Volunteer < ApplicationRecord
 
   # Validations
   validates :first_name, :last_name, presence: true, unless: -> { registration_in_progress? }
+  validates :addresses, length: { minimum: 1 }, unless: -> { registration_in_progress? }
   validates :phone, phony_plausible: true, uniqueness: true, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { email&.present? }
 

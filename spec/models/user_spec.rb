@@ -112,14 +112,14 @@ RSpec.describe User, type: :model do
   context '#admin?' do
     let(:user) { build :user }
 
-    it 'is truthy if user has super_admin role' do
+    it 'is true if user has super_admin role' do
       allow_any_instance_of(User).to receive(:roles_name).and_return(['super_admin'])
-      expect(user.admin?).to be_truthy
+      expect(user.admin?).to be true
     end
 
-    it 'is falsey if user does not have super_admin role' do
+    it 'is false if user does not have super_admin role' do
       allow_any_instance_of(User).to receive(:roles_name).and_return(['coordinator'])
-      expect(user.admin?).to be_falsey
+      expect(user.admin?).to be false
     end
   end
 
@@ -127,14 +127,14 @@ RSpec.describe User, type: :model do
     let(:user) { create :user }
     let(:organisation) { create :organisation }
 
-    it 'is truthy if user has coordinator role' do
+    it 'is true if user has coordinator role' do
       user.grant :coordinator, organisation
-      expect(user.coordinator?).to be_truthy
+      expect(user.coordinator?).to be true
     end
 
-    it 'is falsey if user does not have coordinator role' do
+    it 'is false if user does not have coordinator role' do
       user.grant :super_admin, organisation
-      expect(user.coordinator?).to be_falsey
+      expect(user.coordinator?).to be false
     end
   end
 
@@ -145,7 +145,7 @@ RSpec.describe User, type: :model do
 
     it 'returns first associated record of coordinating_groups' do
       allow(user).to receive(:coordinating_groups).and_return(Group.where(id: [group_1.id, group_2.id]).order(id: :desc))
-      expect(group_2.id > group_1.id).to be_truthy # quite nasty check
+      expect(group_2.id > group_1.id).to be true # quite nasty check
       expect(user.organisation_group).to eq group_2
     end
   end

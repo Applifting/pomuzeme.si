@@ -26,7 +26,7 @@ RSpec.describe Group, type: :model do
 
     it 'should assign volunteer exclusively to group' do
       group_volunteer = group.add_exclusive_volunteer volunteer
-      expect(group_volunteer.is_exclusive).to be_truthy
+      expect(group_volunteer.is_exclusive).to be true
       expect(group_volunteer.group).to eq group
       expect(GroupVolunteer.sources[group_volunteer.source]).to eq GroupVolunteer.sources[:channel]
       expect(GroupVolunteer.recruitment_statuses[group_volunteer.recruitment_status]).to eq GroupVolunteer::DEFAULT_RECRUITMENT_STATUS
