@@ -35,6 +35,7 @@ module Abilities
 
     def can_manage_requests(user)
       can :create, Request
+      can :manage, Message
 
       # read-only access to requests within organisation group
       can %i[index read], [Request, RequestDecorator], organisation_id: user.cache_output(:user_group_organisations) { Organisation.user_group_organisations(user).pluck(:id) }
