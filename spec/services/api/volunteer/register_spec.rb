@@ -19,7 +19,7 @@ describe Api::Volunteer::Register do
       expect { Api::Volunteer::Register.new(volunteer, volunteer_data).perform }
         .to change { volunteer.reload.first_name }.from('').to('Test')
         .and change { volunteer.reload.last_name }.from('').to('Testic')
-                                                  .and change { volunteer.addresses.count }.from(0).to(1)
+        .and change { volunteer.addresses.count }.from(0).to(1)
       expect(volunteer.addresses.first.geo_entry_id).to eq geocoder_search_mock.first.data['place_id']
     end
 
