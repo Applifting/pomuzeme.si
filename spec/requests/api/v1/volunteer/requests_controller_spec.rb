@@ -10,7 +10,7 @@ RSpec.describe 'Api::V1::Volunteer::RequestsController', type: :request do
         let!(:requested_volunteer_pending) { create :requested_volunteer, volunteer: volunteer, state: :pending_notification }
         let!(:requested_volunteer_pending) { create :requested_volunteer, volunteer: volunteer, state: :removed }
 
-        it 'is not returned in response' do
+        it 'requests are not included in the response' do
           authorized_get volunteer: volunteer,
                          path: api_v1_volunteer_requests_path
           expect(response.body).to eq [].to_json
