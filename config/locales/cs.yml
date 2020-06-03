@@ -43,9 +43,9 @@ cs:
           channel: online kanál
           public_pool: veřejný seznam
     models:
-      volunteer: Dobrovolník
+      volunteer: Dobrovolníci
       organisation: Organizace
-      user: Uživatel
+      user: Uživatelé
       comment: Komentář
       message: Zprávy
       group: Organizační skupina
@@ -54,7 +54,7 @@ cs:
       roles: Role
       label: Štítek
       volunteer_label: Štítek
-      request: Poptávka
+      request: Poptávky
       organisation_request: Poptávka
       news: Aktuality
     attributes:
