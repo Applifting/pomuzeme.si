@@ -40,7 +40,7 @@ RSpec.describe 'Api::V1::SessionControllers', type: :request do
       end
     end
 
-    context 'with unconfirmed volunteer number' do
+    context 'with unconfirmed volunteer phone number' do
       let(:volunteer) { create :volunteer, :unconfirmed }
 
       it 'returns not found error' do
