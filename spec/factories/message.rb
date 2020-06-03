@@ -34,5 +34,9 @@ FactoryBot.define do
     trait :request_offer do
       message_type { :request_offer }
     end
+
+    trait :request_update do
+      message_type { :request_update }
+    end
   end
 end

@@ -11,4 +11,12 @@ FactoryBot.define do
       volunteer.addresses << build(:address)
     end
   end
+
+  factory :volunteer_not_registered, class: 'Volunteer' do
+    first_name { '' }
+    last_name { '' }
+    phone { "+420#{rand(111111111...999999999)}" }
+    email { '' }
+    pending_registration { true }
+  end
 end

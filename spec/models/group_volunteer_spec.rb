@@ -8,14 +8,14 @@ RSpec.describe GroupVolunteer, type: :model do
 
     it 'should validate uniqueness of volunteer scoped to group' do
       group_volunteer = subject.dup
-      expect(group_volunteer.valid?).to be_falsey
+      expect(group_volunteer.valid?).to be false
       expect(group_volunteer.errors.messages[:volunteer]).to include(I18n.t('errors.messages.taken'))
     end
 
     it 'should not validate uniqueness of volunteer' do
       group_volunteer = subject.dup
       group_volunteer.group = nil
-      expect(create(:group_volunteer, group: create(:group_applifting)).valid?).to be_truthy
+      expect(create(:group_volunteer, group: create(:group_applifting)).valid?).to be true
     end
   end
 

@@ -1,23 +1,41 @@
 require 'rails_helper'
 
-describe SmsService::Manager do
+describe SmsService do
   before(:all) { I18n.locale = :cs }
 
-  context '.send_welcome_msg' do
-    let(:standard_text) { I18n.t 'sms.welcome' }
-    let(:partner_text)  { I18n.transliterate I18n.t('sms.welcome_channel', group_name: 'Clovek', group_slug: 'clovek') }
-    let(:group)         { Group.new name: 'Clovek', slug: 'clovek' }
+  let(:message) { create :message }
+  let(:outgoing_message) { MessagingService::OutgoingMessage.new message }
 
-    it 'sends standard welcome message to free volunteer' do
-      expect(described_class).to receive(:sms_gateway).with('1234', standard_text)
-
-      described_class.send_welcome_msg '1234'
+  describe '.send_message' do
+    it 'sends message via default connector with delivery report' do
+      expect(SmsService::Connector::O2).to receive(:send_message).with(outgoing_message.phone, outgoing_message.text, delivery_report: true)
+      SmsService.send_message outgoing_message
     end
 
-    it 'sends welcome message to channel volunteer' do
-      expect(described_class).to receive(:sms_gateway).with('1234', partner_text)
+    it 'returns connector response if no block given' do
+      expect(SmsService::Connector::O2).to receive(:send_message).and_return('foobar')
+      expect(SmsService.send_message outgoing_message).to eq 'foobar'
+    end
 
-      described_class.send_welcome_msg '1234', group
+    it 'yields connector response if block given' do
+      expect(SmsService::Connector::O2).to receive(:send_message).and_return('foobar')
+      SmsService.send_message outgoing_message do |response|
+        expect(response).to eq 'foobar'
+      end
+    end
+  end
+
+  describe '.send_text' do
+    it 'sends message via default connector without delivery report' do
+      expect(SmsService::Connector::O2).to receive(:send_message).with('123456789', 'hello world', delivery_report: false)
+      SmsService.send_text '123456789', 'hello world'
+    end
+  end
+
+  describe '.receive' do
+    it 'calls receiver method on default connector' do
+      expect(SmsService::Connector::O2).to receive(:receive_message).with(no_args)
+      SmsService.receive
     end
   end
 end

@@ -7,17 +7,17 @@ describe SmsConfirmable do
     context 'given confirmed_at is not set, "confirmed?"' do
       let(:confirmed_at) { nil }
 
-      it { expect(confirmable.confirmed?).to be_falsey }
+      it { expect(confirmable.confirmed?).to be false }
     end
 
     context 'given confirmed_at is set, "confirmed?"' do
       let(:confirmed_at) { Time.now }
 
-      it { expect(confirmable.confirmed?).to be_truthy }
+      it { expect(confirmable.confirmed?).to be true }
     end
   end
 
-  context '#confirm_with' do
+  describe '#confirm_with' do
     let(:confirmed_at) { nil }
     let(:sms_confirmation_code) { confirmation_code }
     let(:confirmation_code) { 'ABCD' }
