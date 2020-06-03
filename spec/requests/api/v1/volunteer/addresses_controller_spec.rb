@@ -128,7 +128,7 @@ RSpec.describe 'Api::V1::Volunteer::AddressesController', type: :request do
         end
       end
 
-      context 'all data are provided, but place id is invalid' do
+      context 'required data are provided, but place id is invalid' do
         before { allow(Geocoder).to receive(:search).with(any_args).and_return([]) }
 
         it 'returns address invalid error' do
