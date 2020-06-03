@@ -52,7 +52,7 @@ RSpec.describe 'Api::V1::SessionControllers', type: :request do
   end
 
   describe 'POST /api/v1/session/create' do
-    context 'with registered volunteer number' do
+    context 'with registered volunteer phone number' do
       let(:volunteer) { create :volunteer, :confirmed, :initialized_authorization }
 
       context 'and with invalid authorization code' do
