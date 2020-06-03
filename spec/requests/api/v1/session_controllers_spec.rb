@@ -16,7 +16,7 @@ RSpec.describe 'Api::V1::SessionControllers', type: :request do
         expect(response).to have_http_status(200)
       end
 
-      it 'updates volunteers fcm token if present' do
+      it 'updates volunteers fcm token if token is present' do
         allow_any_instance_of(Volunteer).to receive(:obtain_authorization_code)
         expect { post api_v1_session_new_path, params: { phone_number: volunteer.phone, fcm_token: 'uniq_token' } }
             .to change { volunteer.reload.fcm_token }.from(nil).to('uniq_token')
