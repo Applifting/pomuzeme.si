@@ -57,6 +57,7 @@ ActiveAdmin.register GroupVolunteer do
                                    collection: enum_options_for_select(GroupVolunteer, :recruitment_statuses)
       f.input(:source, as: :hidden, input_html: { value: GroupVolunteer::SRC_PUBLIC_POOL }) if object.new_record?
       f.input :coordinator_id, as: :select, collection: current_user.organisation_colleagues, select: 1
+      f.input :contract_expires, as: :date_select
       f.input :comments, as: :text, hint: 'Poznámky k náboru'
     end
     f.actions
