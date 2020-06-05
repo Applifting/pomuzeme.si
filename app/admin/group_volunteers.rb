@@ -5,7 +5,7 @@ ActiveAdmin.register GroupVolunteer do
 
   belongs_to :volunteer
 
-  permit_params :comments, :coordinator_id, :group_id, :recruitment_status, :source
+  permit_params :comments, :contract_expires, :coordinator_id, :group_id, :recruitment_status, :source
 
   controller do
     def create
