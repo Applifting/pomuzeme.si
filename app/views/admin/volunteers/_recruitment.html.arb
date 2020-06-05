@@ -24,6 +24,7 @@ if recruitment.present?
                                                   url: admin_volunteer_group_volunteer_path(resource, recruitment)
     end
     row :source
+    row :contract_expires
     row :comments do
       best_in_place recruitment, :comments, as: :textarea,
                                             url: admin_volunteer_group_volunteer_path(resource, recruitment),
