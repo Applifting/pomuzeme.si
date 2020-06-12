@@ -3,6 +3,7 @@
 //= require geocomplete
 //= require best_in_place
 //= require active_admin_datetimepicker
+//= require character_counter
 
 $(document).ready(function () {
   $.ajaxSetup({

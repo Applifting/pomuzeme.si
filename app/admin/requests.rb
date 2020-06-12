@@ -140,7 +140,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     f.semantic_errors
 
     f.inputs 'Poptávka služby' do
-      f.input :text, as: :text, hint: 'Tento popis dostane dobrovolník do aplikace / SMS'
+      f.input :text, as: :text, hint: 'Tento popis dostane dobrovolník do aplikace / SMS', input_html: { class: :character_counter }
       f.input :required_volunteer_count, input_html: { value: object.required_volunteer_count.nil? ? 1 : resource.required_volunteer_count }
       f.input :fullfillment_date, as: :date_time_picker, input_html: { autocomplete: 'off' }
     end
