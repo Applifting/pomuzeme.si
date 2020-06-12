@@ -78,6 +78,7 @@ cs:
         description: Jak může pomoci
         created_at: Vytvořen
         updated_at: Upraven
+        full_address: Adresa
       news:
         outlet: Médium
         created_at: Publikovat po
@@ -118,6 +119,7 @@ cs:
           channel: Vlastní nábor
           public_pool: pomuzeme.si
           migration: Import
+          manual: Manuální registrace
       label:
         name: Název
         description: Popis
