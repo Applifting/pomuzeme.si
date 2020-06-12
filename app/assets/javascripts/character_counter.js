@@ -1,22 +1,25 @@
-function characterCounter (event) {
+function characterCounter (event, limit) {
   let length = event.currentTarget.value.length
-  $('#remainingLength').text(calcLimit(length))
-  if (length > 160) {
-    $('p.inline-hints remainingLength').css({ color: 'red' })
+  let parent = event.currentTarget.parentNode
+  let counter = parent.querySelector('.remainingLength')
+
+  let counter_text = parent.querySelector('#remainingLength')
+  counter_text.innerHTML = limit - length
+
+  if (length > limit) {
+    counter.style.color = 'red'
   } else {
-    $('p.inline-hints remainingLength').css({ color: 'inherit' })
+    counter.style.color = 'inherit'
   }
 }
 
-function calcLimit(length) {
-  return 160 - length;
-}
-
 $(document).ready(function () {
-  input = $('.character_counter')
-  currentLength = calcLimit(input.val().length)
-  input.after(`<p class=\"inline-hints remainingLength\">Zbývá <span id=\"remainingLength\">${currentLength}</span> znaků.</p>`)
-  input.keyup(function(event) {
-    characterCounter(event);
+  $('.character_counter').each(function() {
+    let limit = $(this).attr('data-limit')
+    let currentLength = limit - $(this).val().length
+    $(this).after(`<p class=\"inline-hints remainingLength\">Zbývá <span id=\"remainingLength\">${currentLength}</span> znaků.</p>`)
+    $(this).keyup(function(event) {
+      characterCounter(event, limit);
+    })
   })
 });
