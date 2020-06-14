@@ -1,7 +1,7 @@
 require 'jwt'
 module Api
   class JsonWebToken
-    SECRET_KEY = Rails.application.secrets.secret_key_base.to_s
+    SECRET_KEY = ENV.fetch('SECRET_KEY_BASE')
 
     def self.encode(payload, exp = 30.days.from_now)
       payload[:exp] = exp.to_i
