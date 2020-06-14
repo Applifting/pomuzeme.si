@@ -8,7 +8,12 @@ ActiveAdmin.register Recruitment do
   scope :recruitment_all, &:all
   scope :recruitment_unassigned, &:unassigned
 
-  filter :coordinator, as: :select, collection: proc { current_user.organisation_colleagues.map(&:decorate).map { |u| [u.full_name, u.id] } }
+  filter :volunteer_full_name_cont
+  filter :coordinator, as: :select,
+                       collection: proc { OptionsWrapper.wrap (current_user.organisation_colleagues.map { |i| [i.to_s, i.id] }), params, :coordinator_eq }
+  filter :recruitment_status, as: :select, collection: GroupVolunteer.recruitment_statuses
+  filter :contract_expires_lteq, as: :date_picker, label: 'Smlouva do data'
+
 
   controller do
     def scoped_collection

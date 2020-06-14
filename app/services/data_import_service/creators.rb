@@ -23,6 +23,7 @@ module DataImportService
       user = User.find_by(last_name: last_name || first_name, first_name: first_name)
       user || User.create(last_name: last_name || first_name,
                           first_name: first_name, email: FFaker::Internet.email,
+                          phone: FFaker::PhoneNumberIT.phone_number,
                           password: SecureRandom.uuid)
     end
 
