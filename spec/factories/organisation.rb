@@ -10,7 +10,7 @@ FactoryBot.define do
 
     trait :with_group do
       transient do
-        group { create :group }
+        group { create :group }
       end
 
       after(:create) do |organisation, evaluator|
