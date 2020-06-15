@@ -71,6 +71,12 @@ function InitRequestAutocomplete() {
     })
 }
 
+function InitVolunteerAutocomplete() {
+    $(document).ready(function() {
+        initAutocompleteForResultElements('volunteer_addresses_attributes_0')
+    })
+}
+
 function InitFilterAutocomplete() {
     $(document).ready(function() {
         var input = $(".geocomplete_filter")

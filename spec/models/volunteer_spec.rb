@@ -210,4 +210,26 @@ describe Volunteer do
       expect(volunteer.to_s).to eq(volunteer.to_s)
     end
   end
+
+  describe '#process_manual_registration' do
+    let(:volunteer) { create :volunteer }
+    let(:user)      { create :user, :with_organisation_group }
+
+    it 'sets the volunteers phone number as confirmed' do
+      expect(volunteer.confirmed_at).to be_nil
+
+      volunteer.process_manual_registration user
+      expect(volunteer.confirmed_at).to be_instance_of(ActiveSupport::TimeWithZone)
+    end
+
+    it 'creates onboarding for the volunteer' do
+      volunteer.process_manual_registration user
+
+      expect(volunteer.group_volunteers.count).to eq 1
+      expect(volunteer.group_volunteers.first.recruitment_status).to eq 'onboarding'
+      expect(volunteer.group_volunteers.first.is_exclusive).to be true
+      expect(volunteer.group_volunteers.first.coordinator).to eq user
+      expect(volunteer.group_volunteers.first.source).to eq 'manual'
+    end
+  end
 end

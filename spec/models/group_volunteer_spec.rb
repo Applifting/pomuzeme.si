@@ -26,7 +26,7 @@ RSpec.describe GroupVolunteer, type: :model do
   end
 
   context 'enums' do
-    it { should define_enum_for(:source).with_values(migration: 1, channel: 2, public_pool: 3) }
+    it { should define_enum_for(:source).with_values(migration: 1, channel: 2, public_pool: 3, manual: 4) }
     it { should define_enum_for(:recruitment_status).with_values(waiting_for_contact: 1, onboarding: 2, active: 3, inactive: 4) }
   end
 
