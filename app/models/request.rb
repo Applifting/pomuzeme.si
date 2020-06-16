@@ -14,7 +14,7 @@ class Request < ApplicationRecord
   belongs_to :organisation
   has_many :requested_volunteers, dependent: :destroy
   has_many :volunteers, through: :requested_volunteers
-  has_many :messages
+  has_many :messages, dependent: :destroy
 
   # Validations
   validates :required_volunteer_count, presence: true
