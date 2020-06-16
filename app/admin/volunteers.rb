@@ -1,7 +1,9 @@
 ActiveAdmin.register Volunteer do
   decorate_with VolunteerDecorator
 
-  permit_params :description, :first_name, :last_name, :phone, :email
+  permit_params :description, :first_name, :last_name, :phone, :email,
+                addresses_attributes: %i[street_number street city city_part postal_code country_code
+                                         latitude longitude geo_entry_id]
 
   scope :volunteer_verified, default: true do |scope|
     scope.verified_by(current_user.organisation_group.id)
@@ -47,6 +49,16 @@ ActiveAdmin.register Volunteer do
 
     def scoped_collection
       scoped_request ? super.not_blocked.where.not(id: Volunteer.assigned_to_request(scoped_request.id)) : super
+    end
+
+    def create
+      super do |success, failure|
+        success.html do
+          resource.process_manual_registration current_user
+          redirect_to admin_volunteer_path(resource), notice: "Dobrovolník uložen, zkontrolujte stav náboru."
+        end
+        failure.html { render :new }
+      end
     end
   end
 
@@ -105,11 +117,28 @@ ActiveAdmin.register Volunteer do
   end
 
   form do |f|
+    javascript_for(*location_autocomplete(callback: 'InitVolunteerAutocomplete'))
+
     f.inputs do
       f.input :first_name
       f.input :last_name
       f.input :phone
       f.input :email
+      address_label = proc { |type| I18n.t("activerecord.attributes.volunteer.#{type}") }
+      custom_input :full_address, class: 'geocomplete',
+                                  label: (address_label['full_address'] + ' *')
+
+      f.inputs for: [:addresses, f.object.addresses.first || f.object.addresses.build] do |address_form|
+        address_form.input :street_number, as: :hidden
+        address_form.input :street, as: :hidden
+        address_form.input :city, as: :hidden
+        address_form.input :city_part, as: :hidden
+        address_form.input :postal_code, as: :hidden
+        address_form.input :country_code, as: :hidden
+        address_form.input :latitude, as: :hidden
+        address_form.input :longitude, as: :hidden
+        address_form.input :geo_entry_id, as: :hidden
+      end
       f.inputs :description, as: :text
       f.inputs(:preferences, as: :jsonb) if current_user.admin?
     end

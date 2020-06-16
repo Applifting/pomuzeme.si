@@ -7,5 +7,15 @@ FactoryBot.define do
     contact_person { FFaker::Name.name }
     contact_person_email { FFaker::Internet.email }
     contact_person_phone { "+420#{rand(111111111...999999999)}" }
+
+    trait :with_group do
+      transient do
+        group { create :group }
+      end
+
+      after(:create) do |organisation, evaluator|
+        create :organisation_group, organisation: organisation, group: evaluator.group
+      end
+    end
   end
 end

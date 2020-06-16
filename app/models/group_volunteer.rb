@@ -7,7 +7,7 @@ class GroupVolunteer < ApplicationRecord
 
   # Enums
   enum recruitment_status: { WAITING_FOR_CONTACT => 1, onboarding: 2, ACTIVE => 3, inactive: 4 }
-  enum source: { migration: 1, channel: 2, SRC_PUBLIC_POOL => 3 }
+  enum source: { migration: 1, channel: 2, SRC_PUBLIC_POOL => 3, manual: 4 }
 
   # Associations
   belongs_to :group

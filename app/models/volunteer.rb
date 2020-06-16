@@ -17,6 +17,9 @@ class Volunteer < ApplicationRecord
   has_many :requests, through: :requested_volunteers
   has_many :messages, dependent: :destroy
 
+  # Attributes
+  accepts_nested_attributes_for :addresses
+
   # normalize phone format and add default czech prefix if missings
   phony_normalize :phone, default_country_code: 'CZ'
   phony_normalized_method :phone, default_country_code: 'CZ'
@@ -81,6 +84,16 @@ class Volunteer < ApplicationRecord
 
   def registration_in_progress?
     confirmed_at.nil? && pending_registration?
+  end
+
+  def process_manual_registration(current_user)
+    update(confirmed_at: Time.zone.now)
+    GroupVolunteer.create(group: current_user.organisation_group,
+                          volunteer: self,
+                          coordinator: current_user,
+                          source: :manual,
+                          recruitment_status: :onboarding,
+                          is_exclusive: true)
   end
 
   private

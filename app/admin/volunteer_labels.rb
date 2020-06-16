@@ -21,7 +21,7 @@ ActiveAdmin.register VolunteerLabel do
   end
 
   form do |f|
-    labels = Label.managable_by current_user
+    labels = Label.managable_by(current_user).order(:name)
     taken_labels = VolunteerLabel.where(volunteer_id: params[:volunteer_id]).pluck(:label_id)
 
     f.inputs do
