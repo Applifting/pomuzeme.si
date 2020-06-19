@@ -21,13 +21,9 @@
       </div>
       <div id="tab-partners" class="tab-content">
         <div class="logos-container">
-          <%= content_tag(:div, link_to(image_tag(asset_path('logo-cadstudio.svg', alt: 'podpořili projekt pomuzeme.si záštitou', title: 'Cadstudio')), 'https://www.cadstudio.cz', target: '_blank'), class: 'partner-logo') %>
-          <%= content_tag(:div, link_to(image_tag(asset_path('logo-nethost.svg', alt: 'podpořili projekt pomuzeme.si SMS branou', title: 'Nethost')), 'https://www.nethost.cz', target: '_blank'), class: 'partner-logo') %>
-          <%= content_tag(:div, link_to(image_tag(asset_path('logo-o2.svg', alt: 'podpořili projekt pomuzeme.si SMS branou', title: 'O2')), 'https://www.o2.cz/', trget: '_blank'), class: 'partner-logo') %>
-          <%= content_tag(:div, link_to(image_tag(asset_path('logo-sedlakova.svg', alt: 'podpořili projekt pomuzeme.si advokátními službami', title: 'Sedlákova Legl')), 'https://sedlakovalegal.com/', target: '_blank'), class: 'partner-logo') %>
-          <%= content_tag(:div, link_to(image_tag(asset_path('logo-trimed.svg', alt: 'podpořili projekt pomuzeme.si záštitou', title: 'Trimed')), 'https://www.trimed.cz/', target: '_blank'), class: 'partner-logo') %>
-          <%= content_tag(:div, link_to(image_tag(asset_path('logo-teologicka-fakulta.svg', alt: 'podpořili projekt pomuzeme.si záštitou', title: 'Evangelická teologická fakulta')), 'https://etf.cuni.cz', target: '_blank'), class: 'partner-logo') %>
-          <%= content_tag(:div, link_to(image_tag(asset_path('logo-sestry-v-zaloze.svg', alt: 'podpořili projekt pomuzeme.si referencí ze svého webu', title: 'Sesty v záloze')), 'https://www.sestryvzaloze.info/', target: '_blank'), class: 'org-logo') %>
+          <% @partner_logos.each do |partner| %>
+            <%= content_tag(:div, link_to(image_tag(asset_path(partner[:logo], alt: partner[:alt], title: partner[:title])), partner[:url], target: '_blank'), class: 'partner-logo') %>
+          <% end %>
         </div>
       </div>
       <div id="tab-organizations" class="tab-content">

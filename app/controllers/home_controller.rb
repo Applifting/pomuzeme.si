@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   before_action :load_counts
+  before_action :load_partner_logos
   before_action :load_project_volunteers
 
   def index
@@ -25,6 +26,13 @@ class HomeController < ApplicationController
   def load_counts
     @volunteer_count      = Volunteer.cached_count
     @organisations_count  = Organisation.cached_count
+  end
+
+  def load_partner_logos
+    @partner_logos = Rails.cache.fetch :partner_logos do
+      YAML.load_file('lib/assets/partner_logos.yml')
+          .map(&:with_indifferent_access)
+    end
   end
 
   def load_project_volunteers
