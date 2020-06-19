@@ -30,7 +30,7 @@ class HomeController < ApplicationController
   end
 
   def load_organization_logos
-    @organization_logos = Rails.cache.fetch :partner_logos do
+    @organization_logos = Rails.cache.fetch :organization_logos do
       YAML.load_file('lib/assets/organization_logos.yml')
           .map(&:with_indifferent_access)
     end
