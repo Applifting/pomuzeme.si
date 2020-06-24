@@ -20,6 +20,8 @@ require 'rspec/rails'
 require 'rspec/json_expectations'
 require 'test_prof/recipes/rspec/let_it_be'
 require 'support/api_helper'
+require 'support/features/recaptcha_helper'
+require 'support/features/sign_up_helper'
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -67,4 +69,6 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include ActiveSupport::Testing::TimeHelpers
   config.include ApiHelper, type: :request
+  config.include Features::RecaptchaHelper, type: :feature
+  config.include Features::SignUpHelper, type: :feature
 end
