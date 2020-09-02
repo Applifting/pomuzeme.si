@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe SmsConfirmable do
+  before(:all) { I18n.locale = :en }
+
   describe '#confirmed?' do
     subject(:confirmable) { build(:volunteer, confirmed_at: confirmed_at) }
 

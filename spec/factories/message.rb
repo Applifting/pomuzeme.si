@@ -38,5 +38,9 @@ FactoryBot.define do
     trait :request_update do
       message_type { :request_update }
     end
+
+    factory :response_to_offer, traits: %w[received incoming] do
+      channel { :sms }
+    end
   end
 end
