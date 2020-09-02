@@ -10,6 +10,10 @@ FactoryBot.define do
       state { :accepted }
     end
 
+    trait :notified do
+      state { :notified }
+    end
+
     trait :rejected do
       state { :rejected }
     end
