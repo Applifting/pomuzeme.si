@@ -1,0 +1,271 @@
+---
+-
+    name: Kamil Hanus
+    photo: arthurwozniak.jpeg
+    role: master developer
+    url: https://github.com/arthurwozniak
+-
+    name: Jiří Bartušek (GUG.cz)
+    photo: he.png
+    role: networking
+    url:
+-
+    name: Vojta Sláma (Citadelo)
+    photo: he.png
+    role: application security
+    url:
+-
+    name: Lukáš Kypus
+    photo: he.png
+    role: application security
+    url:
+-
+    name: Igor Eržiak
+    photo: he.png
+    role: application security
+    url:
+-
+    name: Stanislav Spanilý (Taste Digistory)
+    photo: he.png
+    role: community management, sociální média
+    url: https://taste.cz/
+-
+    name: Martin Hanzík
+    photo: martinhanzik.jpeg
+    role: DevOps
+    url: https://github.com/martinhanzik
+-
+    name: Pavel Chlad
+    photo: pavelchlad.png
+    role: DevOps
+    url: https://github.com/pavelchlad
+-
+    name: Jiří Dolejš
+    photo: he.png
+    role: DevOps mobilní aplikace
+    url: https://swingingdogs.com/
+-
+    name: Jakub Bican
+    photo: he.png
+    role: konzultace geocodingu, networking
+    url:
+-
+    name: Filip Kirschner (UX)
+    photo: filipkirchner.jpeg
+    role: legal & support
+    url: https://github.com/kirscfil
+-
+    name: Honza Husták (Hustá Komunikejšn)
+    photo: he.png
+    role: marketing, PR
+    url:
+-
+    name: Jan Soukup
+    photo: he.png
+    role: networking
+    url:
+-
+    name: František Štěch
+    photo: he.png
+    role: networking, PR
+    url:
+-
+    name: Zdeněk Brož (O2)
+    photo: he.png
+    role: pomoc s SMS konektorem
+    url:
+-
+    name: Vráťa Kalenda
+    photo: he.png
+    role: project all-rounder
+    url:
+-
+    name: Daniel Sýkora
+    photo: he.png
+    role: rozvoj vztahů s neziskovkami
+    url:
+-
+    name: Pavel Pacák
+    photo: he.png
+    role: social media guru
+    url:
+-
+    name: Matouš Burda
+    photo: he.png
+    role: testování
+    url:
+-
+    name: Jiří Flachs
+    photo: he.png
+    role: UI
+    url:
+-
+    name: Jáchym Kraus
+    photo: he.png
+    role: UK mission
+    url:
+-
+    name: Ngoc Karel Minh
+    photo: ngocminh.jpeg
+    role: UK mission
+    url: https://github.com/ryzzaki
+-
+    name: David Fuchsa
+    photo: he.png
+    role: UX / UI
+    url:
+-
+    name: David Vobecký
+    photo: he.png
+    role: UX / UI
+    url:
+-
+    name: Vojtěch Švec
+    photo: he.png
+    role: UX design mobilní aplikace
+    url:
+-
+    name: Daniel Senff
+    photo: he.png
+    role: vývoj aplikace
+    url: http://www.danielsenff.de
+-
+    name: Dominik Snopek
+    photo: he.png
+    role: vývoj aplikace
+    url:
+-
+    name: Pavel Černý
+    photo: he.png
+    role: vývoj aplikace
+    url: https://github.com/pavelc
+-
+    name: Petr Malák
+    photo: he.png
+    role: vývoj aplikace
+    url: https://github.com/pmalak
+-
+    name: Vláďa Nevyhoštěný
+    photo: vladanevyhosteny.jpeg
+    role: vývoj aplikace
+    url: https://github.com/vlnevyhosteny
+-
+    name: Jakub Pavlík
+    photo: he.png
+    role: vývoj aplikace
+    url: http://igneus.github.com
+-
+    name: Honza "Ziggy" Zikán
+    photo: he.png
+    role: vývoj aplikace
+    url: http://www.sorcerer.cz
+-
+    name: Michal Vlasák
+    photo: he.png
+    role: vývoj aplikace
+    url:
+-
+    name: Martin Tomas
+    photo: he.png
+    role: vývoj aplikace
+    url:
+-
+    name: Jan Chmelníček
+    photo: he.png
+    role: vývoj aplikace
+    url:
+-
+    name: Dan Marek
+    photo: he.png
+    role: vývoj mobilní aplikace
+    url:
+-
+    name: Tomáš Landovský
+    photo: landovsky.png
+    role: idea, vývoj a koordinace
+    url: https://www.linkedin.com/in/tomaslandovsky/
+-
+    name: Václav Pavlíček
+    photo: vaclavpavlicek.jpeg
+    role: front-end
+    url: https://github.com/vaclavpavlicek
+-
+    name: Patrícia Bučíková (Taste Digistory)
+    photo: she.png
+    role: community management
+    url: https://taste.cz/
+-
+    name: Terezie Pokorná (Taste Digistory)
+    photo: she.png
+    role: community management
+    url: https://taste.cz/
+-
+    name: Klára Šebková (Taste Digistory)
+    photo: she.png
+    role: community management
+    url: https://taste.cz/
+-
+    name: Adéla Homolová
+    photo: adelkahomolova.jpeg
+    role: copywriting
+    url: https://github.com/adelkahomolova
+-
+    name: Lucie Džurdženiková
+    photo: she.png
+    role: copywriting
+    url:
+-
+    name: Zuzka Košutová (Hustá Komunikejšn)
+    photo: she.png
+    role: copywriting
+    url:
+-
+    name: Týna Mašková
+    photo: she.png
+    role: ilustrátorka
+    url:
+-
+    name: Veronika Kovářová
+    photo: she.png
+    role: koordinace dobrovolníků
+    url:
+-
+    name: Tereza Formanová (SEDLAKOVA legal)
+    photo: she.png
+    role: legal
+    url:
+-
+    name: Zuzka Pešková
+    photo: she.png
+    role: project all-rounder
+    url:
+-
+    name: Anna M. Rybáčková
+    photo: she.png
+    role: support
+    url:
+-
+    name: Nikola Čížková
+    photo: she.png
+    role: support
+    url:
+-
+    name: Věrka Králová
+    photo: she.png
+    role: support
+    url:
+-
+    name: Veronika Zvěřinová
+    photo: she.png
+    role: support
+    url:
+-
+    name: Klára Vytisková
+    photo: she.png
+    role: vývoj aplikace
+    url: https://github.com/klaravytiskova
+-
+    name: Jarka Košanová
+    photo: jarkakosanova.jpeg
+    role: vývoj aplikace
+    url: https://github.com/jarkaK

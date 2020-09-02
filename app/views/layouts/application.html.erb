@@ -89,6 +89,8 @@
   <script>
       $(document).ready(function() {
           M.CharacterCounter.init(document.querySelectorAll('#validation-code'));
+          const tabs = document.querySelectorAll('.tabs');
+          tabs.forEach(it => M.Tabs.init(tabs, {}))
       });
   </script>
 </body>

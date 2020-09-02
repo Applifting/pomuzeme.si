@@ -1,0 +1,172 @@
+@import "../variables";
+
+.section-involvement {
+  background-color: $background-dark;
+  padding: 120px 0 60px;
+
+  @include lg {
+    padding: 80px 0 40px;
+  }
+
+  h2 {
+    margin: 0 0 48px;
+    padding: 120px 0;
+    text-align: center;
+    font-family: $title-font, serif;
+    font-style: normal;
+    font-weight: 600;
+
+    @include lg {
+      margin: 0 0 24px;
+    }
+  }
+
+  .section {
+    padding: 0;
+
+    .col.s12 {
+      .tabs {
+        background: none;
+        height: 70px;
+        max-width: 900px;
+
+        .tab {
+          height: 70px;
+          text-transform: none;
+
+          a.link {
+            display: flex;
+            color: $secondary-button-color;
+            font-size: 20px;
+            font-family: Montserrat, serif;
+            font-style: normal;
+            font-weight: 500;
+            align-items: center;
+            justify-content: center;
+            white-space: normal;
+            line-height: unset;
+
+            &:focus {
+              background: none;
+            }
+
+            &.active {
+              color: $text-color;
+            }
+
+            @include lg {
+              font-size: 14px;
+              line-height: 20px;
+            }
+          }
+        }
+
+        .indicator {
+          background: $text-color;
+        }
+      }
+    }
+
+    .tab-content {
+      .logos-container, .developers {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        // align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .logos-container .partner-logo {
+        padding: 32px;
+      }
+
+      .intro {
+        justify-content: center;
+        padding: 20px;
+        display: grid;
+      }
+
+      .developers {
+        padding-top: 16px;
+
+        .developer {
+          background-image: url("volunteer-background.svg");
+          display: flex;
+          margin: 12px;
+          width: 186px;
+          height: 216px;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+
+          .photo {
+            border-radius: 50%;
+            width: 64px;
+          }
+
+          .name {
+            font-family: Montserrat, serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            margin: 8px 0 0;
+            text-align: center;
+          }
+
+          .role {
+            margin: 0;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .tab-content {
+      .logos-container, .developers {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .logos-container .partner-logo {
+        padding: 32px;
+      }
+
+      .developers {
+        padding-top: 16px;
+
+        .developer {
+          background-image: url("volunteer-background.svg");
+          display: flex;
+          margin: 12px;
+          width: 186px;
+          height: 216px;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+
+          .photo {
+            border-radius: 50%;
+            width: 64px;
+          }
+
+          .name {
+            font-family: Montserrat, serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            margin: 8px 0 0;
+          }
+
+          .role {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}
