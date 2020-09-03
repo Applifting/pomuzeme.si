@@ -145,17 +145,6 @@ RSpec.describe 'Api::V1::SessionControllers', type: :request do
       end
     end
 
-    context 'as unauthorized volunteer' do
-      it 'returns not found error' do
-        post api_v1_session_refresh_path
-        expect(response.body).to include_json(error_key: 'UNAUTHORIZED_RESOURCE')
-        expect(response.body).to include_json(message: nil)
-      end
-
-      it 'returns status code 401' do
-        post api_v1_session_refresh_path
-        expect(response).to have_http_status(401)
-      end
-    end
+    it_behaves_like 'unauthorized user', :post, :api_v1_session_refresh_path
   end
 end

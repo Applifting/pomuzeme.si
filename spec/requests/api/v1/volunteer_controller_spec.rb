@@ -19,15 +19,9 @@ RSpec.describe 'Api::V1::VolunteerController', type: :request do
     end
 
     context 'as unauthorized volunteer' do
-      it 'returns not found error' do
-        get api_v1_volunteer_profile_path
-        expect(response.body).to include_json(error_key: 'UNAUTHORIZED_RESOURCE')
-        expect(response.body).to include_json(message: nil)
-      end
-
-      it 'returns status code 401' do
-        get api_v1_volunteer_profile_path
-        expect(response).to have_http_status(401)
+      it_behaves_like 'unauthorized user' do
+        let(:http_method) { :get }
+        let(:url_path) { api_v1_volunteer_profile_path }
       end
     end
   end
@@ -74,15 +68,9 @@ RSpec.describe 'Api::V1::VolunteerController', type: :request do
     end
 
     context 'as unauthorized volunteer' do
-      it 'returns not found error' do
-        put api_v1_volunteer_profile_path
-        expect(response.body).to include_json(error_key: 'UNAUTHORIZED_RESOURCE')
-        expect(response.body).to include_json(message: nil)
-      end
-
-      it 'returns status code 401' do
-        put api_v1_volunteer_profile_path
-        expect(response).to have_http_status(401)
+      it_behaves_like 'unauthorized user' do
+        let(:http_method) { :put }
+        let(:url_path) { api_v1_volunteer_profile_path }
       end
     end
   end
@@ -105,15 +93,9 @@ RSpec.describe 'Api::V1::VolunteerController', type: :request do
     end
 
     context 'as unauthorized volunteer' do
-      it 'returns not found error' do
-        get api_v1_volunteer_preferences_path
-        expect(response.body).to include_json(error_key: 'UNAUTHORIZED_RESOURCE')
-        expect(response.body).to include_json(message: nil)
-      end
-
-      it 'returns status code 401' do
-        get api_v1_volunteer_preferences_path
-        expect(response).to have_http_status(401)
+      it_behaves_like 'unauthorized user' do
+        let(:http_method) { :get }
+        let(:url_path) { api_v1_volunteer_preferences_path }
       end
     end
   end
@@ -158,15 +140,9 @@ RSpec.describe 'Api::V1::VolunteerController', type: :request do
     end
 
     context 'as unauthorized volunteer' do
-      it 'returns not found error' do
-        put api_v1_volunteer_preferences_path
-        expect(response.body).to include_json(error_key: 'UNAUTHORIZED_RESOURCE')
-        expect(response.body).to include_json(message: nil)
-      end
-
-      it 'returns status code 401' do
-        put api_v1_volunteer_preferences_path
-        expect(response).to have_http_status(401)
+      it_behaves_like 'unauthorized user' do
+        let(:http_method) { :put }
+        let(:url_path) { api_v1_volunteer_preferences_path }
       end
     end
   end
@@ -214,15 +190,9 @@ RSpec.describe 'Api::V1::VolunteerController', type: :request do
     end
 
     context 'as unauthorized volunteer' do
-      it 'returns not found error' do
-        get api_v1_volunteer_organisations_path
-        expect(response.body).to include_json(error_key: 'UNAUTHORIZED_RESOURCE')
-        expect(response.body).to include_json(message: nil)
-      end
-
-      it 'returns status code 401' do
-        get api_v1_volunteer_organisations_path
-        expect(response).to have_http_status(401)
+      it_behaves_like 'unauthorized user' do
+        let(:http_method) { :get }
+        let(:url_path) { api_v1_volunteer_organisations_path }
       end
     end
   end

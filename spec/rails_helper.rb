@@ -20,6 +20,7 @@ require 'rspec/rails'
 require 'rspec/json_expectations'
 require 'test_prof/recipes/rspec/let_it_be'
 require 'support/api_helper'
+require 'support/shared_examples_for_unauthorized_user'
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.

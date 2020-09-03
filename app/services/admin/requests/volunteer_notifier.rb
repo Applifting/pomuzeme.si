@@ -74,3 +74,8 @@ module Admin
     end
   end
 end
+
+
+rq = RequestedVolunteer.last
+user = User.find 2
+Admin::Requests::VolunteerNotifier.new(user, rq.request).notify_assigned
