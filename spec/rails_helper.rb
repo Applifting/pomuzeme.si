@@ -16,7 +16,10 @@ end
 # Prevent database truncation if the environment is production
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
+require 'rspec/json_expectations'
 require 'test_prof/recipes/rspec/let_it_be'
+require 'support/api_helper'
+require 'support/shared_examples_for_unauthorized_user'
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -63,4 +66,5 @@ RSpec.configure do |config|
   config.include ActiveSupport::Testing::TimeHelpers
   config.include FactoryBot::Syntax::Methods
   config.include ActiveSupport::Testing::TimeHelpers
+  config.include ApiHelper, type: :request
 end
