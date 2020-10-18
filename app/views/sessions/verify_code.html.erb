@@ -6,6 +6,7 @@
       <%= form_tag verify_code_path, method: :post, remote: false do |f| %>
         <%= label_tag :code, "Ověřovací kód" %>
         <%= text_field_tag :code, '', required: true %>
+        <%= hidden_field_tag :redirect_to, @session.redirect_to %>
         <div class="error-list">
           <ul>
           <% @session&.errors.messages.values.flatten.compact.each do |msg| %>

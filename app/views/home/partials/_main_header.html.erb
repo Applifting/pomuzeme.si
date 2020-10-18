@@ -1,3 +1,11 @@
+<li class="menu-item">
+  <% if @current_user %>
+    <a href="<%= logout_path %>" class="link slide-link">Odhlásit se</a>
+  <% else %>
+    <a href="<%= login_path %>" class="link slide-link">Přihlásit se</a>
+  <% end %>
+</li>
+
 <div id="js-mobile-menu-container" class="mobile-menu-container">
   <div class="mobile-menu">
     <div class="menu-top-row">
@@ -11,10 +19,11 @@
     <nav class="navigation">
       <ul id="js-mobile-menu-list" class="mobile-menu-list">
         <%= render 'home/partials/menu_items' unless @partner_signup_group %>
+        <li>
+          <a href="<%= login_path %>" class="main-button">Můj profil</a>
+        </li>
       </ul>
-      <button class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
-        Chci pomáhat
-      </button>
+
     </nav>
   </div>
 </div>
@@ -27,7 +36,7 @@
       <ul id="js-desktop-menu-list" class="desktop-menu">
         <%= render 'home/partials/menu_items' unless @partner_signup_group %>
         <li class="menu-item">
-          <a href="javascript:void(0);" class="link wanna-join modal-trigger" data-target="registration">CHCI POMÁHAT</a>
+          <a href="<%= login_path %>" class="link wanna-join">Můj profil</a>
         </li>
       </ul>
     </nav>

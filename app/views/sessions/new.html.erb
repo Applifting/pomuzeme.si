@@ -5,6 +5,7 @@
       <p>V profilu dobrovolníka si můžete aktualizovat bydliště a jiné preference, abychom vám mohli nabídnout ty správné dobrovolnické činnosti.</p>
       <%= form_tag request_code_path, method: :post, remote: false do |f| %>
         <%= label_tag :phone, "Telefonní číslo" %>
+        <%= hidden_field_tag :redirect_to, params[:redirect_to] %>
         <%= text_field_tag :phone, @session.phone || '+420', required: true %>
         <div class="error-list">
           <ul>

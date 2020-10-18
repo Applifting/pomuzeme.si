@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
   before_action :load_session
 
   def new
+    redirect_to volunteer_profile_path if session[:volunteer_id]
   end
 
   def request_code
@@ -24,7 +25,7 @@ class SessionsController < ApplicationController
       session[:volunteer_id] = @session.volunteer.id
       @current_user = @session.volunteer
 
-      redirect_to volunteer_profile_path
+      redirect_to @session.redirect_to.presence || volunteer_profile_path
     else
       @session.errors.add(:code, :not_valid)
     end
@@ -44,7 +45,7 @@ class SessionsController < ApplicationController
   private
 
   def load_session
-    @session = Session.new(phone: params[:phone] || session[:session_phone], code: params[:code])
+    @session = Session.new(phone: params[:phone] || session[:session_phone], code: params[:code], redirect_to: params[:redirect_to])
   end
 
   def send_and_persist_verification_code
