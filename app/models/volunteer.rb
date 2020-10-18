@@ -11,11 +11,15 @@ class Volunteer < ApplicationRecord
   has_many :addresses, as: :addressable, dependent: :destroy
   has_many :group_volunteers, dependent: :destroy
   has_many :groups, through: :group_volunteers
+  has_many :messages, dependent: :destroy
   has_many :volunteer_labels, dependent: :destroy
   has_many :labels, through: :volunteer_labels
+  has_many :volunteer_skills, dependent: :destroy
+  has_many :skills, through: :volunteer_skills
+  has_many :volunteer_interests, dependent: :destroy
+  has_many :interests, through: :volunteer_interests
   has_many :requested_volunteers, dependent: :destroy
   has_many :requests, through: :requested_volunteers
-  has_many :messages, dependent: :destroy
 
   # Attributes
   accepts_nested_attributes_for :addresses
@@ -56,6 +60,10 @@ class Volunteer < ApplicationRecord
 
   def with_existing_record
     Volunteer.unconfirmed.where(phone: normalized_phone).take || self
+  end
+
+  def address
+    addresses.first
   end
 
   def to_s

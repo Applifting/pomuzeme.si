@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
       session[:volunteer_id] = @session.volunteer.id
       @current_user = @session.volunteer
 
-      redirect_to profile_path
+      redirect_to volunteer_profile_path
     else
       @session.errors.add(:code, :not_valid)
     end
@@ -38,7 +38,7 @@ class SessionsController < ApplicationController
     session.delete :volunteer_id
     @current_user = nil
 
-    redirect_to login_path
+    redirect_to params[:redirect_to].presence || login_path
   end
 
   private

@@ -19,7 +19,11 @@ Rails.application.routes.draw do
   get 'overeni', to: 'sessions#new'
   post 'verify_code', to: 'sessions#verify_code', as: :verify_code
   get 'logout', to: 'sessions#logout'
-  get 'profil', to: 'volunteer_profiles#show', as: :profile
+  get 'profil', to: 'volunteer_profiles#show', as: :volunteer_profile
+  patch 'update_volunteer_profile', to: 'volunteer_profiles#update', as: :update_volunteer_profile
+  get 'zruseni_profilu', to: 'volunteer_profiles#confirm_destroy', as: :confirm_destruction_of_volunteer_profile
+  post 'close_account', to: 'volunteer_profiles#destroy', as: :destroy_volunteer_profile
+  get 'profil_zrusen', to: 'volunteer_profiles#destroyed', as: :profile_destroyed
 
   resource :volunteer, only: [] do
     post :register, on: :collection
