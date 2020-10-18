@@ -1,0 +1,16 @@
+<section class="section-hero section">
+  <div class="hero-content">
+    <div class="column-left">
+      <h2>Profil dobrovolníka</h2>
+      <%= form_tag verify_code_path, method: :post, remote: false do |f| %>
+        <%= label_tag :code, "Ověřovací kód" %>
+        <%= text_field_tag :code, '', required: true %>
+        <div class="error-list">
+          <ul>
+          </ul>
+        </div>
+        <%= submit_tag 'Ověřit', class: 'main-button' %>
+      <% end %>
+    </div>
+  </div>
+</section>

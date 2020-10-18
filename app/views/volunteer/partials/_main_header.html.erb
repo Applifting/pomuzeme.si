@@ -1,0 +1,44 @@
+<%= content_for :login_logout do %>
+  <li class="menu-item">
+    <% if @current_user %>
+      <a href="<%= logout_path %>" class="link slide-link">Odhlásit se</a>
+    <% else %>
+      <a href="<%= login_path %>" class="link slide-link">Přihlásit se</a>
+    <% end %>
+  </li>
+<% end %>
+
+<div id="js-mobile-menu-container" class="mobile-menu-container">
+  <div class="mobile-menu">
+    <div class="menu-top-row">
+      <a href="javascript:void(0);" class="link slide-link">
+        <%= image_tag asset_path('pomuzemesi.svg'), class: 'main-logo'  %>
+      </a>
+      <a id="js-close-menu-button" class="close-button">
+        <i class="material-icons">close</i>
+      </a>
+    </div>
+    <nav class="navigation">
+      <ul id="js-mobile-menu-list" class="mobile-menu-list">
+        <%= yield(:login_logout) %>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div id="js-main-header-container" class="main-header-container">
+  <header class="main-header section">
+    <a href="javascript:void(0);" class="link slide-link">
+      <%= image_tag asset_path('pomuzemesi.svg'), class: 'main-logo'  %>
+    </a>
+    <nav class="navigation">
+      <ul id="js-desktop-menu-list" class="desktop-menu">
+        <%= yield(:login_logout) %>
+      </ul>
+    </nav>
+    <div class="mobile-menu-icon-container">
+      <a id="js-menu-button" class="menu-button">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </header>
+</div>

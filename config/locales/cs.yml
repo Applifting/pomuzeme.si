@@ -265,8 +265,20 @@ cs:
               improbable_phone: zadejte číslo v mezinárodním formátu, bez mezer
     messages:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
+  activemodel:
+    errors:
+      models:
+        session:
+          attributes:
+            phone:
+              improbable_phone: Neplatné číslo
+            volunteer:
+              not_found: Pod tímto číslem jsme nenašli žádnou registraci
+            code:
+              not_valid: Nesprávný přihlašovací kód
 
   sms:
+    login_code: Kód pro přihlášení do pomuzeme.si - %{code}
     verification: "Overovaci kod pro overeni registrace na portalu pomuzeme.si je: %{code}"
     mobile_authorization: "Overovaci kod pro prihlaseni do aplikace pomuzeme.si je: %{code}"
     welcome: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se ozve jedna z organizaci ve vasem okoli a zapoji vas do deni. Reknete o nas i pratelum? Pomuzeme.si

@@ -14,6 +14,13 @@ Rails.application.routes.draw do
     post :test_set, on: :collection
   end
 
+  get 'prihlaseni', to: 'sessions#new', as: :login
+  post 'overeni', to: 'sessions#request_code', as: :request_code
+  get 'overeni', to: 'sessions#new'
+  post 'verify_code', to: 'sessions#verify_code', as: :verify_code
+  get 'logout', to: 'sessions#logout'
+  get 'profil', to: 'volunteer_profiles#show', as: :profile
+
   resource :volunteer, only: [] do
     post :register, on: :collection
     post :confirm, on: :collection
