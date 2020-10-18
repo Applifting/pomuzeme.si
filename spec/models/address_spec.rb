@@ -92,7 +92,7 @@ RSpec.describe Address, type: :model do
     subject { build :address }
 
     it 'has expected format' do
-      required_values = [subject.street_number, subject.street, subject.city, subject.city_part, subject.postal_code]
+      required_values = [subject.street, subject.street_number, subject.city, subject.city_part, subject.postal_code]
       expect(subject.to_s).to eq required_values.uniq.compact.join(', ')
     end
   end
