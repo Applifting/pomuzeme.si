@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).on('turbolinks:load', function () {
     const menuButton = document.querySelector('#js-menu-button');
     const closeMenuButton = document.querySelector('#js-close-menu-button');
     const mobileLinks = document.querySelectorAll('.mobile-menu .slide-link');

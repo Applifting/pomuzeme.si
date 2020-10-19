@@ -5,9 +5,13 @@ class SessionsController < ApplicationController
 
   def new
     redirect_to volunteer_profile_path if session[:volunteer_id]
+
+    @action = params[:redirect_to] == confirm_destruction_of_volunteer_profile_path ? :delete_profile : :login
   end
 
   def request_code
+    @action = @session.redirect_to == confirm_destruction_of_volunteer_profile_path ? :delete_profile : :login
+
     if @session.valid?
       send_and_persist_verification_code
 
@@ -23,7 +27,7 @@ class SessionsController < ApplicationController
       session.delete :verification_code_expires
       session.delete :session_phone
       session[:volunteer_id] = @session.volunteer.id
-      @current_user = @session.volunteer
+      @current_volunteer = @session.volunteer
 
       redirect_to @session.redirect_to.presence || volunteer_profile_path
     else
@@ -37,7 +41,7 @@ class SessionsController < ApplicationController
 
   def logout
     session.delete :volunteer_id
-    @current_user = nil
+    @current_volunteer = nil
 
     redirect_to params[:redirect_to].presence || login_path
   end

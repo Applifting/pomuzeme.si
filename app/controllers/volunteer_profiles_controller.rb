@@ -1,15 +1,15 @@
-class VolunteerProfilesController < ApplicationController
-  before_action :authorize_and_load_volunteer, except: [:destroyed]
+class VolunteerProfilesController < PublicController
+  skip_before_action :authorize_current_volunteer, only: [:destroyed]
 
   def show
     @volunteer = Volunteer.includes(volunteer_interests: :interest, volunteer_skills: :skill)
-                          .where(id: @current_user.id)
+                          .where(id: @current_volunteer.id)
                           .first
   end
 
   def update
     @volunteer = Volunteer.includes(volunteer_interests: :interest, volunteer_skills: :skill)
-                          .where(id: @current_user.id)
+                          .where(id: @current_volunteer.id)
                           .first
 
     ActiveRecord::Base.transaction do
@@ -27,7 +27,7 @@ class VolunteerProfilesController < ApplicationController
   end
 
   def destroy
-    Volunteer.find(@current_user.id).destroy
+    Volunteer.find(@current_volunteer.id).destroy
 
     redirect_to logout_path(redirect_to: profile_destroyed_path)
   end
@@ -79,11 +79,5 @@ class VolunteerProfilesController < ApplicationController
     address_params.except(:geo_coord_x, :geo_coord_y).merge(coordinate: coordinate,
                                                             geo_provider: 'google_places',
                                                             default: true)
-  end
-
-  def authorize_and_load_volunteer
-    @current_user = Volunteer.find(session[:volunteer_id]) if session[:volunteer_id]
-
-    redirect_to login_path unless @current_user.present?
   end
 end

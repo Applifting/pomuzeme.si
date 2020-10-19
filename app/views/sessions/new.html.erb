@@ -1,8 +1,8 @@
 <section class="section-hero section">
   <div class="hero-content">
     <div class="column-left">
-      <h2>Přihlášení do profilu</h2>
-      <p>V profilu dobrovolníka si můžete aktualizovat bydliště a jiné preference, abychom vám mohli nabídnout ty správné dobrovolnické činnosti.</p>
+      <h2><%= I18n.t "volunteer_profile.#{@action}.title" %></h2>
+      <p><%= I18n.t "volunteer_profile.#{@action}.description" %></p>
       <%= form_tag request_code_path, method: :post, remote: false do |f| %>
         <%= label_tag :phone, "Telefonní číslo" %>
         <%= hidden_field_tag :redirect_to, params[:redirect_to] %>
@@ -16,6 +16,11 @@
         </div>
         <%= submit_tag 'Přihlásit', class: 'main-button' %>
       <% end %>
+
+      <button id="chci-pomahat-2" class="modal-button modal-trigger main-button tertiary" data-target="registration" aria-haspopup="true">
+        nemám registraci
+      </button>
+
     </div>
   </div>
 </section>

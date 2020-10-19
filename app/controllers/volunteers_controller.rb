@@ -26,8 +26,6 @@ class VolunteersController < ApplicationController
     partner_group = volunteer.groups.take
     SmsService::Manager.send_welcome_msg(volunteer.phone, partner_group)
 
-    session[:volunteer_id] = nil
-
     render 'volunteer/confirm_success'
   end
 

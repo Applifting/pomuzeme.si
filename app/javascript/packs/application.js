@@ -10,6 +10,7 @@ require("channels");
 import 'materialize-css/dist/js/materialize'
 require("src/materialize");
 require("src/google_autocomplete");
+require("src/hard_reload");
 require("src/menu");
 
 // Uncomment to copy all static images under ../images to the output folder and reference
