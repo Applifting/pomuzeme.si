@@ -1,4 +1,5 @@
-class HomeController < ApplicationController
+class HomeController < PublicController
+  skip_before_action :authorize_current_volunteer
   before_action :load_counts
 
   def index

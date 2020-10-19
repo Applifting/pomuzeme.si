@@ -1,0 +1,21 @@
+<section class="section-hero section">
+  <div class="hero-content">
+    <div class="column-left">
+      <h2>Zadejte ověřovací kód</h2>
+      <p>který jsme vám zaslali na <%= @session.phone %></p>
+      <%= form_tag verify_code_path, method: :post, remote: false do |f| %>
+        <%= label_tag :code, "Ověřovací kód" %>
+        <%= text_field_tag :code, '', required: true %>
+        <%= hidden_field_tag :redirect_to, @session.redirect_to %>
+        <div class="error-list">
+          <ul>
+          <% @session&.errors.messages.values.flatten.compact.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+        <%= submit_tag 'Ověřit', class: 'main-button' %>
+      <% end %>
+    </div>
+  </div>
+</section>

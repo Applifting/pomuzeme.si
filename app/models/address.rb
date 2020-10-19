@@ -60,7 +60,7 @@ class Address < ApplicationRecord
   end
 
   def to_s
-    [street_number, street, city, city_part, postal_code].uniq.compact.join ', '
+    [street, street_number, city, city_part, postal_code].uniq.compact.reject(&:blank?).join ', '
   end
 
   def only_address_errors?

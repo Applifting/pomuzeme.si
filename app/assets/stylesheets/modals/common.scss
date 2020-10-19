@@ -36,12 +36,12 @@
 
     .modal-card-body {
       padding: 0;
-
-      .error-list {
-        font-size: 14px;
-        line-height: 160%;
-        color: darkred;
-      }
     }
   }
+}
+
+.error-list {
+  font-size: 14px;
+  line-height: 160%;
+  color: darkred;
 }

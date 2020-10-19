@@ -11,10 +11,10 @@
     <nav class="navigation">
       <ul id="js-mobile-menu-list" class="mobile-menu-list">
         <%= render 'home/partials/menu_items' unless @partner_signup_group %>
+        <li>
+          <a href="#" class="main-button" id="hard_reload_target" data-target="<%= login_path %>">Přihlásit</a>
+        </li>
       </ul>
-      <button class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
-        Chci pomáhat
-      </button>
     </nav>
   </div>
 </div>
@@ -27,7 +27,9 @@
       <ul id="js-desktop-menu-list" class="desktop-menu">
         <%= render 'home/partials/menu_items' unless @partner_signup_group %>
         <li class="menu-item">
-          <a href="javascript:void(0);" class="link wanna-join modal-trigger" data-target="registration">CHCI POMÁHAT</a>
+          <a href="#" class="link wanna-join" id="hard_reload_target" data-target="<%= login_path %>">
+            Přihlásit
+          </a>
         </li>
       </ul>
     </nav>

@@ -53,7 +53,7 @@
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<%= yield %>
+<%= content_for?(:content) ? yield(:content) : yield %>
 
 <% ga_measure_id = ENV['GA_MEASURE_ID'] %>
 <% if ga_measure_id.present? %>

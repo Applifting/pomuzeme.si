@@ -1,0 +1,6 @@
+<div class="checkbox-row">
+  <label>
+    <%= check_box_tag "#{model}[#{option.code}]", 1, @volunteer.send(model.pluralize).any? { |item| item.code == option.code } %>
+    <span class="text-required"><%= option.name %></span>
+  </label>
+</div>
