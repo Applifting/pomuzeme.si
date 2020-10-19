@@ -39,7 +39,7 @@
         <h3>Zájmy v dobrovolnictví</h3>
         <span>Budeme se snažit vám nabídnout relevantní příležitosti dle zájmů, které si vyberete.</span>
         <div class="checkbox_group">
-          <%= render partial: 'checkbox', collection: Interest.all, as: :option, locals: { model: 'interests' } %>
+          <%= render partial: 'checkbox', collection: Interest.all.order(:name), as: :option, locals: { model: 'interests' } %>
         </div>
         <div class="input-field">
           <%= f.label :other_interests, 'Jiné zájmy' %>
@@ -49,7 +49,7 @@
         <h3>Kvalifikace</h3>
         <span>Vyplněním kvalifikací pomůžete neziskovkám snáze najít váš profil.</span>
         <div class="checkbox_group">
-          <%= render partial: 'checkbox', collection: Skill.all, as: :option, locals: { model: 'skills' } %>
+          <%= render partial: 'checkbox', collection: Skill.all.order(:name), as: :option, locals: { model: 'skills' } %>
         </div>
 
         <div class="input-field">
