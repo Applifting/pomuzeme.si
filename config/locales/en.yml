@@ -46,7 +46,7 @@ en:
         street: Street
         city: City
         city_part: City part
-        zipcode: Zipcode
+        zipcode: Post code
         phone: Phone number
         email: E-mail
         confirmation_code: Confirmation code
@@ -84,9 +84,154 @@ en:
         state_last_updated_at: State last updated at
     errors:
       models:
+        address:
+          base:
+            inaccurate_address: Address could not be found
         volunteer:
           attributes:
             confirmation_code:
               not_matching: 'is not matching'
               expired: 'is expired'
               confirmed: 'is already confirmed'
+
+  request:
+    responses:
+      accept: Request accepted
+      rejected: Request denied
+
+  landingpage:
+    navbar:
+      logo: wehelp.svg
+      aboutus: About us
+      howdoesitwork: How does it work
+      news: News
+      partners: Partners
+      iwanttohelp: I want to help
+    mainheader:
+      iwanttohelp: I want to help
+      coronavirus: Coronavirus?!
+      together: We'll make it through
+      motto: Getting volunteers to where they're needed.
+    orgs:
+      joinedorganisations: Organisations which have joined the cause
+      supportedby: Our project is supported by
+      members:
+        diakonie:
+          title: Diakonie ČCE
+          url: https://www.diakonie.cz/en
+          alt: &voluteering_org dobrovolnická organizace zapojená do pomuzeme.si
+        hero_clan:
+          title: Hero Clan
+          url: https://www.heroclan.cz/en
+          alt: *voluteering_org
+        o2:
+          title: O2
+          url: https://www.o2.cz/en
+          alt: donated SMS gateway to the project
+        sedlakova_legal:
+          title: Sedlákova Legal
+          url: https://sedlakovalegal.com/
+          alt: donated legal services
+        teologicka_fakulta:
+          title: Theological faculty of the Charles University
+          url: https://tcc.etf.cuni.cz/
+          alt: gave patronage of the project
+    buttons:
+      iwanttohelp: I want to help
+      organisevolunteers: I organise volunteers
+      requirevolunteers: Request volunteers
+      registerorganisation: Register organisation
+      irepresentorganisation: I'm an organisation
+    intro:
+      title: Why use WeHelp?
+      description: We enable you to provide your help quickly and easily to those that need it. We make the cooperation between volunteers and non-profit organisations more effective. We connect volunteers to organisations that are ready to help with the current emergency. We will make it through together. WeHelp.
+      countertitle: How many of us are helping globally?
+      registeredvolunteers: Registered volunteers
+      charitableorganisations: Charitable organisations
+    guide:
+      howdoesitwork: How does it work?
+      iwanttovolunteer: I want to help as a volunteer!
+      stepone: Sign up on our platform as a volunteer
+      steptwo: You will be contacted by organisations in your local area
+      stepthree: You will decide together on the most adequate form of help
+    contact:
+      lookingforvolunteers: Looking for new volunteers?
+      coordinatingvolunteers: Need to coordinate existing volunteers?
+      title: I represent an organisation
+      subtitle1: We can quickly help you to...
+      subtitle2: Our solution can help you...
+      col1_point1: increase the volunteer count without any account registration on our platform
+      col1_point2: connect with the right volunteers in your area for your cause
+      col1_point3: get the requested volunteers to where they are needed for your one-off event
+      col2_point1: co-ordinate the demand for help between the volunteers based on location
+      col2_point2: work with your existing volunteers list which you can load into the application
+      col2_point3: get an overview of the current availability of volunteers
+      col2_point4: gain new volunteers if you are in need of more help, and organise their onboarding
+      asterix: only you will be able to see and access the volunteers which you choose to upload to the application
+      contactushere: Contact email
+      email: info@wehelp.uk.com
+      organisationlogin: Organisation login
+    news:
+      mentionedus: We were mentioned
+      title: News
+    footer:
+      whatiswehelp: What is WeHelp?
+      wehelpdescription: This platform aims to connect volunteers wishing to help with the people in need who are, for any particular reason, unable to obtain basic necessities or perform activities such as shopping for food or walking the dog.
+      whoisbehind: Who is behind this project?
+      whoisbehinddescription: Applifting - software development studio from Karlin, Prague which has been doing things in a slightly different manner for 6 years now. We are a team of more than 90 people co-operating without a single manager. We love to create apps that simplify other people's lives. For instance, we developed a platform for a more efficient international exchange of organ transplants; or built the security of a banking app used by millions of users across Europe.
+
+  modals:
+    registration:
+      thanks: Thank you!
+      thankssubtitle: We love to see that you want to help. We are in this together. WeHelp.
+      title: Please fill in your details
+      phoneprefix: 44
+      addresstitle: Address
+      addresshelper: We are using your address in order to connect you with help-seeking charities in your area!
+      consenttoterms: I agree with the terms of
+      usage: usage
+      usagepdf: podminky_dobrovolnika_pomuzemesi.pdf
+      and: and
+      protectionofdata: protection of my personal data
+      protectionofdatapdf: podminky_ochrany_osobnich_udaju_pomuzemesi.pdf
+      ageconfirmation: I confirm I am aged 18 or older
+      register: Register
+      disabledregister: Register...
+    confirmation:
+      verifytitle: Verify your phone number
+      verifysubtitle: We have sent a code to your phone number. Please enter the code below to verify.
+      notreceived: Have you not received a code?
+      tryagain: Try again
+      finishregistration: Finish registration
+      disabledfinishregistration: Finish registration...
+    thankyou:
+      title: Thank you for your willingness to help others
+      subtitle: Non-profit organisations in your local area will now have your contact details. Please remain patient, some of them will surely contact you soon!
+      helpinmeantime: In the meantime, you can raise more awareness by sharing it through social media.
+
+  admin:
+    groups:
+      title: Add an organisation to a group
+    users:
+      addrole: Add a new role
+
+  socials:
+    facebooklink: https://www.facebook.com/sharer/sharer.php?u=pomuzemesi.cz
+    twitterlink: http://twitter.com/share?url=https://pomuzemesi.cz
+
+  application:
+    title: WeHelp.uk.com
+    meta:
+      title: WeHelp.uk.com | Coronavirus?! We'll make it through
+      description: Getting volunteers to where they're needed.
+    og:
+      url: https://wehelp.uk.com/
+      title: WeHelp.uk.com | Coronavirus?! We'll make it through
+      description: Getting volunteers to where they're needed.
+      image: https://pomuzemesi.cz/thumbnail.png
+    twitter:
+      title: WeHelp.uk.com | Coronavirus?! We'll make it through
+      image: https://pomuzemesi.cz/thumbnail.png
+    favicon:
+      big: uk-favicon-32x32.png
+      small: uk-favicon-16x16.png

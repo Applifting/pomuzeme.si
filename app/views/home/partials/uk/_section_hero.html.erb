@@ -1,0 +1,46 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+    const registerScroll = link => {
+      const id = link.dataset.target;
+      link.addEventListener('click', () =>
+        document.getElementById(id).scrollIntoView({
+          behavior: 'smooth'
+        })
+      );
+    };
+
+    const scrollables = document.querySelectorAll('.js-scrollable');
+
+    for (let scrollable of scrollables) {
+      registerScroll(scrollable);
+    }
+  });
+</script>
+
+<section id="home" class="section-hero section">
+  <div class="hero-content">
+    <div class="column-left">
+      <h1>
+        <span class="lighter">
+          <%= I18n.t 'landingpage.mainheader.coronavirus' %>
+          <img id="virus" src="<%= asset_path "virus.svg" %>" />
+        </span>
+        <div><%= I18n.t 'landingpage.mainheader.together' %></div>
+      </h1>
+      <p>
+        <%= I18n.t 'landingpage.mainheader.motto' %>
+      </p>
+      <div class="button-group">
+        <button id="chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
+          <%= I18n.t 'landingpage.buttons.iwanttohelp' %>
+        </button>
+        <button class="main-button tertiary">
+          <a href="javascript:void(0);" class="js-scrollable" data-target="pro-organizace"><%= I18n.t 'landingpage.buttons.irepresentorganisation' %></a>
+        </button>
+      </div>
+    </div>
+    <div class="column-right">
+      <%= image_tag asset_path('hero.svg'), class: 'hero-image'  %>
+    </div>
+  </div>
+</section>

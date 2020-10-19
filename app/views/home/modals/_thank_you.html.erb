@@ -5,27 +5,27 @@
 
     <section class="modal-card-body">
       <%= image_tag asset_path('thank-you.svg'), class: 'success-image' %>
-      <h3>Děkujeme že chcete pomáhat</h3>
+      <h3><%= I18n.t 'modals.thankyou.title' %></h3>
       <% if @partner_signup_group.present? %>
-        <p>
-          <%= @partner_signup_group&.thank_you&.html_safe %>
-        </p>
+      <p>
+        <%= @partner_signup_group&.thank_you&.html_safe %>
+      </p>
       <% else %>
-        <p>Nyní na vás mají kontakt dobročinné organizace z&nbsp;vašeho blízkého okolí. Mějte trpělivost a některá z&nbsp;nich se vám ozve.</p>
+      <p><%= I18n.t 'modals.thankyou.subtitle' %></p>
       <% end %>
 
       <div class="divider"></div>
 
-      <p class="social-text">Mezitím můžete pomoct i tím, že iniciativu budete sdílet!</p>
+      <p class="social-text"><%= I18n.t 'modals.thankyou.helpinmeantime' %></p>
 
       <div class="social-sites">
-        <a class="site" href="https://www.facebook.com/sharer/sharer.php?u=pomuzemesi.cz" target="_blank">
+        <a class="site" href="<%= I18n.t 'socials.facebooklink' %>" target="_blank">
           <div class="circle">
             <%= image_tag asset_path('social-facebook.svg')  %>
           </div>
           <div class="label">Facebook</div>
         </a>
-        <a class="site" href="http://twitter.com/share?url=https://pomuzemesi.cz" target="_blank">
+        <a class="site" href="<%= I18n.t 'socials.twitterlink' %>" target="_blank">
           <div class="circle">
             <%= image_tag asset_path('social-twitter.svg')  %>
           </div>

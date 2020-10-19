@@ -6,12 +6,12 @@
   <div class="section">
     <div class="news-content">
       <div class="column-left">
-        <h2>Napsali o nás </h2>
+        <h2><%= I18n.t 'landingpage.news.mentionedus' %> </h2>
         <%= render partial: "publications", collection: @publications %>
       </div>
 
       <div class="column-right">
-        <h2>Aktuality </h2>
+        <h2><%= I18n.t 'landingpage.news.title' %> </h2>
         <%= render partial: "news", collection: @news %>
       </div>
     </div>

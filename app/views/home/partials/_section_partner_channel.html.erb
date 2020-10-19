@@ -5,13 +5,13 @@
         <span class="lighter" style="color: #019de0">
           <%= @partner_signup_group.name %>
         </span>
-        <div style="font-size: 0.6em">Spolu to dáme</div>
+        <div style="font-size: 0.6em"><%= I18n.t 'landingpage.mainheader.motto' %></div>
         <% if @partner_signup_group.channel_description %>
-          <p style="margin-top: 28px"><%= @partner_signup_group.channel_description.html_safe %></p>
+        <p style="margin-top: 28px"><%= @partner_signup_group.channel_description.html_safe %></p>
         <% end %>
       </h1>
       <button id="chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
-        Chci pomáhat
+        <%= I18n.t 'landingpage.buttons.iwanttohelp' %>
       </button>
     </div>
     <div class="column-right">

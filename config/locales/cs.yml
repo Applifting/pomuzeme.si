@@ -287,3 +287,154 @@ cs:
     responses:
       accept: Poptávka přijata
       rejected: Poptávka odmítnuta
+
+  landingpage:
+    navbar:
+      logo: pomuzemesi.svg
+      aboutus: O NÁS
+      howdoesitwork: JAK TO FUNGUJE
+      news: AKTUÁLNĚ
+      partners: PARTNEŘI
+      iwanttohelp: CHCI POMÁHAT
+    mainheader:
+      iwanttohelp: Chci pomáhat
+      coronavirus: Koronavirus?!
+      together: Spolu to dáme
+      motto: Pomáháme dostat dobrovolníky tam, kde jsou třeba.
+    orgs:
+      joinedorganisations: Zapojené dobrovolnické organizace
+      supportedby: Projekt podporují
+      members:
+        diakonie:
+          title: Diakonie ČCE
+          url: https://www.diakonie.cz/
+          alt: &voluteering_org dobrovolnická organizace zapojená do pomuzeme.si
+        charita:
+          title: Městská Charita České Budějovice
+          url: https://mchcb.cz
+          alt: *voluteering_org
+        hero_clan:
+          title: Hero Clan
+          url: https://www.heroclan.cz
+          alt: *voluteering_org
+        duhovy_tandem:
+          title: Duhový Tandem
+          url: http://duhovytandem.cz/
+          alt: *voluteering_org
+        o2:
+          title: O2
+          url: https://www.o2.cz/
+          alt: podpořili projekt pomuzeme.si SMS branou
+        sedlakova_legal:
+          title: Sedlákova Legal
+          url: https://sedlakovalegal.com/
+          alt: podpořili projekt pomuzeme.si advokátními službami
+        sestry_v_zaloze:
+          title: Sesty v záloze
+          url: https://www.sestryvzaloze.info
+          alt: podpořili projekt pomuzeme.si referencí ze svého webu
+        teologicka_fakulta:
+          title: Teologická fakulta Univerzity Karlovy
+          url: https://tcc.etf.cuni.cz/
+          alt: podpořili projekt pomuzeme.si záštitou
+        nethost:
+          title: Nethost
+          url: https://www.nethost.cz
+          alt: podpořili projekt pomuzeme.si záštitou
+
+    buttons:
+      iwanttohelp: Chci pomáhat
+      organisevolunteers: Organizuji dobrovolníky
+      requirevolunteers: Potřebuji dobrovolníky
+      registerorganisation: Registrovat organizaci
+    intro:
+      title: Proč Pomůžeme.si?
+      description: Umožňujeme lidem snadno a rychle dostat svou pomoc k těm, kteří ji potřebují. Koordinaci dobrovolníků a neziskovek děláme efektivnější. Hledáme dobrovolníky organizacím, které jsou v souvislosti s koronavirem přetížené. Jedeme v tom společně. Pomůžeme.si.
+      countertitle: Kolik nás už pomáhá?
+      registeredvolunteers: Registrovaných dobrovolníků
+      charitableorganisations: Dobročinných organizací
+    guide:
+      howdoesitwork: Jak to celé funguje?
+      iwanttovolunteer: Chci pomáhat jako dobrovolník!
+      stepone: Zaregistrujete se jako dobrovolník
+      steptwo: Budou vás kontaktovat dobročinné organizace z okolí
+      stepthree: Společně se domluvíte na konkrétní pomoci potřebným
+    contact:
+      lookingforvolunteers: Hledáte dobrovolníky jednorázově?
+      coordinatingvolunteers: Potřebujete koordinovat dobrovolníky?
+      title: Jste zástupce organizace?
+      subtitle: Pomocí naší platformy budete moci
+      col1_point1: pomůžeme vám najít a oslovit vhodné dobrovolníky pro vaše potřeby
+      col1_point2: stačí vyplnit poptávkový formulář
+      col2_point1: koordinovat rozdělení poptávek mezi dobrovolníky na základě lokality
+      col2_point2: pracovat s dobrovolníky, které si do aplikace nahrajete
+      col2_point3: získat přehled o aktuální dostupnosti dobrovolníků
+      col2_point4: získat nové dobrovolníky, pokud jich nemáte dostatek, a organizovat jejich nábor
+      asterix: k dobrovolníkům, které si do aplikace nahrajete, budete mít výhradní přístup jen vy
+      contactushere: Kontaktní email
+      email: info@pomuzeme.si
+      organisationlogin: Přihlášení organizace
+    news:
+      mentionedus: Napsali o nás
+      title: Aktuality
+    footer:
+      whatiswehelp: Co je vlastně Pomůžeme.si?
+      wehelpdescription: Jde o platformu, která je určena ke snazší organizaci dobrovolníků v rámci epidemie infekčního onemocnění COVID-19. Spojuje ty, kteří chtějí nezištně pomáhat, s lidmi, kteří si z nejrůznějších důvodů nemohou obstarat základní potřeby, jako je nákup nebo třeba venčení psa.
+      whoisbehind: Kdo za projektem stojí?
+      whoisbehinddescription: Applifting - softwarové studio z pražského Karlína, které už 6 let dělá věci jinak. Je nás přes 90 a fungujeme bez manažerů. Nejraději vyrábíme aplikace, které lidem zjednodušují život. Vyvinuli jsme třeba systém pro rychlejší mezinárodní výměnu orgánů k transplantaci. Nebo zabezpečení bankovní aplikace, kterou používají miliony uživatelů napříč Evropou.
+
+  modals:
+    registration:
+      thanks: Patří vám velké díky!
+      thankssubtitle: Je skvělé, že chcete pomáhat. Jedeme v tom společně. Pomůžeme.si.
+      title: Vyplňte potřebné údaje
+      phoneprefix: 420
+      addresstitle: Adresa
+      addresshelper: Díky adrese vás propojíme právě s těmi dobročinnými organizacemi, které se nacházejí ve vaší lokalitě.
+      consenttoterms: Souhlasím s podmínkami
+      usage: užívání
+      usagepdf: podminky_dobrovolnika_pomuzemesi.pdf
+      and: a
+      protectionofdata: ochrany osobních údajů
+      protectionofdatapdf: podminky_ochrany_osobnich_udaju_pomuzemesi.pdf
+      ageconfirmation: Prohlašuji, že jsem osoba starší 18 let
+      register: Zaregistrovat se
+      disabledregister: Zaregistrovat se...
+    confirmation:
+      verifytitle: Ověření čísla
+      verifysubtitle: Na telefonní číslo jsme vám odeslali ověřovací kód. Vyplňte jej níže.
+      notreceived: Nepřišel vám ověřovací kód?
+      tryagain: Zkusit znovu
+      finishregistration: Dokončit registraci
+      disabledfinishregistration: Dokončit registraci...
+    thankyou:
+      title: Děkujeme že chcete pomáhat
+      subtitle: Nyní na vás mají kontakt dobročinné organizace z&nbsp;vašeho blízkého okolí. Mějte trpělivost a některá z nich se vám ozve.
+      helpinmeantime: Mezitím můžete pomoct i tím, že iniciativu budete sdílet!
+
+  admin:
+    groups:
+      title: Přidat organizaci do skupiny
+    users:
+      addrole: Přidat roli
+
+  socials:
+    facebooklink: https://www.facebook.com/sharer/sharer.php?u=pomuzemesi.cz
+    twitterlink: http://twitter.com/share?url=https://pomuzemesi.cz
+
+  application:
+    title: Pomůžeme.si
+    meta:
+      title: Pomůžeme.si | Koronavirus?! Spolu to dáme
+      description: Pomáháme dostat dobrovolníky tam, kde jsou třeba.
+    og:
+      url: https://pomuzeme.si/
+      title: Pomůžeme.si | Koronavirus?! Spolu to dáme
+      description: Pomáháme dostat dobrovolníky tam, kde jsou třeba.
+      image: https://pomuzemesi.cz/thumbnail.png
+    twitter:
+      title: Pomůžeme.si | Koronavirus?! Spolu to dáme
+      image: https://pomuzemesi.cz/thumbnail.png
+    favicon:
+      big: favicon-32x32.png
+      small: favicon-16x16.png

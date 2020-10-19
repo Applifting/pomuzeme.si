@@ -69,7 +69,7 @@ img {
   box-shadow: $shadow_1;
 
   @include sm {
-    max-width: 288px;
+    max-width: 328px;
   }
 
   &.secondary {
@@ -95,10 +95,7 @@ img {
 }
 
 .wave-container {
-  display: flex;
-  justify-content: center;
   width: 100%;
-  overflow: hidden;
   position: relative;
 
   .wave {

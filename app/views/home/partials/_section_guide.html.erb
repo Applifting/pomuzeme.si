@@ -1,31 +1,31 @@
 <section id="guide" class="section-guide section">
-  <h2>Jak to celé funguje?</h2>
-  <h3>Chci pomáhat jako dobrovolník!</h3>
+  <h2><%= I18n.t 'landingpage.guide.howdoesitwork' %></h2>
+  <h3><%= I18n.t 'landingpage.guide.iwanttovolunteer' %></h3>
   <div class="guide-content">
     <div class="step">
       <%= image_tag asset_path('hiw-laptop.svg') %>
       <p>
-        Zaregistrujete se jako dobrovolník
+        <%= I18n.t 'landingpage.guide.stepone' %>
       </p>
     </div>
     <%= image_tag asset_path('arrow.svg'), class: 'arrow' %>
     <div class="step">
       <%= image_tag asset_path('hiw-phone.svg') %>
       <p>
-        Budou vás kontaktovat dobročinné organizace z&nbsp;okolí
+        <%= I18n.t 'landingpage.guide.steptwo' %>
       </p>
     </div>
     <%= image_tag asset_path('arrow.svg'), class: 'arrow' %>
     <div class="step">
       <%= image_tag asset_path('hiw-thumbs-up.svg') %>
       <p>
-        Společně se domluvíte na konkrétní pomoci potřebným
+        <%= I18n.t 'landingpage.guide.stepthree' %>
       </p>
     </div>
   </div>
   <div class="container has-text-centered">
     <button id="chci-pomahat-2" class="modal-button modal-trigger main-button" data-target="registration" aria-haspopup="true">
-      Chci pomáhat
+      <%= I18n.t 'landingpage.buttons.iwanttohelp' %>
     </button>
   </div>
 </section>

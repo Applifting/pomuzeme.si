@@ -1,0 +1,31 @@
+<div class="wave-container">
+  <%= image_tag asset_path('bg-wave.svg'), class: 'wave' %>
+</div>
+<footer class="main-footer uk">
+  <div class="footer-content section">
+    <div class="column-left">
+      <h4><%= I18n.t 'landingpage.footer.whatiswehelp' %></h4>
+      <p class="body1">
+        <%= I18n.t 'landingpage.footer.wehelpdescription' %>
+      </p>
+    </div>
+    <div class="column-right">
+      <%= image_tag asset_path('applifting-rocket.svg'), class: "rocket" %>
+      <h4><%= I18n.t 'landingpage.footer.whoisbehind' %></h4>
+      <p class="body1">
+        <%= I18n.t 'landingpage.footer.whoisbehinddescription' %>
+      </p>
+      <div class="contact-item">
+        <%= image_tag asset_path('web-icon.svg') %>
+        <a href="https://www.applifting.io">www.applifting.io</a>
+      </div>
+      <div class="contact-item">
+        <%= image_tag asset_path('email-icon.svg') %>
+        <a href="mailto:<%= I18n.t 'landingpage.contact.email' %> "><%= I18n.t 'landingpage.contact.email' %> </a>
+      </div>
+    </div>
+  </div>
+  <div class="copy">
+    <a href="#">Applifting &copy; 2020</a>
+  </div>
+</footer>

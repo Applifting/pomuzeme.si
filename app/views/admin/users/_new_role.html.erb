@@ -1,9 +1,9 @@
-<h3>Přidat roli</h3>
+<h3><%= I18n.t 'admin.users.addrole' %></h3>
 
 <div style="width: 400px">
   <%= form_with url: create_role_admin_user_path(@user), remote: true do |f| %>
-    <%= f.hidden_field :user_id, value: @user.id %>
-    <%= f.select :role_id, @available_roles.collect{|role| [ role.to_s, role.id ] }, { include_blank: false } %>
-    <%= f.submit label: 'Přidat' %>
+  <%= f.hidden_field :user_id, value: @user.id %>
+  <%= f.select :role_id, @available_roles.collect{|role| [ role.to_s, role.id ] }, { include_blank: false } %>
+  <%= f.submit label: 'Přidat' %>
   <% end %>
 </div>

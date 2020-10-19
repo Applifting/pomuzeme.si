@@ -3,7 +3,9 @@
     const registerScroll = link => {
       const id = link.dataset.target;
       link.addEventListener('click', () =>
-          document.getElementById(id).scrollIntoView({behavior: 'smooth'})
+        document.getElementById(id).scrollIntoView({
+          behavior: 'smooth'
+        })
       );
     };
 
@@ -20,23 +22,23 @@
     <div class="column-left">
       <h1>
         <span class="lighter">
-          Koronavirus?!
+          <%= I18n.t 'landingpage.mainheader.coronavirus' %>
           <img id="virus" src="<%= asset_path "virus.svg" %>" />
         </span>
-        <div>Spolu to dáme</div>
+        <div><%= I18n.t 'landingpage.mainheader.together' %></div>
       </h1>
       <p>
-        Pomáháme dostat dobrovolníky tam, kde jsou třeba.
+        <%= I18n.t 'landingpage.mainheader.motto' %>
       </p>
       <div class="button-group">
         <button id="chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
-          Chci pomáhat
+          <%= I18n.t 'landingpage.buttons.iwanttohelp' %>
         </button>
         <button class="main-button tertiary">
-          <a href="javascript:void(0);" class="js-scrollable" data-target="pro-organizace">Organizuji dobrovolníky</a>
+          <a href="javascript:void(0);" class="js-scrollable" data-target="pro-organizace"><%= I18n.t 'landingpage.buttons.organisevolunteers' %></a>
         </button>
         <button class="main-button tertiary">
-          <a href="<%= ENV['NEED_VOLUNTEERS_GOOGLE_FORM']%>" target="_blank">Potřebuji dobrovolníky</a>
+          <a href="<%= ENV['NEED_VOLUNTEERS_GOOGLE_FORM']%>" target="_blank"><%= I18n.t 'landingpage.buttons.requirevolunteers' %></a>
         </button>
       </div>
     </div>
