@@ -57,6 +57,8 @@ cs:
       request: Poptávky
       organisation_request: Poptávka
       news: Aktuality
+      skill: Kvalifikace
+      interest: Zájmy
     attributes:
       volunteer:
         first_name: Jméno
