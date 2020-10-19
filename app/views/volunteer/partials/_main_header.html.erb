@@ -1,0 +1,59 @@
+<% content_for :logo_url do %>
+  <% if @current_volunteer.present? %>
+    <a href="<%= volunteer_profile_path %>" class="link slide-link">
+  <% else %>
+    <a href="#" id="hard_reload_target" data-target="/" class="link">
+  <% end %>
+    <%= image_tag asset_path('pomuzemesi.svg'), class: 'main-logo'  %>
+  </a>
+<% end %>
+
+<div id="js-mobile-menu-container" class="mobile-menu-container">
+  <div class="mobile-menu">
+    <div class="menu-top-row">
+      <%= yield(:logo_url) %>
+      <a id="js-close-menu-button" class="close-button">
+        <i class="material-icons">close</i>
+      </a>
+    </div>
+    <nav class="navigation">
+      <ul id="js-mobile-menu-list" class="mobile-menu-list">
+        <% if @current_volunteer %>
+          <a href="<%= logout_path %>" class="link slide-link">Odhlásit se</a>
+        <% else %>
+          <button class="modal-button modal-trigger main-button" id="chci-pomahat-2" data-target="registration" aria-haspopup="true">
+            Chci pomáhat
+          </button>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</div>
+<div id="js-main-header-container" class="main-header-container">
+  <header class="main-header section">
+    <%= yield(:logo_url) %>
+    <nav class="navigation">
+      <ul id="js-desktop-menu-list" class="desktop-menu">
+        <li class="menu-item">
+          <% if @current_volunteer %>
+            <a href="<%= logout_path %>" class="link slide-link">Odhlásit se</a>
+          <% else %>
+            <a href="#" class="modal-button modal-trigger link wanna-join" id="chci-pomahat-2" data-target="registration" aria-haspopup="true">
+              CHCI POMÁHAT
+            </a>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+    <div class="mobile-menu-icon-container">
+      <a id="js-menu-button" class="menu-button">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </header>
+</div>
+
+
+<%= render 'home/modals/registration' %>
+<%= render 'home/modals/confirmation' %>
+<%= render 'home/modals/thank_you' %>

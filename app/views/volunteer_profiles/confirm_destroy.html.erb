@@ -1,0 +1,12 @@
+<section class="section-hero section">
+  <div class="hero-content">
+    <div class="column-left">
+      <h2>Zrušení profilu</h2>
+      <p>Chcete opravdu nevratně zrušit svůj profil?</p>
+      <%= form_with url: destroy_volunteer_profile_path, method: :post, remote: false do %>
+        <%= submit_tag 'Zrušit profil', class: 'main-button' %>
+      <% end %>
+      <%= button_to 'zpět', volunteer_profile_path, class: 'main-button secondary', method: :get %>
+    </div>
+  </div>
+</section>

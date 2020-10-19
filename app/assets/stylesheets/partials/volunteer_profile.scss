@@ -1,0 +1,10 @@
+.checkbox_group {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .checkbox-row {
+    margin: 12px 18px 12px 0px;
+  }
+}

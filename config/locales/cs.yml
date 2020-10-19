@@ -57,6 +57,8 @@ cs:
       request: Poptávky
       organisation_request: Poptávka
       news: Aktuality
+      skill: Kvalifikace
+      interest: Zájmy
     attributes:
       volunteer:
         first_name: Jméno
@@ -265,8 +267,20 @@ cs:
               improbable_phone: zadejte číslo v mezinárodním formátu, bez mezer
     messages:
       sms_resended: Váš kód byl změněn a SMS je na cestě.
+  activemodel:
+    errors:
+      models:
+        session:
+          attributes:
+            phone:
+              improbable_phone: Neplatné číslo
+            volunteer:
+              not_found: Pod tímto číslem jsme nenašli žádnou registraci
+            code:
+              not_valid: Nesprávný přihlašovací kód
 
   sms:
+    login_code: Kód pro přihlášení do pomuzeme.si - %{code}
     verification: "Overovaci kod pro overeni registrace na portalu pomuzeme.si je: %{code}"
     mobile_authorization: "Overovaci kod pro prihlaseni do aplikace pomuzeme.si je: %{code}"
     welcome: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se ozve jedna z organizaci ve vasem okoli a zapoji vas do deni. Reknete o nas i pratelum? Pomuzeme.si
@@ -277,6 +291,14 @@ cs:
       confirmed: Díky za potvrzení poptávky %{identifier}, koordinátor %{organisation} se vám ozve s detaily.
       rejected: Poptávka %{identifier} organizace %{organisation} byla odmítnuta.
       over_capacity: Moc děkujeme za zájem, na poptávku organizace %{organisation} se již našlo dostatek dobrovolníků. Počkejte na další.
+  volunteer_profile:
+    login:
+      title: Přihlášení do profilu
+      description: V profilu dobrovolníka si můžete aktualizovat bydliště a jiné preference, abychom vám mohli nabídnout ty správné dobrovolnické činnosti.
+    delete_profile:
+      title: Zrušení registrace
+      description: Pro zrušení registrace zadejte telefonní číslo, pod kterým jste se zaregistroval/a.
+
   errors:
     messages:
       invalid_zipcode: nebylo rozpoznano.

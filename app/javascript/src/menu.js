@@ -1,11 +1,10 @@
-$(document).ready(function () {
+$(document).on('turbolinks:load', function () {
     const menuButton = document.querySelector('#js-menu-button');
     const closeMenuButton = document.querySelector('#js-close-menu-button');
     const mobileLinks = document.querySelectorAll('.mobile-menu .slide-link');
     const desktopLinks = document.querySelectorAll('.main-header .slide-link');
     const mobileMenu = document.querySelector('#js-mobile-menu-container');
     const body = document.querySelector('body');
-    const wannaJoinButton = document.querySelector('#js-mobile-menu-container .main-button');
     const headerContainer = document.querySelector('#js-main-header-container');
 
     const closeCallback = () => {
@@ -35,8 +34,6 @@ $(document).ready(function () {
     }));
 
     closeMenuButton.onclick = closeCallback;
-
-    wannaJoinButton.addEventListener('click', closeCallback);
 
     let previousScrollTop;
     let previousDocumentScrollTop;
