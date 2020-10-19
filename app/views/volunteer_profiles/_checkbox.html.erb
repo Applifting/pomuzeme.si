@@ -2,5 +2,6 @@
   <label>
     <%= check_box_tag "#{model}[#{option.code}]", 1, @volunteer.send(model.pluralize).any? { |item| item.code == option.code } %>
     <span class="text-required"><%= option.name %></span>
+    <%= content_tag(:div, option.description, style: "margin-left: 35px; width: 190px;") if model == 'interests' && option.description.present? %>
   </label>
 </div>
