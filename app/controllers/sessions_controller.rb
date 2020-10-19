@@ -6,11 +6,11 @@ class SessionsController < ApplicationController
   def new
     redirect_to volunteer_profile_path if session[:volunteer_id]
 
-    @action = params[:redirect_to] == confirm_destruction_of_volunteer_profile_path ? :delete_profile : :login
+    set_after_login_redirect_action
   end
 
   def request_code
-    @action = @session.redirect_to == confirm_destruction_of_volunteer_profile_path ? :delete_profile : :login
+    set_after_login_redirect_action
 
     if @session.valid?
       send_and_persist_verification_code
@@ -47,6 +47,10 @@ class SessionsController < ApplicationController
   end
 
   private
+
+  def set_after_login_redirect_action
+    @action = (params[:redirect_to] || @session.redirect_to) == confirm_destruction_of_volunteer_profile_path ? :delete_profile : :login
+  end
 
   def load_session
     @session = Session.new(phone: params[:phone] || session[:session_phone], code: params[:code], redirect_to: params[:redirect_to])
