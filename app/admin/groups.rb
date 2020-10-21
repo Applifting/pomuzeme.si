@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Group do
-  permit_params :name, :slug, :channel_description, :thank_you
+  decorate_with GroupDecorator
+
+  permit_params :name, :slug, :channel_description, :thank_you, :exclusive_volunteer_signup
 
   index do
     para 'Organizační skupina zastřešuje vaše místní organizace, které mezi sebou sdílí dobrovolníky.'
-    para 'Do skupiny jsou napojeni dobrovolníci, kteří se zaregistrovali přes link vaší organizace (např. pomuzeme.si/clovek-v-tisni).'
+    para 'Do skupiny jsou napojeni dobrovolníci, kteří se zaregistrovali přes link vaší organizace (např. pomuzeme.si/diecezni-charita-ceske-budejovice).'
 
     id_column
     column :name
@@ -22,6 +24,7 @@ ActiveAdmin.register Group do
       attributes_table_for resource do
         row :name
         row :slug
+        row :exclusive_volunteer_signup
         row :created_at
         row :updated_at
       end

@@ -94,8 +94,10 @@ cs:
         updated_at: Upraven
       group:
         name: Název
-        slug: Kód
-        channel_description: Krátký popis na web
+        slug: Adresa registračního formuláře
+        channel_description: Krátký popis na registrační formulář
+        exclusive_volunteer_signup: Exklusivita přihlášených dobrovolníků
+        thank_you: Děkovný text po registraci
         created_at: Vytvořeno
         updated_at: Upraveno
       group_volunteer:
