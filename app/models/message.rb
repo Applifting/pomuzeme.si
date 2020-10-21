@@ -1,6 +1,10 @@
 class Message < ApplicationRecord
-
+  # Callbacks
   MESSAGES_FOR_REQUEST_SQL = 'volunteer_id = %{volunteer_id} AND (request_id IS NULL OR request_id = %{request_id})'.freeze
+
+  after_create  :update_counter_cache
+  after_destroy :update_counter_cache
+  after_update  :update_counter_cache
 
   # Associations
   belongs_to :volunteer, optional: true
@@ -22,5 +26,15 @@ class Message < ApplicationRecord
 
   def mark_as_read
     update read_at: Time.zone.now if read_at.nil?
+  end
+
+  private
+
+  def update_counter_cache
+    return if volunteer_id.blank? || request_id.blank?
+
+    requested_volunteer = RequestedVolunteer.where(volunteer_id: volunteer_id, request_id: request_id).first
+
+    requested_volunteer.update(unread_incoming_messages_count: requested_volunteer.unread_incoming_messages.count)
   end
 end

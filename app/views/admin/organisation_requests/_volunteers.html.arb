@@ -25,7 +25,7 @@ table_for resource.requested_volunteers.includes(:volunteer).order(:state).map(&
                                                            url: admin_organisation_request_requested_volunteer_path(resource, requested_volunteer)
   end
   column '' do |requested_volunteer|
-    link_title = requested_volunteer.messages.incoming.unread.present? ? 'nepřečtené zprávy' : 'zprávy'
+    link_title = requested_volunteer.unread_incoming_messages_count.positive? ? 'nepřečtené zprávy' : 'zprávy'
     link_to link_title, new_admin_volunteer_message_path(requested_volunteer.volunteer_id, request_id: resource.id)
   end
 end

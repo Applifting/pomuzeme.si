@@ -17,7 +17,7 @@ ActiveAdmin.register Message do
 
   form do |f|
     # Mark incoming messages as read
-    Message.incoming.unread.for_request(params[:request_id], params[:volunteer_id]).update_all(read_at: Time.zone.now)
+    Message.incoming.unread.for_request(params[:request_id], params[:volunteer_id]).each { |m| m.update(read_at: Time.zone.now) }
 
     groupped_messages = Message.for_request(params[:request_id], params[:volunteer_id])
                                .eager_load(:creator)
