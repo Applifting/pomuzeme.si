@@ -469,6 +469,7 @@ DEPENDENCIES
   devise
   devise-i18n
   draper
+  execjs
   factory_bot_rails (~> 5.1)
   ffaker (~> 2.14)
   geocoder
