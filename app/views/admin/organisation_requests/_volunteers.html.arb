@@ -5,11 +5,13 @@ div class: 'title h4' do
   span link_to('', admin_volunteers_path(params: resource.decorate.volunteer_params), class: 'action add', data: { turbolinks: false }) if can?(:manage, Request)
 end
 
-if can?(:manage, Request) && resource.requested_volunteers.to_be_notified.present?
-  span(link_to('Oslovit dobrovolníky', notify_volunteers_admin_organisation_request_path, method: :post, class: 'button primary'))
+div style: 'margin-bottom: 8px;' do
+  if can?(:manage, Request) && resource.requested_volunteers.to_be_notified.present?
+    span(link_to('Oslovit dobrovolníky', notify_volunteers_admin_organisation_request_path, method: :post, class: 'button secondary'))
+  end
 end
 
-table_for resource.requested_volunteers.includes(volunteer: :group_volunteers).order(:state).map(&:decorate) do
+table_for resource.requested_volunteers.includes(volunteer: :group_volunteers).order([{ unread_incoming_messages_count: :desc }, :state]).map(&:decorate) do
   column I18n.t('activerecord.attributes.volunteer.full_name'), :full_name, &:volunteer_name_link
   column I18n.t('activerecord.attributes.volunteer.phone'), :phone
   column I18n.t('activerecord.attributes.group_volunteer.source') do |resource|
