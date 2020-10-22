@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RequestedVolunteer < ApplicationRecord
+  REQUESTED_VOLUNTEERS_WITH_REQUEST_SQL = 'volunteer_id = %{volunteer_id} AND (request_id IS NULL OR request_id = %{request_id})'.freeze
+
   # Callbacks
   before_save :update_timestamps
 
@@ -26,9 +28,14 @@ class RequestedVolunteer < ApplicationRecord
 
   # Scopes
   scope :with_organisations, ->(*organisation_ids) { joins(:request).where(requests: { organisation_id: organisation_ids }) }
+  scope :with_optional_request_id, ->(volunteer_id, request_id) do
+    scope = where(volunteer_id: volunteer_id)
+    scope = scope.where(request_id: request_id) if request_id
+    scope
+  end
 
   def unread_incoming_messages
-    Message.incoming.unread.where(volunteer_id: volunteer_id, request_id: request_id)
+    Message.incoming.unread.where(format(REQUESTED_VOLUNTEERS_WITH_REQUEST_SQL, volunteer_id: volunteer_id, request_id: request_id))
   end
 
   private

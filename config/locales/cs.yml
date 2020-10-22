@@ -290,7 +290,7 @@ cs:
       offer: "%{identifier} %{text} Prosíme, odpovězte ANO / NE"
       unrecognized: Máte-li o poptávku zájem, odpovězte ANO nebo NE
       confirmed: Díky za potvrzení poptávky %{identifier}, koordinátor %{organisation} se vám ozve s detaily.
-      rejected: Poptávka %{identifier} organizace %{organisation} byla odmítnuta.
+      rejected: Poptávka %{identifier} organizace %{organisation} byla odmítnuta. Své dobrovolnické preference můžete nastavit na https://pomuzeme.si/profil?utm_medium=sms
       over_capacity: Moc děkujeme za zájem, na poptávku organizace %{organisation} se již našlo dostatek dobrovolníků. Počkejte na další.
   volunteer_profile:
     login:

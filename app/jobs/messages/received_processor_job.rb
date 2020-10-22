@@ -13,7 +13,7 @@ module Messages
 
         Common::Request::ResponseProcessor.new(request, requested_volunteer.volunteer, response).perform
         confirm_response
-        mark_message_as_read
+        mark_message_as_read if rejection_response?
       rescue Common::Request::CapacityExceededError
         capacity_exceeded_response
       end
@@ -23,6 +23,10 @@ module Messages
 
     def valid_response?
       !response.nil?
+    end
+
+    def rejection_response?
+      response == false
     end
 
     def invalid_response
