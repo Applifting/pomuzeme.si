@@ -5,13 +5,26 @@ div class: 'title h4' do
   span link_to('', admin_volunteers_path(params: resource.decorate.volunteer_params), class: 'action add', data: { turbolinks: false }) if can?(:manage, Request)
 end
 
-if can?(:manage, Request) && resource.requested_volunteers.to_be_notified.present?
-  span(link_to('Oslovit dobrovolníky', notify_volunteers_admin_organisation_request_path, method: :post, class: 'button primary'))
+div style: 'margin-bottom: 8px;' do
+  if can?(:manage, Request) && resource.requested_volunteers.to_be_notified.present?
+    span(link_to('Oslovit dobrovolníky', notify_volunteers_admin_organisation_request_path, method: :post, class: 'button secondary'))
+  end
 end
 
-table_for resource.requested_volunteers.includes(:volunteer).order(:state).map(&:decorate) do
+table_for resource.requested_volunteers.includes(volunteer: :group_volunteers).order([{ unread_incoming_messages_count: :desc }, :state]).map(&:decorate) do
   column I18n.t('activerecord.attributes.volunteer.full_name'), :full_name, &:volunteer_name_link
   column I18n.t('activerecord.attributes.volunteer.phone'), :phone
+  column I18n.t('activerecord.attributes.group_volunteer.source') do |resource|
+    source = resource.volunteer.group_volunteers&.first&.source || :public_pool
+    I18n.t("activerecord.enums.group_volunteer.source." + source.to_s)
+  end
+  column I18n.t('activerecord.attributes.group_volunteer.recruitment_status') do |resource|
+    status = resource.volunteer
+                     .group_volunteers
+                     .find { |gv| gv.group_id == current_user.organisation_group.id }
+                    &.recruitment_status
+    I18n.t("activerecord.enums.group_volunteer.recruitment_statuses." + status.to_s) if status
+  end
   column I18n.t('activerecord.attributes.requested_volunteer.state') do |requested_volunteer|
     best_in_place requested_volunteer, :state, as: :select,
                                                collection: I18n.t('activerecord.attributes.requested_volunteer.states'),
@@ -25,7 +38,7 @@ table_for resource.requested_volunteers.includes(:volunteer).order(:state).map(&
                                                            url: admin_organisation_request_requested_volunteer_path(resource, requested_volunteer)
   end
   column '' do |requested_volunteer|
-    link_title = requested_volunteer.messages.incoming.unread.present? ? 'nepřečtené zprávy' : 'zprávy'
+    link_title = requested_volunteer.unread_incoming_messages_count.positive? ? 'nepřečtené zprávy' : 'zprávy'
     link_to link_title, new_admin_volunteer_message_path(requested_volunteer.volunteer_id, request_id: resource.id)
   end
 end

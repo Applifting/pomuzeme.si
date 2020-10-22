@@ -19,7 +19,6 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   filter :organisation, as: :select, collection: proc { Organisation.user_group_organisations(current_user) }
 
   # Scopes
-  # Experimental feature
   scope :request_unread_msgs do |scope|
     scope.not_closed.has_unread_messages
   end
@@ -70,6 +69,9 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     column :text
     column :accepted_volunteers_count do |resource|
       "#{resource.requested_volunteers.accepted.count} / #{resource.required_volunteer_count}"
+    end
+    column :requested_volunteers do |resource|
+      resource.requested_volunteers.count
     end
     column :address
     column :fullfillment_date

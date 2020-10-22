@@ -93,7 +93,7 @@ class VolunteersController < ApplicationController
   end
 
   def bind_volunteer_with_organisation_group(volunteer)
-    @partner_signup_group.add_exclusive_volunteer(volunteer)
+    @partner_signup_group.add_group_volunteer(volunteer)
   end
 
   def agreements_granted?(volunteer)

@@ -38,7 +38,10 @@ ActiveAdmin.register Volunteer do
 
   batch_action :assign_request, confirm: I18n.t('active_admin.batch_actions.assign_request.confirmation') do |ids|
     request = referer_request
-    Admin::Requests::VolunteerAssigner.new(current_user, request, Volunteer.where(id: ids)).perform
+    results = Admin::Requests::VolunteerAssigner.new(current_user, request, Volunteer.where(id: ids)).perform
+
+    flash[:notice] = "Počet přiřazených dobrovolníků: #{ids.count - results.count}"
+    flash[:error] = "Některé dobrovolníky se nepodařilo k poptávce přiřadit (#{results.map { |v| v.to_s }.join(', ')})." if results.present?
     redirect_to admin_organisation_request_path request.id
   rescue StandardError => e
     redirect_to admin_organisation_request_path(request.id), alert: e.message

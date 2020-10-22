@@ -20,16 +20,31 @@ RSpec.describe Group, type: :model do
     it { should have_many(:volunteers) }
   end
 
-  context '#add_exclusive_volunteer' do
-    let(:group) { create :group }
+  context '#add_group_volunteer' do
     let(:volunteer) { create :volunteer }
 
-    it 'should assign volunteer exclusively to group' do
-      group_volunteer = group.add_exclusive_volunteer volunteer
-      expect(group_volunteer.is_exclusive).to be true
-      expect(group_volunteer.group).to eq group
-      expect(GroupVolunteer.sources[group_volunteer.source]).to eq GroupVolunteer.sources[:channel]
-      expect(GroupVolunteer.recruitment_statuses[group_volunteer.recruitment_status]).to eq GroupVolunteer::DEFAULT_RECRUITMENT_STATUS
+    context 'when volunteers signed up through organisation form are to be exclusive' do
+      let(:group) { create :group, exclusive_volunteer_signup: true }
+
+      it 'should assign volunteer exclusively to group' do
+        group_volunteer = group.add_group_volunteer volunteer
+        expect(group_volunteer.is_exclusive).to be true
+        expect(group_volunteer.group).to eq group
+        expect(GroupVolunteer.sources[group_volunteer.source]).to eq GroupVolunteer.sources[:channel]
+        expect(GroupVolunteer.recruitment_statuses[group_volunteer.recruitment_status]).to eq GroupVolunteer::DEFAULT_RECRUITMENT_STATUS
+      end
+    end
+
+    context 'when volunteers signed up through organisation form are to be public' do
+      let(:group) { create :group, exclusive_volunteer_signup: false }
+
+      it 'should assign volunteer to group, but volunteers remains public' do
+        group_volunteer = group.add_group_volunteer volunteer
+        expect(group_volunteer.is_exclusive).to be false
+        expect(group_volunteer.group).to eq group
+        expect(GroupVolunteer.sources[group_volunteer.source]).to eq GroupVolunteer.sources[:channel]
+        expect(GroupVolunteer.recruitment_statuses[group_volunteer.recruitment_status]).to eq GroupVolunteer::DEFAULT_RECRUITMENT_STATUS
+      end
     end
   end
 end
