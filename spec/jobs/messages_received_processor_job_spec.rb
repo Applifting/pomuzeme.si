@@ -21,13 +21,31 @@ describe Messages::ReceivedProcessorJob do
           Messages::ReceivedProcessorJob.new.perform message[volunteer, 'ano']
         end
 
-        it 'marks incoming message as read' do
-          incoming_msg = message[volunteer, 'ano']
+        it 'marks incoming rejection message as read' do
+          incoming_msg = message[volunteer, 'ne']
           expect(incoming_msg.read_at).to be_nil
 
           Messages::ReceivedProcessorJob.new.perform incoming_msg
 
           expect(incoming_msg.read_at).not_to be_nil
+        end
+
+        it 'leaves incoming acceptance message unread' do
+          incoming_msg = message[volunteer, 'ano']
+          expect(incoming_msg.read_at).to be_nil
+
+          Messages::ReceivedProcessorJob.new.perform incoming_msg
+
+          expect(incoming_msg.read_at).to be_nil
+        end
+
+        it 'leaves other incoming message unread' do
+          incoming_msg = message[volunteer, 'nevim']
+          expect(incoming_msg.read_at).to be_nil
+
+          Messages::ReceivedProcessorJob.new.perform incoming_msg
+
+          expect(incoming_msg.read_at).to be_nil
         end
 
         it 'creates acceptance confirmation msg when offer is accepted' do

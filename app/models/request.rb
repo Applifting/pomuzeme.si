@@ -49,7 +49,8 @@ class Request < ApplicationRecord
   scope :in_progress, -> { where('state = 4 AND (fullfillment_date IS NULL OR fullfillment_date > ?)', Time.zone.now) }
   scope :check_fulfillment, -> { where('state = 4 AND fullfillment_date < ?', Time.zone.now) }
   scope :without_coordinator, -> { where(coordinator_id: nil) }
-  scope :has_unread_messages, -> { joins(requested_volunteers: :messages).merge(Message.incoming.unread).distinct }
+  scope :has_unread_messages, -> { joins(:requested_volunteers).where('requested_volunteers.unread_incoming_messages_count > 0').distinct }
+  scope :not_closed, -> { where.not(state: :closed) }
 
   def title
     [text[0..39], address].compact.join ', '

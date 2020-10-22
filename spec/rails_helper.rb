@@ -1,4 +1,5 @@
 ENV['RAILS_ENV'] ||= 'test'
+ENV['SMS_MOCK'] ||= 'true'
 
 require 'simplecov'
 SimpleCov.start 'rails' do
@@ -35,8 +36,19 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.include ActiveSupport::Testing::TimeHelpers
+  config.include FactoryBot::Syntax::Methods
+  config.include ActiveSupport::Testing::TimeHelpers
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
+  config.include Warden::Test::Helpers
+
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
+
+  config.before(:all) do
+    I18n.locale = :cs
   end
 
   config.mock_with :rspec do |mocks|
@@ -60,7 +72,4 @@ RSpec.configure do |config|
   I18n.enforce_available_locales = false
   I18n.locale = :en
 
-  config.include ActiveSupport::Testing::TimeHelpers
-  config.include FactoryBot::Syntax::Methods
-  config.include ActiveSupport::Testing::TimeHelpers
 end

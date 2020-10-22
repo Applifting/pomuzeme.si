@@ -1,6 +1,10 @@
 class Message < ApplicationRecord
+  MESSAGES_WITH_REQUEST_SQL = 'volunteer_id = %{volunteer_id} AND (request_id IS NULL OR request_id = %{request_id})'.freeze
 
-  MESSAGES_FOR_REQUEST_SQL = 'volunteer_id = %{volunteer_id} AND (request_id IS NULL OR request_id = %{request_id})'.freeze
+  # Callbacks
+  after_create  :update_unread_messages_counter_cache
+  after_destroy :update_unread_messages_counter_cache
+  after_update  :update_unread_messages_counter_cache
 
   # Associations
   belongs_to :volunteer, optional: true
@@ -18,9 +22,36 @@ class Message < ApplicationRecord
 
   # Scopes
   scope :unread, -> { where(read_at: nil) }
-  scope :for_request, ->(request_id, volunteer_id) { where(format(MESSAGES_FOR_REQUEST_SQL, request_id: request_id, volunteer_id: volunteer_id)) }
+  scope :with_request, ->(request_id, volunteer_id) { where(format(MESSAGES_WITH_REQUEST_SQL, request_id: request_id, volunteer_id: volunteer_id)) }
 
   def mark_as_read
     update read_at: Time.zone.now if read_at.nil?
+  end
+
+  def read?
+    read_at.present?
+  end
+
+  def self.mark_read(request_id:, volunteer_id:)
+    Message.incoming.unread.with_request(:request_id, :volunteer_id).each do |message|
+      message.update(read_at: Time.zone.now)
+    end
+  end
+
+  def self.update_unread_messages_counter_cache(volunteer_id:, request_id:)
+    # Incoming SMS cannot be matched with specific request, hence optional request_id
+    # when such message is received, all matching requested volunteers' cache is updated
+    # so that all requests with this volunteer is flagged as unread
+    requested_volunteers = RequestedVolunteer.with_optional_request_id(volunteer_id, request_id)
+
+    requested_volunteers.each do |requested_volunteer|
+      requested_volunteer.update(unread_incoming_messages_count: requested_volunteer.unread_incoming_messages.count)
+    end
+  end
+
+  private
+
+  def update_unread_messages_counter_cache
+    Message.update_unread_messages_counter_cache(volunteer_id: volunteer_id, request_id: request_id)
   end
 end
