@@ -41,7 +41,7 @@ RSpec.feature 'Volunteer Messages' do
       it 'requested volunteer has "unread messages" tag' do
         visit admin_organisation_request_path(request)
 
-        expect(page).to have_text 'Petr Long +420777111222 Odesílání zprávy - nepřečtené zprávy'
+        expect(page).to have_text 'Petr Long +420777111222 veřejný seznam Odesílání zprávy - nepřečtené zprávy'
       end
     end
   end
