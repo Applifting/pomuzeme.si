@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
-  # Redirect from faulty link to the actual document
-  get '/ochrana-osobnich-udaju.pdf', to: redirect { 'podminky_ochrany_osobnich_udaju_pomuzemesi.pdf' }
-
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  root 'home#index'
+  # Redirect from faulty link to the actual document
+  get '/ochrana-osobnich-udaju.pdf', to: redirect { 'podminky_ochrany_osobnich_udaju_pomuzemesi.pdf' }
 
   resources :home, only: :index do
     post :test_post, on: :collection
@@ -55,12 +56,12 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  root 'home#index'
-  get '/:slug', param: :slug, to: 'home#partner_signup', slug: /(?!.*?admin).*/
+  post '/api/sms_callback', to: 'callback#sms'
 
   namespace :docs do
     get '/partner-kit', to: redirect { 'https://drive.google.com/drive/folders/1w9_PVRbZ9VvE10zY0sR26f6SlmLq0xZn' }
     get '/letak-linky-pomoci', to: redirect { 'https://d113nbfwgx4fgo.cloudfront.net/leaflet-diakonie.pdf' }
   end
+
+  get '/:slug', param: :slug, to: 'home#partner_signup', slug: /(?!.*?admin).*/
 end
