@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root 'home#index'
   # Redirect from faulty link to the actual document
   get '/ochrana-osobnich-udaju.pdf', to: redirect { 'podminky_ochrany_osobnich_udaju_pomuzemesi.pdf' }
+  get '/potrebuji-dobrovolniky', to: redirect { 'https://docs.google.com/forms/d/e/1FAIpQLScKMDxDV7iBOrVWNNRby_XVtiDxfB5L6kfocnkDbaFxLxfamw/viewform' }, as: :need_volunteers
 
   resources :home, only: :index do
     post :test_post, on: :collection

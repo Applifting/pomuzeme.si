@@ -32,11 +32,9 @@
         <button id="chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
           Chci pomáhat
         </button>
-        <button class="main-button tertiary">
+        <%= link_to 'Potřebuji dobrovolníky', need_volunteers_path, target: "_blank", class: 'main-button', id: 'potrebuji-dobrovolniky' %>
+        <button class="main-button tertiary" id='pro-organizace' >
           <a href="javascript:void(0);" class="js-scrollable" data-target="pro-organizace">Organizuji dobrovolníky</a>
-        </button>
-        <button class="main-button tertiary">
-          <a href="<%= ENV['NEED_VOLUNTEERS_GOOGLE_FORM']%>" target="_blank">Potřebuji dobrovolníky</a>
         </button>
       </div>
     </div>
