@@ -39,18 +39,18 @@
           </div>
 
           <div class="input-field">
-            <%= form.text_field :email, class: 'validate', required: false, ariaRequired: true %>
-            <%= form.label :email, class: 'required' %>
+            <%= form.text_field :email, class: 'validate', required: false, ariaRequired: false %>
+            <%= form.label :email %>
           </div>
 
           <div class="address-title">
-            <span>Adresa</span>
+            <span>Lokalita</span>
 
             <img
               src="<%= asset_pack_path('media/images/tooltip.svg') %>"
               class="tooltipped"
               data-position="top"
-              data-tooltip="Díky adrese vás propojíme právě s těmi dobročinnými organizacemi, které se nacházejí ve vaší lokalitě."
+              data-tooltip="Díky zadání lokality pro vás můžeme najít geograficky nejbližší dobrovolnické příležitosti."
               />
           </div>
 
@@ -71,8 +71,7 @@
           <%= form.hidden_field :geo_coord_y %>
 
           <div class="input-field">
-            <%= form.text_area :description, class: 'validate', required: false, placeholder: '' %>
-            <%= form.label :description %>
+            <span>Po dokončení registrace můžete ve svém profilu doplnit dobrovolnické preference a dovednosti.</span>
           </div>
 
           <div class="checkbox-row">
@@ -94,7 +93,7 @@
             </ul>
           </div>
 
-          <%= form.submit 'Zaregistrovat se', class: 'form-button', data: { disable_with: "Zaregistrovat se..." } %>
+          <%= form.submit 'Zaregistrovat se', class: 'form-button', id:'cta-submit-registration-form', data: { disable_with: "Zaregistrovat se..." } %>
           <%= recaptcha_v3(action: 'login') %>
         <% end %>
       </div>
