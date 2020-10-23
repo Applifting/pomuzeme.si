@@ -20,6 +20,7 @@ class VolunteerProfilesController < PublicController
       update_skills
     end
 
+    flash[:success] = 'Profil uložen.'
     redirect_to volunteer_profile_path
   end
 
