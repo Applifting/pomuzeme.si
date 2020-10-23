@@ -29,13 +29,11 @@
         Pomáháme dostat dobrovolníky tam, kde jsou třeba.
       </p>
       <div class="button-group">
-        <button id="chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
+        <button id="cta-chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
           Chci pomáhat
         </button>
-        <%= link_to 'Potřebuji dobrovolníky', need_volunteers_path, target: "_blank", class: 'main-button', id: 'potrebuji-dobrovolniky' %>
-        <button class="main-button tertiary" id='pro-organizace' >
-          <a href="javascript:void(0);" class="js-scrollable" data-target="pro-organizace">Organizuji dobrovolníky</a>
-        </button>
+        <%= link_to 'Potřebuji dobrovolníky', need_volunteers_path, target: "_blank", class: 'main-button primary', id: 'cta-potrebuji-dobrovolniky' %>
+        <a href="javascript:void(0);" class="js-scrollable main-button tertiary" data-target="pro-organizace" id='nav-pro-organizace'>Organizuji dobrovolníky</a>
       </div>
     </div>
     <div class="column-right">
