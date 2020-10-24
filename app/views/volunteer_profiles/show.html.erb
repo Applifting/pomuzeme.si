@@ -4,11 +4,7 @@
       <%= render partial: 'volunteer_profiles/navigation' %>
 
       <h2>Profil dobrovolníka</h2>
-      <% flash.each do |type, msg| %>
-        <div class="alert alert-info" id="flash-message">
-          <%= msg %>
-        </div>
-      <% end %>
+      <%= render partial: 'common/flash' %>
       <div style="padding: 18px 0px; font-size: 14px;">
         <%= link_to 'Zrušit registraci', confirm_destruction_of_volunteer_profile_path, style: 'color: red;' %>
       </div>
@@ -24,7 +20,7 @@
         </div>
         <div class="input-field">
           <%= label_tag :email, "Email" %>
-          <%= f.text_field :email, class: 'validate', required: true %>
+          <%= f.text_field :email %>
         </div>
 
         <div class="input-field">

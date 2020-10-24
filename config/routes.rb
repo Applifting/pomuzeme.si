@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   post 'close_account', to: 'volunteer_profiles#destroy', as: :destroy_volunteer_profile
   get 'profil_zrusen', to: 'volunteer_profiles#destroyed', as: :profile_destroyed
   get 'prilezitosti', to: 'requests#index', as: :requests
+  post 'accept', to: 'requests#accept', as: :accept_request
 
   resource :volunteer, only: [] do
     post :register, on: :collection

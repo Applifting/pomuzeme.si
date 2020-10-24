@@ -216,9 +216,20 @@ h4 {
 }
 
 
-.alert.alert-info {
-  background-color: #a4ffab;
-  padding: 12px;
-  border: 0px solid;
-  border-radius: 4px;
+alerts {
+  padding: 12px 0;
+
+  .message {
+    padding: 12px;
+    border: 0px solid;
+    border-radius: 4px;
+
+    &.success {
+      background-color: #a4ffab;
+    }
+
+    &.warn {
+      background-color: #f7f700;
+    }
+  }
 }

@@ -1,5 +1,9 @@
-<% button = link_to 'Mám zájem', '#', id: 'hard_reload_target',
-                                      class: "main-button secondary small",
-                                      'data-target' => login_path(redirect_to: requests_path) %>
+<% button = if @current_volunteer
+     link_to 'Mám zájem', accept_request_path(request_id: request.id), method: :post, class: "main-button secondary small"
+   else
+     link_to 'Mám zájem', '#', id: 'hard_reload_target',
+                               class: "main-button secondary small",
+                               'data-target' => login_path(redirect_to: requests_path)
+   end %>
 
 <%= render partial: 'request', locals: { request: request, button: button} %>
