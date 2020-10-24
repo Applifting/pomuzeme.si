@@ -15,7 +15,9 @@ module Common
           validate_capacity!
           requested_volunteer.update!(state: request_accepted? ? :accepted : :rejected)
           request.update! state: resolve_request_state
-          log_response_message
+
+          # This probably should be higher up in the chain so that we don't need to treat the 'if' exception
+          log_response_message if volunteer.push_notifications?
         end
       end
 
@@ -46,7 +48,7 @@ module Common
         Message.create! volunteer: volunteer,
                         request: request,
                         text: message_text,
-                        direction: :incoming,
+                        direction: :outgoing,
                         state: :received
       end
 
