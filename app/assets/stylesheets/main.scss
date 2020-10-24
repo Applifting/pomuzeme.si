@@ -184,11 +184,20 @@ h4 {
   flex-wrap: wrap;
   margin-bottom: 12px;
 
-  button#chci-pomahat {
-    margin-right: 12px;
+  button:not(:first-child), a:not(:first-child) {
+    margin-left: 12px;
   }
 
-  a {
+  &.inline {
+    flex-direction: row;
+    flex-wrap: unset;
+
+    button:not(:first-child), a:not(:first-child) {
+      margin-left: 18px;
+    }
+  }
+
+  a:not(.main-button) {
     color: $tertiary-button-color;
   }
 

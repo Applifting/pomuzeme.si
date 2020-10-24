@@ -1,6 +1,8 @@
 <section class="section-hero section">
   <div class="hero-content">
     <div class="column-left">
+      <%= render partial: 'volunteer_profiles/navigation' %>
+
       <h2>Profil dobrovolníka</h2>
       <% flash.each do |type, msg| %>
         <div class="alert alert-info" id="flash-message">

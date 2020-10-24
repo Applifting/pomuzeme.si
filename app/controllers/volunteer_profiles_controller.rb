@@ -5,6 +5,8 @@ class VolunteerProfilesController < PublicController
     @volunteer = Volunteer.includes(volunteer_interests: :interest, volunteer_skills: :skill)
                           .where(id: @current_volunteer.id)
                           .first
+
+    @all_requests_count  = Request.assignable.count
   end
 
   def update
