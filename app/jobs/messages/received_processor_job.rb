@@ -6,14 +6,21 @@ module Messages
       @message = message
 
       # Process response message in context of requested volunteer associations waiting for response
-      RequestedVolunteer.eager_load(:request, :volunteer).where(volunteer_id: message.volunteer_id, state: :notified).each do |requested_volunteer|
+      RequestedVolunteer.eager_load(:request, :volunteer)
+                        .where(volunteer_id: message.volunteer_id, state: :notified)
+                        .each do |requested_volunteer|
         @requested_volunteer = requested_volunteer
         @request             = requested_volunteer.request
-        return invalid_response unless valid_response?
+
+        # Don't process messages for closed requests
+        next if @request.closed?
+
+        request_parsable_response && next unless valid_response?
 
         Common::Request::ResponseProcessor.new(request, requested_volunteer.volunteer, response).perform
         confirm_response
         mark_message_as_read if rejection_response?
+
       rescue Common::Request::CapacityExceededError
         capacity_exceeded_response
       end
@@ -29,11 +36,12 @@ module Messages
       response == false
     end
 
-    def invalid_response
+    def request_parsable_response
       volunteer = Volunteer.find(message.volunteer_id)
       text      = I18n.t('sms.request.unrecognized')
 
       SmsService.send_text volunteer.phone, text
+      true
     end
 
     def capacity_exceeded_response

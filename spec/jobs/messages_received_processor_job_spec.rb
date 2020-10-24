@@ -10,7 +10,7 @@ describe Messages::ReceivedProcessorJob do
     let(:unrequested_volunteer) { create :requested_volunteer, :accepted }
     let(:message) { proc { |volunteer, text| create :response_to_offer, text: text, volunteer: volunteer, request: request } }
 
-    context "when we're waiting for volunteer's response (requested_volunteer has status notified)" do
+    context "when we're waiting for volunteer's response (requested_volunteer has status notified, request is not closed)" do
       context 'when response is recognized as confirmation or rejection' do
         it 'calls Common::Request::ResponseProcessor to process the message' do
           response_processor_dbl = double('ResponseProcessor')
@@ -27,6 +27,7 @@ describe Messages::ReceivedProcessorJob do
 
           Messages::ReceivedProcessorJob.new.perform incoming_msg
 
+          expect(requested_volunteer.reload.unread_incoming_messages_count).to eq 0
           expect(incoming_msg.read_at).not_to be_nil
         end
 
@@ -36,6 +37,7 @@ describe Messages::ReceivedProcessorJob do
 
           Messages::ReceivedProcessorJob.new.perform incoming_msg
 
+          expect(requested_volunteer.reload.unread_incoming_messages_count).to eq 1
           expect(incoming_msg.read_at).to be_nil
         end
 
@@ -45,6 +47,7 @@ describe Messages::ReceivedProcessorJob do
 
           Messages::ReceivedProcessorJob.new.perform incoming_msg
 
+          expect(requested_volunteer.reload.unread_incoming_messages_count).to eq 1
           expect(incoming_msg.read_at).to be_nil
         end
 
@@ -52,6 +55,7 @@ describe Messages::ReceivedProcessorJob do
           Messages::ReceivedProcessorJob.new.perform message[volunteer, 'ano']
 
           acceptance_confirmation = Message.where(volunteer: volunteer, request: request, direction: :outgoing).first
+
           expect(acceptance_confirmation.text).to include 'Díky za potvrzení poptávky'
         end
 
@@ -71,6 +75,17 @@ describe Messages::ReceivedProcessorJob do
 
             Messages::ReceivedProcessorJob.new.perform message[volunteer, 'nevim']
         end
+      end
+    end
+
+    context "when message is received for requested_volunteer whose request is closed" do
+      it 'message processing is skipped' do
+        request.update state: :closed
+
+        expect(Common::Request::ResponseProcessor).not_to receive(:new)
+            .with(request, volunteer, true)
+
+        Messages::ReceivedProcessorJob.new.perform message[volunteer, 'ano']
       end
     end
   end

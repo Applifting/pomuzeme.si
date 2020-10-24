@@ -15,14 +15,16 @@ describe Common::Request::ResponseProcessor do
         .to raise_error(AuthorisationError)
     end
 
-    context 'when user accepts' do
-      it 'logs accepting response status as message to request' do
+    context 'when volunteer with push notifications accepts' do
+      it 'logs accepting response status as message to request (to have a record in the Messages)' do
+        volunteer.update preferences: { notifications_to_app: true }
+
         expect(Message).to receive(:create!).with(volunteer: volunteer,
                                                   request: request,
                                                   text: I18n.t('request.responses.accept'),
-                                                  direction: :incoming,
+                                                  direction: :outgoing,
                                                   state: :received)
-        Common::Request::ResponseProcessor.new(request, volunteer, true).perform
+        Common::Request::ResponseProcessor.new(request, volunteer.reload, true).perform
       end
 
       it 'changes request state if capacity is filled' do
@@ -53,12 +55,14 @@ describe Common::Request::ResponseProcessor do
       end
     end
 
-    context 'when user rejects' do
+    context 'when user with push notifications rejects' do
       it 'logs rejecting response status as message to request' do
+        volunteer.update preferences: { notifications_to_app: true }
+
         expect(Message).to receive(:create!).with(volunteer: volunteer,
                                                   request: request,
                                                   text: I18n.t('request.responses.rejected'),
-                                                  direction: :incoming,
+                                                  direction: :outgoing,
                                                   state: :received)
         Common::Request::ResponseProcessor.new(request, volunteer, false).perform
       end
