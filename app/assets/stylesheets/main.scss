@@ -231,5 +231,10 @@ alerts {
     &.warn {
       background-color: #f7f700;
     }
+
+    &.error {
+      background-color: red;
+      color: white;
+    }
   }
 }

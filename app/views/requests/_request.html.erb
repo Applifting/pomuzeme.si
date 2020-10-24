@@ -7,7 +7,7 @@
       <%= request.organisation.name %>
     </span>
   </cell>
-  <cell class="description"><%= request.text %></cell>
+  <cell class="description"><%= request.text || request.text %></cell>
   <cell class="counts flex center">
     <div class="flex">
       <span class="number">

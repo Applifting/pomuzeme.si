@@ -6,11 +6,8 @@ class HomeController < PublicController
     session[:volunteer_id] = nil
     session[:group_id]     = nil
 
-    @requests            = Request.includes(:address, :requested_volunteers, :organisation)
-                                  .assignable
-                                  .order(created_at: :desc)
-                                  .limit(3)
-    @all_requests_count  = Request.assignable.count
+    @requests            = Request.for_web.limit(3)
+    @all_requests_count  = Request.for_web.count
     @news                = News.cached_recent_news(5)
     @publications        = News.cached_recent_from_media(5)
   end
