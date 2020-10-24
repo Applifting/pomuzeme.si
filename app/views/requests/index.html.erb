@@ -1,0 +1,14 @@
+<section class="section-hero section">
+  <div class="hero-content" style="flex-direction: column;">
+    <%= render partial: 'volunteer_profiles/navigation' if @current_volunteer %>
+
+    <h2>Žádosti o pomoc</h2>
+    <%= render partial: 'common/flash' %>
+
+    <div class="table border-bottom">
+      <% @requests.each do |request| %>
+        <%= render partial: 'request_with_button', locals: { request: request } %>
+      <% end %>
+    </div>
+  </div>
+</section>

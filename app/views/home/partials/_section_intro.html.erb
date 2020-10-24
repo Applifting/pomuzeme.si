@@ -1,6 +1,4 @@
-<div class="wave-container">
-  <%= image_tag asset_path('bg-wave.svg'), class: 'wave' %>
-</div>
+<%= render partial: 'home/partials/wave' %>
 
 <section id="intro" class="section-intro">
   <div class="section">
@@ -43,6 +41,4 @@
   </div>
 </section>
 
-<div class="wave-container">
-  <%= image_tag asset_path('bg-wave.svg'), class: 'wave bottom' %>
-</div>
+<%= render partial: 'home/partials/wave', locals: { direction: :bottom } %>

@@ -181,6 +181,7 @@ cs:
         requested_volunteers: Oslovení dobrovolníci
         state: Stav
         state_last_updated_at: Stav naposledy aktualizován
+        is_public: Zveřejnit na webu
         subscriber: Příjemce
         subscriber_hidden: skrytý příjemce
         subscriber_phone: Telefon příjemce
@@ -297,7 +298,7 @@ cs:
   volunteer_profile:
     login:
       title: Přihlášení do profilu
-      description: V profilu dobrovolníka si můžete aktualizovat bydliště a jiné preference, abychom vám mohli nabídnout ty správné dobrovolnické činnosti.
+      description: V profilu dobrovolníka můžete zobrazit aktuální žádosti o pomoc, nebo aktualizovat bydliště a jiné preference, abychom vám mohli nabídnout ty správné dobrovolnické činnosti.
     delete_profile:
       title: Zrušení registrace
       description: Pro zrušení registrace zadejte telefonní číslo, pod kterým jste se zaregistroval/a.

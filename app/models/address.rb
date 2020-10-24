@@ -63,6 +63,14 @@ class Address < ApplicationRecord
     [street, street_number, city, city_part, postal_code].uniq.compact.reject(&:blank?).join ', '
   end
 
+  def short
+    result = []
+    result << city if city
+    brackets = [city_part == city ? nil : city_part, street].uniq.compact.reject(&:blank?).join(' - ')
+    result << "(#{brackets})" if brackets.present?
+    result.compact.reject(&:blank?).join(' ')
+  end
+
   def only_address_errors?
     errors.keys.map(&:to_s).none? { |key| key.start_with? 'addressable' }
   end
