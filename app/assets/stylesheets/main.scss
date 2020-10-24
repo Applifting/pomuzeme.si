@@ -184,8 +184,16 @@ h4 {
   flex-wrap: wrap;
   margin-bottom: 12px;
 
-  button:not(:first-child), a:not(:first-child) {
-    margin-left: 12px;
+  @include md {
+    button:not(:first-child), a:not(:first-child) {
+      margin-left: 12px;
+    }
+  }
+
+  @include sm {
+    button:not(:first-child), a:not(:first-child) {
+      margin-left: 0px;
+    }
   }
 
   &.inline {
