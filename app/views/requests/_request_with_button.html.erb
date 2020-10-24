@@ -1,0 +1,5 @@
+<% button = link_to 'Mám zájem', '#', id: 'hard_reload_target',
+                                      class: "main-button secondary small",
+                                      'data-target' => login_path(redirect_to: requests_path) %>
+
+<%= render partial: 'request', locals: { request: request, button: button} %>

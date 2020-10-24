@@ -1,0 +1,25 @@
+<row>
+  <cell class="organisation flex">
+    <div class="address">
+      <%= request.address.short %>
+    </div>
+    <span class="title">
+      <%= request.organisation.name %>
+    </span>
+  </cell>
+  <cell class="description"><%= request.text %></cell>
+  <cell class="counts flex center">
+    <div class="flex">
+      <span class="number">
+        <%= request.requested_volunteers.length%> / <%= request.required_volunteer_count %>
+      </span>
+      <span style="font-size: 12px">
+        potvrzených / požadovaných dobrovolníků
+      </span>
+      <span style="font-size: 12px">
+        vytvořeno: <%= I18n.l request.created_at, format: :short %>
+      </span>
+    </div>
+    <%= button if defined? button %>
+  </cell>
+</row>

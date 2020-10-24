@@ -30,6 +30,10 @@ img {
   @include sm {
     padding: 0 16px;
   }
+
+  .has-text-centered {
+    text-align: center;
+  }
 }
 
 %common-button {
@@ -72,8 +76,11 @@ img {
     max-width: 288px;
   }
 
-  &.secondary {
-    background-color: $secondary-button-color;
+  &.small {
+    height: 42px;
+    line-height: 42px;
+    font-size: 14px;
+    border-radius: 22px;
   }
 }
 
