@@ -1,0 +1,15 @@
+<%= render partial: 'home/partials/wave' %>
+<section class="section-intro">
+  <div class="section">
+    <h2>Žádosti o pomoc</h2>
+    <div class="table border-bottom">
+      <% @requests.each do |request| %>
+        <%= render partial: 'requests/request', locals: { request: request } %>
+      <% end %>
+    </div>
+    <div class="container has-text-centered">
+      <%= link_to "Všechny žádosti (#{@all_requests_count})", requests_path, id: 'cta-all-requests', class: 'main-button' %>
+    </div>
+  </div>
+</section>
+<%= render partial: 'home/partials/wave', locals: { direction: :bottom } %>

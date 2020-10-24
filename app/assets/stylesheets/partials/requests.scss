@@ -1,0 +1,68 @@
+.table {
+  .address {
+    margin-bottom: 16px;
+    font-size: 1.6em;
+    font-weight: bold;
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  row {
+    &:hover {
+      background-color: #fbf2e4;
+    }
+  }
+
+  cell.organisation {
+    width: 40%;
+
+    .title {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: gray;
+    }
+
+    @include md {
+      width: 100%
+    }
+  }
+
+  cell.description {
+    width: 40%;
+    font-size: 1.2em;
+
+    @include md {
+      width: 100%
+    }
+  }
+
+  cell.counts {
+    width: 20%;
+    font-size: 32px;
+    font-weight: bolder;
+
+    .number {
+      font-family: Montserrat;
+    }
+
+    @include md {
+      width: 100%
+    }
+  }
+
+  .flex {
+    display: flex;
+    flex-direction: column;
+    margin: 4px 0;
+
+    &.center {
+      align-items: center;
+    }
+
+    span {
+      margin: 6px 0;
+    }
+  }
+}

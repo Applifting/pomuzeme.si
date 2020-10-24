@@ -6,9 +6,9 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
 
   menu priority: 2
 
-  permit_params :closed_note, :coordinator_id, :created_by_id, :fullfillment_date, :organisation_id,
-                :required_volunteer_count, :state, :subscriber, :subscriber_phone, :subscriber_email,
-                :text, :long_text, :block_volunteer_until,
+  permit_params :closed_note, :coordinator_id, :created_by_id, :fullfillment_date, :is_public,
+                :organisation_id, :required_volunteer_count, :state, :subscriber, :subscriber_phone,
+                :subscriber_email, :text, :long_text, :block_volunteer_until,
                 address_attributes: %i[street_number street city city_part postal_code country_code
                                        latitude longitude geo_entry_id]
 
@@ -127,6 +127,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
           row :created_at
           row :creator
           row :organisation
+          row :is_public
         end
       end
       panel nil do
@@ -174,6 +175,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     f.inputs 'Koordinace' do
       organisations = current_user.cached_admin? ? Organisation.all : Organisation.user_group_organisations(current_user)
 
+      f.input :is_public
       f.input :state if resource.persisted?
       f.input :organisation, as: :select,
                              collection: organisations,
