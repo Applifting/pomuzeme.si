@@ -24,7 +24,7 @@
           Nepřišel vám ověřovací kód? <%= link_to 'Zkusit znovu', resend_volunteer_path, remote: true, method: :post  %>
         </p>
 
-        <%= form.submit 'Dokončit registraci', class: 'form-button', data: { disable_with: "Dokončit registraci..." } %>
+        <%= form.submit 'Dokončit registraci', class: 'form-button', id: 'cta-confirm-registration-code', data: { disable_with: "Dokončit registraci..." } %>
       <% end %>
     </section>
   </div>
