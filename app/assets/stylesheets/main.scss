@@ -198,7 +198,6 @@ h4 {
 
   &.inline {
     flex-direction: row;
-    flex-wrap: unset;
 
     button:not(:first-child), a:not(:first-child) {
       margin-left: 18px;
@@ -244,5 +243,15 @@ alerts {
       background-color: red;
       color: white;
     }
+  }
+}
+
+ul.styled {
+  padding-left: 24px;
+  line-height: 28px;
+
+  li {
+    list-style-type: circle;
+    color: gray;
   }
 }

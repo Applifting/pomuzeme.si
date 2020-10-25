@@ -2,16 +2,13 @@ class SessionsController < ApplicationController
   layout 'volunteer_profiles'
 
   before_action :load_session
+  before_action :set_login_description_based_on_redirect, only: %i[new request_code]
 
   def new
     redirect_to volunteer_profile_path if session[:volunteer_id]
-
-    set_after_login_redirect_action
   end
 
   def request_code
-    set_after_login_redirect_action
-
     if @session.valid?
       send_and_persist_verification_code
 
@@ -43,13 +40,15 @@ class SessionsController < ApplicationController
     session.delete :volunteer_id
     @current_volunteer = nil
 
-    redirect_to params[:redirect_to].presence || login_path
+    redirect_to params[:redirect_to].presence || home_page_path
   end
 
   private
 
-  def set_after_login_redirect_action
-    @action = (params[:redirect_to] || @session.redirect_to) == confirm_destruction_of_volunteer_profile_path ? :delete_profile : :login
+  def set_login_description_based_on_redirect
+    redirect = params[:redirect_to] || @session.redirect_to
+
+    @action = helpers.login_screen_text(redirect)
   end
 
   def load_session

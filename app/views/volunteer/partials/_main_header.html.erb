@@ -1,8 +1,8 @@
 <% content_for :logo_url do %>
   <% if @current_volunteer.present? %>
-    <a href="<%= volunteer_profile_path %>" class="link slide-link">
+    <a href="<%= volunteer_profile_path %>" id="nav-logo" class="link slide-link">
   <% else %>
-    <a href="#" id="hard_reload_target" data-target="/" class="link">
+    <a href="#" id="nav-logo" data-target="/" class="link hard_reload">
   <% end %>
     <%= image_tag asset_path('pomuzemesi.svg'), class: 'main-logo'  %>
   </a>
@@ -19,7 +19,7 @@
     <nav class="navigation">
       <ul id="js-mobile-menu-list" class="mobile-menu-list">
         <% if @current_volunteer %>
-          <a href="<%= logout_path %>" class="link slide-link">Odhlásit se</a>
+          <a href="<%= logout_path %>" class="link slide-link main-button">Odhlásit se</a>
         <% else %>
           <button class="modal-button modal-trigger main-button" id="cta-chci-pomahat-2" data-target="registration" aria-haspopup="true">
             Chci pomáhat

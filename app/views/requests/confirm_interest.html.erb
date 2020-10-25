@@ -1,0 +1,11 @@
+<section class="section-hero section">
+  <div class="hero-content" style="flex-direction: column;">
+    <div class="column-left">
+      <h2>Chcete přijmout tuto žádost o pomoc?</h2>
+    </div>
+    <div class="table border-bottom">
+        <%= render partial: 'requests/request', locals: { request: @request} %>
+      </div>
+    <%= link_to 'PŘIJMOUT ŽÁDOST', accept_request_path(request_id: @request.id), method: :post, class: "main-button secondary small" %>
+  </div>
+</section>
