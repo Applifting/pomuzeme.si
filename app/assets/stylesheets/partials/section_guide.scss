@@ -21,7 +21,7 @@
 
   .guide-content {
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: center;
 
     @include lg {
@@ -43,17 +43,33 @@
 
       @include lg {
         margin: 20px 0;
+
+        img {
+          height: 108px !important;
+
+          &.smaller {
+            height: 68px !important;
+          }
+        }
       }
 
       p {
         font-size: 20px;
         line-height: 160%;
       }
+
+      img {
+        height: 160px;
+
+        &.smaller {
+          height: 88px;
+        }
+      }
     }
 
     .arrow {
       position: relative;
-      bottom: 160px;
+      bottom: -58px;
 
       @include xl {
         display: none;
