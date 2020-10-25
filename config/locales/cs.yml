@@ -303,6 +303,9 @@ cs:
     delete_profile:
       title: Zrušení registrace
       description: Pro zrušení registrace zadejte telefonní číslo, pod kterým jste se zaregistroval/a.
+    accept_request:
+      title: Přijetí žádosti o pomoc
+      description: Pro přijetí žádosti o pomoc si vytvořte registraci, nebo se přihlašte.
 
   errors:
     messages:

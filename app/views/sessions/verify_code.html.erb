@@ -5,7 +5,7 @@
       <p>který jsme vám zaslali na <%= @session.phone %></p>
       <%= form_tag verify_code_path, method: :post, remote: false do |f| %>
         <%= label_tag :code, "Ověřovací kód" %>
-        <%= text_field_tag :code, '', required: true %>
+        <%= text_field_tag :code, (session[:verification_code] if Rails.env.development?), required: true %>
         <%= hidden_field_tag :redirect_to, @session.redirect_to %>
         <div class="error-list">
           <ul>

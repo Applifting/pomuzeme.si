@@ -9,7 +9,6 @@ section.section-hero {
 
   .hero-content {
     display: flex;
-    padding-bottom: 88px;
 
     @include lg {
       flex-direction: column;

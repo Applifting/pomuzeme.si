@@ -1,9 +1,14 @@
 class RequestsController < PublicController
-  skip_before_action :authorize_current_volunteer, except: [:accept]
+  skip_before_action :authorize_current_volunteer, only: [:index]
+  before_action :load_request, only: %i[confirm_interest accept]
 
   def index
     @requests            = Request.for_web.decorate
     @all_requests_count  = Request.for_web.count
+  end
+
+  def confirm_interest
+    redirect_to(requests_path) && return unless request_permissible
   end
 
   def accept
@@ -14,15 +19,20 @@ class RequestsController < PublicController
 
     if volunteer_already_accepted
       flash[:warn] = 'Tuto žádost už jste jednou přijal/a.'
+
+      redirect_to(requests_path) && return
     else
       add_volunteer_to_request
       log_acceptance_message
-
-      flash[:success] = 'Děkujeme. Vaše kontaktní údaje předáme koordinátorovi, který se vám brzy ozve.'
     end
 
-    redirect_to requests_path
+    redirect_to(request_accepted_path) && return
   end
+
+  def request_accepted
+    @all_requests_count  = Request.for_web.count
+  end
+
 
   private
 
@@ -31,6 +41,10 @@ class RequestsController < PublicController
     RequestedVolunteer.create! volunteer: @current_volunteer,
                                request_id: params[:request_id],
                                state: :notified
+  end
+
+  def load_request
+    @request = Request.assignable.find_by(id: params[:request_id].to_i)&.decorate
   end
 
   def log_acceptance_message
@@ -45,11 +59,9 @@ class RequestsController < PublicController
   end
 
   def request_permissible
-    request_permitted = Request.assignable.where(id: params[:request_id].to_i).present?
+    return true if @request.present?
 
-    return true if request_permitted
-
-    flash[:error] = 'Tuto žádost se nepodařilo přidělit.'
+    flash[:error] = 'Tuto žádost nelze přijmout.'
     Raven.capture_exception StandardError.new('Request cannot be found')
     false
   end

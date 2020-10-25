@@ -4,11 +4,11 @@
     <h2>Žádosti o pomoc</h2>
     <div class="table border-bottom">
       <% @requests.each do |request| %>
-        <%= render partial: 'requests/request', locals: { request: request } %>
+        <%= render partial: 'requests/request_with_button', locals: { request: request } %>
       <% end %>
     </div>
     <div class="container has-text-centered">
-      <%= link_to "Všechny žádosti (#{@all_requests_count})", requests_path, id: 'cta-all-requests', class: 'main-button' %>
+      <%= link_to "Všechny žádosti (#{@all_requests_count})", requests_path, id: 'cta-seznam-zadosti', class: 'main-button' %>
     </div>
   </div>
 </section>
