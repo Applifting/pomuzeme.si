@@ -6,7 +6,7 @@ class VolunteerProfilesController < PublicController
                           .where(id: @current_volunteer.id)
                           .first
 
-    @all_requests_count  = Request.assignable.count
+    @all_requests_count  = Request.for_web.count
   end
 
   def update

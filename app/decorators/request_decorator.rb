@@ -8,10 +8,14 @@ class RequestDecorator < ApplicationDecorator
 
   def subscriber
     if h.can?(:manage, object)
-      object.subscriber
+      subscriber_organisation.present? ? "#{subscriber_organisation} (#{object.subscriber})" : object.subscriber
     else
-      I18n.t 'activerecord.attributes.request.subscriber_hidden'
+      object.subscriber_organisation.presence || I18n.t('activerecord.attributes.request.subscriber_hidden')
     end
+  end
+
+  def public_subscriber
+    object.subscriber_organisation.presence || I18n.t('activerecord.attributes.request.subscriber_hidden')
   end
 
   def address_link

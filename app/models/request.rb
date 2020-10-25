@@ -43,7 +43,7 @@ class Request < ApplicationRecord
   }
 
   # Scopes
-  scope :for_web, -> { assignable.publishable.includes(:address, :requested_volunteers, :organisation).order(created_at: :desc) }
+  scope :for_web, -> { assignable.publishable.includes(:address, :requested_volunteers).order(created_at: :desc) }
   scope :publishable, -> { where(is_public: true) }
   scope :sorted_state, -> { order(state: :asc, state_last_updated_at: :desc) }
   scope :assignable, -> { where(state: %i[created searching_capacity pending_confirmation]) }
