@@ -11,7 +11,7 @@
   <cell class="counts flex center">
     <div class="flex">
       <span class="number">
-        <%= request.requested_volunteers.map { |rv| rv.state == :accepted }.count %> / <%= request.required_volunteer_count %>
+        <%= request.requested_volunteers.select { |rv| rv.state == :accepted }.count %> / <%= request.required_volunteer_count %>
       </span>
       <span style="font-size: 12px">
         potvrzených / požadovaných dobrovolníků
