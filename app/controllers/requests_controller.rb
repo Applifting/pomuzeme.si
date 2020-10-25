@@ -6,6 +6,9 @@ class RequestsController < PublicController
     @all_requests_count  = Request.for_web.count
   end
 
+  def confirm_interest
+  end
+
   def accept
     redirect_to(requests_path) && return unless request_permissible
 
@@ -24,9 +27,10 @@ class RequestsController < PublicController
     redirect_to(request_accepted_path) && return
   end
 
-  def acceptance_confirmation
+  def request_accepted
     @all_requests_count  = Request.for_web.count
   end
+
 
   private
 

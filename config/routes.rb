@@ -28,7 +28,8 @@ Rails.application.routes.draw do
   get 'profil_zrusen', to: 'volunteer_profiles#destroyed', as: :profile_destroyed
   get 'prilezitosti', to: 'requests#index', as: :requests
   post 'accept', to: 'requests#accept', as: :accept_request
-  get 'prijeti-zadosti', to: 'requests#acceptance_confirmation', as: :request_accepted
+  get 'zadost-prijata', to: 'requests#request_accepted', as: :request_accepted
+  get 'potvrdte-zajem', to: 'requests#confirm_interest', as: :confirm_interest
 
   resource :volunteer, only: [] do
     post :register, on: :collection
