@@ -1,12 +1,12 @@
-module VolunteerHelper
+module SessionsHelper
   def login_screen_text(path)
     return :login if path.blank?
 
-    path = VolunteerHelper.normalize_path path
+    path = SessionsHelper.normalize_path path
     case path
-    when VolunteerHelper.normalize_path(confirm_destruction_of_volunteer_profile_path)
+    when SessionsHelper.normalize_path(confirm_destruction_of_volunteer_profile_path)
       :delete_profile
-    when VolunteerHelper.normalize_path(confirm_interest_path(1))
+    when SessionsHelper.normalize_path(confirm_interest_path(1))
       :accept_request
     else
       :login
