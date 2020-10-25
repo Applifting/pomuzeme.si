@@ -183,7 +183,8 @@ cs:
         state_last_updated_at: Stav naposledy aktualizován
         is_public: Zveřejnit na webu
         subscriber: Příjemce
-        subscriber_hidden: skrytý příjemce
+        subscriber_hidden: Příjemce je jednotlivec
+        subscriber_organisation: Organizace příjemce
         subscriber_phone: Telefon příjemce
         subscriber_email: Email příjemce
         created_at: Vytvořeno
