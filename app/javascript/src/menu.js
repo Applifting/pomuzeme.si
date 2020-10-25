@@ -18,7 +18,7 @@ $(document).on('turbolinks:load', function () {
 
     menuButton.onclick = () => mobileMenu.classList.add('open');
 
-    const linkIds = ['home', 'intro', 'guide', 'news', 'partners'];
+    const linkIds = ['home', 'intro', 'guide', 'news', 'requests'];
 
     mobileLinks.forEach((link, index) => link.addEventListener('click', () => {
         closeCallback();

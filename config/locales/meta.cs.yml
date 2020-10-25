@@ -1,0 +1,11 @@
+cs:
+  meta:
+    home:
+      title: Pomůžeme si - dostaneme dobrovolníky tam, kde jsou třeba
+      description: Hledáte jako dobrovolník příležitosti pro pomoc druhým? Oslovíme vás s nabídkami dle vašich zájmů, nebo si vyberete z žádostí o pomoc nejen ze sociální péče a zdravotnictví.
+    prihlaseni:
+      title: Pomůžeme si - přihlášení dobrovolníka
+      description: V profilu dobrovolníka nám řeknete své preference v pomoci druhým. Chcete do zdravotnictví, sociální péče, nebo se raději věnujete dětem?
+    prilezitosti:
+      title: Pomůžeme si - žádosti o pomoc
+      description: Veřejný seznam organizací, které aktuálně potřebují o dobrovolníky. Najděte si svojí příležitost a kliknutím dejte koordinátorovi vědět, že máte zájem.
