@@ -2,7 +2,7 @@ class RequestsController < PublicController
   skip_before_action :authorize_current_volunteer, except: [:accept]
 
   def index
-    @requests            = Request.for_web
+    @requests            = Request.for_web.decorate
     @all_requests_count  = Request.for_web.count
   end
 
@@ -27,9 +27,10 @@ class RequestsController < PublicController
   private
 
   def add_volunteer_to_request
+    # Volunteer is created in notified state which is later updated by ReceivedProcessorJob
     RequestedVolunteer.create! volunteer: @current_volunteer,
                                request_id: params[:request_id],
-                               state: :accepted
+                               state: :notified
   end
 
   def log_acceptance_message
