@@ -43,7 +43,7 @@ class SessionsController < ApplicationController
     session.delete :volunteer_id
     @current_volunteer = nil
 
-    redirect_to params[:redirect_to].presence || login_path
+    redirect_to params[:redirect_to].presence || home_page_path
   end
 
   private

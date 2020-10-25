@@ -246,3 +246,13 @@ alerts {
     }
   }
 }
+
+ul.styled {
+  padding-left: 24px;
+  line-height: 28px;
+
+  li {
+    list-style-type: circle;
+    color: gray;
+  }
+}

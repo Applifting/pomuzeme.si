@@ -14,14 +14,18 @@ class RequestsController < PublicController
 
     if volunteer_already_accepted
       flash[:warn] = 'Tuto žádost už jste jednou přijal/a.'
+
+      redirect_to(requests_path) && return
     else
       add_volunteer_to_request
       log_acceptance_message
-
-      flash[:success] = 'Děkujeme. Vaše kontaktní údaje předáme koordinátorovi, který se vám brzy ozve.'
     end
 
-    redirect_to requests_path
+    redirect_to(request_accepted_path) && return
+  end
+
+  def acceptance_confirmation
+    @all_requests_count  = Request.for_web.count
   end
 
   private
