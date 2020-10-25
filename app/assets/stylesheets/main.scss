@@ -198,7 +198,6 @@ h4 {
 
   &.inline {
     flex-direction: row;
-    flex-wrap: unset;
 
     button:not(:first-child), a:not(:first-child) {
       margin-left: 18px;

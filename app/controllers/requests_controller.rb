@@ -1,5 +1,6 @@
 class RequestsController < PublicController
-  skip_before_action :authorize_current_volunteer, except: [:accept]
+  skip_before_action :authorize_current_volunteer, only: [:index]
+  before_action :load_request, only: %i[confirm_interest accept]
 
   def index
     @requests            = Request.for_web.decorate
@@ -7,6 +8,7 @@ class RequestsController < PublicController
   end
 
   def confirm_interest
+    redirect_to(requests_path) && return unless request_permissible
   end
 
   def accept
@@ -41,6 +43,10 @@ class RequestsController < PublicController
                                state: :notified
   end
 
+  def load_request
+    @request = Request.assignable.find_by(id: params[:request_id].to_i)&.decorate
+  end
+
   def log_acceptance_message
     message = Message.create! volunteer: @current_volunteer,
                               request_id: params[:request_id],
@@ -53,11 +59,9 @@ class RequestsController < PublicController
   end
 
   def request_permissible
-    request_permitted = Request.assignable.where(id: params[:request_id].to_i).present?
+    return true if @request.present?
 
-    return true if request_permitted
-
-    flash[:error] = 'Tuto žádost se nepodařilo přidělit.'
+    flash[:error] = 'Tuto žádost nelze přijmout.'
     Raven.capture_exception StandardError.new('Request cannot be found')
     false
   end

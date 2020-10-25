@@ -1,4 +1,4 @@
-<div class="button-group inline" style="width: 560px;">
+<div class="button-group inline">
   <%= link_to 'Profil', volunteer_profile_path, class: class_names('main-button', if_path_active(volunteer_profile_path, 'secondary', 'tertiary')) %>
   <%= link_to "Žádosti o pomoc (#{@all_requests_count})", requests_path, class: class_names('main-button', if_path_active(requests_path, 'secondary', 'tertiary')),
                                                                          id: 'cta-seznam-zadosti' %>
