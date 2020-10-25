@@ -1,0 +1,34 @@
+<%= render 'volunteer/partials/main_header' %>
+
+<section class="section-guide section">
+  <h2 style="margin-top: 118px;">Potřebujete dobrovolníky?</h2>
+  <h3 style="margin-bottom: 28px;">Najdeme dobrovolníka/y pro organizaci i jednotlivce</h3>
+  <div class="guide-content">
+    <div class="step">
+      <%= image_tag asset_path('hiw-laptop.svg'), class: 'smaller' %>
+      <p>
+        1. Během hodiny zveřejníme vaší poptávku na tomto portálu s dosahem 1800 potenciálních dobrovolníků týdně.
+      </p>
+    </div>
+    <%= image_tag asset_path('arrow.svg'), class: 'arrow' %>
+    <div class="step">
+      <%= image_tag asset_path('hiw-phone.svg'), class: 'smaller' %>
+      <p>
+        2. Poptávku také rozpošleme registrovaným dobrovolníkům ve vašem okolí.
+      </p>
+    </div>
+    <%= image_tag asset_path('arrow.svg'), class: 'arrow' %>
+    <div class="step">
+      <%= image_tag asset_path('hiw-thumbs-up.svg'), class: 'smaller' %>
+      <p>
+        3. Přepošleme vám kontakt na dobrovolníky, kteří mají aktivní zájem vám pomoci. Dohodnete s nimi podrobnosti.
+      </p>
+    </div>
+  </div>
+  <div class="container has-text-centered">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScKMDxDV7iBOrVWNNRby_XVtiDxfB5L6kfocnkDbaFxLxfamw/viewform"
+       id="cta-vyplnit-formular-zadosti-o-dobrovolniky" target="_blank" class="main-button">
+      vyplnit formulář
+    </a>
+  </div>
+</section>
