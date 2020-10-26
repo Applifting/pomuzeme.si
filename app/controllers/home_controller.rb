@@ -22,7 +22,7 @@ class HomeController < PublicController
     not_found if @partner_signup_group.blank?
 
     session[:group_id] = @partner_signup_group.id
-    render :index
+    render :partner_signup, layout: 'public'
   end
 
   private
