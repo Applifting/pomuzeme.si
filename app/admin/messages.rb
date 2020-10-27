@@ -1,24 +1,23 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Message do
-  belongs_to :volunteer
-
   permit_params :volunteer_id, :request_id, :created_by_id, :text, :channel
 
   controller do
     def create
       # Potentional vulnerability due to trusting permitted_params values
       MessagingService.create_message permitted_params[:message]
-      redirect_to new_admin_volunteer_message_path(params[:volunteer_id], request_id: params[:message][:request_id]), notice: 'Zpráva odeslána'
+      redirect_to new_admin_message_path(volunteer_id: params[:message][:volunteer_id],
+                                         request_id: params[:message][:request_id]), notice: 'Zpráva odeslána'
     rescue StandardError => e
-      redirect_to new_admin_volunteer_message_path(params[:volunteer_id], request_id: params[:message][:request_id]), alert: e.message
+      redirect_to new_admin_message_path(volunteer_id: params[:message][:volunteer_id],
+                                         request_id: params[:message][:request_id]), alert: e.message
     end
   end
 
   form do |f|
     # Mark incoming messages as read
     Message.mark_read(request_id: params[:request_id], volunteer_id: params[:volunteer_id])
-
 
     groupped_messages = Message.with_request(params[:request_id], params[:volunteer_id])
                                .eager_load(:creator)

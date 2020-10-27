@@ -143,7 +143,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     f.semantic_errors
 
     f.inputs 'Poptávka služby' do
-      f.input :text, as: :text, hint: 'Tento popis dostane dobrovolník do aplikace / SMS', input_html: { class: :character_counter, 'data-limit' => 160 }
+      f.input :text, as: :text, hint: 'Tento popis dostane dobrovolník do aplikace / SMS.', input_html: { class: :character_counter, 'data-limit' => 160 }
       f.input :required_volunteer_count, input_html: { value: object.required_volunteer_count.nil? ? 1 : resource.required_volunteer_count }
       f.input :fullfillment_date, as: :date_time_picker, input_html: { autocomplete: 'off' }
     end
@@ -152,7 +152,8 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
       para 'K osobním údajům příjemce služby se dostanou pouze koordinátoři vaší organizace.', class: :small
       f.input :subscriber
       f.input :subscriber_organisation
-      f.input :subscriber_phone, input_html: { maxlength: 13 }
+      f.input :subscriber_phone, input_html: { maxlength: 13 },
+                                 hint: 'Je-li příjemce organizace, dostane po přijetí poptávky dobrovolníkem automaticky SMS s jeho kontaktem.'
       f.input :subscriber_email, input_html: { maxlength: 64 }
       address_label = proc { |type| I18n.t("activerecord.attributes.request.#{type}") }
       custom_input :full_address, class: 'geocomplete',
