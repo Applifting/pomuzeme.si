@@ -39,7 +39,7 @@ module MessagingService
                                   state: :received,
                                   channel: :sms
 
-        Messages::ReceivedProcessorJob.perform_later message
+        Messages::ReceivedProcessorJob.perform_later(message) if volunteer
       end
     end
   end
