@@ -2,6 +2,7 @@
 
 div class: 'title h4' do
   span 'Poptávky'
+  span link_to('', new_admin_organisation_request_requested_volunteer_path(Request.first, volunteer_id: resource.id), class: 'action add')
 end
 
 table_for resource.requested_volunteers.with_organisations(current_user.coordinating_organisations.pluck(:id)) do
