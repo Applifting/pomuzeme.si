@@ -27,16 +27,19 @@ module MessagingService
 
       def message_received(adapter_response)
         volunteer = Volunteer.find_by(phone: adapter_response.from_number)
+        requests  = Request.where(subscriber_phone: adapter_response.from_number).pluck(:id) if volunteer.blank?
 
-        return unless volunteer
+        return unless volunteer || requests.present?
 
         message = Message.create! volunteer: volunteer,
+                                  phone: adapter_response.from_number,
                                   text: adapter_response.text,
                                   direction: :incoming,
+                                  message_type: (requests.present? ? :subscriber : :other),
                                   state: :received,
                                   channel: :sms
 
-        Messages::ReceivedProcessorJob.perform_later message
+        Messages::ReceivedProcessorJob.perform_later(message) if volunteer
       end
     end
   end

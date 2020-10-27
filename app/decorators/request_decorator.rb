@@ -14,6 +14,16 @@ class RequestDecorator < ApplicationDecorator
     end
   end
 
+  def subscriber_phone_and_messages
+    unread_incoming = subscriber_messages.unread.incoming.count
+    link_text = unread_incoming.positive? ? 'nepřečetené zprávy' : 'zprávy'
+
+    content = []
+    content << object.subscriber_phone
+    content << h.link_to(link_text, h.new_admin_subscriber_message_path(request_id: id, subscriber_phone: object.subscriber_phone))
+    content.join(' | ').html_safe
+  end
+
   def public_subscriber
     object.subscriber_organisation.presence || I18n.t('activerecord.attributes.request.subscriber_hidden')
   end
