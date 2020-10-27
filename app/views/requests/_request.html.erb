@@ -10,14 +10,14 @@
   <cell class="description"><%= request.long_text.presence || request.text %></cell>
   <cell class="counts flex center">
     <div class="flex">
-      <span class="number">
-        <%= request.requested_volunteers.select { |rv| rv.state == 'accepted' }.count %> / <%= request.required_volunteer_count %>
-      </span>
-      <span style="font-size: 12px">
-        potvrzených / požadovaných dobrovolníků
-      </span>
       <span style="font-size: 12px">
         vytvořeno: <%= I18n.l request.created_at, format: :short %>
+      </span>
+      <span style="font-size: 12px">
+        zbývá volných míst
+      </span>
+      <span class="number">
+        <%= request.required_volunteer_count - request.requested_volunteers.select { |rv| rv.state == 'accepted' }.count %>
       </span>
     </div>
     <%= button if defined? button %>
