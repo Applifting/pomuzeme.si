@@ -18,6 +18,7 @@ module Common
 
           # This probably should be higher up in the chain so that we don't need to treat the 'if' exception
           log_response_message if volunteer.push_notifications?
+          notify_subscriber_organisation_about_acceptance if request_accepted?
         end
       end
 
@@ -35,6 +36,15 @@ module Common
         return @request_accepted if defined? @request_accepted
 
         @request_accepted = ActiveModel::Type::Boolean.new.cast is_accepted
+      end
+
+      def notify_subscriber_organisation_about_acceptance
+        return if request.subscriber_organisation.blank?
+
+        text = I18n.t 'sms.request.subscriber_notification', identifier: request.identifier,
+                                                             full_name: volunteer.to_s,
+                                                             phone: volunteer.phone
+        SmsService.send_text request.subscriber_phone, text
       end
 
       def resolve_request_state
