@@ -36,7 +36,7 @@ RSpec.describe Message, type: :model do
       end
     end
 
-    context '.with_request' do
+    context '.with_request_and_volunteer' do
       let(:volunteer) { create :volunteer }
       let(:another_volunteer) { create :volunteer }
       let!(:request) { create :request }
@@ -44,22 +44,22 @@ RSpec.describe Message, type: :model do
       let!(:message) { create :message, volunteer: volunteer }
 
       it 'returns messages with matching volunteer id and no request id' do
-        expect(Message.with_request(request.id, volunteer.id)).to include(message)
+        expect(Message.with_request_and_volunteer(request_id: request.id, volunteer_id: volunteer.id)).to include(message)
       end
 
       it 'returns messages with matching volunteer id and request id' do
         message.update! request: request
-        expect(Message.with_request(request.id, volunteer.id)).to include(message)
+        expect(Message.with_request_and_volunteer(request_id: request.id, volunteer_id: volunteer.id)).to include(message)
       end
 
       it 'does not return messages with matching volunteer id and different request id' do
         message.update! request: another_request
-        expect(Message.with_request(request.id, volunteer.id)).not_to include(message)
+        expect(Message.with_request_and_volunteer(request_id: request.id, volunteer_id: volunteer.id)).not_to include(message)
       end
 
       it 'does not return messages with different volunteer id and matching request id' do
         message.update! volunteer: another_volunteer, request: request
-        expect(Message.with_request(request.id, volunteer.id)).not_to include(message)
+        expect(Message.with_request_and_volunteer(request_id: request.id, volunteer_id: volunteer.id)).not_to include(message)
       end
     end
   end

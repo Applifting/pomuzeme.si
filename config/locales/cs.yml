@@ -186,6 +186,7 @@ cs:
         subscriber_hidden: Příjemce je jednotlivec
         subscriber_organisation: Organizace příjemce
         subscriber_phone: Telefon příjemce
+        subscriber_phone_and_messages: Telefon příjemce
         subscriber_email: Email příjemce
         created_at: Vytvořeno
         states:

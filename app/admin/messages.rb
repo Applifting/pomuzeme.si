@@ -19,12 +19,14 @@ ActiveAdmin.register Message do
     # Mark incoming messages as read
     Message.mark_read(request_id: params[:request_id], volunteer_id: params[:volunteer_id])
 
-    groupped_messages = Message.with_request(params[:request_id], params[:volunteer_id])
+    groupped_messages = Message.with_request_and_volunteer(request_id: params[:request_id], volunteer_id: params[:volunteer_id])
                                .eager_load(:creator)
                                .order(:created_at)
                                .decorate.group_by { |msg| msg.created_at.to_date }
 
-    render partial: 'messages', locals: { groupped_messages: groupped_messages }
+    panel 'Konverzace s dobrovolníkem' do
+      render partial: 'messages', locals: { groupped_messages: groupped_messages }
+    end
 
     f.inputs 'Nová zpráva' do
       f.input :text

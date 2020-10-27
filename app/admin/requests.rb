@@ -93,7 +93,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
         if can?(:manage, resource)
           attributes_table_for resource do
             row :subscriber
-            row :subscriber_phone
+            row :subscriber_phone_and_messages
             row :subscriber_email
             row :long_text
           end
