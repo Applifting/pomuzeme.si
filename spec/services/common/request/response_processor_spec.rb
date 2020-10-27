@@ -15,6 +15,31 @@ describe Common::Request::ResponseProcessor do
         .to raise_error(AuthorisationError)
     end
 
+    describe 'subscriber notification' do
+      let(:request)             { create :request, :from_organisation, subscriber_phone: '+420777222444' }
+      let(:volunteer)           { create :volunteer, first_name: 'John', last_name: 'Barber', phone: '+420777111555' }
+      let!(:requested_volunteer) { create :requested_volunteer, request: request, volunteer: volunteer }
+
+      context 'when volunteer accepts request from with subscriber - organisation' do
+        it 'sends request subscriber' do
+          text = format 'Na vaší poptávku %{identifier} se přihlásil nový dobrovolník - %{full_name}, %{phone}.', identifier: request.identifier,
+                  full_name: volunteer.to_s,
+                  phone: volunteer.phone
+          expect(SmsService).to receive(:send_text).with '+420777222444', text
+
+          Common::Request::ResponseProcessor.new(request, volunteer, true).perform
+        end
+      end
+
+      context 'when volunteer accepts request from with subscriber - private individual' do
+        it 'does not send request subscriber' do
+          expect(SmsService).not_to receive(:send_text)
+
+          Common::Request::ResponseProcessor.new(request, volunteer, false).perform
+        end
+      end
+    end
+
     context 'when volunteer with push notifications accepts' do
       it 'logs accepting response status as message to request (to have a record in the Messages)' do
         volunteer.update preferences: { notifications_to_app: true }

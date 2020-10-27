@@ -15,7 +15,7 @@ module Messages
         # Don't process messages for closed requests
         next if @request.closed?
 
-        request_parsable_response && next unless valid_response?
+        send_request_not_parsable_response && next unless valid_response?
 
         Common::Request::ResponseProcessor.new(request, requested_volunteer.volunteer, response).perform
         confirm_response
@@ -36,7 +36,7 @@ module Messages
       response == false
     end
 
-    def request_parsable_response
+    def send_request_not_parsable_response
       volunteer = Volunteer.find(message.volunteer_id)
       text      = I18n.t('sms.request.unrecognized')
 

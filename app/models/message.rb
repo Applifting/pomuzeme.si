@@ -1,5 +1,5 @@
 class Message < ApplicationRecord
-  MESSAGES_WITH_REQUEST_SQL = 'volunteer_id = %{volunteer_id} AND (request_id IS NULL OR request_id = %{request_id})'.freeze
+  VOLUNTEER_MESSAGES_WITH_REQUEST_SQL = 'volunteer_id = %{volunteer_id} AND (request_id IS NULL OR request_id = %{request_id})'.freeze
 
   # Callbacks
   after_create  :update_unread_messages_counter_cache
@@ -15,14 +15,19 @@ class Message < ApplicationRecord
   enum state: { pending: 1, sent: 2, received: 3 }
   enum direction: { outgoing: 1, incoming: 2 }
   enum channel: { sms: 1, push: 2 }
-  enum message_type: { other: 1, request_offer: 2, request_update: 3 }, _prefix: true
+  enum message_type: { other: 1, request_offer: 2, request_update: 3, subscriber: 4 }, _prefix: true
+
+  phony_normalize :phone, default_country_code: 'CZ'
+  phony_normalized_method :phone, default_country_code: 'CZ'
 
   # Validations
   validates_presence_of :text
 
   # Scopes
   scope :unread, -> { where(read_at: nil) }
-  scope :with_request, ->(request_id, volunteer_id) { where(format(MESSAGES_WITH_REQUEST_SQL, request_id: request_id, volunteer_id: volunteer_id)) }
+  scope :with_request_and_volunteer, ->(request_id:, volunteer_id:) do
+    where(format(VOLUNTEER_MESSAGES_WITH_REQUEST_SQL, request_id: request_id, volunteer_id: volunteer_id))
+  end
 
   def mark_as_read
     update read_at: Time.zone.now if read_at.nil?
@@ -33,7 +38,7 @@ class Message < ApplicationRecord
   end
 
   def self.mark_read(request_id:, volunteer_id:)
-    Message.incoming.unread.with_request(:request_id, :volunteer_id).each do |message|
+    Message.incoming.unread.with_request_and_volunteer(request_id: request_id, volunteer_id: volunteer_id).each do |message|
       message.update(read_at: Time.zone.now)
     end
   end

@@ -78,6 +78,11 @@ class Request < ApplicationRecord
     @identifier ||= [organisation.abbreviation, ('%04d' % id)].join '-'
   end
 
+  def subscriber_messages
+    @subscriber_messages = Message.joins('LEFT JOIN requests r ON r.id = messages.request_id OR r.subscriber_phone = messages.phone')
+                                  .where(messages: { message_type: :subscriber }).where('r.id = ?', id)
+  end
+
   private
 
   def address_presence

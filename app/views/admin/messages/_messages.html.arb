@@ -1,25 +1,23 @@
-panel 'Konverzace s dobrovolníkem' do
-  div class: :conversation do
-    para 'Žádné zprávy.' if groupped_messages.blank?
+div class: :conversation do
+  para 'Žádné zprávy.' if groupped_messages.blank?
 
-    groupped_messages.each do |date, messages|
-      ul class: 'messages' do
-        li date, class: 'date-header'
-        messages.each do |msg|
-          li class: msg.sent_by_css('msg') do
-            div class: 'msg-wrapper' do
-              div class: 'msg-box' do
-                div msg.text, class: 'body'
-                div id: 'msg-time', style: 'display: inline-flex' do
-                  seen_date = msg&.read_at
-                  div(span, class: 'unread-dot') unless seen_date
-                  span [msg.creator.to_s, msg.created_at.strftime('%H:%M')].compact.join(' '), class: 'msg-time'
-                  span "| #{Message.human_attribute_name(:channel)}: #{msg.channel}", class: 'msg-channel' if msg.channel.present?
-                  if seen_date
-                    div("přečteno před #{distance_of_time_in_words(seen_date, Time.zone.now)}",
-                        class: 'msg-time tooltip',
-                        title: seen_date)
-                  end
+  groupped_messages.each do |date, messages|
+    ul class: 'messages' do
+      li date, class: 'date-header'
+      messages.each do |msg|
+        li class: msg.sent_by_css('msg') do
+          div class: 'msg-wrapper' do
+            div class: 'msg-box' do
+              div msg.text, class: 'body'
+              div id: 'msg-time', style: 'display: inline-flex' do
+                seen_date = msg&.read_at
+                div(span, class: 'unread-dot') if seen_date.nil? && msg.incoming?
+                span [msg.creator.to_s, msg.created_at.strftime('%H:%M')].compact.join(' '), class: 'msg-time'
+                span "| #{Message.human_attribute_name(:channel)}: #{msg.channel}", class: 'msg-channel' if msg.channel.present?
+                if seen_date
+                  div("přečteno před #{distance_of_time_in_words(seen_date, Time.zone.now)}",
+                      class: 'msg-time tooltip',
+                      title: seen_date)
                 end
               end
             end

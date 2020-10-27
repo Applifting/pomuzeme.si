@@ -73,23 +73,46 @@ describe MessagingService::Callbacks do
   describe '.message_received' do
     before { message.incoming! }
 
-    it 'does nothing when volunteer is not recognized from message' do
-      message_response = mock_message_response number: nil
+    context 'from volunteer' do
+      it 'does nothing when volunteer is not recognized from message' do
+        message_response = mock_message_response number: nil
 
-      expect(Message).not_to receive(:create!)
-      MessagingService::Callbacks.message_received message_response
+        expect(Message).not_to receive(:create!)
+        MessagingService::Callbacks.message_received message_response
+      end
+
+      it 'creates incoming message from volunteer' do
+        message_response = mock_message_response number: volunteer.phone, text: 'hello world'
+
+        expect(Message).to receive(:create!).with(volunteer: volunteer,
+                                                  text: 'hello world',
+                                                  direction: :incoming,
+                                                  phone: volunteer.phone,
+                                                  state: :received,
+                                                  channel: :sms,
+                                                  message_type: :other)
+
+        MessagingService::Callbacks.message_received message_response
+      end
     end
 
-    it 'creates incoming message from volunteer' do
-      message_response = mock_message_response number: volunteer.phone, text: 'hello world'
+    context 'from request subscriber' do
+      let(:request)             { create :request, subscriber_phone: '+420777111222' }
+      let(:requested_volunteer) { create :requested_volunteer }
 
-      expect(Message).to receive(:create!).with(volunteer: volunteer,
-                                                text: 'hello world',
-                                                direction: :incoming,
-                                                state: :received,
-                                                channel: :sms)
+      it 'creates incoming message from subscriber' do
+        message_response = mock_message_response number: '+420777111222'
 
-      MessagingService::Callbacks.message_received message_response
+        expect(Message).to receive(:create!).with(text: 'response text',
+                                                  phone: '+420777111222',
+                                                  direction: :incoming,
+                                                  volunteer: nil,
+                                                  state: :received,
+                                                  channel: :sms,
+                                                  message_type: :subscriber)
+
+        MessagingService::Callbacks.message_received message_response
+      end
     end
 
     it 'schedules job processing incoming message' do

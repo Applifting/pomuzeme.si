@@ -14,5 +14,9 @@ FactoryBot.define do
     after(:build) do |request|
       request.address = build(:address, addressable: request)
     end
+
+    trait :from_organisation do
+      subscriber_organisation { 'Člověk v tísni' }
+    end
   end
 end

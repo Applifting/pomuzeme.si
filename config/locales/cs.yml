@@ -186,6 +186,7 @@ cs:
         subscriber_hidden: Příjemce je jednotlivec
         subscriber_organisation: Organizace příjemce
         subscriber_phone: Telefon příjemce
+        subscriber_phone_and_messages: Telefon příjemce
         subscriber_email: Email příjemce
         created_at: Vytvořeno
         states:
@@ -289,13 +290,14 @@ cs:
     verification: "Overovaci kod pro overeni registrace na portalu pomuzeme.si je: %{code}"
     mobile_authorization: "Overovaci kod pro prihlaseni do aplikace pomuzeme.si je: %{code}"
     welcome: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se ozve jedna z organizaci ve vasem okoli a zapoji vas do deni. Reknete o nas i pratelum? Pomuzeme.si
-    welcome_channel: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se vám ozve %{group_name} a zapoji vas do deni. Reknete o nas i pratelum? pomuzeme.si/%{group_slug}
+    welcome_channel: Vitejte mezi dobrovolniky! Na pomuzeme.si/prilezitosti najdete aktuální seznam žádostí o pomoc. Na pomuzeme.si/profil si nastavíte své preference (zájmy).
     request:
       offer: "%{identifier} %{text} Prosíme, odpovězte ANO / NE"
       unrecognized: Máte-li o poptávku zájem, odpovězte ANO nebo NE
       confirmed: Díky za potvrzení poptávky %{identifier}, koordinátor %{organisation} se vám ozve s detaily.
       rejected: Poptávka %{identifier} organizace %{organisation} byla odmítnuta. Své dobrovolnické preference můžete nastavit na https://pomuzeme.si/profil?utm_medium=sms
       over_capacity: Moc děkujeme za zájem, na poptávku organizace %{organisation} se již našlo dostatek dobrovolníků. Počkejte na další.
+      subscriber_notification: Na vaší poptávku %{identifier} se přihlásil nový dobrovolník - %{full_name}, %{phone}.
   volunteer_profile:
     login:
       title: Přihlášení do profilu

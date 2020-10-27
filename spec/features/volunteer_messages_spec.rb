@@ -50,7 +50,7 @@ RSpec.feature 'Volunteer Messages' do
     it 'marks unread messages as read' do
       expect(requested_volunteer.reload.unread_incoming_messages_count).to eq 1
 
-      visit new_admin_volunteer_message_path(volunteer.id, request_id: request.id)
+      visit new_admin_message_path(volunteer_id: volunteer.id, request_id: request.id)
 
       expect(page).to have_text 'Im not sure'
       expect(requested_volunteer.reload.unread_incoming_messages_count).to eq 0
@@ -68,7 +68,7 @@ RSpec.feature 'Volunteer Messages' do
       expect(requested_volunteer.reload.unread_incoming_messages_count).to eq 2
       expect(requested_volunteer2.reload.unread_incoming_messages_count).to eq 2
 
-      visit new_admin_volunteer_message_path(volunteer.id, request_id: request.id)
+      visit new_admin_message_path(volunteer_id: volunteer.id, request_id: request.id)
 
       expect(requested_volunteer.reload.unread_incoming_messages_count).to eq 0
       expect(requested_volunteer2.reload.unread_incoming_messages_count).to eq 0
