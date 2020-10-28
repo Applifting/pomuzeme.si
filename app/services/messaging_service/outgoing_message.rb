@@ -3,7 +3,7 @@ module MessagingService
     attr_reader :phone, :message, :fcm_token, :request
 
     def initialize(active_record_message)
-      @phone = active_record_message&.volunteer&.phone
+      @phone = active_record_message&.phone
       @fcm_token = active_record_message&.volunteer&.fcm_token
       @text = active_record_message.text
       @creator = active_record_message.creator

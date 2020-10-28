@@ -10,12 +10,12 @@ describe MessagingService do
     it 'creates Message with given args' do
       create_args = {text: 'foobar'}
       expect(Message).to receive(:create!).with(create_args).and_return(create :message)
-      MessagingService.create_message create_args
+      MessagingService.create_and_send_message create_args
     end
 
     it 'delivers message via background job' do
       ActiveJob::Base.queue_adapter = :test
-      expect { MessagingService.create_message build(:message).attributes }
+      expect { MessagingService.create_and_send_message build(:message).attributes }
         .to have_enqueued_job(Messages::SenderJob)
     end
   end

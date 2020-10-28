@@ -41,6 +41,7 @@ FactoryBot.define do
 
     factory :response_to_offer, traits: %w[received incoming] do
       channel { :sms }
+      phone { volunteer&.phone }
     end
   end
 end

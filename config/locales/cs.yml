@@ -56,6 +56,8 @@ cs:
       volunteer_label: Štítek
       request: Poptávky
       organisation_request: Poptávka
+      volunteer_message: Chat s dobrovolníkem
+      subscriber_message: Chat s příjemcem
       news: Aktuality
       skill: Kvalifikace
       interest: Zájmy

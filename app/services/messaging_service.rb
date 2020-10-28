@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module MessagingService
-  def self.create_message(new_message_args)
+  def self.create_and_send_message(new_message_args)
     message = Message.create! new_message_args
     Messages::SenderJob.perform_later message.id
   end

@@ -39,6 +39,6 @@ table_for resource.requested_volunteers.includes(volunteer: :group_volunteers).o
   end
   column '' do |requested_volunteer|
     link_title = requested_volunteer.unread_incoming_messages_count.positive? ? 'nepřečtené zprávy' : 'zprávy'
-    link_to link_title, new_admin_message_path(volunteer_id: requested_volunteer.volunteer_id, request_id: resource.id)
+    link_to link_title, new_admin_volunteer_message_path(volunteer_id: requested_volunteer.volunteer_id, request_id: resource.id)
   end
 end

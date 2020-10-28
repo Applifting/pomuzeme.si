@@ -12,6 +12,7 @@ cs:
     edit_model: "Upravit"
     delete_model: "Smazat"
     details: "Detaily"
+    create_model: "Vytvořit %{model}"
     cancel: "Zrušit"
     empty: "Prázdné"
     previous: "Předchozí"

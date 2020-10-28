@@ -8,3 +8,8 @@ Sidekiq.configure_client do |_config|
     Messages::ReceiverJob.perform_later unless ENV['DISABLE_SMS_RECEIVER'] == 'true'
   end
 end
+
+if Rails.env.development?
+  require 'sidekiq/testing'
+  Sidekiq::Testing.inline!
+end
