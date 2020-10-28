@@ -51,7 +51,10 @@ module SmsService
             send(1)
           end
 
-          handle_response(raw_response)
+          handle_response(raw_response).tap do |parsed_response|
+            event = raw_response.success? ? :message_sent : :message_not_sent
+            log event, parsed_response
+          end
         end
 
         def self.handle_response(raw_response)
@@ -66,8 +69,12 @@ module SmsService
 
         private
 
-        def log(event_type, message)
-          Rails.logger.info format('%{class}: %{event} - from: %{from}', class: self.name, event: event_type, from: message.from_number)
+        def log(event_type, parsed_response)
+          Rails.logger.info format('o2-connector: %{event} - from: %{from}, raw: %{raw_response}', event: event_type,
+                                                                                                   from: parsed_response.from_number,
+                                                                                                   raw_response: parsed_response.raw_response)
+        rescue => e
+          Rails.logger.error e
         end
 
         def handle_response(raw_response)

@@ -29,6 +29,7 @@ module MessagingService
         volunteer = Volunteer.find_by(phone: adapter_response.from_number)
         requests  = Request.where(subscriber_phone: adapter_response.from_number).pluck(:id) if volunteer.blank?
 
+        # True response causes for the message to be acknowledged (marked as received) to the SMS gateway
         return true unless volunteer || requests.present?
 
         message = Message.create! volunteer: volunteer,
@@ -39,8 +40,7 @@ module MessagingService
                                   state: :received,
                                   channel: :sms
 
-        Messages::ReceivedProcessorJob.perform_later(message) if volunteer
-        true
+        Messages::ReceivedProcessorJob.perform_later(message)
       end
     end
   end
