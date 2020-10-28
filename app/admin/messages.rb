@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Message do
-  permit_params :volunteer_id, :request_id, :created_by_id, :text, :channel
+  permit_params :volunteer_id, :request_id, :created_by_id, :text, :channel, :phone
 
   controller do
     def create
@@ -19,6 +19,8 @@ ActiveAdmin.register Message do
     # Mark incoming messages as read
     Message.mark_read(request_id: params[:request_id], volunteer_id: params[:volunteer_id])
 
+    volunteer = Volunteer.find params[:volunteer_id]
+
     groupped_messages = Message.with_request_and_volunteer(request_id: params[:request_id], volunteer_id: params[:volunteer_id])
                                .eager_load(:creator)
                                .order(:created_at)
@@ -34,6 +36,7 @@ ActiveAdmin.register Message do
       f.input :volunteer_id, as: :hidden, input_html: { value: params[:volunteer_id] }
       f.input :created_by_id, as: :hidden, input_html: { value: current_user.id }
       f.input :channel, as: :hidden, input_html: { value: :sms }
+      f.input :phone, as: :hidden, input_html: { value: volunteer.phone }
       custom_input :redirect_to, type: :hidden, value: request.referrer
     end
     f.actions do

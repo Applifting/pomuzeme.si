@@ -64,7 +64,7 @@ module Messages
                                                message_type: :other,
                                                channel: :sms,
                                                text: text,
-                                               phone: message.phone,
+                                               phone: requested_volunteer.phone,
                                                volunteer_id: message.volunteer_id,
                                                request: request
     end

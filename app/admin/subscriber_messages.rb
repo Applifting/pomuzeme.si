@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Message, as: 'Subscriber Message' do
-  permit_params :request_id, :created_by_id, :text, :channel, :message_type
+  permit_params :request_id, :created_by_id, :text, :channel, :message_type, :phone
 
   controller do
     def create
