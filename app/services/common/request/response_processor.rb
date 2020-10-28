@@ -44,7 +44,15 @@ module Common
         text = I18n.t 'sms.request.subscriber_notification', identifier: request.identifier,
                                                              full_name: volunteer.to_s,
                                                              phone: volunteer.phone
-        SmsService.send_text request.subscriber_phone, text
+
+        message = Message.create! text: text,
+                                  direction: :outgoing,
+                                  channel: :sms,
+                                  message_type: :subscriber,
+                                  phone: request.subscriber_phone,
+                                  request: request
+
+        Messages::SenderJob.perform_later message.id
       end
 
       def resolve_request_state

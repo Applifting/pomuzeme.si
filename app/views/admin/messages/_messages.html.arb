@@ -11,7 +11,7 @@ div class: :conversation do
               div msg.text, class: 'body'
               div id: 'msg-time', style: 'display: inline-flex' do
                 seen_date = msg&.read_at
-                div(span, class: 'unread-dot') if seen_date.nil? && msg.incoming?
+                div(span, class: 'unread-dot') if seen_date.nil?
                 span [msg.creator.to_s, msg.created_at.strftime('%H:%M')].compact.join(' '), class: 'msg-time'
                 span "| #{Message.human_attribute_name(:channel)}: #{msg.channel}", class: 'msg-channel' if msg.channel.present?
                 if seen_date
