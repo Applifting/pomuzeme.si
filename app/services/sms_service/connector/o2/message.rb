@@ -67,15 +67,20 @@ module SmsService
           raise SmsService::MessagingError, parsed_response.response_description
         end
 
-        private
-
-        def log(event_type, parsed_response)
+        def self.log(event_type, parsed_response)
           Rails.logger.info format('o2-connector: %{event} - from: %{from}, raw: %{raw_response}', event: event_type,
                                                                                                    from: parsed_response.from_number,
                                                                                                    raw_response: parsed_response.raw_response)
         rescue => e
           Rails.logger.error e
         end
+
+        def log(event_type, parsed_response)
+          Message.log event_type, parsed_response
+        end
+
+        private
+
 
         def handle_response(raw_response)
           self.class.handle_response raw_response
