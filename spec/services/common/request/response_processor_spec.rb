@@ -21,21 +21,21 @@ describe Common::Request::ResponseProcessor do
       let!(:requested_volunteer) { create :requested_volunteer, request: request, volunteer: volunteer }
 
       context 'when volunteer accepts request from with subscriber - organisation' do
-        it 'sends request subscriber' do
-          text = format 'Na vaší poptávku %{identifier} se přihlásil nový dobrovolník - %{full_name}, %{phone}.', identifier: request.identifier,
+        it 'sends voluteer contact to request subscriber' do
+          text = format 'Na vaší poptávku %{identifier} se přihlásil nový dobrovolník - %{full_name}, %{phone}.',
+                  identifier: request.identifier,
                   full_name: volunteer.to_s,
                   phone: volunteer.phone
-          expect(SmsService).to receive(:send_text).with '+420777222444', text
+
+          expect(Message).to receive(:create!).with(request: request,
+                                                    text: text,
+                                                    direction: :outgoing,
+                                                    message_type: :subscriber,
+                                                    channel: :sms,
+                                                    phone: '+420777222444')
+                                              .and_return(Message.new)
 
           Common::Request::ResponseProcessor.new(request, volunteer, true).perform
-        end
-      end
-
-      context 'when volunteer accepts request from with subscriber - private individual' do
-        it 'does not send request subscriber' do
-          expect(SmsService).not_to receive(:send_text)
-
-          Common::Request::ResponseProcessor.new(request, volunteer, false).perform
         end
       end
     end

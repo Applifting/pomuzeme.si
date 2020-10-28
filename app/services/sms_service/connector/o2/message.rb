@@ -14,6 +14,7 @@ module SmsService
 
         def self.receive
           raw_response = O2.client.get('/smsconnector/getpost/GP', { query: { action: 'receive', baID: O2::BA_ID } })
+          log :raw_message_received, raw_response
           response = handle_response(raw_response)
           block_given? ? yield(response) : response
         end
@@ -27,7 +28,10 @@ module SmsService
           }
 
           raw_response = O2.client.get('/smsconnector/getpost/GP', { query: confirm_query })
-          handle_response(raw_response)
+          handle_response(raw_response).tap do |parsed_response|
+            event = raw_response.success? ? :message_confirmed : :message_not_confirmed
+            log event, parsed_response
+          end
         end
 
         def self.send(phone, text, delivery_report:)
@@ -61,6 +65,10 @@ module SmsService
         end
 
         private
+
+        def log(event_type, message)
+          Rails.logger.info format('%{class}: %{event} - from: %{from}', class: self.name, event: event_type, from: message.from_number)
+        end
 
         def handle_response(raw_response)
           self.class.handle_response raw_response
