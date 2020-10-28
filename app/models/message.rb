@@ -55,6 +55,25 @@ class Message < ApplicationRecord
     end
   end
 
+  # Manual test methods
+  def self.test_acceptance_sms(request, volunteer)
+    message = Message.incoming.sms.create! text: 'Ano',
+                                           phone: volunteer.phone,
+                                           request: request,
+                                           volunteer: volunteer
+
+    Messages::ReceivedProcessorJob.perform_later message
+  end
+
+  def self.test_rejection_sms(request, volunteer)
+    message = Message.incoming.sms.create! text: 'Ne',
+                                           phone: volunteer.phone,
+                                           request: request,
+                                           volunteer: volunteer
+
+    Messages::ReceivedProcessorJob.perform_later message
+  end
+
   private
 
   def should_validate?

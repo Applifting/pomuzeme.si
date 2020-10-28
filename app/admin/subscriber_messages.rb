@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Message, as: 'Subscriber Message' do
+  menu false
+
   permit_params :request_id, :created_by_id, :text, :channel, :message_type, :phone
 
   controller do
@@ -25,7 +27,7 @@ ActiveAdmin.register Message, as: 'Subscriber Message' do
                                          .order(:created_at)
                                          .decorate.group_by { |msg| msg.created_at.to_date }
 
-    panel 'Konverzace s příjemcem' do
+    panel 'Chat s příjemcem' do
       render partial: 'admin/messages/messages', locals: { groupped_messages: groupped_messages }
     end
 
