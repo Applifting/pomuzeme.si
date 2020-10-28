@@ -14,15 +14,14 @@ class RequestsController < PublicController
   def accept
     redirect_to(requests_path) && return unless request_permissible
 
-    volunteer_already_accepted = RequestedVolunteer.where(volunteer: @current_volunteer, request_id: params[:request_id].to_i).present?
+    @requested_volunteer = RequestedVolunteer.find_by(volunteer: @current_volunteer, request_id: params[:request_id])
 
-
-    if volunteer_already_accepted
+    if @requested_volunteer&.accepted?
       flash[:warn] = 'Tuto žádost už jste jednou přijal/a.'
 
       redirect_to(requests_path) && return
     else
-      add_volunteer_to_request
+      add_or_update_requested_volunteer
       log_acceptance_message
     end
 
@@ -36,11 +35,10 @@ class RequestsController < PublicController
 
   private
 
-  def add_volunteer_to_request
-    # Volunteer is created in notified state which is later updated by ReceivedProcessorJob
-    RequestedVolunteer.create! volunteer: @current_volunteer,
-                               request_id: params[:request_id],
-                               state: :notified
+  def add_or_update_requested_volunteer
+    # If missing, volunteer is created in notified state which is later updated by ReceivedProcessorJob
+    @requested_volunteer ||= RequestedVolunteer.find_or_create_by(volunteer: @current_volunteer, request: @request)
+    @requested_volunteer.notified!
   end
 
   def load_request
@@ -52,7 +50,7 @@ class RequestsController < PublicController
                               request_id: params[:request_id],
                               direction: :incoming,
                               state: :received,
-                              channel: :sms,
+                              channel: :web,
                               text: 'Ano'
 
     Messages::ReceivedProcessorJob.perform_later message

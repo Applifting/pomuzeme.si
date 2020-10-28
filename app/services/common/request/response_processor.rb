@@ -45,14 +45,12 @@ module Common
                                                              full_name: volunteer.to_s,
                                                              phone: volunteer.phone
 
-        message = Message.create! text: text,
-                                  direction: :outgoing,
-                                  channel: :sms,
-                                  message_type: :subscriber,
-                                  phone: request.subscriber_phone,
-                                  request: request
-
-        Messages::SenderJob.perform_later message.id
+        MessagingService.create_and_send_message text: text,
+                                                 direction: :outgoing,
+                                                 channel: :sms,
+                                                 message_type: :subscriber,
+                                                 phone: request.subscriber_phone,
+                                                 request: request
       end
 
       def resolve_request_state
@@ -66,8 +64,9 @@ module Common
         Message.create! volunteer: volunteer,
                         request: request,
                         text: message_text,
-                        direction: :outgoing,
-                        state: :received
+                        direction: :incoming,
+                        state: :received,
+                        channel: :push
       end
 
       def message_text

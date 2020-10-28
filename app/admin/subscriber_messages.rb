@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Message, as: 'Subscriber Message' do
-  permit_params :request_id, :created_by_id, :text, :channel, :message_type
+  menu false
+
+  permit_params :request_id, :created_by_id, :text, :channel, :message_type, :phone
 
   controller do
     def create
       # Potentional vulnerability due to trusting permitted_params values
-      MessagingService.create_message permitted_params[:message]
+      MessagingService.create_and_send_message permitted_params[:message]
       redirect_to new_admin_subscriber_message_path(request_id: params[:message][:request_id],
                                                     subscriber_phone: params[:message][:phone]), notice: 'Zpráva odeslána'
     rescue StandardError => e
@@ -25,7 +27,7 @@ ActiveAdmin.register Message, as: 'Subscriber Message' do
                                          .order(:created_at)
                                          .decorate.group_by { |msg| msg.created_at.to_date }
 
-    panel 'Konverzace s příjemcem' do
+    panel 'Chat s příjemcem' do
       render partial: 'admin/messages/messages', locals: { groupped_messages: groupped_messages }
     end
 
