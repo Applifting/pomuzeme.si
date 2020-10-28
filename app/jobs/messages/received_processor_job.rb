@@ -45,7 +45,7 @@ module Messages
     end
 
     def capacity_exceeded_response
-      create_message I18n.t('sms.request.over_capacity', organisation: request.organisation.name)
+      create_volunteer_message I18n.t('sms.request.over_capacity', organisation: request.organisation.name)
     end
 
     def mark_message_as_read
@@ -54,18 +54,19 @@ module Messages
 
     def confirm_response
       msg_type = response ? 'sms.request.confirmed' : 'sms.request.rejected'
-      create_message I18n.t(msg_type,
-                            identifier: request.identifier,
-                            organisation: request.organisation.name)
+      create_volunteer_message I18n.t(msg_type,
+                                      identifier: request.identifier,
+                                      organisation: request.organisation.name)
     end
 
-    def create_message(text)
-      MessagingService.create_message direction: :outgoing,
-                                      message_type: :other,
-                                      channel: :sms,
-                                      text: text,
-                                      volunteer_id: message.volunteer_id,
-                                      request: request
+    def create_volunteer_message(text)
+      MessagingService.create_and_send_message direction: :outgoing,
+                                               message_type: :other,
+                                               channel: :sms,
+                                               text: text,
+                                               phone: message.phone,
+                                               volunteer_id: message.volunteer_id,
+                                               request: request
     end
 
     def response

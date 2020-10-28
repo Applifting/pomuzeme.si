@@ -52,7 +52,7 @@ class RequestsController < PublicController
                               request_id: params[:request_id],
                               direction: :incoming,
                               state: :received,
-                              channel: :sms,
+                              channel: :web,
                               text: 'Ano'
 
     Messages::ReceivedProcessorJob.perform_later message

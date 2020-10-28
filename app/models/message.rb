@@ -14,7 +14,7 @@ class Message < ApplicationRecord
   # Attributes
   enum state: { pending: 1, sent: 2, received: 3 }
   enum direction: { outgoing: 1, incoming: 2 }
-  enum channel: { sms: 1, push: 2 }
+  enum channel: { sms: 1, push: 2, web: 3 }
   enum message_type: { other: 1, request_offer: 2, request_update: 3, subscriber: 4 }, _prefix: true
 
   phony_normalize :phone, default_country_code: 'CZ'
@@ -22,6 +22,7 @@ class Message < ApplicationRecord
 
   # Validations
   validates_presence_of :text
+  validates :phone, phony_plausible: true, presence: true, if: :should_validate?
 
   # Scopes
   scope :unread, -> { where(read_at: nil) }
@@ -55,6 +56,10 @@ class Message < ApplicationRecord
   end
 
   private
+
+  def should_validate?
+    new_record? && sms?
+  end
 
   def update_unread_messages_counter_cache
     Message.update_unread_messages_counter_cache(volunteer_id: volunteer_id, request_id: request_id)

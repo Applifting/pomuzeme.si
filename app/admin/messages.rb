@@ -6,7 +6,7 @@ ActiveAdmin.register Message do
   controller do
     def create
       # Potentional vulnerability due to trusting permitted_params values
-      MessagingService.create_message permitted_params[:message]
+      MessagingService.create_and_send_message permitted_params[:message]
       redirect_to new_admin_message_path(volunteer_id: params[:message][:volunteer_id],
                                          request_id: params[:message][:request_id]), notice: 'Zpráva odeslána'
     rescue StandardError => e

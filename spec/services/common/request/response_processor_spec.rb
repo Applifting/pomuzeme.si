@@ -46,8 +46,9 @@ describe Common::Request::ResponseProcessor do
 
         expect(Message).to receive(:create!).with(volunteer: volunteer,
                                                   request: request,
+                                                  channel: :push,
                                                   text: I18n.t('request.responses.accept'),
-                                                  direction: :outgoing,
+                                                  direction: :incoming,
                                                   state: :received)
         Common::Request::ResponseProcessor.new(request, volunteer.reload, true).perform
       end
@@ -87,7 +88,8 @@ describe Common::Request::ResponseProcessor do
         expect(Message).to receive(:create!).with(volunteer: volunteer,
                                                   request: request,
                                                   text: I18n.t('request.responses.rejected'),
-                                                  direction: :outgoing,
+                                                  direction: :incoming,
+                                                  channel: :push,
                                                   state: :received)
         Common::Request::ResponseProcessor.new(request, volunteer, false).perform
       end

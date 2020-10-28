@@ -30,25 +30,26 @@ module Admin
 
       def notification_of_assigned(requested_volunteer)
         requested_volunteer.pending_notification!
-        MessagingService.create_message direction: :outgoing,
-                                        message_type: :request_offer,
-                                        request: request,
-                                        channel: resolve_channel(requested_volunteer),
-                                        text: resolve_text(requested_volunteer),
-                                        volunteer_id: requested_volunteer.volunteer_id,
-                                        creator: user
+        MessagingService.create_and_send_message direction: :outgoing,
+                                                 message_type: :request_offer,
+                                                 request: request,
+                                                 phone: requested_volunteer.phone,
+                                                 channel: resolve_channel(requested_volunteer),
+                                                 text: resolve_text(requested_volunteer),
+                                                 volunteer_id: requested_volunteer.volunteer_id,
+                                                 creator: user
       end
 
       def notification_of_updated(requested_volunteer)
         return unless should_receive_push_update? requested_volunteer
 
-        MessagingService.create_message direction: :outgoing,
-                                        message_type: :request_update,
-                                        request: request,
-                                        channel: :push,
-                                        text: push_text_updated,
-                                        volunteer_id: requested_volunteer.volunteer_id,
-                                        creator: user
+        MessagingService.create_and_send_message direction: :outgoing,
+                                                 message_type: :request_update,
+                                                 request: request,
+                                                 channel: :push,
+                                                 text: push_text_updated,
+                                                 volunteer_id: requested_volunteer.volunteer_id,
+                                                 creator: user
       end
 
       def resolve_text(requested_volunteer)
@@ -70,7 +71,7 @@ module Admin
 
       def push_text_updated
         I18n.t 'push.notifications.request.update.body', description: request.text,
-                                                      organisation: request.organisation.name
+                                                         organisation: request.organisation.name
       end
 
       def should_receive_push_update?(requested_volunteer)
