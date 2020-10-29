@@ -1,0 +1,33 @@
+<%= form_with url: requests_path, method: :get, local: true do |form| %>
+  <div style="display: flex; align-items: center;">
+    <address_input style="width: 100%; max-width: 380px;">
+      <div class="address-title">
+        <span>Hledat poblíž lokality</span>
+      </div>
+
+      <div class="input-field">
+        <%= form.text_field :search_nearby, value: params[:search_nearby], id: 'location_search',
+                                            class: 'validate autocomplete',
+                                            required: true,
+                                            ariaRequired: true,
+                                            'data-type': :request %>
+      </div>
+
+      <%= form.hidden_field :request_street %>
+      <%= form.hidden_field :request_street_number %>
+      <%= form.hidden_field :request_city %>
+      <%= form.hidden_field :request_city_part %>
+      <%= form.hidden_field :request_postal_code %>
+      <%= form.hidden_field :request_country_code %>
+      <%= form.hidden_field :request_geo_entry_id %>
+      <%= form.hidden_field :request_geo_unit_id %>
+      <%= form.hidden_field :request_geo_coord_x %>
+      <%= form.hidden_field :request_geo_coord_y %>
+    </address_input>
+
+    <%= form.submit 'Hledat', class: 'form-button',
+                              id:'cta-hledat-zadosti-pobliz',
+                              style: 'width: 166px',
+                              data: { disable_with: "Hledám..." } %>
+  </div>
+<% end %>

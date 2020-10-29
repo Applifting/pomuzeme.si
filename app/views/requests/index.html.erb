@@ -5,6 +5,8 @@
     <h2>Žádosti o pomoc</h2>
     <%= render partial: 'common/flash' %>
 
+    <%= render partial: 'requests/search_form' %>
+
     <div class="table border-bottom">
       <% @requests.each do |request| %>
         <%= render partial: 'request_with_button', locals: { request: request } %>
