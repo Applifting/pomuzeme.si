@@ -14,6 +14,12 @@ class RequestDecorator < ApplicationDecorator
     end
   end
 
+  def distance_km
+    return nil unless object.respond_to?(:distance_meters) && object.distance_meters.present?
+
+    h.content_tag :p, format('%{distance} km', distance: ((object.distance_meters / 1000).round(1)))
+  end
+
   def subscriber_phone_and_messages
     unread_incoming = subscriber_messages.unread.incoming.count
     link_text = unread_incoming.positive? ? 'nepřečetené zprávy' : 'zprávy'

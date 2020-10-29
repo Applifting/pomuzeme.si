@@ -6,8 +6,8 @@ class HomeController < PublicController
     session[:volunteer_id] = nil
     session[:group_id]     = nil
 
-    @requests            = Request.for_web.limit(3).decorate
-    @all_requests_count  = Request.for_web.count
+    @requests            = Request.for_web_preloaded.limit(3).decorate
+    @all_requests_count  = Request.for_web_preloaded.count
     @news                = News.cached_recent_news(5)
     @publications        = News.cached_recent_from_media(5)
   end

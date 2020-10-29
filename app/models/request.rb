@@ -2,6 +2,7 @@
 
 class Request < ApplicationRecord
   TITLE_MAX_LENGTH = 30
+  NEAREST_ADDRESSES_SQL = 'CROSS JOIN (SELECT ST_SetSRID(ST_MakePoint(%{longitude}, %{latitude}), 4326)::geography AS ref_geom) AS r'.freeze
 
   # Hooks
   before_validation :set_state, :set_state_last_updated_at
@@ -43,7 +44,8 @@ class Request < ApplicationRecord
   }
 
   # Scopes
-  scope :for_web, -> { assignable.publishable.includes(:address, :requested_volunteers).order(created_at: :desc) }
+  scope :for_web, -> { assignable.publishable }
+  scope :for_web_preloaded, -> { assignable.publishable.includes(:address, :requested_volunteers).order(created_at: :desc) }
   scope :publishable, -> { where(is_public: true) }
   scope :sorted_state, -> { order(state: :asc, state_last_updated_at: :desc) }
   scope :assignable, -> { where(state: %i[created searching_capacity pending_confirmation]) }
@@ -53,6 +55,21 @@ class Request < ApplicationRecord
   scope :without_coordinator, -> { where(coordinator_id: nil) }
   scope :has_unread_messages, -> { joins(:requested_volunteers).where('requested_volunteers.unread_incoming_messages_count > 0').distinct }
   scope :not_closed, -> { where.not(state: :closed) }
+  scope :with_calculated_distance, lambda { |center_point|
+    joins(:address).joins(format(NEAREST_ADDRESSES_SQL, longitude: center_point.longitude, latitude: center_point.latitude))
+                     .select('requests.*', 'addresses.id AS distance_address_id', 'ST_Distance(addresses.coordinate, ref_geom) as distance_meters')
+                     .order('distance_meters ASC')
+  }
+
+  # Dirty ransack scopes
+  def self.ransackable_scopes(_opts)
+    %i[search_nearby]
+  end
+
+  def self.search_nearby(encoded_location)
+    latitude, longitude = encoded_location.split '#'
+    with_calculated_distance Geography::Point.from_coordinates(longitude: longitude, latitude: latitude)
+  end
 
   def title
     [text[0..39], address].compact.join ', '
