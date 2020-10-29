@@ -19,7 +19,6 @@ function handleAutocompleteBlur(event, target) {
 }
 
 window.initAutocompleteForResultElements = function(result_prefix){
-    console.log(result_prefix)
     var input = $(".geocomplete")
     var target = $("#" + input.data("target"))
     var autocomplete = new google.maps.places.Autocomplete(input[0])

@@ -8,7 +8,6 @@ window.findProperty = function (input, type, property) {
 window.signUpLocationCallback = function (){
     var input = $('#location_search');
     var resource_type = input.attr('data-type');
-    console.log(resource_type)
     var autocomplete = new google.maps.places.Autocomplete(input[0]);
     autocomplete.setTypes([]);
     autocomplete.setComponentRestrictions({country: "cz"});
