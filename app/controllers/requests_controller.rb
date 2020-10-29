@@ -3,7 +3,13 @@ class RequestsController < PublicController
   before_action :load_request, only: %i[confirm_interest accept]
 
   def index
-    @requests            = Request.for_web.decorate
+    if params[:request_geo_coord_y].present? && params[:request_geo_coord_x].present?
+      search = Request.for_web.ransack(search_nearby: encoded_coordinates, order: :distance_meters_asc)
+      @requests = search.result.decorate
+    else
+      @requests = Request.for_web_preloaded.decorate
+    end
+
     @all_requests_count  = Request.for_web.count
   end
 
@@ -34,6 +40,10 @@ class RequestsController < PublicController
 
 
   private
+
+  def encoded_coordinates
+    format '%{lat}#%{lon}', lat: params[:request_geo_coord_y], lon: params[:request_geo_coord_x]
+  end
 
   def add_or_update_requested_volunteer
     # If missing, volunteer is created in notified state which is later updated by ReceivedProcessorJob
