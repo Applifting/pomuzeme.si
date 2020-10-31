@@ -6,8 +6,8 @@
       </div>
 
       <div class="input-field">
-        <%= form.text_field :search_nearby, value: params[:search_nearby], id: 'location_search',
-                                            class: 'validate autocomplete',
+        <%= form.text_field :search_nearby, value: params[:search_nearby],
+                                            class: 'validate autocomplete location_search',
                                             required: true,
                                             ariaRequired: true,
                                             'data-type': :request %>

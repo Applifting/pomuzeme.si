@@ -10,7 +10,7 @@ require("channels");
 import 'materialize-css/dist/js/materialize'
 require("src/materialize");
 require("src/google_autocomplete");
-require("src/hard_reload");
+require("src/modal");
 require("src/flash_messages");
 require("src/menu");
 

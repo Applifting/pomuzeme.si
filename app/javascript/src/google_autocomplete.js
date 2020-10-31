@@ -5,13 +5,13 @@ window.findProperty = function (input, type, property) {
         return ''
     }
 }
-window.signUpLocationCallback = function (){
-    var input = $('#location_search');
-    var resource_type = input.attr('data-type');
-    var autocomplete = new google.maps.places.Autocomplete(input[0]);
+
+function initPlacesSearch(element) {
+    var resource_type = element.getAttribute('data-type');
+    var autocomplete = new google.maps.places.Autocomplete(element);
     autocomplete.setTypes([]);
     autocomplete.setComponentRestrictions({country: "cz"});
-    input.prop('placeholder', '')
+    element.placeholder = ""
 
     autocomplete.addListener("place_changed", function() {
         // TODO: extract into common module with ActiveAdmins geocomplete file
@@ -45,3 +45,16 @@ window.signUpLocationCallback = function (){
         $(`#${resource_type}_geo_unit_id`).val(address.remote_provider_id);
     })
 }
+window.signUpLocationCallback = function (){
+    console.log('signUpLocationCallback FX fired')
+    var inputs = document.getElementsByClassName('location_search');
+
+    for (let item of inputs) {
+        initPlacesSearch(item);
+    }
+}
+
+
+$(document).on('turbolinks:load', function() {
+    window.signUpLocationCallback();
+});

@@ -1,10 +1,9 @@
 <% button = if @current_volunteer
-     link_to 'Mám zájem', accept_request_path(request_id: request.id), method: :post, id: 'cta-zajem-o-poptavku-prihlaseny',
-                                                                       class: "main-button secondary small hard_reload"
+     link_to 'Mám zájem', confirm_interest_path(request_id: request.id), method: :post, id: 'cta-zajem-o-poptavku-prihlaseny',
+                                                                         class: "main-button secondary small"
    else
-     link_to 'Mám zájem', '#', id: 'cta-zajem-o-poptavku-neprihlaseny',
-                               class: "main-button secondary small hard_reload",
-                               'data-target' => login_path(redirect_to: confirm_interest_path(request_id: request.id))
+     link_to 'Mám zájem', login_path(redirect_to: confirm_interest_path(request_id: request.id)), id: 'cta-zajem-o-poptavku-neprihlaseny',
+                               class: "main-button secondary small"
    end %>
 
 <%= render partial: 'requests/request', locals: { request: request, button: button} %>

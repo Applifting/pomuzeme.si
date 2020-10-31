@@ -2,7 +2,7 @@
   <% if @current_volunteer.present? %>
     <a href="<%= volunteer_profile_path %>" id="nav-logo" class="link slide-link">
   <% else %>
-    <a href="#" id="nav-logo" data-target="/" class="link hard_reload">
+    <a href="/" id="nav-logo" class="link">
   <% end %>
     <%= image_tag asset_path('pomuzemesi.svg'), class: 'main-logo'  %>
   </a>
