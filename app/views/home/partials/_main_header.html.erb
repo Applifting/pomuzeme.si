@@ -12,7 +12,7 @@
       <ul id="js-mobile-menu-list" class="mobile-menu-list">
         <%= render 'home/partials/menu_items' unless @partner_signup_group %>
         <li>
-          <a href="#" class="main-button hard_reload" id="cta-prihlasit-se" data-target="<%= login_path %>">Přihlásit se</a>
+          <a href="<%= login_path %>" class="main-button" id="cta-prihlasit-se">Přihlásit se</a>
         </li>
       </ul>
     </nav>
@@ -27,7 +27,7 @@
       <ul id="js-desktop-menu-list" class="desktop-menu">
         <%= render 'home/partials/menu_items' unless @partner_signup_group %>
         <li class="menu-item">
-          <a href="#" class="link wanna-join hard_reload" id="cta-prihlasit-se" data-target="<%= login_path %>">
+          <a href="<%= login_path %>" class="link wanna-join" id="cta-prihlasit-se">
             Přihlásit se
           </a>
         </li>

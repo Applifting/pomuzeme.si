@@ -55,7 +55,7 @@
           </div>
 
           <div class="input-field">
-            <%= form.text_field :street_search, class: 'validate autocomplete', id: :location_search,
+            <%= form.text_field :street_search, class: 'validate autocomplete location_search',
                                                 'data-type': :volunteer, required: true, ariaRequired: true %>
             <%= form.label :street_search, class: 'required' %>
           </div>
@@ -95,7 +95,7 @@
           </div>
 
           <%= form.submit 'Zaregistrovat se', class: 'form-button', id:'cta-submit-registration-form', data: { disable_with: "Zaregistrovat se..." } %>
-          <%= recaptcha_v3(action: 'login') %>
+
         <% end %>
       </div>
     </section>
