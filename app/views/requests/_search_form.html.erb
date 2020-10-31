@@ -1,5 +1,5 @@
 <%= form_with url: requests_path, method: :get, local: true do |form| %>
-  <div style="display: flex; align-items: center;">
+  <div style="display: flex; align-items: center; flex-wrap: wrap;">
     <address_input style="width: 100%; max-width: 380px;">
       <div class="address-title">
         <span>Hledat poblíž lokality</span>
@@ -27,7 +27,7 @@
 
     <%= form.submit 'Hledat poblíž', class: 'form-button',
                               id:'cta-hledat-zadosti-pobliz',
-                              style: 'width: 188px',
+                              style: 'width: 208px',
                               data: { disable_with: "Hledám..." } %>
   </div>
 <% end %>

@@ -48,7 +48,7 @@ img {
   text-decoration: none;
   text-align: center;
   outline: none;
-  padding: 0;
+  padding: 0 22px;
   margin: 12px 0;
   font-family: $title-font;
 
@@ -68,12 +68,18 @@ img {
   height: 64px;
   line-height: 64px;
   font-size: 18px;
-  max-width: 320px;
+  max-width: 338px;
   border-radius: 32px;
   box-shadow: $shadow_1;
+  margin-left: 16px;
+  margin-right: 16px;
 
   @include sm {
     max-width: 288px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px;
+    font-size: 16px;
   }
 
   &.small {
@@ -184,24 +190,36 @@ h4 {
   flex-wrap: wrap;
   margin-bottom: 12px;
 
-  @include md {
-    button:not(:first-child), a:not(:first-child) {
-      margin-left: 12px;
-    }
-  }
+  // .main-button {
+  //   margin-left: 16px;
+  //   margin-right: 16px;
 
-  @include sm {
-    button:not(:first-child), a:not(:first-child) {
-      margin-left: 0px;
-    }
-  }
+  //   @include sm {
+  //     margin-left: 0px;
+  //     margin-right: 0px;
+  //     padding: 0px;
+  //     font-size: 16px;
+  //   }
+  // }
+
+  // @include md {
+  //   button:not(:first-child), a:not(:first-child) {
+  //     margin-left: 12px;
+  //   }
+  // }
+
+  // @include sm {
+  //   button:not(:first-child), a:not(:first-child) {
+  //     margin-left: 0px;
+  //   }
+  // }
 
   &.inline {
     flex-direction: row;
 
-    button:not(:first-child), a:not(:first-child) {
-      margin-left: 18px;
-    }
+    // button:not(:first-child), a:not(:first-child) {
+    //   margin-left: 18px;
+    // }
   }
 
   a:not(.main-button) {
