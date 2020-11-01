@@ -46,7 +46,6 @@ function initPlacesSearch(element) {
     })
 }
 window.signUpLocationCallback = function (){
-    console.log('signUpLocationCallback FX fired')
     var inputs = document.getElementsByClassName('location_search');
 
     for (let item of inputs) {

@@ -15,9 +15,13 @@ class RequestDecorator < ApplicationDecorator
   end
 
   def distance_km
+    (object.distance_meters / 1000).round(1)
+  end
+
+  def distance_km_tag
     return nil unless object.respond_to?(:distance_meters) && object.distance_meters.present?
 
-    h.content_tag :p, format('%{distance} km', distance: ((object.distance_meters / 1000).round(1)))
+    h.content_tag :p, format('%{distance} km', distance: distance_km)
   end
 
   def subscriber_phone_and_messages
