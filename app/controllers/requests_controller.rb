@@ -6,6 +6,7 @@ class RequestsController < PublicController
     if params[:request_geo_coord_y].present? && params[:request_geo_coord_x].present?
       search = Request.for_web.ransack(search_nearby: encoded_coordinates, order: :distance_meters_asc)
       @requests = search.result.decorate
+      @closest_request_km = @requests.first.distance_km
     else
       @requests = Request.for_web_preloaded.decorate
     end

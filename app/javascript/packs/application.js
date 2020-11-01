@@ -11,6 +11,7 @@ import 'materialize-css/dist/js/materialize'
 require("src/materialize");
 require("src/google_autocomplete");
 require("src/modal");
+require("src/analytics");
 require("src/flash_messages");
 require("src/menu");
 
