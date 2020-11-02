@@ -74,5 +74,34 @@ section.section-hero {
         margin: 30px 0 0;
       }
     }
+
+    .current-campaign {
+      padding: 28px;
+      margin: 28px;
+
+      border: 1px solid $secondary-button-color;
+      border-radius: 12px;
+      background-color: $background-dark;
+
+      @include sm {
+        margin: 12px;
+      }
+
+      .hero-image {
+        height: 228px;
+        width: unset;
+        margin: auto;
+        display: block;
+        padding: 16px;
+
+        @include lg {
+          display: unset;
+        }
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
   }
 }
