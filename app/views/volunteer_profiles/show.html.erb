@@ -26,7 +26,9 @@
 
         <div class="input-field">
           <%= f.label :address, 'Adresa / místo, v jejímž okolí působíte (stačí město)', class: 'required' %>
-          <%= f.text_field :address, class: 'autocomplete validate', id: :volunteer_street_search, required: true, ariaRequired: true %>
+          <%= f.text_field :address, class: 'autocomplete validate location_search',
+                                    'data-type' => :volunteer,
+                                     required: true, ariaRequired: true %>
         </div>
 
         <%= f.hidden_field :street %>
