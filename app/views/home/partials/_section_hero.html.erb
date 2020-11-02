@@ -32,12 +32,26 @@
         <button id="cta-chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
           Chci pomáhat
         </button>
-        <%= link_to 'Potřebuji dobrovolníky', need_volunteers_path, class: 'main-button primary', id: 'cta-potrebuji-dobrovolniky' %>
-        <a href="javascript:void(0);" class="js-scrollable main-button tertiary" data-target="pro-organizace" id='nav-pro-organizace'>Organizuji dobrovolníky</a>
+        <%= link_to 'Potřebuji dobrovolníky', need_volunteers_path, class: 'main-button tertiary', id: 'cta-potrebuji-dobrovolniky' %>
       </div>
     </div>
     <div class="column-right">
-      <%= image_tag asset_path('hero.svg'), class: 'hero-image'  %>
+      <div class="current-campaign">
+        <h3 style="text-align: center">Sociální služby</h3>
+        <%= image_tag asset_path('help-seniors.svg'), alt: 'Staňte se dobrovolníkem v pandemii Covid19 a pomáhejte v domovech seniorů, které prožívají personální krizi.',
+                                                      class: 'hero-image'  %>
+        <p>
+          Domovy seniorů prochází personání krizí, jak podrobně popisuje reportáž
+          <a href="https://www.seznamzpravy.cz/clanek/to-nejdulezitejsi-se-nepovedlo-nakaza-se-siri-domovy-pro-seniory-127075" target="_blank">Seznam zpráv</a>.
+        </p>
+        <p>
+          V zařízeních často chybí desítky zaměstnanců a právě teď potřebují vaší pomoc.
+          Vaše ruce jsou potřeba v kuchyních, jídelnách a základní přímé péči o seniory.
+        </p>
+        <div style="text-align: center">
+          <a href="/socialni-sluzby" class="main-button">o pomoci seniorům</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
