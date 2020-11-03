@@ -45,7 +45,7 @@ module Messages
     end
 
     def capacity_exceeded_response
-      create_volunteer_message I18n.t('sms.request.over_capacity', organisation: request.organisation.name)
+      create_volunteer_message I18n.t('sms.request.over_capacity', identifier: request.identifier)
     end
 
     def mark_message_as_read
@@ -54,9 +54,7 @@ module Messages
 
     def confirm_response
       msg_type = response ? 'sms.request.confirmed' : 'sms.request.rejected'
-      create_volunteer_message I18n.t(msg_type,
-                                      identifier: request.identifier,
-                                      organisation: request.organisation.name)
+      create_volunteer_message I18n.t(msg_type, identifier: request.identifier)
     end
 
     def create_volunteer_message(text)
