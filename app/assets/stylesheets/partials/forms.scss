@@ -1,0 +1,13 @@
+form {
+  .invalid_hint {
+    color: red;
+    position: relative;
+    bottom: 18px;
+    font-size: 12px;
+    height: 0px;
+
+    &.hidden {
+      display: none;
+    }
+  }
+}

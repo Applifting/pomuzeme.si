@@ -43,17 +43,57 @@ function initPlacesSearch(element) {
         $(`#${resource_type}_geo_coord_x`).val(address.lng);
         $(`#${resource_type}_geo_entry_id`).val(address.remote_provider_id);
         $(`#${resource_type}_geo_unit_id`).val(address.remote_provider_id);
+
+        validateSelection(element);
     })
 }
 window.signUpLocationCallback = function (){
-    var inputs = document.getElementsByClassName('location_search');
+    eachElementWithClass('location_search', initPlacesSearch);
+}
 
-    for (let item of inputs) {
-        initPlacesSearch(item);
+function eachElementWithClass(className, fx) {
+    var elements = document.getElementsByClassName(className);
+
+    for (let item of elements) {
+        fx(item);
     }
 }
 
+function clearHiddenAddressFields(resource_type) {
+    $(`#${resource_type}_country_code`).val("");
+    $(`#${resource_type}_postal_code`).val("");
+    $(`#${resource_type}_city`).val("");
+    $(`#${resource_type}_city_part`).val("");
+    $(`#${resource_type}_street`).val("");
+    $(`#${resource_type}_street_number`).val("");
+    $(`#${resource_type}_geo_coord_y`).val("");
+    $(`#${resource_type}_geo_coord_x`).val("");
+    $(`#${resource_type}_geo_entry_id`).val("");
+    $(`#${resource_type}_geo_unit_id`).val("");
+}
+
+function ensurePlaceSelection(element) {
+    element.addEventListener('blur', function (event) {
+        validateSelection(event.target);
+    })
+}
+
+function validateSelection(element) {
+    var resourceType = element.getAttribute('data-type');
+    var selectionMade = $(`#${resourceType}_geo_coord_y`).val()
+    var searchInput = element.value
+
+    if(searchInput === "") { clearHiddenAddressFields(resourceType) }
+    if(selectionMade === "" && searchInput !== "") {
+        $('#google_autocomplete').removeClass('hidden');
+        $('form input[type=submit]').prop('disabled', true)
+    } else {
+        $('#google_autocomplete').addClass('hidden');
+        $('form input[type=submit]').prop('disabled', false)
+    }
+}
 
 $(document).on('turbolinks:load', function() {
     window.signUpLocationCallback();
+    eachElementWithClass('location_search', ensurePlaceSelection)
 });

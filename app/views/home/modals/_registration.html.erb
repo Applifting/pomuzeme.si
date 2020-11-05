@@ -59,6 +59,9 @@
                                                 'data-type': :volunteer, required: true, ariaRequired: true %>
             <%= form.label :street_search, class: 'required' %>
           </div>
+          <div class="invalid_hint hidden" id="google_autocomplete">
+            Vyberte lokalitu ze seznamu
+          </div>
 
           <%= form.hidden_field :street %>
           <%= form.hidden_field :street_number %>
