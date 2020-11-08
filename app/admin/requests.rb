@@ -65,7 +65,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   index do
     id_column
     column :state
-    column :subscriber
+    column :subscriber, :subscriber_with_unread_status
     column :text
     column :accepted_volunteers_count do |resource|
       "#{resource.requested_volunteers.accepted.count} / #{resource.required_volunteer_count}"

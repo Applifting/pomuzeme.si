@@ -130,15 +130,6 @@
     width: 100%;
   }
 
-  .unread-dot {
-    height: 6px;
-    width: 6px;
-    background-color: blue;
-    border-radius: 50%;
-    display: inline-block;
-    margin-top: 14px;
-    margin-right: 5px;
-  }
 
   .msg-time.tooltip {
     color: rgba(84, 84, 84, 0.37);
@@ -158,4 +149,18 @@
   .tooltip::after {
     content: ')';
   }
+}
+
+.unread-dot {
+  height: 6px;
+  width: 6px;
+  background-color: blue;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 14px;
+  margin-right: 5px;
+}
+
+.unread-dot-wrapper {
+  padding: 0 6px;
 }
