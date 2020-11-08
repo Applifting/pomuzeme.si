@@ -65,7 +65,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   index do
     id_column
     column :state
-    column :subscriber
+    column :subscriber, :subscriber_with_unread_status
     column :text
     column :accepted_volunteers_count do |resource|
       "#{resource.requested_volunteers.accepted.count} / #{resource.required_volunteer_count}"
@@ -152,7 +152,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
       para 'K osobním údajům příjemce služby se dostanou pouze koordinátoři vaší organizace.', class: :small
       f.input :subscriber
       f.input :subscriber_organisation
-      f.input :subscriber_phone, input_html: { maxlength: 13 },
+      f.input :subscriber_phone, input_html: { maxlength: 13, value: (object.subscriber_phone || '+420') },
                                  hint: 'Je-li příjemce organizace, dostane po přijetí poptávky dobrovolníkem automaticky SMS s jeho kontaktem.'
       f.input :subscriber_email, input_html: { maxlength: 64 }
       address_label = proc { |type| I18n.t("activerecord.attributes.request.#{type}") }
@@ -160,24 +160,25 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
                                   label: object.new_record? ? (address_label['full_address'] + ' *') : address_label['update_address'],
                                   hint: ("Současná adresa: #{f.object.address}" if resource.address)
 
-      f.inputs for: [:address, f.object.address || f.object.build_address] do |address_form|
+      address_object = f.object.address || f.object.build_address
+      f.inputs for: [:address, address_object] do |address_form|
         address_form.input :street_number, as: :hidden
         address_form.input :street, as: :hidden
         address_form.input :city, as: :hidden
         address_form.input :city_part, as: :hidden
         address_form.input :postal_code, as: :hidden
         address_form.input :country_code, as: :hidden
-        address_form.input :latitude, as: :hidden
-        address_form.input :longitude, as: :hidden
+        address_form.input :latitude, as: :hidden, input_html: { value: address_object.coordinate.lat }
+        address_form.input :longitude, as: :hidden, input_html: { value: address_object.coordinate.lon }
         address_form.input :geo_entry_id, as: :hidden
       end
-      f.input :long_text, as: :text, hint: 'Tento popis bude dostupny pouze vybranym dobrovolnikum v aplikaci'
+      f.input :long_text, as: :text, hint: 'Tento popis bude dostupny na webu po zveřejnění'
+      f.input :is_public
     end
 
     f.inputs 'Koordinace' do
       organisations = current_user.cached_admin? ? Organisation.all : Organisation.user_group_organisations(current_user)
 
-      f.input :is_public
       f.input :state if resource.persisted?
       f.input :organisation, as: :select,
                              collection: organisations,

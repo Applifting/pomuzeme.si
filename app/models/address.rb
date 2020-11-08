@@ -1,7 +1,23 @@
 class Address < ApplicationRecord
   NEAREST_ADDRESSES_SQL = 'CROSS JOIN (SELECT ST_SetSRID(ST_MakePoint(%{longitude}, %{latitude}), 4326)::geography AS ref_geom) AS r'.freeze
 
+  # Hooks
+  after_initialize :initialize_defaults
+
+  # Associations
   belongs_to :addressable, polymorphic: true, autosave: true
+
+  # Attributes
+  enum geo_provider: { google_places: 'google_places',
+                       cadstudio: 'cadstudio' }, _suffix: true
+  # Little hack to make form with virtual attributes working.
+  attr_accessor :latitude, :longitude, :address_search_input
+
+  # Validations
+  validates_presence_of :city, :city_part, :geo_entry_id,
+                        :geo_unit_id, :coordinate, :country_code, :geo_provider
+  validates_uniqueness_of :default, scope: [:addressable_type, :addressable_id], if: -> { default }
+
 
   # Scopes
   scope :with_calculated_distance, lambda { |center_point|
@@ -9,18 +25,6 @@ class Address < ApplicationRecord
                                        .select('addresses.*', 'ST_Distance(addresses.coordinate, ref_geom) as distance_meters')
                                    }
   scope :default, -> { where default: true }
-
-  enum geo_provider: { google_places: 'google_places',
-                       cadstudio: 'cadstudio' }, _suffix: true
-
-  validates_presence_of :city, :city_part, :geo_entry_id,
-                        :geo_unit_id, :coordinate, :country_code, :geo_provider
-  validates_uniqueness_of :default, scope: [:addressable_type, :addressable_id], if: -> { default }
-
-  after_initialize :initialize_defaults
-
-  # Little hack to make form with virtual attributes working.
-  attr_accessor :latitude, :longitude, :address_search_input
 
   # Dirty ransack scopes
   def self.ransackable_scopes(_opts)
@@ -78,6 +82,10 @@ class Address < ApplicationRecord
   private
 
   def initialize_defaults
+    puts "________________________"
+    puts latitude
+    puts longitude
+    puts "________________________"
     self.country_code ||= 'cz'
     self.geo_unit_id ||= geo_entry_id
     self.coordinate ||= Geography::Point.from_coordinates latitude: latitude,

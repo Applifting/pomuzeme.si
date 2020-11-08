@@ -14,6 +14,15 @@ class RequestDecorator < ApplicationDecorator
     end
   end
 
+  def subscriber_with_unread_status
+    unread_incoming = subscriber_messages.unread.incoming.count
+
+    content = []
+    content << h.content_tag(:span, '', class: 'unread-dot') if unread_incoming.positive?
+    content << subscriber
+    content.join('').html_safe
+  end
+
   def distance_km
     (object.distance_meters / 1000).round(1)
   end
@@ -26,13 +35,17 @@ class RequestDecorator < ApplicationDecorator
 
   def subscriber_phone_and_messages
     unread_incoming = subscriber_messages.unread.incoming.count
-    link_text = unread_incoming.positive? ? 'nepřečetené zprávy' : 'zprávy'
+    link_text       = unread_incoming.positive? ? 'nepřečetené zprávy' : 'zprávy'
 
     content = []
     content << object.subscriber_phone
-    content << h.link_to(link_text, h.new_admin_subscriber_message_path(request_id: id, subscriber_phone: object.subscriber_phone))
+
+    messages_link = h.link_to(link_text, h.new_admin_subscriber_message_path(request_id: id, subscriber_phone: object.subscriber_phone))
+    messages_link = messages_link + h.content_tag(:span, h.content_tag(:span, '', class: 'unread-dot'), class: 'unread-dot-wrapper') if unread_incoming.positive?
+    content << messages_link
     content.join(' | ').html_safe
   end
+
 
   def public_subscriber
     object.subscriber_organisation.presence || I18n.t('activerecord.attributes.request.subscriber_hidden')
