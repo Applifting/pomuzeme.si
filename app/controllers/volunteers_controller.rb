@@ -1,11 +1,16 @@
 class VolunteersController < ApplicationController
+  RECAPTCHA_THRESHOLD = ENV['RECAPTCHA_THRESHOLD_VOLUNTEER']
+  include Recaptchable
+
   before_action :partner_signup_group
 
-  def register
-    volunteer = Volunteer.new(volunteer_params).with_existing_record
-    address = volunteer.addresses.build address_with_coordinate
+  attr_accessor :volunteer
 
-    if resolve_recaptcha(volunteer) && volunteer.valid? && agreements_granted?(volunteer) && save_and_send_code(volunteer)
+  def register
+    @volunteer = Volunteer.new(volunteer_params).with_existing_record
+    address    = volunteer.addresses.build address_with_coordinate
+
+    if registration_valid
       bind_volunteer_with_organisation_group(volunteer) if @partner_signup_group
       render 'volunteer/register_success'
     else
@@ -40,6 +45,13 @@ class VolunteersController < ApplicationController
   end
 
   private
+
+  def registration_valid
+    resolve_recaptcha(volunteer, RECAPTCHA_THRESHOLD) &&
+      volunteer.valid? &&
+      agreements_granted?(volunteer) &&
+      save_and_send_code(volunteer)
+  end
 
   def volunteer_params
     params.require(:volunteer).permit(:first_name, :last_name, :phone, :email, :description)
@@ -105,18 +117,5 @@ class VolunteersController < ApplicationController
 
   def partner_signup_group
     @partner_signup_group = Group.find(session[:group_id]) if session[:group_id]
-  end
-
-  def resolve_recaptcha(_volunteer)
-    # TEMPORARY DISABLED
-    # score_threshold = ENV['RECAPTCHA_THRESHOLD']&.to_f
-    # if score_threshold.present?
-    # recaptcha = verify_recaptcha(action: 'login', minimum_score: score_threshold)
-    #  volunteer.errors[:recaptcha] << 'je neplatné' unless recaptcha
-    #  recaptcha
-    # else
-    #  true
-    # end
-    true
   end
 end
