@@ -28,7 +28,7 @@ ActiveAdmin.register Message, as: 'Volunteer Message' do
                                .order(:created_at)
                                .decorate.group_by { |msg| msg.created_at.to_date }
 
-    panel 'Chat s dobrovolníkem' do
+    panel Volunteer.find(params[:volunteer_id]).to_s do
       render partial: 'admin/messages/messages', locals: { groupped_messages: groupped_messages }
     end
 

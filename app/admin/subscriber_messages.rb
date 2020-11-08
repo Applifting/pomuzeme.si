@@ -27,7 +27,7 @@ ActiveAdmin.register Message, as: 'Subscriber Message' do
                                          .order(:created_at)
                                          .decorate.group_by { |msg| msg.created_at.to_date }
 
-    panel 'Chat s příjemcem' do
+    panel Request.find(params[:request_id]).decorate.subscriber do
       render partial: 'admin/messages/messages', locals: { groupped_messages: groupped_messages }
     end
 
