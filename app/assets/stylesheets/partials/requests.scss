@@ -66,3 +66,19 @@
     }
   }
 }
+
+.new-request {
+  .container {
+    width: 50%;
+
+    @include md {
+      width: 100%
+    }
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

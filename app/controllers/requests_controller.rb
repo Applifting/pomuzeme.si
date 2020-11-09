@@ -1,5 +1,5 @@
 class RequestsController < PublicController
-  skip_before_action :authorize_current_volunteer, only: [:index]
+  skip_before_action :authorize_current_volunteer, only: [:index, :create]
   before_action :load_request, only: %i[confirm_interest accept]
 
   def index
@@ -12,6 +12,10 @@ class RequestsController < PublicController
     end
 
     @all_requests_count  = Request.for_web.count
+  end
+
+  def create
+
   end
 
   def confirm_interest

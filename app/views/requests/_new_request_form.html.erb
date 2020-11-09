@@ -1,0 +1,101 @@
+<%= form_with model: Request.web.new, url: request_path, remote: false, class: 'hidden new-request' do |form| %>
+  <h4 id="new-request-form">Žádost o zprostředkování dobrovolníka/ů</h4>
+  <div class="container">
+    <div class="input-field">
+      <%= form.text_area :text, class: 'validate', required: true, ariaRequired: true %>
+      <%= form.label 'Co budou dobrovolníci dělat?', for: :request_text, class: 'required' %>
+    </div>
+
+    <div class="input-field">
+      <%= form.number_field :required_volunteer_count, class: 'validate', required: true, ariaRequired: true %>
+      <%= form.label 'Kolik dobrovolníků potřebujete?', for: :request_required_volunteer_count, class: 'required' %>
+    </div>
+
+    <div class="input-field">
+      <%= form.text_field :subscriber, class: 'validate', required: true, ariaRequired: true %>
+      <%= form.label 'Vaše jméno a příjmení', for: :request_subscriber, class: 'required' %>
+    </div>
+
+    <div class="input-field">
+      <%= form.text_field :subscriber_organisation, class: 'validate' %>
+      <%= form.label 'Název organizace', for: :request_subscriber_organisation %>
+    </div>
+
+    <div class="field-title">
+      <span>Telefon</span>
+      <%= tooltip 'Na toto číslo budeme posílat kontakt na dobrovolníky, kteří se na vaší žádost přihlásí.' %>
+    </div>
+
+    <div class="phone-row">
+      <div class="phone-prefix">+420</div>
+
+      <div class="input-field">
+        <%= form.telephone_field :subscriber_phone, class: 'validate', required: true, ariaRequired: true %>
+        <%= form.label 'Mobil', for: :request_subscriber_phone, class: 'required' %>
+      </div>
+    </div>
+
+    <div class="field-title">
+      <span>Lokalita, kde budou dobrovolníci působit</span>
+      <%= tooltip 'Podle vámi zadané lokality budeme hledat dobrovolníky v okolí.' %>
+    </div>
+
+    <div class="input-field">
+      <%= form.text_field :street_search, class: 'validate autocomplete location_search',
+                                          'data-type': :request, required: true, ariaRequired: true %>
+    </div>
+    <div class="invalid-hint hidden" id="google_autocomplete">
+      Vyberte lokalitu ze seznamu
+    </div>
+    <%= form.hidden_field :street %>
+    <%= form.hidden_field :street_number %>
+    <%= form.hidden_field :city %>
+    <%= form.hidden_field :city_part %>
+    <%= form.hidden_field :postal_code %>
+    <%= form.hidden_field :country_code %>
+    <%= form.hidden_field :geo_entry_id %>
+    <%= form.hidden_field :geo_unit_id %>
+    <%= form.hidden_field :geo_coord_x %>
+    <%= form.hidden_field :geo_coord_y %>
+
+    <div class="checkbox-group">
+      <div class="checkbox-row">
+        <label>
+          <%= form.check_box :is_public %>
+          <span class="text-required">Činnost dobrovolníků vyžaduje kontakt s Covid19 pozitivními osobami</span>
+        </label>
+      </div>
+
+      <div class="checkbox-row">
+        <label>
+          <%= form.check_box :is_public %>
+          <span class="text-required">Souhlasím se zveřejněním žádosti na portálu pomuzeme.si</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="registration-errors">
+      <ul id="registration-errors-list" class="error-list">
+
+      </ul>
+    </div>
+    <%= recaptcha_v3(action: 'login') %>
+    <%= form.submit 'Odeslat žádost', class: 'form-button',
+                                      id:'cta-odeslan-formular-zadosti-o-dobrovolniky',
+                                      data: { disable_with: "Zaregistrovat se..." } %>
+    <%= render partial: 'common/form_error' %>
+  </container>
+<% end %>
+
+<script>
+  $(document).ready(function () {
+    $('#cta-vyplnit-formular-zadosti-o-dobrovolniky').on('click', function(event) {
+      event.preventDefault();
+      $('form.hidden').removeClass('hidden');
+      $('html, body').animate({
+        scrollTop: $("#cta-vyplnit-formular-zadosti-o-dobrovolniky").offset().top
+      }, 1000);
+      $('#request_text').focus()
+    })
+  });
+</script>
