@@ -9,7 +9,7 @@ Sidekiq.configure_client do |_config|
   end
 end
 
-if Rails.env.development?
+if Rails.env.development? && ENV['INLINE_SIDEKIQ'] == 'true'
   require 'sidekiq/testing'
   Sidekiq::Testing.inline!
 end

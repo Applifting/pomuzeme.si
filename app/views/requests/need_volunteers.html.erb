@@ -7,7 +7,7 @@
     <div class="step">
       <%= image_tag asset_path('hiw-laptop.svg'), class: 'smaller' %>
       <p>
-        1. Během hodiny zveřejníme vaší poptávku na tomto portálu s dosahem 1800 potenciálních dobrovolníků týdně.
+        1. Během hodiny zveřejníme vaší poptávku na tomto portálu s dosahem 2300 potenciálních dobrovolníků týdně.
       </p>
     </div>
     <%= image_tag asset_path('arrow.svg'), class: 'arrow' %>
@@ -25,10 +25,7 @@
       </p>
     </div>
   </div>
-  <div class="container has-text-centered">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScKMDxDV7iBOrVWNNRby_XVtiDxfB5L6kfocnkDbaFxLxfamw/viewform"
-       id="cta-vyplnit-formular-zadosti-o-dobrovolniky" target="_blank" class="main-button">
-      vyplnit formulář
-    </a>
+  <div class="container has-text-centered" style="margin-bottom: 32px">
+    <%= link_to 'vyplnit formulář', new_request_path, class: 'main-button', id: 'cta-vyplnit-formular-zadosti-o-dobrovolnik' %>
   </div>
 </section>

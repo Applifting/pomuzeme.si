@@ -86,10 +86,12 @@ function validateSelection(element) {
     if(searchInput === "") { clearHiddenAddressFields(resourceType) }
     if(selectionMade === "" && searchInput !== "") {
         $('#google_autocomplete').removeClass('hidden');
-        $('form input[type=submit]').prop('disabled', true)
+        $('form input[type=submit]').prop('disabled', true);
+        $('form .form-error').removeClass('hidden');
     } else {
         $('#google_autocomplete').addClass('hidden');
         $('form input[type=submit]').prop('disabled', false)
+        $('form .form-error').addClass('hidden');
     }
 }
 
