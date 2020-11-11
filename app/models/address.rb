@@ -82,10 +82,6 @@ class Address < ApplicationRecord
   private
 
   def initialize_defaults
-    puts "________________________"
-    puts latitude
-    puts longitude
-    puts "________________________"
     self.country_code ||= 'cz'
     self.geo_unit_id ||= geo_entry_id
     self.coordinate ||= Geography::Point.from_coordinates latitude: latitude,
