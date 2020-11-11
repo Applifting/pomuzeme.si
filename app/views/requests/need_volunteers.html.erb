@@ -26,10 +26,6 @@
     </div>
   </div>
   <div class="container has-text-centered" style="margin-bottom: 32px">
-    <a href="#"
-       id="cta-vyplnit-formular-zadosti-o-dobrovolniky" class="main-button">
-      vyplnit formulář
-    </a>
+    <%= link_to 'vyplnit formulář', new_request_path, class: 'main-button', id: 'cta-vyplnit-formular-zadosti-o-dobrovolnik' %>
   </div>
-  <%= render partial: 'requests/new_request_form' %>
 </section>

@@ -12,9 +12,6 @@ class HomeController < PublicController
     @publications        = News.cached_recent_from_media(5)
   end
 
-  def need_volunteers
-  end
-
   def partner_signup
     @partner_signup_group = Group.find_by(slug: params[:slug])
 

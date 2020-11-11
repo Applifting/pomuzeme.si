@@ -1,0 +1,7 @@
+<%= render 'volunteer/partials/main_header' %>
+
+<section class="section-guide section">
+  <h4 id="new-request-form" style="margin-top: 110px">Žádost o zprostředkování dobrovolníka/ů</h4>
+  <%= render partial: 'common/flash' %>
+  <%= render partial: 'requests/new_request_form', locals: { request: @request } %>
+</section>

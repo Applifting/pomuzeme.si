@@ -1,5 +1,5 @@
 class VolunteersController < ApplicationController
-  RECAPTCHA_THRESHOLD = ENV['RECAPTCHA_THRESHOLD_VOLUNTEER']
+  RECAPTCHA_THRESHOLD = ENV['RECAPTCHA_THRESHOLD_VOLUNTEER']&.to_f
   include Recaptchable
 
   before_action :partner_signup_group

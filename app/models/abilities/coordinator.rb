@@ -42,7 +42,7 @@ module Abilities
       can %i[index read], [Request, RequestDecorator], organisation_id: user.cache_output(:user_group_organisations) { Organisation.user_group_organisations(user).pluck(:id) }
 
       # full access to requests in user's organisations
-      can :manage, [Request, RequestDecorator], organisation_id: user.cache_output(:coordinating_organisations) { user.coordinating_organisation_ids }
+      can :manage, [Request, RequestDecorator], organisation_id: user.cache_output(:coordinating_organisations) { user.coordinating_organisation_ids }.push(nil)
       can :manage, [RequestedVolunteer, RequestedVolunteerDecorator], request: { organisation_id: user.cache_output(:user_group_organisations) { Organisation.user_group_organisations(user).pluck(:id) } }
 
       # access to ActiveAdmin::Comment
