@@ -46,12 +46,7 @@
           <div class="address-title">
             <span>Lokalita</span>
 
-            <img
-              src="<%= asset_pack_path('media/images/tooltip.svg') %>"
-              class="tooltipped"
-              data-position="top"
-              data-tooltip="Díky zadání lokality pro vás můžeme najít geograficky nejbližší dobrovolnické příležitosti."
-              />
+            <%= tooltip 'Díky zadání lokality pro vás můžeme najít geograficky nejbližší dobrovolnické příležitosti.' %>
           </div>
 
           <div class="input-field">
@@ -59,7 +54,7 @@
                                                 'data-type': :volunteer, required: true, ariaRequired: true %>
             <%= form.label :street_search, class: 'required' %>
           </div>
-          <div class="invalid_hint hidden" id="google_autocomplete">
+          <div class="invalid-hint hidden" id="google_autocomplete">
             Vyberte lokalitu ze seznamu
           </div>
 
@@ -96,9 +91,9 @@
 
             </ul>
           </div>
-
+          <% true || recaptcha_v3(action: 'login') %>
           <%= form.submit 'Zaregistrovat se', class: 'form-button', id:'cta-submit-registration-form', data: { disable_with: "Zaregistrovat se..." } %>
-
+          <%= render partial: 'common/form_error' %>
         <% end %>
       </div>
     </section>

@@ -9,17 +9,19 @@ class Request < ApplicationRecord
 
   # Associations
   has_one :address, as: :addressable, dependent: :destroy
-  belongs_to :creator, class_name: 'User', foreign_key: :created_by_id
+  belongs_to :creator, class_name: 'User', foreign_key: :created_by_id, optional: true
   belongs_to :closer, class_name: 'User', foreign_key: :closed_by_id, optional: true
   belongs_to :coordinator, class_name: 'User', foreign_key: :coordinator_id, optional: true
-  belongs_to :organisation
+  belongs_to :organisation, optional: true
   has_many :requested_volunteers, dependent: :destroy
   has_many :volunteers, through: :requested_volunteers
   has_many :messages, dependent: :destroy
 
   # Validations
   validates :required_volunteer_count, presence: true
-  validates :creator, :state, :state_last_updated_at, presence: true
+  validates :creator, presence: true, unless: :web?
+  validates :organisation, presence: true, unless: :web?
+  validates :state, :state_last_updated_at, presence: true
   validates :subscriber_phone, phony_plausible: true, presence: true
   validates :subscriber_email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { subscriber_email&.present? }
   validates :text, presence: true, length: { maximum: 160 }
@@ -29,6 +31,11 @@ class Request < ApplicationRecord
 
   # Attributes
   accepts_nested_attributes_for :address
+
+  phony_normalize :subscriber_phone, default_country_code: 'CZ'
+  phony_normalized_method :subscriber_phone, default_country_code: 'CZ'
+
+  enum source: { internal: 1, web: 2 }
   enum state: {
     created: 1, # new nobody is working on it
     searching_capacity: 2, # the search for volunteers is ongoing

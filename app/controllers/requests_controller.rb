@@ -1,5 +1,9 @@
 class RequestsController < PublicController
-  skip_before_action :authorize_current_volunteer, only: [:index]
+  RECAPTCHA_THRESHOLD = ENV['RECAPTCHA_THRESHOLD_REQUEST']&.to_f
+
+  include Recaptchable
+
+  skip_before_action :authorize_current_volunteer, only: [:index, :new, :need_volunteers, :create, :new_request_accepted]
   before_action :load_request, only: %i[confirm_interest accept]
 
   def index
@@ -12,6 +16,30 @@ class RequestsController < PublicController
     end
 
     @all_requests_count  = Request.for_web.count
+  end
+
+  def new
+    @request = Request.web.new.decorate
+  end
+
+  def need_volunteers
+  end
+
+  def create
+    @request = Request.web.new(request_params).decorate
+    merge_non_model_fields!
+
+    address  = @request.build_address address_with_coordinate
+
+    if registration_valid && @request.save!
+      SlackBot.send_new_request_notification @request, admin_organisation_request_path(@request)
+      redirect_to new_request_accepted_path
+    else
+      render :new
+    end
+  end
+
+  def new_request_accepted
   end
 
   def confirm_interest
@@ -42,6 +70,11 @@ class RequestsController < PublicController
 
   private
 
+  def merge_non_model_fields!
+    @request.text = @request.text + ". Covid pozitivní v zařízení: #{params[:request][:covid_presence] == '1' ? 'ano' : 'ne'}"
+    @request.text = @request.text + ". Promo na FB: #{params[:request][:publish_facebook] == '1' ? 'ano' : 'ne'}"
+  end
+
   def encoded_coordinates
     format '%{lat}#%{lon}', lat: params[:request_geo_coord_y], lon: params[:request_geo_coord_x]
   end
@@ -54,6 +87,28 @@ class RequestsController < PublicController
 
   def load_request
     @request = Request.assignable.find_by(id: params[:request_id].to_i)&.decorate
+  end
+
+  def registration_valid
+    resolve_recaptcha(:new_request, @request, RECAPTCHA_THRESHOLD) && @request.valid?
+  end
+
+  def request_params
+    params.require(:request).permit(:text, :subscriber, :subscriber_phone, :subscriber_organisation, :required_volunteer_count, :is_public)
+  end
+
+  def address_params
+    params.require(:request).permit(
+      :street, :city, :street_number, :city_part, :postal_code, :country_code, :geo_entry_id, :geo_unit_id, :geo_coord_x, :geo_coord_y
+    )
+  end
+
+  def address_with_coordinate
+    coordinate = Geography::Point.from_coordinates latitude: address_params[:geo_coord_y].to_d,
+                                                   longitude: address_params[:geo_coord_x].to_d
+    address_params.except(:geo_coord_x, :geo_coord_y).merge(coordinate: coordinate,
+                                                            geo_provider: 'google_places',
+                                                            default: true)
   end
 
   def log_acceptance_message

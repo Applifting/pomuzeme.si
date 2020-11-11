@@ -7,8 +7,10 @@ class RequestDecorator < ApplicationDecorator
   end
 
   def subscriber
-    if h.can?(:manage, object)
+    if h.current_user && h.can?(:manage, object)
       subscriber_organisation.present? ? "#{subscriber_organisation} (#{object.subscriber})" : object.subscriber
+    elsif object.new_record?
+      object.subscriber
     else
       object.subscriber_organisation.presence || I18n.t('activerecord.attributes.request.subscriber_hidden')
     end
