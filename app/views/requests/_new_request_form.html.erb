@@ -73,7 +73,17 @@
       <div class="checkbox-row">
         <label>
           <%= form.check_box :is_public %>
-          <span class="text-required">Souhlasím se zveřejněním žádosti na portálu pomuzeme.si</span>
+          <span class="text-required">Souhlasím se zveřejněním žádosti na
+            <%= link_to 'pomuzeme.si/prilezitosti', requests_path, target: '_blank' %>
+          </span>
+        </label>
+      </div>
+      <div class="checkbox-row">
+        <label>
+          <%= form.check_box :publish_facebook %>
+          <span class="text-required">Souhlasím se zveřejněním žádosti na
+            <%= link_to 'Facebookových stránkách pomuzeme.si', 'https://www.facebook.com/pomuzemesi.cz', target: '_blank' %>
+          </span>
         </label>
       </div>
     </div>
@@ -83,7 +93,7 @@
 
       </ul>
     </div>
-    <%= recaptcha_v3(action: 'new_request') %>
+    <% true || recaptcha_v3(action: 'new_request') %>
     <%= form.submit 'Odeslat žádost', class: 'form-button',
                                       id:'cta-odeslan-formular-zadosti-o-dobrovolniky',
                                       data: { disable_with: "Odeslat žádost..." } %>

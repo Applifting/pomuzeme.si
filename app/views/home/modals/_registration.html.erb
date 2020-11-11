@@ -91,7 +91,7 @@
 
             </ul>
           </div>
-          <%= recaptcha_v3(action: 'login') %>
+          <% true || recaptcha_v3(action: 'login') %>
           <%= form.submit 'Zaregistrovat se', class: 'form-button', id:'cta-submit-registration-form', data: { disable_with: "Zaregistrovat se..." } %>
           <%= render partial: 'common/form_error' %>
         <% end %>
