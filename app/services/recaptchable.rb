@@ -5,6 +5,7 @@ module Recaptchable
     if score_threshold.present?
       recaptcha = verify_recaptcha(action: 'login', minimum_score: score_threshold)
       model.errors[:recaptcha] << 'si myslí, že jste robot. Zkusíte to znovu?' unless recaptcha
+      Rails.logger.warn "Recaptcha failed: #{recaptcha_reply}"
       Raven.capture_exception AuthorisationError.new(:recaptcha, model) unless recaptcha
       recaptcha
     else
