@@ -5,7 +5,7 @@ module Recaptchable
     if score_threshold.present?
       verify_recaptcha(action: action, minimum_score: score_threshold)
       recaptcha_response = recaptcha_reply
-      recaptcha_result   = recaptcha_response['success'] == true
+      recaptcha_result   = recaptcha_response.fetch('success', false) == true
 
       if !recaptcha_result
         model.errors[:recaptcha] << 'si myslí, že jste robot. Zkusíte to znovu?'
