@@ -88,7 +88,7 @@ class RequestsController < PublicController
   end
 
   def registration_valid
-    resolve_recaptcha(@request, RECAPTCHA_THRESHOLD) && @request.valid?
+    resolve_recaptcha(:new_request, @request, RECAPTCHA_THRESHOLD) && @request.valid?
   end
 
   def request_params

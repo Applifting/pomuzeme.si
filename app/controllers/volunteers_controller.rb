@@ -47,7 +47,7 @@ class VolunteersController < ApplicationController
   private
 
   def registration_valid
-    resolve_recaptcha(volunteer, RECAPTCHA_THRESHOLD) &&
+    resolve_recaptcha(:login, volunteer, RECAPTCHA_THRESHOLD) &&
       volunteer.valid? &&
       agreements_granted?(volunteer) &&
       save_and_send_code(volunteer)
