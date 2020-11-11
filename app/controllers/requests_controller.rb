@@ -32,6 +32,7 @@ class RequestsController < PublicController
     address  = @request.build_address address_with_coordinate
 
     if registration_valid && @request.save!
+      SlackBot.send_new_request_notification @request, admin_organisation_request_path(@request)
       redirect_to new_request_accepted_path
     else
       render :new
