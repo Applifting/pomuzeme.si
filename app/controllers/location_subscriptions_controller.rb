@@ -55,7 +55,7 @@ class LocationSubscriptionsController < PublicController
     session[:session_phone] = @location_subscription.phone
 
     text = I18n.t('sms.location_subscription_verification', code: code, location: @location_subscription.address.to_s)
-    SmsService.send_text(@session.phone, text) unless Rails.env.development?
+    SmsService.send_text(@location_subscription.phone, text) unless Rails.env.development?
     puts "TEXT: #{text}" if Rails.env.development?
     puts "CODE: #{code}" if Rails.env.development?
   end
