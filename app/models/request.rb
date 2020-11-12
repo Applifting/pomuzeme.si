@@ -99,6 +99,9 @@ class Request < ApplicationRecord
   end
 
   def identifier
+    # Web request can have blank organisation
+    return if organisation.blank?
+
     @identifier ||= [organisation.abbreviation, ('%04d' % id)].join '-'
   end
 

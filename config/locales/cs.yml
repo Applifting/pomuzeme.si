@@ -293,6 +293,7 @@ cs:
     mobile_authorization: "Overovaci kod pro prihlaseni do aplikace pomuzeme.si je: %{code}"
     welcome: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se ozve jedna z organizaci ve vasem okoli a zapoji vas do deni. Reknete o nas i pratelum? Pomuzeme.si
     welcome_channel: Vitejte mezi dobrovolniky! Na pomuzeme.si/prilezitosti najdete aktuální seznam žádostí o pomoc. Na pomuzeme.si/profil si nastavíte své preference (zájmy).
+    location_subscription_verification: Kód pro ověření přihlášení k odběru nových žádostí pro lokalitu %{location} >> %{code}
     request:
       offer: "%{identifier} %{text} Prosíme, odpovězte ANO / NE"
       unrecognized: Máte-li o poptávku zájem, odpovězte ANO nebo NE

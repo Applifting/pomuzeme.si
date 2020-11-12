@@ -1,0 +1,32 @@
+<section class="section-hero section">
+  <div class="hero-content">
+    <div class="column-left">
+      <h2>Zadejte ověřovací kód</h2>
+      <p style="font-size: 14px;">který jsme vám zaslali na <%= @location_subscription.phone %>.</p>
+      <p style="font-size: 14px;">
+        Po ověření vám zapneme notifikace do <%= @location_subscription.distance %> km od lokality: <%= @location_subscription.address.to_s %>.
+      </p>
+      <%= form_with model: @location_subscription, url: location_subscription_path, method: :post, local: true do |form| %>
+        <%= label_tag :code, "Ověřovací kód" %>
+        <%= text_field_tag :code, (session[:verification_code] if Rails.env.development?), required: true %>
+
+        <%= form.hidden_field :distance %>
+        <%= form.hidden_field :phone %>
+        <%= form.hidden_field :street, value: @location_subscription.address.street %>
+        <%= form.hidden_field :street_number, value: @location_subscription.address.street_number %>
+        <%= form.hidden_field :city, value: @location_subscription.address.city %>
+        <%= form.hidden_field :city_part, value: @location_subscription.address.city_part %>
+        <%= form.hidden_field :postal_code, value: @location_subscription.address.postal_code %>
+        <%= form.hidden_field :country_code, value: @location_subscription.address.country_code %>
+        <%= form.hidden_field :geo_entry_id, value: @location_subscription.address.geo_entry_id %>
+        <%= form.hidden_field :geo_unit_id, value: @location_subscription.address.geo_unit_id %>
+        <%= form.hidden_field :geo_coord_x, value: @location_subscription.address.coordinate.lon %>
+        <%= form.hidden_field :geo_coord_y, value: @location_subscription.address.coordinate.lat %>
+
+        <div class="button-group">
+          <%= submit_tag 'Nastavit notifikaci', class: 'main-button' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

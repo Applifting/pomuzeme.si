@@ -1,0 +1,134 @@
+%common-button {
+  width: 100%;
+  background-color: $primary-button-color;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  outline: none;
+  padding: 0 22px;
+  margin: 12px 0;
+  font-family: $title-font;
+
+  &.secondary {
+    background-color: $secondary-button-color;
+  }
+
+  &.tertiary {
+    background-color: $background-light;
+    color: gray;
+    border: 3px black;
+  }
+}
+
+.main-button {
+  @extend %common-button;
+  height: 64px;
+  line-height: 64px;
+  font-size: 18px;
+  max-width: 338px;
+  border-radius: 32px;
+  box-shadow: $shadow_1;
+  margin-left: 16px;
+  margin-right: 16px;
+
+  @include sm {
+    max-width: 288px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px;
+    font-size: 16px;
+  }
+
+  &.small {
+    height: 42px;
+    line-height: 42px;
+    font-size: 14px;
+    border-radius: 22px;
+  }
+}
+
+.form-button {
+  @extend %common-button;
+  height: 48px;
+  line-height: 48px;
+  font-size: 16px;
+  max-width: 329px;
+  border-radius: 24px;
+
+  &.secondary {
+    background-color: $secondary-button-color;
+  }
+
+  &:disabled {
+    background: silver;
+  }
+
+  &.outlined {
+    background-color: unset;
+    color: $heading-color;
+    border: 2px solid $heading-color;
+  }
+
+  &.multi-line {
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 5px;
+  }
+}
+
+.button-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+
+  // .main-button {
+  //   margin-left: 16px;
+  //   margin-right: 16px;
+
+  //   @include sm {
+  //     margin-left: 0px;
+  //     margin-right: 0px;
+  //     padding: 0px;
+  //     font-size: 16px;
+  //   }
+  // }
+
+  // @include md {
+  //   button:not(:first-child), a:not(:first-child) {
+  //     margin-left: 12px;
+  //   }
+  // }
+
+  // @include sm {
+  //   button:not(:first-child), a:not(:first-child) {
+  //     margin-left: 0px;
+  //   }
+  // }
+
+  &.inline {
+    flex-direction: row;
+
+    // button:not(:first-child), a:not(:first-child) {
+    //   margin-left: 18px;
+    // }
+  }
+
+  a:not(.main-button) {
+    color: $tertiary-button-color;
+  }
+
+  a.main-button.primary {
+    color: white;
+  }
+
+  @include lg {
+    justify-content: space-evenly;
+  }
+}

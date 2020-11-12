@@ -1,4 +1,4 @@
-<%= form_with url: requests_path, method: :get, local: true do |form| %>
+<%= form_with model: @request, url: requests_path, method: :get, local: true, id: 'request-search-form' do |form| %>
   <div style="display: flex; align-items: center; flex-wrap: wrap;">
     <address_input style="width: 100%; max-width: 380px;">
       <div class="address-title">
@@ -6,7 +6,7 @@
       </div>
 
       <div class="input-field">
-        <%= form.text_field :search_nearby, value: params[:search_nearby],
+        <%= form.text_field :search_nearby, value: params.dig(:request, :search_nearby),
                                             class: 'validate autocomplete location_search',
                                             required: true,
                                             ariaRequired: true,
@@ -16,16 +16,16 @@
         Vyberte lokalitu ze seznamu
       </div>
 
-      <%= form.hidden_field :request_street %>
-      <%= form.hidden_field :request_street_number %>
-      <%= form.hidden_field :request_city %>
-      <%= form.hidden_field :request_city_part %>
-      <%= form.hidden_field :request_postal_code %>
-      <%= form.hidden_field :request_country_code %>
-      <%= form.hidden_field :request_geo_entry_id %>
-      <%= form.hidden_field :request_geo_unit_id %>
-      <%= form.hidden_field :request_geo_coord_x %>
-      <%= form.hidden_field :request_geo_coord_y %>
+      <%= form.hidden_field :street, value: @request&.address&.street %>
+      <%= form.hidden_field :street_number, value: @request&.address&.street_number %>
+      <%= form.hidden_field :city, value: @request&.address&.city %>
+      <%= form.hidden_field :city_part, value: @request&.address&.city_part %>
+      <%= form.hidden_field :postal_code, value: @request&.address&.postal_code %>
+      <%= form.hidden_field :country_code, value: @request&.address&.country_code %>
+      <%= form.hidden_field :geo_entry_id, value: @request&.address&.geo_entry_id %>
+      <%= form.hidden_field :geo_unit_id, value: @request&.address&.geo_unit_id %>
+      <%= form.hidden_field :geo_coord_x, value: @request&.address&.coordinate&.lon %>
+      <%= form.hidden_field :geo_coord_y, value: @request&.address&.coordinate&.lat %>
     </address_input>
 
     <%= form.submit 'Hledat poblíž', class: 'form-button',

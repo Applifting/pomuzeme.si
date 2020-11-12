@@ -1,0 +1,84 @@
+<div id="location-subscription-form-wrapper">
+  <%= form_with model: @location_subscription, url: (@current_volunteer ? location_subscription_path : location_subscription_request_code_path),
+                                               local: true, id: 'location-subscription-form' do |form| %>
+      <div class="input-field">
+        <%= form.number_field :distance, class: 'validate', required: true, ariaRequired: true %>
+        <%= form.label 'Kolik km od této lokality můžete dojet?', for: :location_subscription_distance, class: 'required' %>
+      </div>
+
+      <% if @current_volunteer.present? %>
+        <%= form.hidden_field :phone, class: 'validate',
+                                      value: @current_volunteer&.phone[4..],
+                                      required: true,
+                                      ariaRequired: true %>
+      <% else %>
+        <div class="phone-row">
+          <div class="phone-prefix">+420</div>
+
+          <div class="input-field">
+            <%= form.text_field :phone, class: 'validate',
+                                        required: true,
+                                        ariaRequired: true %>
+            <%= form.label 'Mobil kam pošleme notifikaci', for: :location_subscription_phone, class: 'required' %>
+            <div class="invalid-hint hidden" id="location_subscription_phone_hint" style="bottom: 5px;">
+              zadejte mobilní telefonní číslo bez mezer
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <%= form.hidden_field :street, value: @location_subscription.address.street %>
+      <%= form.hidden_field :street_number, value: @location_subscription.address.street_number %>
+      <%= form.hidden_field :city, value: @location_subscription.address.city %>
+      <%= form.hidden_field :city_part, value: @location_subscription.address.city_part %>
+      <%= form.hidden_field :postal_code, value: @location_subscription.address.postal_code %>
+      <%= form.hidden_field :country_code, value: @location_subscription.address.country_code %>
+      <%= form.hidden_field :geo_entry_id, value: @location_subscription.address.geo_entry_id %>
+      <%= form.hidden_field :geo_unit_id, value: @location_subscription.address.geo_unit_id %>
+      <%= form.hidden_field :geo_coord_x, value: @location_subscription.address.coordinate.lon %>
+      <%= form.hidden_field :geo_coord_y, value: @location_subscription.address.coordinate.lat %>
+
+      <div class="registration-errors">
+        <ul id="registration-errors-list" class="error-list">
+
+        </ul>
+      </div>
+
+      <%= form.submit 'Odebírat notifikace', class: 'form-button',
+                                            id:'cta-odeslan-formular-notifikace-pro-lokalitu',
+                                            data: { disable_with: "Odebírat notifikace..." } %>
+      <%= render partial: 'common/form_error' %>
+  <% end %>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('input#location_subscription_phone').on('change', function() {
+      let phone = $(this).val()
+      let hint  = $('#location_subscription_phone_hint')
+      let submit = $('#cta-odeslan-formular-notifikace-pro-lokalitu')
+
+      if(phone.length === 9 && (phone.startsWith("6") || phone.startsWith("7"))) {
+        $(this).removeClass('invalid');
+        $(this).addClass('valid');
+        hint.addClass('hidden');
+        submit.prop('disabled', false);
+        $('#location-subscription-form .form-error').addClass('hidden');
+      } else {
+        $(this).removeClass('valid');
+        $(this).addClass('invalid');
+        hint.removeClass('hidden');
+        submit.prop('disabled', true);
+        $('#location-subscription-form .form-error').removeClass('hidden');
+      }
+    })
+
+    $('#cta-otevren-formular-notifikace-pro-lokalitu').on('click', function(event) {
+      $('#location-subscription-form-wrapper').addClass('open');
+      $(this).hide();
+      $('#location_subscription_distance').focus();
+      $('#request-search-form input[type=submit]').addClass('hidden');
+      event.preventDefault();
+    })
+  });
+</script>
