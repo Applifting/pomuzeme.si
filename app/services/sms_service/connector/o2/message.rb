@@ -8,7 +8,7 @@ module SmsService
 
         def initialize(phone, text, delivery_report: nil)
           @phone = phone
-          @text  = I18n.transliterate text
+          @text  = sanitize_text(text)
           @request_delivery_report = delivery_report
         end
 
@@ -81,6 +81,11 @@ module SmsService
 
         private
 
+        def sanitize_text(text)
+          new_text = I18n.transliterate text
+          new_text = new_text.gsub "\t", ' '
+          new_text
+        end
 
         def handle_response(raw_response)
           self.class.handle_response raw_response

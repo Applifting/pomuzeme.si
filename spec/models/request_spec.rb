@@ -17,7 +17,7 @@ RSpec.describe Request, type: :model do
 
     it { is_expected.not_to allow_values('foo', '1 b@example.c').for(:subscriber_email) }
     it { is_expected.to allow_values('test@example.com').for(:subscriber_email) }
-    it { is_expected.not_to allow_values('444 444 444', '+420 abc 111 111').for(:subscriber_phone) }
+    it { is_expected.not_to allow_values('+420 abc 111 111').for(:subscriber_phone) }
     it { is_expected.to allow_values('+420444444444', '+420 444 444 444').for(:subscriber_phone) }
   end
 
@@ -26,10 +26,8 @@ RSpec.describe Request, type: :model do
     it { should have_many(:volunteers) }
     it { should have_many(:messages) }
     it { should have_one(:address) }
-    it { should belong_to(:creator).class_name('User') }
     it { should belong_to(:closer).class_name('User').optional }
     it { should belong_to(:coordinator).class_name('User').optional }
-    it { should belong_to(:organisation) }
   end
 
   context 'enums' do
