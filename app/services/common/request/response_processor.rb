@@ -39,7 +39,8 @@ module Common
       end
 
       def notify_subscriber_organisation_about_acceptance
-        return if request.subscriber_organisation.blank?
+        # Web request can have blank organisation
+        return if request.subscriber_organisation.blank? || request.organisation.nil?
 
         text = I18n.t 'sms.request.subscriber_notification', identifier: request.identifier,
                                                              full_name: volunteer.to_s,

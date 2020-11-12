@@ -1,0 +1,13 @@
+#location-subscription-form-wrapper {
+  width: 100%;
+  flex-direction: column;
+  display: none;
+
+  &.open {
+    display: flex;
+  }
+
+  form {
+    max-width: 380px;
+  }
+}

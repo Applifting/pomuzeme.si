@@ -9,7 +9,10 @@
 
     <% if @closest_request_km %>
       <div id="closest_request" value="<%= @closest_request_km %>"></div>
+      <%= link_to('zapnout upozornění na nové žádosti', '', id: 'cta-otevren-formular-notifikace-pro-lokalitu', class: 'form-button secondary multi-line outlined', style: 'width: 208px;') %>
+      <%= render partial: 'location_subscriptions/form' %>
     <% end %>
+
     <div class="table border-bottom">
       <% @requests.each do |request| %>
         <%= render partial: 'request_with_button', locals: { request: request } %>

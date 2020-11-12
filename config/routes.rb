@@ -41,6 +41,10 @@ Rails.application.routes.draw do
     post :resend, on: :collection
   end
 
+  resource :location_subscription, only: [:create]
+
+  post 'overeni-upozorneni-na-nove-zadosti', to: 'location_subscriptions#request_code', as: :location_subscription_request_code
+
   namespace :api do
     namespace :v1 do
       post '/geo/fulltext', to: 'geolocation#fulltext'

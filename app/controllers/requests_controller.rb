@@ -7,11 +7,14 @@ class RequestsController < PublicController
   before_action :load_request, only: %i[confirm_interest accept]
 
   def index
-    if params[:request_geo_coord_y].present? && params[:request_geo_coord_x].present?
+    if params[:request] && address_params[:geo_coord_y].present? && address_params[:geo_coord_x].present?
       search = Request.for_web.ransack(search_nearby: encoded_coordinates, order: :distance_meters_asc)
       @requests = search.result.decorate
+      build_location_subscription
+      build_request
       @closest_request_km = @requests.first.distance_km
     else
+      @request = Request.new
       @requests = Request.for_web_preloaded.decorate
     end
 
@@ -64,7 +67,7 @@ class RequestsController < PublicController
   end
 
   def request_accepted
-    @all_requests_count  = Request.for_web.count
+    @all_requests_count = Request.for_web.count
   end
 
 
@@ -76,8 +79,18 @@ class RequestsController < PublicController
     @request.text = @request.text + ". Publikovat na web: #{params[:request][:is_public] == '1' ? 'ano' : 'ne'}"
   end
 
+  def build_request
+    @request  = Request.new
+    @request.build_address address_with_coordinate
+  end
+
+  def build_location_subscription
+    @location_subscription  = LocationSubscription.new
+    @location_subscription.build_address address_with_coordinate
+  end
+
   def encoded_coordinates
-    format '%{lat}#%{lon}', lat: params[:request_geo_coord_y], lon: params[:request_geo_coord_x]
+    format '%{lat}#%{lon}', lat: address_params[:geo_coord_y], lon: address_params[:geo_coord_x]
   end
 
   def add_or_update_requested_volunteer
