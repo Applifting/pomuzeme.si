@@ -1,0 +1,7 @@
+var modal = document.getElementsByClassName('modal')[0]
+var modalContent = document.getElementById('modal-content')
+modalContent.innerHTML = "<%= j(render partial: template) %>"
+
+var modalInstance = M.Modal.getInstance(modal);
+
+modalInstance.open();

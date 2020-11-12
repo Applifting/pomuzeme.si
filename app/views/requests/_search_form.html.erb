@@ -28,8 +28,11 @@
       <%= form.hidden_field :request_geo_coord_y %>
     </address_input>
 
+    <%= render partial: 'modals/modal' %>
+
     <%= form.submit 'Hledat poblíž', class: 'form-button',
                                      style: 'width: 208px',
                                      data: { disable_with: "Hledám..." } %>
+    <%= link_to 'Otevři se', open_path, class: 'main-button', remote: true %>
   </div>
 <% end %>

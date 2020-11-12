@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   post 'zadost-o-dobrovolniky', to: 'requests#create', as: :request
   get 'zadost-o-dobrovolniky-prijata', to: 'requests#new_request_accepted', as: :new_request_accepted
 
-  resource :volunteer, only: [] do
+  resource :volunteer, only: [:new] do
     post :register, on: :collection
     post :confirm, on: :collection
     post :resend, on: :collection

@@ -6,16 +6,20 @@ class VolunteersController < ApplicationController
 
   attr_accessor :volunteer
 
+  def new
+    open_modal template: 'home/modals/registration'
+  end
+
   def register
     @volunteer = Volunteer.new(volunteer_params).with_existing_record
     address    = volunteer.addresses.build address_with_coordinate
 
     if registration_valid
       bind_volunteer_with_organisation_group(volunteer) if @partner_signup_group
-      render 'volunteer/register_success'
+      open_modal template: 'volunteer/register_success'
     else
       Rails.logger.error address.errors.messages
-      render 'volunteer/register_error', locals: { volunteer: volunteer, address: address }
+      render 'common/modals/open', content: 'volunteer/register_error', locals: { volunteer: volunteer, address: address }
     end
   end
 

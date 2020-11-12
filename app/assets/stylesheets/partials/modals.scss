@@ -1,0 +1,15 @@
+.modal-content-custom {
+
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    left: auto;
+    bottom: auto;
+    background-color: transparent;
+  }
+
+  .modal-card-body {
+    padding: 0;
+  }
+}

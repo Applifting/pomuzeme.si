@@ -23,6 +23,11 @@ class ApplicationController < ActionController::Base
     raise error
   end
 
+
+  def open_modal(template:, data: nil)
+    render 'common/modals/open', locals: { template: template, data: data }
+  end
+
   def set_raven_context
     Raven.user_context(current_user_id: current_user&.id) if current_user
   end
