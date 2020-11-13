@@ -4,7 +4,9 @@ module SmsService
   attr_reader :connector
 
   def self.send_message(message_object)
-    response = Connector::O2.send_message(message_object.phone, message_object.text, delivery_report: ENV['DISABLE_SMS_RECEIVER'] != 'true')
+    response = Connector::O2.send_message(message_object.phone,
+                                          message_object.text,
+                                          delivery_report: ENV['DISABLE_SMS_RECEIVER'] != 'true')
 
     block_given? ? yield(response) : response
   end
