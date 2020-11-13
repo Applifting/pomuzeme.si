@@ -108,7 +108,7 @@ class Volunteer < ApplicationRecord
 
   # Dirty ransack scopes
   def self.ransackable_scopes(_opts)
-    %i[search_nearby has_labels]
+    %i[search_nearby has_labels has_interests]
   end
 
   def self.has_labels(*label_ids)
@@ -116,6 +116,14 @@ class Volunteer < ApplicationRecord
                                 .where('volunteer_labels' => { label_id: label_ids })
                                 .group(:id)
                                 .having("count(*) >= #{label_ids.count}").select(:id))
+  end
+
+  def self.has_interests(*interest_ids)
+    where(id: Volunteer.unscoped.left_joins(:volunteer_interests)
+                                .where('volunteer_interests' => { interest_id: interest_ids })
+                                .or(Volunteer.unscoped.left_joins(:volunteer_interests).where('volunteer_interests' => { interest_id: nil }))
+                                .group(:id)
+                                .having("count(*) >= #{interest_ids.count}").select(:id))
   end
 
   def self.search_nearby(encoded_location)

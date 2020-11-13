@@ -25,6 +25,10 @@ ActiveAdmin.register Volunteer do
                       collection: proc { OptionsWrapper.wrap (Label.alphabetically.managable_by(current_user).map { |i| [i.name, i.id] }), params, :has_labels },
                       selected: 1,
                       input_html: { style: 'height: 100px' }
+  filter :has_interests, label: 'Zájmy v dobrovolnictví',
+                      as: :select,
+                      collection: proc { OptionsWrapper.wrap (Interest.alphabetically.map { |i| [i.name, i.id] }), params, :has_interests },
+                      selected: 1
   filter :phone_or_email_cont, label: 'Telefon / email'
   filter :group_volunteers_coordinator_id_eq, as: :select,
                                               collection: proc { OptionsWrapper.wrap (current_user.organisation_colleagues.map { |i| [i.to_s, i.id] }), params, :group_volunteer_coordinator_eq },
@@ -101,14 +105,30 @@ ActiveAdmin.register Volunteer do
 
   show do
     panel resource.full_name do
-      attributes_table_for resource do
-        row :full_name
-        row :phone
-        row :email
-        row :address, &:address_link
-        row :description
-        row :created_at
-        row :updated_at
+      tabs do
+        tab 'Profil' do
+          attributes_table_for resource do
+            row :full_name
+            row :phone
+            row :email
+            row :address, &:address_link
+            row :description
+            row :created_at
+            row :updated_at
+          end
+        end
+
+        tab 'Preference' do
+          para 'Zájmy'
+          attributes_table_for resource.interests do
+            row :name, 'Název'
+          end
+
+          para 'Dovednosti'
+          attributes_table_for resource.skills do
+            row :name
+          end
+        end if resource.interests.present? || resource.skills.present?
       end
     end
 
