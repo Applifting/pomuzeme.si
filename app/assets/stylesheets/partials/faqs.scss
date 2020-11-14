@@ -16,6 +16,11 @@
     width: 100%;
     margin-bottom: 28px;
 
+    break {
+      display: block;
+      height: 8px;
+    }
+
     @include md {
       flex-direction: column;
       align-items: flex-start;

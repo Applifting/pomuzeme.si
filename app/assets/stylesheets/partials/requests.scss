@@ -85,12 +85,12 @@
 
 #confirm-interest {
   row {
-    border: 1px solid gray;
     border-radius: 10px;
     margin-bottom: 18px;
+    background-color: $background-dark;
 
     &:hover {
-      background-color: unset;
+      background-color: $background-dark;
       border-radius: 10px;
     }
   }
