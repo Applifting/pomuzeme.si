@@ -3,8 +3,8 @@ class RequestsController < PublicController
 
   include Recaptchable
 
-  skip_before_action :authorize_current_volunteer, only: [:index, :new, :need_volunteers, :create, :new_request_accepted]
-  before_action :load_request, only: %i[confirm_interest accept]
+  skip_before_action :authorize_current_volunteer, only: %i[index new need_volunteers create new_request_accepted confirm_interest]
+  before_action :load_and_authorize_request, only: %i[confirm_interest accept]
 
   def index
     if params[:request] && address_params[:geo_coord_y].present? && address_params[:geo_coord_x].present?
@@ -42,16 +42,11 @@ class RequestsController < PublicController
     end
   end
 
-  def new_request_accepted
-  end
+  def new_request_accepted; end
 
-  def confirm_interest
-    redirect_to(requests_path) && return unless request_permissible
-  end
+  def confirm_interest; end
 
   def accept
-    redirect_to(requests_path) && return unless request_permissible
-
     @requested_volunteer = RequestedVolunteer.find_by(volunteer: @current_volunteer, request_id: params[:request_id])
 
     if @requested_volunteer&.accepted?
@@ -99,8 +94,13 @@ class RequestsController < PublicController
     @requested_volunteer.notified!
   end
 
-  def load_request
-    @request = Request.assignable.find_by(id: params[:request_id].to_i)&.decorate
+  def load_and_authorize_request
+    @request = Request.for_web.assignable.find_by(id: params[:request_id].to_i)&.decorate
+    return true if @request.present?
+
+    flash[:error] = 'Tato žádost o dobrovolníky neexistuje, nebo nelze přijmout.'
+    Raven.capture_exception StandardError.new('Request cannot be found')
+    redirect_to requests_path
   end
 
   def registration_valid
@@ -134,13 +134,5 @@ class RequestsController < PublicController
                               text: 'Ano'
 
     Messages::ReceivedProcessorJob.perform_later message
-  end
-
-  def request_permissible
-    return true if @request.present?
-
-    flash[:error] = 'Tuto žádost nelze přijmout.'
-    Raven.capture_exception StandardError.new('Request cannot be found')
-    false
   end
 end

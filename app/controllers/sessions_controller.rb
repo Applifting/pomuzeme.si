@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   before_action :set_login_description_based_on_redirect, only: %i[new request_code]
 
   def new
+    save_redirect_to_session
     redirect_to volunteer_profile_path if session[:volunteer_id]
   end
 
@@ -44,6 +45,12 @@ class SessionsController < ApplicationController
   end
 
   private
+
+  def save_redirect_to_session
+    return unless params[:redirect_to].present?
+
+    session[:redirect_to] = params[:redirect_to]
+  end
 
   def set_login_description_based_on_redirect
     redirect = params[:redirect_to] || @session.redirect_to
