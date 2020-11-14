@@ -293,16 +293,16 @@ cs:
 
   sms:
     login_code: Kód pro přihlášení do pomuzeme.si - %{code}
-    verification: "Overovaci kod pro overeni registrace na portalu pomuzeme.si je: %{code}"
-    mobile_authorization: "Overovaci kod pro prihlaseni do aplikace pomuzeme.si je: %{code}"
-    welcome: Vitejte mezi dobrovolniky! Mame vas v databazi, brzy se ozve jedna z organizaci ve vasem okoli a zapoji vas do deni. Reknete o nas i pratelum? Pomuzeme.si
+    verification: "Kod pro overeni registrace na portalu pomuzeme.si je: %{code}"
+    mobile_authorization: "Kod pro prihlaseni do aplikace pomuzeme.si je: %{code}"
+    welcome: Vitejte mezi dobrovolniky! Své dobrovolnické preference můžete nastavit na https://pomuzeme.si/profil Pomuzeme.si
     welcome_channel: Vitejte mezi dobrovolniky! Na pomuzeme.si/prilezitosti najdete aktuální seznam žádostí o pomoc. Na pomuzeme.si/profil si nastavíte své preference (zájmy).
     location_subscription_verification: Kód pro ověření přihlášení k odběru nových žádostí pro lokalitu %{location} >> %{code}
     request:
       offer: "%{identifier} %{text} Prosíme, odpovězte ANO / NE"
       unrecognized: Máte-li o poptávku zájem, odpovězte ANO nebo NE
       confirmed: Díky za potvrzení poptávky %{identifier}, koordinátor se vám ozve s detaily. Odpovězte, prosíme, na tuto zprávu, neozve-li se do 24 hodin, nebo další pracovní den.
-      rejected: Poptávka %{identifier} byla odmítnuta. Své dobrovolnické preference můžete nastavit na https://pomuzeme.si/profil?utm_medium=sms
+      rejected: Poptávka %{identifier} byla odmítnuta. Své dobrovolnické preference můžete nastavit na https://pomuzeme.si/profil
       over_capacity: Moc děkujeme za zájem, na poptávku %{identifier} se již našlo dostatek dobrovolníků. Počkejte na další.
       subscriber_notification: Na vaší poptávku %{identifier} se přihlásil nový dobrovolník - %{full_name}, %{phone}.
   volunteer_profile:
