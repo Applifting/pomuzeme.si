@@ -30,11 +30,11 @@
     </faq>
 
     <% if @current_volunteer %>
-      <%= link_to 'PŘIJMOUT ŽÁDOST', accept_request_path(request_id: @request.id),
+      <%= link_to 'POTVRDIT ZÁJEM', accept_request_path(request_id: @request.id),
                   class: "main-button secondary small",
                   id: "cta-zajem-o-poptavku-vazny-prihlaseny" %>
     <% else %>
-      <%= link_to 'PŘIJMOUT ŽÁDOST', login_path(redirect_to: accept_request_path(request_id: @request.id)),
+      <%= link_to 'POTVRDIT ZÁJEM', login_path(redirect_to: accept_request_path(request_id: @request.id)),
                   class: "main-button secondary small",
                   id: "cta-zajem-o-poptavku-vazny-neprihlaseny" %>
     <% end %>
