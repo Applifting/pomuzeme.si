@@ -3,7 +3,7 @@ class RequestsController < PublicController
 
   include Recaptchable
 
-  skip_before_action :authorize_current_volunteer, only: [:index, :new, :need_volunteers, :create, :new_request_accepted]
+  skip_before_action :authorize_current_volunteer, only: %i[index new need_volunteers create new_request_accepted confirm_interest]
   before_action :load_request, only: %i[confirm_interest accept]
 
   def index
@@ -42,12 +42,9 @@ class RequestsController < PublicController
     end
   end
 
-  def new_request_accepted
-  end
+  def new_request_accepted; end
 
-  def confirm_interest
-    redirect_to(requests_path) && return unless request_permissible
-  end
+  def confirm_interest; end
 
   def accept
     redirect_to(requests_path) && return unless request_permissible

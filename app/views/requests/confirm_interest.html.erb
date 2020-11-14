@@ -1,11 +1,46 @@
-<section class="section-hero section">
-  <div class="hero-content" style="flex-direction: column;">
-    <div class="column-left">
-      <h2>Chcete přijmout tuto žádost o pomoc?</h2>
-    </div>
-    <div class="table border-bottom">
+<section class="section section-hero">
+  <div class="hero-content" style="flex-direction: column; margin-bottom: 66px;">
+    <h2>Chcete přijmout tuto žádost o pomoc?</h2>
+
+    <request>
+      <div id="confirm-interest" class="table border-bottom">
         <%= render partial: 'requests/request', locals: { request: @request} %>
       </div>
-    <%= link_to 'PŘIJMOUT ŽÁDOST', accept_request_path(request_id: @request.id), method: :post, class: "main-button secondary small" %>
+    </request>
+
+    <faq class="faq-wrapper">
+      <div class="faq-item">
+        <div class="question">Co budu jako dobrovolník dělat?</div>
+        <div class="answer">
+          Rozsah činností je uveden v žádosti. Pokud tuto žádost přijmete, ozve se vám koordinátor, nebo příjemce pomoci a
+          můžete se ho zeptat na podrobnosti, které vás zajímají.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="question">Jak je to časově náročné?</div>
+        <div class="answer">
+          Nejlepší pomoc je opakovaná. Nejde ani o počet hodin, ale o schopnost přijít třeba jednou týdně na 4 hodiny, nicméně zařízení respektují vaše časové možnosti. Pokud jste momentálně bez práce a chcete zařízení nabídnout větší úvazek, nebojte se zeptat na možnost dohody o pracovní činnosti.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="question">Co se stane, když žádost přijmu?</div>
+        <div class="answer">
+          1. Váš zájem si u žádosti poznačíme a předáme vaše kontaktní údaje koordinátorovi / příjemci pomoci.
+          <br><br>
+          2. Pošleme vám potvrzující SMS zprávu. Můžete na ní odpovědět a poslat nám doplňující informace.
+          <br><br>
+          3. Ozve se vám koordinátor / příjemce pomoci a domluvíte se na detailech (kdy můžete přijít, co si máte vzít s sebou,
+          jaké vybavení dostanete, apod.).
+        </div>
+      </div>
+    </faq>
+
+    <% if @current_volunteer %>
+      <%= link_to 'PŘIJMOUT ŽÁDOST', accept_request_path(request_id: @request.id), class: "main-button secondary small" %>
+    <% else %>
+      <%= link_to 'PŘIJMOUT ŽÁDOST', login_path(redirect_to: accept_request_path(request_id: @request.id)),
+                  class: "main-button secondary small" %>
+    <% end %>
+
   </div>
 </section>

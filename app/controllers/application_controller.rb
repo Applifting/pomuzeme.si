@@ -26,4 +26,10 @@ class ApplicationController < ActionController::Base
   def set_raven_context
     Raven.user_context(current_user_id: current_user&.id) if current_user
   end
+
+  def handle_redirect
+    return false unless session[:redirect_to]
+
+    session.delete :redirect_to
+  end
 end

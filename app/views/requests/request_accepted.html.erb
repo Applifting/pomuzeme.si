@@ -15,7 +15,10 @@
           Pokud se vám nikdo neozve, odpovězte, prosíme, na potvrzující SMS kterou jsme vám poslali.
         </li>
       </ul>
-      <%= link_to 'Zpět na seznam', requests_path, class: 'main-button secondary' %>
+      <div class="button-group" style="margin-top: 24px">
+        <%= link_to 'Zpět na seznam', requests_path, class: 'main-button secondary' %>
+        <%= link_to 'Do profilu', volunteer_profile_path, class: 'main-button tertiary' %>
+      </div>
     </div>
   </div>
 </section>

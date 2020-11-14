@@ -6,7 +6,7 @@ module SessionsHelper
     case path
     when SessionsHelper.normalize_path(confirm_destruction_of_volunteer_profile_path)
       :delete_profile
-    when SessionsHelper.normalize_path(confirm_interest_path(1))
+    when SessionsHelper.normalize_path(accept_request_path)
       :accept_request
     else
       :login
@@ -14,6 +14,9 @@ module SessionsHelper
   end
 
   def self.normalize_path(path)
-    path.split('/').reject { |segment| segment.to_i.positive? }.reject(&:blank?).sort
+    without_params = path.split('?').first
+    new_path       = without_params.split('/').reject { |segment| segment.to_i.positive? }
+                                   .reject(&:blank?).sort
+    new_path
   end
 end

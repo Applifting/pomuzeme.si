@@ -31,7 +31,10 @@ class VolunteersController < ApplicationController
     partner_group = volunteer.groups.take
     SmsService::Manager.send_welcome_msg(volunteer.phone, partner_group)
 
-    render 'volunteer/confirm_success'
+    handle_redirect.tap do |redirect|
+      redirect_to(redirect) && return if redirect
+      render('volunteer/confirm_success')
+    end
   end
 
   def resend
