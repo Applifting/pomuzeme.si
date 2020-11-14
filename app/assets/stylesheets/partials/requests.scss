@@ -82,3 +82,16 @@
     align-items: flex-start;
   }
 }
+
+#confirm-interest {
+  row {
+    border-radius: 10px;
+    margin-bottom: 18px;
+    background-color: $background-dark;
+
+    &:hover {
+      background-color: $background-dark;
+      border-radius: 10px;
+    }
+  }
+}

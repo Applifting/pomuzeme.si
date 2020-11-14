@@ -94,26 +94,26 @@ RSpec.describe Request, type: :model do
       skip 'figure out if written scope is relevant for us'
     end
 
-    context '.check_fulfillment' do
+    context '.for_followup' do
       let!(:request) { create :request, fullfillment_date: 1.week.ago, state: :help_coordinated }
 
       it 'returns coordinated requests with fullfillment date not exceeded' do
-        expect(Request.check_fulfillment).to include request
+        expect(Request.for_followup).to include request
       end
 
       it 'does not return coordinated requests with fullfillment date exceeded' do
         request.update! fullfillment_date: 1.week.from_now
-        expect(Request.check_fulfillment).not_to include request
+        expect(Request.for_followup).not_to include request
       end
 
       it 'does not return requests with fullfillment date not exceeded, but different state' do
         request.update! fullfillment_date: 1.week.from_now, state: :created
-        expect(Request.check_fulfillment).not_to include request
+        expect(Request.for_followup).not_to include request
       end
 
       it 'does not return coordinated requests with nil fullfillment date' do
         request.update! fullfillment_date: nil
-        expect(Request.check_fulfillment).not_to include request
+        expect(Request.for_followup).not_to include request
       end
     end
 

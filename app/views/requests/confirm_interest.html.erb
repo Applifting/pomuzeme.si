@@ -1,11 +1,43 @@
-<section class="section-hero section">
-  <div class="hero-content" style="flex-direction: column;">
-    <div class="column-left">
-      <h2>Chcete přijmout tuto žádost o pomoc?</h2>
-    </div>
-    <div class="table border-bottom">
+<section class="section section-hero">
+  <div class="hero-content" style="flex-direction: column; margin-bottom: 66px;">
+    <h2>Chcete přijmout tuto žádost o pomoc?</h2>
+
+    <request>
+      <div id="confirm-interest" class="table border-bottom">
         <%= render partial: 'requests/request', locals: { request: @request} %>
       </div>
-    <%= link_to 'PŘIJMOUT ŽÁDOST', accept_request_path(request_id: @request.id), method: :post, class: "main-button secondary small" %>
+    </request>
+
+    <faq class="faq-wrapper">
+      <div class="faq-item">
+        <div class="question">Jak je to časově náročné?</div>
+        <div class="answer">
+          Každá hodina se počítá, nicméně nejlepší pomoc je opakovaná, protože tak nejlépe zhodnotíte získané zkušenosti. Příjemci pomoci se však většinou snaží respektovat vaše časové možnosti.
+          <break></break>
+          Pokud jste momentálně bez práce a chcete zařízení nabídnout větší úvazek, nebojte se zeptat na možnost dohody o pracovní činnosti.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="question">Co se stane, když žádost přijmu?</div>
+        <div class="answer">
+          1. Předáme vaše kontaktní údaje koordinátorovi / příjemci pomoci.
+          <break></break>
+          2. Pošleme vám potvrzující SMS zprávu. Pokud nám chcete poslat doplňující informace, můžete na zprávu odpovědět.
+          <break></break>
+          3. Ozve se vám koordinátor / příjemce pomoci a domluvíte se na detailech.
+        </div>
+      </div>
+    </faq>
+
+    <% if @current_volunteer %>
+      <%= link_to 'POTVRDIT ZÁJEM', accept_request_path(request_id: @request.id),
+                  class: "main-button secondary small",
+                  id: "cta-zajem-o-poptavku-vazny-prihlaseny" %>
+    <% else %>
+      <%= link_to 'POTVRDIT ZÁJEM', login_path(redirect_to: accept_request_path(request_id: @request.id)),
+                  class: "main-button secondary small",
+                  id: "cta-zajem-o-poptavku-vazny-neprihlaseny" %>
+    <% end %>
+
   </div>
 </section>
