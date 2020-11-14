@@ -15,7 +15,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   # Filters
   filter :coordinator, collection: proc { OptionsWrapper.wrap (current_user.organisation_colleagues.map { |i| [i.to_s, i.id] }), params, :coordinator_id_eq }
   filter :text_cont, label: 'Text poptávky'
-  filter :subscriber_cont, label: 'Příjemce poptávky'
+  filter :subscriber_or_subscriber_organisation_cont, label: 'Příjemce poptávky'
   filter :state, as: :select, collection: Request.states
   filter :organisation, as: :select, collection: proc { Organisation.user_group_organisations(current_user) }
 
