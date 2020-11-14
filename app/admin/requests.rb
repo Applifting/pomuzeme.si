@@ -13,7 +13,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
                                        latitude longitude geo_entry_id]
 
   # Filters
-  filter :coordinator, collection: proc { OptionsWrapper.wrap (current_user.organisation_colleagues.map { |i| [i.to_s, i.id] }), params, :coordinator_eq }
+  filter :coordinator, collection: proc { OptionsWrapper.wrap (current_user.organisation_colleagues.map { |i| [i.to_s, i.id] }), params, :coordinator_id_eq }
   filter :text_cont, label: 'Text poptávky'
   filter :subscriber_cont, label: 'Příjemce poptávky'
   filter :state, as: :select, collection: Request.states
