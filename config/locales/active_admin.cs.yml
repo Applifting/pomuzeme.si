@@ -130,7 +130,7 @@ cs:
       request_unread_msgs: Nepřečtené
       request_in_preparation: V přípravě
       request_in_fulfillment: V plnění
-      request_check_fulfillment: Ke kontrole
+      request_for_followup: Ke kontrole
       closed: Uzavřené
     index_list:
       table: "Tabulka"

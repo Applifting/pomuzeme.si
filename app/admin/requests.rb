@@ -8,7 +8,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
 
   permit_params :closed_note, :coordinator_id, :created_by_id, :fullfillment_date, :is_public,
                 :organisation_id, :required_volunteer_count, :state, :subscriber, :subscriber_organisation,
-                :subscriber_phone, :subscriber_email, :text, :long_text, :block_volunteer_until,
+                :subscriber_phone, :subscriber_email, :text, :long_text, :block_volunteer_until, :follow_up_after,
                 address_attributes: %i[street_number street city city_part postal_code country_code
                                        latitude longitude geo_entry_id]
 
@@ -31,8 +31,8 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     scope.in_progress
          .with_organisations(current_user.coordinating_organisations.pluck(:id))
   end
-  scope :request_check_fulfillment do |scope|
-    scope.check_fulfillment
+  scope :request_for_followup do |scope|
+    scope.for_followup
          .with_organisations(current_user.coordinating_organisations.pluck(:id))
   end
   scope :closed
@@ -57,10 +57,25 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
     end
   end
 
+  # Custom controller actions
+  member_action :remove_followup, method: :post do
+    resource = Request.find(params[:id])
+    resource.update follow_up_after: nil
+    redirect_to admin_organisation_request_path(resource)
+  end
+
   member_action :notify_volunteers, method: :post do
     Admin::Requests::VolunteerNotifier.new(current_user, resource).notify_assigned
     flash[:notice] = 'Dobrovolníci osloveni'
     redirect_to admin_organisation_request_path(resource)
+  end
+
+  # Action items
+  action_item :cancel_followup, only: %i(show) do
+    if resource.follow_up_after.present?
+      link_to 'Zrušit follow-up', remove_followup_admin_organisation_request_path(resource), method: :post,
+                                                                                             style: 'background-color: gray'
+    end
   end
 
   index do
@@ -186,6 +201,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
                              include_blank: false
       f.input :block_volunteer_until, as: :date_time_picker, input_html: { autocomplete: 'off' }
       f.input :coordinator_id, as: :select, collection: current_user.organisation_colleagues
+      f.input :follow_up_after, as: :date_time_picker, input_html: { autocomplete: 'off' }
       f.input :closed_note, as: :text if resource.persisted?
       f.input :created_by_id, as: :hidden, input_html: { value: current_user.id }
     end

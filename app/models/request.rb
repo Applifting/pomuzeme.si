@@ -58,7 +58,7 @@ class Request < ApplicationRecord
   scope :assignable, -> { where(state: %i[created searching_capacity pending_confirmation]) }
   scope :with_organisations, ->(*organisation_id) { where(organisation_id: organisation_id) }
   scope :in_progress, -> { where('state = 4 AND (fullfillment_date IS NULL OR fullfillment_date > ?)', Time.zone.now) }
-  scope :check_fulfillment, -> { where('state = 4 AND fullfillment_date < ?', Time.zone.now) }
+  scope :for_followup, -> { where('(state != 5 AND follow_up_after < ?) OR (state = 4 AND fullfillment_date < ?)', Time.zone.now, Time.zone.now) }
   scope :without_coordinator, -> { where(coordinator_id: nil) }
   scope :has_unread_messages, -> { joins(:requested_volunteers).where('requested_volunteers.unread_incoming_messages_count > 0').distinct }
   scope :not_closed, -> { where.not(state: :closed) }
