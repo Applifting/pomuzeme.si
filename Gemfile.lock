@@ -304,7 +304,7 @@ GEM
     rails-i18n (6.0.0)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 7)
-    rails_autoscale_agent (0.8.0)
+    rails_autoscale_agent (0.9.1)
     railties (6.0.2.2)
       actionpack (= 6.0.2.2)
       activesupport (= 6.0.2.2)
@@ -500,7 +500,7 @@ DEPENDENCIES
   rack-attack
   rails (~> 6.0.2, >= 6.0.2.2)
   rails-i18n
-  rails_autoscale_agent
+  rails_autoscale_agent (>= 0.9.1)
   recaptcha
   rolify
   rpush

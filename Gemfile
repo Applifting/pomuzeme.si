@@ -86,7 +86,7 @@ group :test do
 end
 
 group :production do
-  gem 'rails_autoscale_agent'
+  gem 'rails_autoscale_agent', '>= 0.9.1'
 end
 
 gem 'ffaker', '~> 2.14'
