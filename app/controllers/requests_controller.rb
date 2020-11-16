@@ -71,7 +71,7 @@ class RequestsController < PublicController
   private
 
   def merge_non_model_fields!
-    @request.text = @request.text + ". Covid pozitivní v zařízení: #{params[:request][:covid_presence] == '1' ? 'ano' : 'ne'}"
+    @request.text = "Z WEBU: Covid pozitivní v zařízení: #{params[:request][:covid_presence] == '1' ? 'ano' : 'ne'}"
     @request.text = @request.text + ". Promo na FB: #{params[:request][:publish_facebook] == '1' ? 'ano' : 'ne'}"
     @request.text = @request.text + ". Publikovat na web: #{params[:request][:is_public] == '1' ? 'ano' : 'ne'}"
   end
@@ -110,7 +110,7 @@ class RequestsController < PublicController
   end
 
   def request_params
-    params.require(:request).permit(:text, :subscriber, :subscriber_phone, :subscriber_organisation, :required_volunteer_count)
+    params.require(:request).permit(:long_text, :subscriber, :subscriber_phone, :subscriber_organisation, :required_volunteer_count)
   end
 
   def address_params
