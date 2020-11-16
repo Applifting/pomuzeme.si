@@ -1,8 +1,8 @@
 <%= form_with model: @request, url: request_path, local: true, class: 'new-request' do |form| %>
   <div class="container">
     <div class="input-field">
-      <%= form.text_area :text, class: 'validate', required: true, ariaRequired: true %>
-      <%= form.label 'Co budou dobrovolníci dělat?', for: :request_text, class: 'required' %>
+      <%= form.text_area :long_text, class: 'validate', required: true, ariaRequired: true %>
+      <%= form.label 'Co budou dobrovolníci dělat?', for: :request_long_text, class: 'required' %>
     </div>
 
     <div class="input-field">
