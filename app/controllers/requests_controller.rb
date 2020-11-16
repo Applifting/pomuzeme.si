@@ -38,6 +38,8 @@ class RequestsController < PublicController
       SlackBot.send_new_request_notification @request, admin_organisation_request_path(@request)
       redirect_to new_request_accepted_path
     else
+      Raven.extra_context(errors: @request.errors.messages, request_data: @request.as_json)
+      Raven.capture_exception StandardError.new('Request - form submission failed')
       render :new
     end
   end
