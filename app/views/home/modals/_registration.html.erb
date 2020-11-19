@@ -35,6 +35,9 @@
             <div class="input-field">
               <%= form.telephone_field :phone, class: 'validate', required: true, ariaRequired: true %>
               <%= form.label :phone, class: 'required' %>
+              <div class="invalid-hint hidden" id="volunteer_phone_hint" style="bottom: 5px;">
+                zadejte mobilní telefonní číslo bez mezer
+              </div>
             </div>
           </div>
 
@@ -99,3 +102,37 @@
     </section>
   </div>
 </div>
+
+<script>
+  function validateRegPhone(phone_field) {
+    let phone = phone_field.val()
+    let hint  = $('#volunteer_phone_hint')
+    let submit = $('input#cta-submit-registration-form')
+
+    if(phone.length === 9 && (phone.startsWith("6") || phone.startsWith("7"))) {
+      phone_field.removeClass('invalid');
+      phone_field.addClass('valid');
+      hint.addClass('hidden');
+      submit.prop('disabled', false);
+      $('form .form-error').addClass('hidden');
+      return true;
+    } else {
+      phone_field.removeClass('valid');
+      phone_field.addClass('invalid');
+      hint.removeClass('hidden');
+      submit.prop('disabled', true);
+      $('form .form-error').removeClass('hidden');
+      return false;
+    }
+  }
+
+  $(document).ready(function () {
+    $('input#volunteer_phone').on('change', function() {
+      validateRegPhone($(this));
+    })
+
+    $('input#volunteer_phone').on('blur', function() {
+      validateRegPhone($(this));
+    })
+  });
+</script>
