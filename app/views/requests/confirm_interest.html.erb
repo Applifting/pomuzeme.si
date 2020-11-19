@@ -32,11 +32,11 @@
     <% if @current_volunteer %>
       <%= link_to 'POTVRDIT ZÁJEM', accept_request_path(request_id: @request.id),
                   class: "main-button secondary small",
-                  id: "cta-zajem-o-poptavku-vazny-prihlaseny" %>
+                  id: "cta-zajem-o-poptavku-vazny-prihlaseny", rel: 'nofollow' %>
     <% else %>
       <%= link_to 'POTVRDIT ZÁJEM', login_path(redirect_to: accept_request_path(request_id: @request.id)),
                   class: "main-button secondary small",
-                  id: "cta-zajem-o-poptavku-vazny-neprihlaseny" %>
+                  id: "cta-zajem-o-poptavku-vazny-neprihlaseny", rel: 'nofollow' %>
     <% end %>
 
   </div>
