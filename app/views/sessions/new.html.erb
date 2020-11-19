@@ -3,10 +3,23 @@
     <div class="column-left">
       <h2><%= I18n.t "volunteer_profile.#{@action}.title" %></h2>
       <p><%= I18n.t "volunteer_profile.#{@action}.description" %></p>
-      <%= form_tag request_code_path, method: :post, remote: false do |f| %>
-        <%= label_tag :phone, "Telefonní číslo" %>
+      <%= form_tag request_code_path, method: :post, remote: false do %>
         <%= hidden_field_tag :redirect_to, params[:redirect_to] %>
-        <%= text_field_tag :phone, @session.phone || '+420', required: true %>
+
+        <div class="phone-row">
+          <div class="phone-prefix">+420</div>
+
+          <div class="input-field">
+            <%= text_field_tag :phone, @session&.phone_number, class: 'validate',
+                                                             required: true,
+                                                             ariaRequired: true %>
+            <%= label_tag 'Mobil', nil, for: :phone, class: 'required' %>
+            <div class="invalid-hint hidden" id="session_phone_hint" style="bottom: 5px;">
+              zadejte mobilní telefonní číslo bez mezer
+            </div>
+          </div>
+        </div>
+
         <div class="error-list">
           <ul>
           <% @session&.errors.messages.values.flatten.compact.each do |msg| %>
@@ -14,13 +27,44 @@
           <% end %>
           </ul>
         </div>
-        <%= submit_tag 'Přihlásit', class: 'main-button' %>
+        <%= submit_tag 'Přihlásit', class: 'form-button', id: 'cta-prihlasit-se-odeslan-formular' %>
       <% end %>
 
-      <button id="cta-nemam-registraci" class="modal-button modal-trigger main-button tertiary" data-target="registration" aria-haspopup="true">
+      <button id="cta-nemam-registraci" class="modal-button modal-trigger form-button outlined" data-target="registration" aria-haspopup="true">
         nemám registraci
       </button>
 
     </div>
   </div>
 </section>
+<script>
+  function validatePhone(phone_field) {
+    let phone = phone_field.val()
+    let hint  = $('#session_phone_hint')
+    let submit = $('input#cta-prihlasit-se-odeslan-formular')
+
+    if(phone.length === 9 && (phone.startsWith("6") || phone.startsWith("7"))) {
+      phone_field.removeClass('invalid');
+      phone_field.addClass('valid');
+      hint.addClass('hidden');
+      submit.prop('disabled', false);
+      return true;
+    } else {
+      phone_field.removeClass('valid');
+      phone_field.addClass('invalid');
+      hint.removeClass('hidden');
+      submit.prop('disabled', true);
+      return false;
+    }
+  }
+
+  $(document).ready(function () {
+    $('input#phone').on('change', function() {
+      validatePhone($(this));
+    })
+
+    $('input#phone').on('blur', function() {
+      validatePhone($(this));
+    })
+  });
+</script>
