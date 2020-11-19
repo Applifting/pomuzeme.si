@@ -1,0 +1,1 @@
+class FormError < StandardError; end

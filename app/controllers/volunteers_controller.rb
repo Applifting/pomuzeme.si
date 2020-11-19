@@ -8,14 +8,14 @@ class VolunteersController < ApplicationController
 
   def register
     @volunteer = Volunteer.new(volunteer_params).with_existing_record
-    address    = volunteer.addresses.build address_with_coordinate
+    @address    = volunteer.addresses.build address_with_coordinate
 
     if registration_valid
       bind_volunteer_with_organisation_group(volunteer) if @partner_signup_group
       render 'volunteer/register_success'
     else
-      Rails.logger.error address.errors.messages
-      render 'volunteer/register_error', locals: { volunteer: volunteer, address: address }
+      log_error(__method__, 'registration failed')
+      render 'volunteer/register_error', locals: { volunteer: volunteer, address: @address }
     end
   end
 
@@ -54,6 +54,14 @@ class VolunteersController < ApplicationController
       volunteer.valid? &&
       agreements_granted?(volunteer) &&
       save_and_send_code(volunteer)
+  end
+
+  def log_error(method, error_message)
+    Raven.extra_context(volunteer_errors: @volunteer.errors.messages,
+                        address_errors: @address.errors.messages,
+                        volunteer: @volunteer.as_json,
+                        address: @address.as_json)
+    Raven.capture_exception FormError.new("VolunteersController##{method} #{error_message}")
   end
 
   def volunteer_params

@@ -10,4 +10,8 @@ class Session < Tableless
   def volunteer
     @user = Volunteer.find_by phone: phone
   end
+
+  def phone_number
+    phone.present? ? phone[4..] : ''
+  end
 end
