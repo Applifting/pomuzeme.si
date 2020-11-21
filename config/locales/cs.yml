@@ -299,11 +299,11 @@ cs:
 
   sms:
     login_code: Kód pro přihlášení do pomuzeme.si - %{code}
-    verification: "Kod pro overeni registrace na portalu pomuzeme.si je: %{code}"
-    mobile_authorization: "Kod pro prihlaseni do aplikace pomuzeme.si je: %{code}"
+    verification: "%{code} - vas kod pro overeni registrace na portalu pomuzeme.si "
+    mobile_authorization: "%{code} - vas kod pro prihlaseni do aplikace pomuzeme.si"
     welcome: Vitejte mezi dobrovolniky! Své dobrovolnické preference můžete nastavit na https://pomuzeme.si/profil Pomuzeme.si
     welcome_channel: Vitejte mezi dobrovolniky! Na pomuzeme.si/prilezitosti najdete aktuální seznam žádostí o pomoc. Na pomuzeme.si/profil si nastavíte své preference (zájmy).
-    location_subscription_verification: Kód pro ověření přihlášení k odběru nových žádostí pro lokalitu %{location} >> %{code}
+    location_subscription_verification: "%{code} - kód pro ověření přihlášení k odběru nových žádostí pro lokalitu %{location}"
     request:
       offer: "%{identifier} %{text} Prosíme, odpovězte ANO / NE"
       unrecognized: Máte-li o poptávku zájem, odpovězte ANO nebo NE
