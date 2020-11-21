@@ -16,7 +16,7 @@ module Abilities
         can? :manage, address.addressable
       end
 
-      can %i[read], [Group], id: user.cache_output(:coordinating_groups) { user.coordinating_groups.pluck(:id) }
+      can %i[read], [Group, GroupDecorator], id: user.cache_output(:coordinating_groups) { user.coordinating_groups.pluck(:id) }
 
       can :manage, Label, group_id: user.cache_output(:coordinating_groups) { user.coordinating_groups.pluck(:id) }
       can :manage, VolunteerLabel
