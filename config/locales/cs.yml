@@ -177,6 +177,7 @@ cs:
         closed_note: Poznámka k uzavření
         closed_state: Uzavřeno stavem
         coordinator: Koordinátor
+        coordinator_empty: bez koordinátora
         coordinator_id: Koordinátor
         creator: Vytvořil
         address: Adresa
@@ -210,6 +211,7 @@ cs:
         volunteer: Dobrovolník
         state: Stav dobrovolníka v poptávce
         visible_sensitive: Odkrýt podrobnosti
+        note: Poznámka
         states:
           to_be_notified: Oslovit
           pending_notification: Odesílání zprávy

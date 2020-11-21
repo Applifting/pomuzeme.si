@@ -5,12 +5,13 @@ ActiveAdmin.register RequestedVolunteer do
 
   belongs_to :organisation_request, parent_class: Request
 
-  permit_params :request_id, :volunteer_id, :state, :visible_sensitive
+  permit_params :request_id, :volunteer_id, :state, :visible_sensitive, :note
 
   controller do
     def create
       super do |success, failure|
         success.html {
+          flash[:notice] = 'Dobrovolník přidán do poptávky'
           resource.update state: params[:state] if params[:state]
           redirect_to admin_volunteer_path(resource.volunteer_id)
         }
@@ -46,10 +47,20 @@ ActiveAdmin.register RequestedVolunteer do
   end
 
   form do |f|
+    volunteer_id = params[:volunteer_id] || params[:requested_volunteer][:volunteer_id]
+    volunteer = Volunteer.find(volunteer_id)
+
     f.inputs 'Přidání dobrovolníka do poptávky' do
-      f.input :request, label: 'Poptávka', as: :select, collection: Request.assignable.with_organisations(current_user.coordinating_organisations.pluck(:id))
+      f.input :volunteer, as: :string, input_html: { value: volunteer.to_s, disabled: true }
+      f.input :request, label: 'Poptávka', as: :select,
+                        collection: Request.includes(:coordinator)
+                                           .assignable
+                                           .with_organisations(current_user.coordinating_organisations.pluck(:id))
+                                           .without_volunteer(volunteer)
+                                           .decorate
+                                           .map { |i| [[i.subscriber, i.coordinator].join(' - '), i.id]}
       f.input :state, label: 'Přidat jako', as: :select, collection: [['Potvrzen', :accepted], ['K oslovení', :to_be_notified]]
-      f.input :volunteer_id, as: :hidden, input_html: { value: params[:volunteer_id] }
+      f.input :volunteer_id, as: :hidden, input_html: { value: volunteer_id }
     end
     f.actions
   end

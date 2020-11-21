@@ -60,6 +60,7 @@ class Request < ApplicationRecord
   scope :in_progress, -> { where('state = 4 AND (fullfillment_date IS NULL OR fullfillment_date > ?)', Time.zone.now) }
   scope :for_followup, -> { where('(state != 5 AND follow_up_after < ?) OR (state = 4 AND fullfillment_date < ?)', Time.zone.now, Time.zone.now) }
   scope :without_coordinator, -> { where(coordinator_id: nil) }
+  scope :without_volunteer, -> (volunteer) { where('NOT EXISTS(SELECT 1 from requested_volunteers where request_id = requests.id AND volunteer_id = ?)', volunteer.id) }
   scope :has_unread_messages, -> { joins(:requested_volunteers).where('requested_volunteers.unread_incoming_messages_count > 0').distinct }
   scope :not_closed, -> { where.not(state: :closed) }
   scope :with_calculated_distance, lambda { |center_point|
