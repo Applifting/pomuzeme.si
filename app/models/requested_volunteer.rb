@@ -25,6 +25,7 @@ class RequestedVolunteer < ApplicationRecord
 
   # Validations
   validates_uniqueness_of :volunteer_id, scope: :request_id
+  validates_presence_of :state, :volunteer, :request
 
   # Scopes
   scope :with_organisations, ->(*organisation_ids) { joins(:request).where(requests: { organisation_id: organisation_ids }) }

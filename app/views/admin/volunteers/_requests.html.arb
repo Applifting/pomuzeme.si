@@ -2,13 +2,17 @@
 
 div class: 'title h4' do
   span 'Poptávky'
+  span link_to('', new_admin_organisation_request_requested_volunteer_path(Request.first, volunteer_id: resource.id), class: 'action add')
 end
 
-table_for resource.requested_volunteers.with_organisations(current_user.coordinating_organisations.pluck(:id)) do
+table_for Request.joins(:requested_volunteers)
+                 .merge(resource.requested_volunteers.with_organisations(current_user.coordinating_organisations.pluck(:id)))
+                 .decorate do
   column :subscriber
   column :text
+  column :note
   column :state
   column 'Detail', class: 'centered' do |request|
-    a 'detail', href: admin_organisation_request_path(request.request_id)
+    a 'detail', href: admin_organisation_request_path(request)
   end
 end

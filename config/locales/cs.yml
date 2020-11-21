@@ -58,6 +58,7 @@ cs:
       organisation_request: Poptávka
       volunteer_message: Chat s dobrovolníkem
       subscriber_message: Chat s příjemcem
+      requested_volunteer: Dobrovolník
       news: Aktuality
       skill: Kvalifikace
       interest: Zájmy
@@ -142,6 +143,8 @@ cs:
         contact_person_email: Kontantní email
         created_at: Vytvořeno
         updated_at: Upraveno
+      requested_volunteer:
+        request: Poptávka
       role:
         name: Název
       user:
@@ -174,6 +177,7 @@ cs:
         closed_note: Poznámka k uzavření
         closed_state: Uzavřeno stavem
         coordinator: Koordinátor
+        coordinator_empty: bez koordinátora
         coordinator_id: Koordinátor
         creator: Vytvořil
         address: Adresa
@@ -207,6 +211,7 @@ cs:
         volunteer: Dobrovolník
         state: Stav dobrovolníka v poptávce
         visible_sensitive: Odkrýt podrobnosti
+        note: Poznámka
         states:
           to_be_notified: Oslovit
           pending_notification: Odesílání zprávy
@@ -294,11 +299,11 @@ cs:
 
   sms:
     login_code: Kód pro přihlášení do pomuzeme.si - %{code}
-    verification: "Kod pro overeni registrace na portalu pomuzeme.si je: %{code}"
-    mobile_authorization: "Kod pro prihlaseni do aplikace pomuzeme.si je: %{code}"
+    verification: "%{code} - vas kod pro overeni registrace na portalu pomuzeme.si "
+    mobile_authorization: "%{code} - vas kod pro prihlaseni do aplikace pomuzeme.si"
     welcome: Vitejte mezi dobrovolniky! Své dobrovolnické preference můžete nastavit na https://pomuzeme.si/profil Pomuzeme.si
     welcome_channel: Vitejte mezi dobrovolniky! Na pomuzeme.si/prilezitosti najdete aktuální seznam žádostí o pomoc. Na pomuzeme.si/profil si nastavíte své preference (zájmy).
-    location_subscription_verification: Kód pro ověření přihlášení k odběru nových žádostí pro lokalitu %{location} >> %{code}
+    location_subscription_verification: "%{code} - kód pro ověření přihlášení k odběru nových žádostí pro lokalitu %{location}"
     request:
       offer: "%{identifier} %{text} Prosíme, odpovězte ANO / NE"
       unrecognized: Máte-li o poptávku zájem, odpovězte ANO nebo NE

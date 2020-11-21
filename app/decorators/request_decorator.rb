@@ -25,6 +25,11 @@ class RequestDecorator < ApplicationDecorator
     content.join('').html_safe
   end
 
+  def coordinator
+    return object.coordinator.to_s if object.coordinator.present?
+    I18n.t('activerecord.attributes.request.coordinator_empty')
+  end
+
   def distance_km
     (object.distance_meters / 1000).round(1)
   end
