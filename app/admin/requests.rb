@@ -98,7 +98,7 @@ ActiveAdmin.register Request, as: 'OrganisationRequest' do
   end
 
   show do
-    div style: 'width: 600px' do
+    div style: 'width: 680px' do
       panel resource.text do
         attributes_table_for resource do
           row :address, &:address_link
