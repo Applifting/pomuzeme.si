@@ -10,7 +10,7 @@ class RequestedVolunteer < ApplicationRecord
   belongs_to :request
   belongs_to :volunteer
   has_many :messages, primary_key: :volunteer_id, foreign_key: :volunteer_id
-  has_many :feedback_request, class_name: 'RequestedVolunteerFeedback', dependent: :delete_all
+  has_one :feedback_request, class_name: 'RequestedVolunteerFeedback', dependent: :delete
 
   # Attributes
   delegate :first_name, :last_name, :phone, :to_s, to: :volunteer
