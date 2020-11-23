@@ -18,5 +18,10 @@ FactoryBot.define do
         create :organisation_group, organisation: organisation, group: evaluator.group
       end
     end
+
+    trait :with_volunteer_feedback_setup do
+      volunteer_feedback_message         { 'Feedback from for %{subscriber}' }
+      volunteer_feedback_send_after_days { 1 }
+    end
   end
 end

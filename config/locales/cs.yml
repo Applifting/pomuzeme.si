@@ -141,6 +141,12 @@ cs:
         contact_person: Kontantní osoba
         contact_person_phone: Kontantní telefon
         contact_person_email: Kontantní email
+        volunteer_feedback_message: Text SMS
+        volunteer_feedback_message_hint: "Tento text bude odeslán dobrovolníkovi jako žádost o zpětnou vazbu. Do šablony lze vložit parametry: %{allowed_interpolations}"
+        volunteer_feedback_send_after_days: Interval
+        volunteer_feedback_send_after_days_hint: Po kolika dnech od vložení dobrovolníka do poptávky bude žádost o zpětnou vazbu odeslána.
+        volunteer_feedback_interpolations:
+          subscriber_organisation: prijimajici_organizace
         created_at: Vytvořeno
         updated_at: Upraveno
       requested_volunteer:
@@ -276,6 +282,8 @@ cs:
           attributes:
             contact_person_phone:
               improbable_phone: zadejte číslo v mezinárodním formátu, bez mezer
+            volunteer_feedback_message:
+              invalid_interpolations: "Povolené parametry jsou: %{allowed_interpolations}."
         address:
           base:
             inaccurate_address: Nepřesná adresa. Prosíme vyberte adresu z našeptávače.
