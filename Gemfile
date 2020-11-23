@@ -3,57 +3,82 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
-# Use postgresql as the database for Active Record
-gem 'pg', '>= 0.18', '< 2.0'
-# GIS adapter for pg
-gem 'activerecord-postgis-adapter'
-# Use Puma as the app server
-gem 'puma', '~> 4.3'
-# Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
-gem 'sprockets', '= 3.7.2'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 4.0'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
-
-# Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
-
-gem 'best_in_place', '~> 3.1', '>= 3.1.1'
-
+## 3rd party integrations and integration enablers
 gem 'httparty'
-
-# cloudflare - heroku integration according to https://www.viget.com/articles/heroku-cloudflare-the-right-way/
-gem 'rack-attack'
-gem 'cloudflare-rails'
-
-gem 'newrelic_rpm'
-
-gem 'sentry-raven'
-
-# heroku metrics
-gem 'barnes'
-
 gem 'recaptcha'
-
+gem 'rpush'
+gem 'sendgrid-ruby'
 gem 'slack-ruby-client'
 
+
+## Active admin
+gem 'active_admin-humanized_enum'
+gem 'activeadmin'
+gem 'arctic_admin'
+gem 'best_in_place'
+gem 'draper'
+gem 'active_admin_datetimepicker'
+gem 'activeadmin_json_editor'
+
+
+# Authentication, authorization & friends
+gem 'devise'
+gem 'cancancan'
+gem 'jwt'
+gem 'rolify' # role management
+
+
+## Background job processing
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
+
+
+## Cloud operations
+gem 'barnes' # heroku metrics
+gem 'newrelic_rpm'
+gem 'rack-attack'      # cloudflare - heroku integration according to https://www.viget.com/articles/heroku-cloudflare-the-right-way/
+gem 'cloudflare-rails' # cloudflare - heroku integration according to https://www.viget.com/articles/heroku-cloudflare-the-right-way/
+gem 'sentry-raven'
+gem 'rails_autoscale_agent', '>= 0.9.1', group: :production
+
+
+## Database related gems
+gem 'active_model_serializers'
+gem 'activerecord-postgis-adapter'
+gem 'nilify_blanks'
+gem 'pg', '>= 0.18', '< 2.0'
+gem 'pg_lock'
+gem 'phony_rails'
+gem 'validates_zipcode'
+
+
+## Rails & friends
+gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
+gem 'puma', '~> 4.3'
+
+
+## Front-end stuff
+gem 'sass-rails', '>= 6'
+gem 'sprockets', '= 3.7.2'
+gem 'turbolinks', '~> 5'
+gem 'webpacker', '~> 4.0'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+
+
+## Miscellaneous
+gem 'jbuilder', '~> 2.7'
+gem 'bootsnap', '>= 1.4.2', require: false # Reduces boot times through caching; required in config/boot.rb
+gem 'geocoder' # geocoding
+gem 'rails-i18n' # localisation
+gem 'devise-i18n' # localisation
+# data management
+gem 'csv'
+
+
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'ffaker', '~> 2.14'
   gem 'pry-rails'
+  gem 'rubocop'
 end
 
 group :development do
@@ -85,61 +110,5 @@ group :test do
   gem 'codecov', require: false
 end
 
-group :production do
-  gem 'rails_autoscale_agent', '>= 0.9.1'
-end
-
-gem 'ffaker', '~> 2.14'
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-
-# Validations
-gem 'validates_zipcode'
-gem 'phony_rails'
-
-# Code quality
-gem 'rubocop'
-
-# authentication
-gem 'devise'
-
-# authorization
-gem 'cancancan'
-gem 'jwt'
-
-# role management
-gem 'rolify'
-
-# active admin
-gem 'active_admin-humanized_enum'
-gem 'activeadmin'
-gem 'arctic_admin'
-gem 'draper'
-gem 'active_admin_datetimepicker'
-gem 'activeadmin_json_editor'
-
-# geocoding
-gem 'geocoder'
-
-# localisation
-gem 'rails-i18n'
-gem 'devise-i18n'
-
-# email provider
-gem 'sendgrid-ruby'
-
-# data management
-gem 'csv'
-
-# serializers
-gem 'active_model_serializers'
-
-# push notifications
-gem 'rpush'
-
-# background job processing
-gem 'sidekiq'
-
-# job locking mechanism
-gem 'pg_lock'
