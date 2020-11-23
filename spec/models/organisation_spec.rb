@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Organisation do
-  context 'validations' do
+  describe 'validations' do
     subject { build(:organisation) }
 
     it { is_expected.to validate_presence_of(:name) }
@@ -15,17 +15,43 @@ describe Organisation do
     it { is_expected.to allow_values('test@example.com').for(:contact_person_email) }
     it { is_expected.not_to allow_values('4443', '+420111222').for(:contact_person_phone) }
     it { is_expected.to allow_values('+420111222333', '420111222333').for(:contact_person_phone) }
+
+    describe 'validate volunteer_feedback_message_interpolation' do
+      context 'when allowed interpolations are specified by *.attributes.organisation.volunteer_feedback_interpolations I18n' do
+        let(:organisation) { build :organisation, volunteer_feedback_send_after_days: 1 }
+
+        before :each do
+          allow(organisation).to receive(:permitted_interpolations).and_return %w[city country]
+        end
+
+        it 'marks record invalid if the volunteer_feedback_message contains other than allowed interpolations' do
+          organisation.volunteer_feedback_message = 'There are some %{city} %{allowed} params.'
+          organisation.valid?
+
+          expect(organisation).not_to be_valid
+          expect(organisation.errors.messages[:volunteer_feedback_message]).to include /Povolené parametry jsou: %\{city\}, %\{country\}./
+        end
+
+        it 'marks record valid if the volunteer_feedback_message contains only allowed interpolations' do
+          organisation.volunteer_feedback_message = 'There are some %{city} %{country} params.'
+          organisation.valid?
+
+          expect(organisation).to be_valid
+          expect(organisation.errors.messages[:volunteer_feedback_message]).to be_blank
+        end
+      end
+    end
   end
 
-  context 'associations' do
+  describe 'associations' do
     it { should have_many(:coordinators) }
     it { should have_many(:organisation_groups) }
     it { should have_many(:groups) }
     it { should have_many(:requests) }
   end
 
-  context 'scopes' do
-    context '.user_group_organisations' do
+  describe 'scopes' do
+    describe '.user_group_organisations' do
       let(:user) { create :user }
       let(:organisation) { create :organisation }
       let(:group) { create :group}
@@ -46,7 +72,7 @@ describe Organisation do
     end
   end
 
-  context '#to_s' do
+  describe '#to_s' do
     subject(:organisation) { create(:organisation) }
     let(:expected_result) do
       "#{organisation.name} ~ #{organisation.abbreviation}"
