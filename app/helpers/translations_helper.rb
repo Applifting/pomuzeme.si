@@ -1,5 +1,4 @@
-# app/helpers/enum_i18n_helper.rb
-module EnumI18nHelper
+module TranslationsHelper
   # Returns an array of the possible key/i18n values for the enum
   # Example usage:
   # enum_options_for_select(User, :approval_state)
@@ -20,6 +19,10 @@ module EnumI18nHelper
   # Example usage:
   # enum_i18n(User, :approval_state, :unprocessed)
   def enum_i18n(class_name, enum, key)
-    I18n.t("activerecord.enums.#{class_name.model_name.i18n_key}.#{enum.to_s.pluralize}.#{key}")
+    I18n.t "activerecord.enums.#{class_name.model_name.i18n_key}.#{enum.to_s.pluralize}.#{key}"
+  end
+
+  def i18n_model_attribute(model, attribute)
+    I18n.t "activerecord.attributes.#{model.model_name.i18n_key}.#{attribute}"
   end
 end
