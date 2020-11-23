@@ -4,7 +4,7 @@ describe VolunteerFeedback::Sender do
   describe '.call' do
     let(:organisation)        { create :organisation, volunteer_feedback_message: 'Feedback form for %{prijimajici_organizace}',
                                                       volunteer_feedback_send_after_days: 1 }
-    let(:request)             { create :request, organisation: organisation, subscriber: 'the girl' }
+    let(:request)             { create :request, organisation: organisation, subscriber_organisation: 'the girl' }
     let(:requested_volunteer) { create :requested_volunteer, request: request }
 
     before :each do
