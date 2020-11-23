@@ -42,6 +42,11 @@ gem 'sentry-raven'
 gem 'rails_autoscale_agent', '>= 0.9.1', group: :production
 
 
+## Data management
+gem 'csv'
+gem 'ffaker', '~> 2.14'
+
+
 ## Database related gems
 gem 'active_model_serializers'
 gem 'activerecord-postgis-adapter'
@@ -71,12 +76,8 @@ gem 'bootsnap', '>= 1.4.2', require: false # Reduces boot times through caching;
 gem 'geocoder' # geocoding
 gem 'rails-i18n' # localisation
 gem 'devise-i18n' # localisation
-# data management
-gem 'csv'
-
 
 group :development, :test do
-  gem 'ffaker', '~> 2.14'
   gem 'pry-rails'
   gem 'rubocop'
 end
