@@ -7,3 +7,8 @@ production:
 :queues:
   - default
   - receiver_queue
+
+:schedule:
+  volunteer_feedback_scheduler:
+    cron: '0 18 * * * Europe/Prague'
+    class: VolunteerFeedbackScheduler

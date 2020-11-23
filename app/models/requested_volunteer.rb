@@ -4,16 +4,17 @@ class RequestedVolunteer < ApplicationRecord
   REQUESTED_VOLUNTEERS_WITH_REQUEST_SQL = 'volunteer_id = %{volunteer_id} AND (request_id IS NULL OR request_id = %{request_id})'.freeze
 
   # Callbacks
-  before_save :update_timestamps
+  before_save :update_timestamps, if: :state_changed?
 
   # Associations
   belongs_to :request
   belongs_to :volunteer
   has_many :messages, primary_key: :volunteer_id, foreign_key: :volunteer_id
+  has_one :feedback_request, class_name: 'RequestedVolunteerFeedback', dependent: :delete
 
   # Attributes
   delegate :first_name, :last_name, :phone, :to_s, to: :volunteer
-  delegate :text, :subscriber, to: :request
+  delegate :text, :subscriber, :subscriber_organisation, to: :request
   enum state: {
     pending_notification: 1,
     notified: 2,
@@ -33,6 +34,12 @@ class RequestedVolunteer < ApplicationRecord
     scope = where(volunteer_id: volunteer_id)
     scope = scope.where(request_id: request_id) if request_id
     scope
+  end
+  scope :without_feedback_request, -> { left_joins(:feedback_request).where(requested_volunteer_feedbacks: { id: nil }) }
+  scope :feedback_time, -> { accepted.left_joins(request: :organisation).where("requested_volunteers.last_accepted_at < (now() - INTERVAL '1 day' * organisations.volunteer_feedback_send_after_days)") }
+  scope :feedback_required, -> do left_joins(:feedback_request, request: :organisation)
+                                    .merge(Organisation.requires_volunteer_feedback)
+                                    .merge(self.without_feedback_request.feedback_time)
   end
 
   def unread_incoming_messages
