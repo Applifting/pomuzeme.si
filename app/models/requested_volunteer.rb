@@ -10,6 +10,7 @@ class RequestedVolunteer < ApplicationRecord
   belongs_to :request
   belongs_to :volunteer
   has_many :messages, primary_key: :volunteer_id, foreign_key: :volunteer_id
+  has_many :feedback_request, class_name: 'RequestedVolunteerFeedback', dependent: :delete_all
 
   # Attributes
   delegate :first_name, :last_name, :phone, :to_s, to: :volunteer
@@ -33,6 +34,12 @@ class RequestedVolunteer < ApplicationRecord
     scope = where(volunteer_id: volunteer_id)
     scope = scope.where(request_id: request_id) if request_id
     scope
+  end
+  scope :without_feedback_request, -> { left_joins(:feedback_request).where(requested_volunteer_feedbacks: { id: nil }) }
+  scope :feedback_time, -> { accepted.left_joins(request: :organisation).where("requested_volunteers.last_accepted_at < (now() - INTERVAL '1 day' * organisations.volunteer_feedback_send_after_days)") }
+  scope :feedback_required, -> do left_joins(:feedback_request, request: :organisation)
+                                    .merge(Organisation.requires_volunteer_feedback)
+                                    .merge(self.without_feedback_request.feedback_time)
   end
 
   def unread_incoming_messages

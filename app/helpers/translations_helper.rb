@@ -22,7 +22,11 @@ module TranslationsHelper
     I18n.t "activerecord.enums.#{class_name.model_name.i18n_key}.#{enum.to_s.pluralize}.#{key}"
   end
 
-  def i18n_model_attribute(model, attribute)
-    I18n.t "activerecord.attributes.#{model.model_name.i18n_key}.#{attribute}"
+  def i18n_model_attribute(model, attribute, **options)
+    I18n.t "activerecord.attributes.#{model.model_name.i18n_key}.#{attribute}", options
+  end
+
+  def i18n_model_error(model, attribute, **options)
+    I18n.t "activerecord.errors.models.#{model.model_name.i18n_key}.attributes.#{attribute}", options
   end
 end
