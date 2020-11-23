@@ -4,7 +4,7 @@ class RequestedVolunteer < ApplicationRecord
   REQUESTED_VOLUNTEERS_WITH_REQUEST_SQL = 'volunteer_id = %{volunteer_id} AND (request_id IS NULL OR request_id = %{request_id})'.freeze
 
   # Callbacks
-  before_save :update_timestamps
+  before_save :update_timestamps, if: :state_changed?
 
   # Associations
   belongs_to :request
@@ -14,7 +14,7 @@ class RequestedVolunteer < ApplicationRecord
 
   # Attributes
   delegate :first_name, :last_name, :phone, :to_s, to: :volunteer
-  delegate :text, :subscriber, to: :request
+  delegate :text, :subscriber, :subscriber_organisation, to: :request
   enum state: {
     pending_notification: 1,
     notified: 2,

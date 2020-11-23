@@ -24,7 +24,7 @@ RSpec.describe VolunteerFeedback::Helper do
   end
 
   describe 'interpolate_message' do
-    let(:request)             { create :request, subscriber: 'Ironman'}
+    let(:request)             { create :request, subscriber_organisation: 'Ironman'}
     let(:requested_volunteer) { create :requested_volunteer, request: request }
     let(:message) { 'This is coming from %{prijimajici_organizace}' }
 
