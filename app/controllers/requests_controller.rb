@@ -39,7 +39,7 @@ class RequestsController < PublicController
       redirect_to new_request_accepted_path
     else
       Raven.extra_context(request_errors: @request.errors.messages, request: @request.as_json)
-      Raven.capture_exception FormNew.new('RequestsController#create: form submission failed')
+      Raven.capture_exception FormError.new('RequestsController#create: form submission failed')
       render :new
     end
   end
