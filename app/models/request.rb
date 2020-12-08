@@ -99,6 +99,19 @@ class Request < ApplicationRecord
     text.truncate TITLE_MAX_LENGTH
   end
 
+  def volunteers_by_state
+    counts  = requested_volunteers.group(:state)
+                                  .count
+
+    accepted_count = counts['accepted'] || 0
+    rejected_count = counts['rejected'] || 0
+    {
+      accepted: accepted_count,
+      rejected: rejected_count,
+      others: (counts.values.sum - accepted_count - rejected_count)
+    }
+  end
+
   def identifier
     # Web request can have blank organisation
     return if organisation.blank?

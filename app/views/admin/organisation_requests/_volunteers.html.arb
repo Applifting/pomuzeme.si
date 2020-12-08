@@ -16,38 +16,21 @@ requested_volunteers = resource.requested_volunteers
                                .order([{ unread_incoming_messages_count: :desc }, :state])
                                .map(&:decorate)
 
-table_for requested_volunteers do
-  column I18n.t('activerecord.attributes.volunteer.full_name'), :full_name, &:volunteer_name_link
-  column I18n.t('activerecord.attributes.volunteer.phone'), :phone
-  column I18n.t('activerecord.attributes.group_volunteer.source') do |resource|
-    source = resource.volunteer.group_volunteers&.first&.source || :public_pool
-    I18n.t("activerecord.enums.group_volunteer.source." + source.to_s)
-  end
-  column I18n.t('activerecord.attributes.group_volunteer.recruitment_status') do |resource|
-    status = resource.volunteer
-                     .group_volunteers
-                     .find { |gv| gv.group_id == current_user.organisation_group.id }
-                    &.recruitment_status
-    I18n.t("activerecord.enums.group_volunteer.recruitment_statuses." + status.to_s) if status
-  end
-  column I18n.t('activerecord.attributes.requested_volunteer.state') do |requested_volunteer|
-    best_in_place requested_volunteer, :state, as: :select,
-                                               collection: I18n.t('activerecord.attributes.requested_volunteer.states'),
-                                               url: admin_organisation_request_requested_volunteer_path(resource, requested_volunteer)
-  end
-  # column I18n.t('activerecord.attributes.requested_volunteer.visible_sensitive'), :visible_sensitive do |requested_volunteer|
-  #   next '-' unless requested_volunteer.volunteer.fcm_active?
+tabs do
+  tab "Potvrdili (#{resource.requested_volunteers.accepted.count})", class: 'remote-tab-content',
+    'data-target': remote_fetch_admin_organisation_request_requested_volunteers_path(resource, type: :accepted),
+    'data-callback': :update_volunteer_counts do
 
-  #   best_in_place requested_volunteer, :visible_sensitive, as: :checkbox,
-  #                                                          collection: { false => I18n.t('active_admin.status_tag.no'), true => I18n.t('active_admin.status_tag.yes') },
-  #                                                          url: admin_organisation_request_requested_volunteer_path(resource, requested_volunteer)
-  # end
-  column I18n.t('activerecord.attributes.requested_volunteer.note') do |requested_volunteer|
-    best_in_place requested_volunteer, :note, url: admin_organisation_request_requested_volunteer_path(resource, requested_volunteer)
+    volunteers = resource.requested_volunteers.accepted.decorate
+    render partial: 'volunteers_table', locals: { volunteers: volunteers }
   end
-  column '' do |requested_volunteer|
-    unread_messages = requested_volunteer.unread_incoming_messages_count.positive?
-    link_title      = unread_messages ? 'nepřečtené zprávy' : 'zprávy'
-    link_to link_title, new_admin_volunteer_message_path(volunteer_id: requested_volunteer.volunteer_id, request_id: resource.id)
+
+  tab "Odmítli (#{resource.requested_volunteers.rejected.count})", class: 'remote-tab-content',
+    'data-target': remote_fetch_admin_organisation_request_requested_volunteers_path(resource, type: :rejected),
+    'data-callback': :update_volunteer_counts do
+  end
+  tab "Ostatní (#{resource.requested_volunteers.others.count})", class: 'remote-tab-content',
+    'data-target': remote_fetch_admin_organisation_request_requested_volunteers_path(resource, type: :others),
+    'data-callback': :update_volunteer_counts do
   end
 end

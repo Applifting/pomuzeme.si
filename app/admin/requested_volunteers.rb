@@ -46,6 +46,26 @@ ActiveAdmin.register RequestedVolunteer do
     end
   end
 
+  collection_action :count, method: :get do
+    request = Request.find_by(id: params[:organisation_request_id])
+
+    render json: request.volunteers_by_state
+  end
+
+  collection_action :remote_fetch, method: :get do
+    request    = Request.with_organisations(current_user.coordinating_organisations.pluck(:id))
+                        .find_by(id: params[:organisation_request_id])
+
+    render :unauthorized && return unless request
+
+    @resource  = request
+    volunteers = request.requested_volunteers
+                        .send(params[:type])
+                        .decorate
+
+    render partial: 'admin/organisation_requests/volunteers_table', locals: { volunteers: volunteers }
+  end
+
   form do |f|
     volunteer_id = params[:volunteer_id] || params[:requested_volunteer][:volunteer_id]
     volunteer = Volunteer.find(volunteer_id)
