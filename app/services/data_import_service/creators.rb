@@ -5,7 +5,8 @@ module DataImportService
     def volunteer_creator(attribute, value)
       check_supported_attributes(__method__, attribute, :phone)
 
-      Volunteer.find_by(phone: value).presence || save_model(volunteer_builder)
+      phone = value.gsub(' ', '')
+      Volunteer.find_by(phone: phone).presence || save_model(volunteer_builder)
     end
 
     def request_creator(attribute, text)
