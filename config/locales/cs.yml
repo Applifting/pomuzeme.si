@@ -39,9 +39,10 @@ cs:
           active: Dobrovolník aktivní (ověřený)
           inactive: Dobrovolník vyřazen
         source:
-          migration: nahrání dat
+          migration: import dat
           channel: online kanál
           public_pool: veřejný seznam
+          manual: manuální registrace
     models:
       volunteer: Dobrovolníci
       organisation: Organizace
@@ -149,8 +150,6 @@ cs:
           subscriber_organisation: prijimajici_organizace
         created_at: Vytvořeno
         updated_at: Upraveno
-      requested_volunteer:
-        request: Poptávka
       role:
         name: Název
       user:
@@ -217,7 +216,8 @@ cs:
         volunteer: Dobrovolník
         state: Stav dobrovolníka v poptávce
         visible_sensitive: Odkrýt podrobnosti
-        note: Poznámka
+        note: Poznámka dobrovolníka
+        request: Poptávka
         states:
           to_be_notified: Oslovit
           pending_notification: Odesílání zprávy
