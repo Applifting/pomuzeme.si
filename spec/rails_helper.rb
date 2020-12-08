@@ -2,6 +2,8 @@ ENV['RAILS_ENV'] ||= 'test'
 ENV['SMS_MOCK'] ||= 'true'
 
 require 'simplecov'
+require 'support/wait_for_ajax'
+
 SimpleCov.start 'rails' do
   add_filter 'app/admin' # ignore ActiveAdmin pages
   add_filter 'app/errors' # errors classes
@@ -40,6 +42,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
+  config.include WaitForAjax, type: :feature
   config.include Warden::Test::Helpers
 
   config.expect_with :rspec do |expectations|
