@@ -30,7 +30,7 @@ class RequestedVolunteer < ApplicationRecord
 
   # Scopes
   scope :with_organisations, ->(*organisation_ids) { joins(:request).where(requests: { organisation_id: organisation_ids }) }
-  scope :others, -> { where.not(state: %i[accepted rejected]) }
+  scope :others, -> { where.not(state: %i[accepted to_be_notified]) }
   scope :with_optional_request_id, ->(volunteer_id, request_id) do
     scope = where(volunteer_id: volunteer_id)
     scope = scope.where(request_id: request_id) if request_id

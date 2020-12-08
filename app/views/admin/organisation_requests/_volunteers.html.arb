@@ -17,7 +17,7 @@ requested_volunteers = resource.requested_volunteers
                                .map(&:decorate)
 
 tabs do
-  tab "Potvrdili (#{resource.requested_volunteers.accepted.count})", class: 'remote-tab-content',
+  tab "Potvrzení (#{resource.requested_volunteers.accepted.count})", class: 'remote-tab-content',
     'data-target': remote_fetch_admin_organisation_request_requested_volunteers_path(resource, type: :accepted),
     'data-callback': :update_volunteer_counts do
 
@@ -25,8 +25,8 @@ tabs do
     render partial: 'volunteers_table', locals: { volunteers: volunteers }
   end
 
-  tab "Odmítli (#{resource.requested_volunteers.rejected.count})", class: 'remote-tab-content',
-    'data-target': remote_fetch_admin_organisation_request_requested_volunteers_path(resource, type: :rejected),
+  tab "K oslovení (#{resource.requested_volunteers.to_be_notified.count})", class: 'remote-tab-content',
+    'data-target': remote_fetch_admin_organisation_request_requested_volunteers_path(resource, type: :to_be_notified),
     'data-callback': :update_volunteer_counts do
   end
   tab "Ostatní (#{resource.requested_volunteers.others.count})", class: 'remote-tab-content',

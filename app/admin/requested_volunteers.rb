@@ -53,8 +53,8 @@ ActiveAdmin.register RequestedVolunteer do
   end
 
   collection_action :remote_fetch, method: :get do
-    request    = Request.with_organisations(current_user.coordinating_organisations.pluck(:id))
-                        .find_by(id: params[:organisation_request_id])
+    request = Request.with_organisations(current_user.coordinating_organisations.pluck(:id))
+                     .find_by(id: params[:organisation_request_id])
 
     render :unauthorized && return unless request
 

@@ -104,11 +104,11 @@ class Request < ApplicationRecord
                                   .count
 
     accepted_count = counts['accepted'] || 0
-    rejected_count = counts['rejected'] || 0
+    to_be_notified = counts['to_be_notified'] || 0
     {
       accepted: accepted_count,
-      rejected: rejected_count,
-      others: (counts.values.sum - accepted_count - rejected_count)
+      to_be_notified: to_be_notified,
+      others: (counts.values.sum - accepted_count - to_be_notified)
     }
   end
 
