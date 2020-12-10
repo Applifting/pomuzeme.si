@@ -5,16 +5,20 @@
         <span class="lighter" style="color: #019de0">
           <%= @partner_signup_group.name %>
         </span>
-        <div style="font-size: 0.6em">Spolu to dáme</div>
+        <div style="font-size: 0.6em">
+          <%= @partner_signup_group.signup_tagline_text.presence || 'Spolu to dáme' %>
+        </div>
         <% if @partner_signup_group.channel_description %>
           <p style="margin-top: 28px">
             <%= @partner_signup_group.channel_description.html_safe %>
           </p>
         <% end %>
       </h1>
-      <button id="cta-chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
-        Chci pomáhat
+      <div class="button-group">
+        <button id="cta-chci-pomahat" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
+          <%= @partner_signup_group.signup_cta_button_text.presence || 'Chci pomáhat' %>
       </button>
+      </div>
     </div>
     <div class="column-right">
       <%= image_tag asset_path('help-seniors.svg'), alt: 'Staňte se dobrovolníkem v pandemii Covid19 a pomáhejte v domovech seniorů, které prožívají personální krizi.',

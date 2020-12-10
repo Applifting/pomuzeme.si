@@ -1,0 +1,31 @@
+<section class="section-hero section" id="trikralova-sbirka">
+  <div class="hero-content" >
+    <div class="column-left">
+      <h1>
+        <span class="lighter" style="color: #019de0">
+          <%= @partner_signup_group.name %>
+        </span>
+        <div style="font-size: 0.6em">
+          <%= @partner_signup_group.signup_tagline_text %>
+        </div>
+        <% if @partner_signup_group.channel_description %>
+          <p style="margin-top: 28px">
+            <%= @partner_signup_group.channel_description.html_safe %>
+          </p>
+        <% end %>
+      </h1>
+      <div class="button-group">
+        <button id="cta-chci-pomahat-partner-signup" class="modal-trigger main-button" data-target="registration" aria-haspopup="true">
+          <%= @partner_signup_group.signup_cta_button_text.presence || 'Chci pomáhat' %>
+        </button>
+      </div>
+    </div>
+    <div class="column-right hero-image">
+      <picture>
+        <source media="(max-width: 940px)" srcset="<%= asset_path('partner-signup/trikralova-sbirka-banner-mobile.jpg') %>">
+        <source media="(min-width: 941px)" srcset="<%= asset_path('partner-signup/trikralova-sbirka-banner-desktop.jpg') %>">
+        <%= image_tag asset_path('partner-signup/trikralova-sbirka-banner-desktop.jpg')  %>
+      </picture>
+    </div>
+  </div>
+</section>
