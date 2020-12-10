@@ -5,8 +5,7 @@ var registrationErrors = $('#registration-errors-list');
 registrationErrors.empty();
 
 // add new volunteer errors
-<% volunteer.errors.delete :addresses %>
-<% volunteer.errors.full_messages.each do |message| %>
+<% volunteer.errors.messages[:base]&.each do |message| %>
   registrationErrors.append('<li><%= message %></li>')
 <% end %>
 

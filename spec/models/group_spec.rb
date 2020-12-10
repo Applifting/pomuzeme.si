@@ -20,30 +20,48 @@ RSpec.describe Group, type: :model do
     it { should have_many(:volunteers) }
   end
 
-  context '#add_group_volunteer' do
-    let(:volunteer) { create :volunteer }
+  context '#build_group_volunteer' do
+    let(:volunteer) { create :volunteer, is_public: false }
+    let(:group)     { create :group }
+
+    it 'assigns volunteer to group with correct source and recruitment status' do
+      group_volunteer = group.build_group_volunteer volunteer
+
+      expect(group_volunteer.group).to eq group
+      expect(GroupVolunteer.sources[group_volunteer.source]).to eq GroupVolunteer.sources[:channel]
+      expect(GroupVolunteer.recruitment_statuses[group_volunteer.recruitment_status]).to eq GroupVolunteer::DEFAULT_RECRUITMENT_STATUS
+    end
 
     context 'when volunteers signed up through organisation form are to be exclusive' do
-      let(:group) { create :group, exclusive_volunteer_signup: true }
+      let(:group)     { create :group, exclusive_volunteer_signup: true }
+      let(:volunteer) { build :volunteer }
 
-      it 'should assign volunteer exclusively to group' do
-        group_volunteer = group.add_group_volunteer volunteer
+      it 'should assign volunteer exclusively to group if the volunteer did not exist before' do
+        group_volunteer = group.build_group_volunteer volunteer
         expect(group_volunteer.is_exclusive).to be true
-        expect(group_volunteer.group).to eq group
-        expect(GroupVolunteer.sources[group_volunteer.source]).to eq GroupVolunteer.sources[:channel]
-        expect(GroupVolunteer.recruitment_statuses[group_volunteer.recruitment_status]).to eq GroupVolunteer::DEFAULT_RECRUITMENT_STATUS
+      end
+
+      it 'should not assign volunteer exclusively to group if the volunteer existed before as public volunteer' do
+        volunteer.update is_public: true
+
+        group_volunteer = group.build_group_volunteer volunteer
+        expect(group_volunteer.is_exclusive).to be false
       end
     end
 
     context 'when volunteers signed up through organisation form are to be public' do
       let(:group) { create :group, exclusive_volunteer_signup: false }
 
-      it 'should assign volunteer to group, but volunteers remains public' do
-        group_volunteer = group.add_group_volunteer volunteer
+      it 'should assign volunteer to group, but volunteers remains public when volunteer did not exist before' do
+        group_volunteer = group.build_group_volunteer volunteer
         expect(group_volunteer.is_exclusive).to be false
-        expect(group_volunteer.group).to eq group
-        expect(GroupVolunteer.sources[group_volunteer.source]).to eq GroupVolunteer.sources[:channel]
-        expect(GroupVolunteer.recruitment_statuses[group_volunteer.recruitment_status]).to eq GroupVolunteer::DEFAULT_RECRUITMENT_STATUS
+      end
+
+      it 'should assign volunteer to group, but volunteers remains public when volunteer existed before as public volunteer' do
+        volunteer.update is_public: true
+
+        group_volunteer = group.build_group_volunteer volunteer
+        expect(group_volunteer.is_exclusive).to be false
       end
     end
   end
