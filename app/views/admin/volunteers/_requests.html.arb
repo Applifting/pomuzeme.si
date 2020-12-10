@@ -9,8 +9,8 @@ table_for RequestedVolunteer.joins(:request)
                             .includes(:request)
                             .merge(resource.requested_volunteers.with_organisations(current_user.coordinating_organisations.pluck(:id)))
                             .decorate do
-  column(I18n.t('activerecord.attributes.request.subscriber')) { |rv| rv.request.subscriber }
-  column(I18n.t('activerecord.attributes.request.text')) { |rv| rv.request.text }
+  column(I18n.t('activerecord.attributes.request.subscriber')) { |rv| rv.reload.request.subscriber }
+  column(I18n.t('activerecord.attributes.request.text')) { |rv| rv.reload.request.text }
   column(I18n.t('activerecord.attributes.requested_volunteer.note')) { |rv| rv.note }
   column :state
   column 'Detail', class: 'centered' do |requested_volunteer|
