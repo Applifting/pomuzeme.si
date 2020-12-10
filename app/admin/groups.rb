@@ -3,7 +3,8 @@
 ActiveAdmin.register Group do
   decorate_with GroupDecorator
 
-  permit_params :name, :slug, :channel_description, :thank_you, :exclusive_volunteer_signup
+  permit_params :name, :slug, :channel_description, :thank_you, :exclusive_volunteer_signup,
+                :signup_cta_button_text, :signup_tagline_text, :signup_partial_name
 
   index do
     para 'Organizační skupina zastřešuje vaše místní organizace, které mezi sebou sdílí dobrovolníky.'

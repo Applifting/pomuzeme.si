@@ -1,0 +1,102 @@
+#trikralova-sbirka {
+  .hero-content {
+    display: flex;
+
+    @include lg {
+      flex-direction: column-reverse;
+    }
+
+    .column-left {
+      width: 560px;
+      flex-shrink: 0;
+
+      @include lg {
+        width: 100%;
+        margin-top: 18px;
+      }
+    }
+
+    .column-right {
+      width: 495px;
+      padding: 12px;
+
+      @include lg {
+        padding: unset;
+        width: 100%;
+        margin: 0px;
+      }
+    }
+
+    h1 {
+      .lighter {
+        color: $heading-color;
+        position: relative;
+      }
+
+      img {
+        position: absolute;
+        right: -85px;
+        top: -56px;
+
+        @include lg {
+          transform: scale(.7);
+          transform-origin: left;
+        }
+      }
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 160%;
+      font-family: $title-font;
+      margin: 0 0 24px;
+
+      @include lg {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 160%;
+      }
+    }
+
+    .hero-image {
+      img {
+        width: 100%;
+        height: auto;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 18px;
+      }
+    }
+
+    .current-campaign {
+      padding: 28px;
+      margin: 28px;
+
+      border: 1px solid $secondary-button-color;
+      border-radius: 38px;
+      background-color: $background-dark;
+
+      @include sm {
+        margin: 12px;
+      }
+
+      .hero-image {
+        height: 228px;
+        width: unset;
+        margin: auto;
+        display: block;
+        padding: 16px;
+
+        @include lg {
+          display: unset;
+        }
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}
