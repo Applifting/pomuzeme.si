@@ -1,5 +1,5 @@
-<%= render 'home/partials/section_partner_channel' %>
-<%= render 'home/partials/section_orgs' %>
+<%= render @partner_signup_group.decorate.signup_partial %>
+<%= render 'home/partials/section_orgs', locals: { section_text: 'Do platformy jsou zapojeny také tyto organizace' } %>
 <%= render 'home/partials/section_intro' %>
 
 <%= render 'home/modals/registration' %>
