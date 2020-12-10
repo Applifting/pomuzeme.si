@@ -17,7 +17,6 @@ module SmsConfirmable
   end
 
   def confirm_with(sms_confirmation_code)
-    return errors.add(:confirmation_code, :confirmed) if confirmed?
     return errors.add(:confirmation_code, :not_matching) if sms_confirmation_code != confirmation_code
     return errors.add(:confirmation_code, :expired) if Time.now > confirmation_valid_to
 
@@ -36,7 +35,6 @@ module SmsConfirmable
   end
 
   def obtain_confirmation_code
-    raise StandardError, 'Token already generated' unless confirmed_at.nil?
     raise StandardError, 'Token regenerated too early' unless can_obtain_code?
 
     regenerate_confirmation_code!

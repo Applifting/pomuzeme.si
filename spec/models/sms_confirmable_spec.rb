@@ -38,16 +38,6 @@ describe SmsConfirmable do
       end.to change(confirmable, :confirmed_at).from(nil)
     end
 
-    context 'given model is already confirmed' do
-      let(:confirmed_at) { 1.day.ago }
-
-      it 'adds error to confirmable model' do
-        confirmable.confirm_with(sms_confirmation_code)
-        expect(confirmable.errors.messages.values.flatten)
-          .to include('is already confirmed')
-      end
-    end
-
     context 'given sms code and stored code are nil' do
       let(:sms_confirmation_code) { nil }
       let(:confirmation_code) { nil }
@@ -104,16 +94,6 @@ describe SmsConfirmable do
 
     before do
       allow(SmsService).to receive(:send_text)
-    end
-
-    context 'given confirmed_at is set' do
-      let(:confirmed_at) { Time.now }
-
-      it 'raises error' do
-        expect do
-          confirmable.obtain_confirmation_code
-        end.to raise_error('Token already generated')
-      end
     end
 
     context 'given confirmed_at is not set' do

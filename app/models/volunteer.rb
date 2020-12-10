@@ -29,8 +29,8 @@ class Volunteer < ApplicationRecord
   phony_normalized_method :phone, default_country_code: 'CZ'
 
   # Validations
-  validates :first_name, :last_name, presence: true, unless: -> { registration_in_progress? }
-  validates :addresses, length: { minimum: 1 }, unless: -> { registration_in_progress? }
+  validates :first_name, :last_name, presence: true, unless: :registration_in_progress?
+  validates :addresses, length: { minimum: 1 }, unless: :registration_in_progress?
   validates :phone, phony_plausible: true, uniqueness: true, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: -> { email&.present? }
 
@@ -59,7 +59,7 @@ class Volunteer < ApplicationRecord
   end
 
   def with_existing_record
-    Volunteer.unconfirmed.where(phone: normalized_phone).take || self
+    Volunteer.where(phone: normalized_phone).take || self
   end
 
   def address
@@ -104,7 +104,25 @@ class Volunteer < ApplicationRecord
                           is_exclusive: true)
   end
 
+  def prepare_partner_signup(group)
+    raise TypeError unless group.is_a? Group
+
+    build_group_volunteer(group)
+    determine_public_status(group)
+  end
+
   private
+
+  def build_group_volunteer(group)
+    group_volunteers.build group.build_group_volunteer(self).as_json
+  end
+
+  def determine_public_status(group)
+    return unless new_record?
+    return unless group&.exclusive_volunteer_signup
+
+    self.is_public = false
+  end
 
   # Dirty ransack scopes
   def self.ransackable_scopes(_opts)

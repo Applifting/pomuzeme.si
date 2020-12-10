@@ -8,10 +8,10 @@ class VolunteersController < ApplicationController
 
   def register
     @volunteer = Volunteer.new(volunteer_params).with_existing_record
-    @address    = volunteer.addresses.build address_with_coordinate
+    @volunteer.prepare_partner_signup(@partner_signup_group) if @partner_signup_group
+    @address = volunteer.addresses.build address_with_coordinate
 
-    if registration_valid
-      bind_volunteer_with_organisation_group(volunteer) if @partner_signup_group
+    if validate_and_save_registration!
       render 'volunteer/register_success'
     else
       log_error(__method__, 'registration failed')
@@ -33,6 +33,7 @@ class VolunteersController < ApplicationController
 
     handle_redirect.tap do |redirect|
       redirect_to(redirect) && return if redirect
+
       render('volunteer/confirm_success')
     end
   end
@@ -49,7 +50,7 @@ class VolunteersController < ApplicationController
 
   private
 
-  def registration_valid
+  def validate_and_save_registration!
     resolve_recaptcha(:login, volunteer, RECAPTCHA_THRESHOLD) &&
       volunteer.valid? &&
       agreements_granted?(volunteer) &&
@@ -79,7 +80,7 @@ class VolunteersController < ApplicationController
                                                    longitude: address_params[:geo_coord_x].to_d
     address_params.except(:geo_coord_x, :geo_coord_y).merge(coordinate: coordinate,
                                                             geo_provider: 'google_places',
-                                                            default: true)
+                                                            default: @volunteer.addresses.count.zero?)
   end
 
   def confirm_params
@@ -113,10 +114,6 @@ class VolunteersController < ApplicationController
       volunteer.errors.add(:base, :sms_not_working)
       raise ActiveRecord::Rollback
     end
-  end
-
-  def bind_volunteer_with_organisation_group(volunteer)
-    @partner_signup_group.add_group_volunteer(volunteer)
   end
 
   def agreements_granted?(volunteer)

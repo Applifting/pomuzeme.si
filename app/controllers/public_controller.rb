@@ -8,6 +8,8 @@ class PublicController < ApplicationController
 
   def load_current_volunteer
     @current_volunteer = Volunteer.find(session[:volunteer_id]) if session[:volunteer_id]
+  rescue ActiveRecord::RecordNotFound
+    redirect_to logout_path
   end
 
   def set_raven_context
