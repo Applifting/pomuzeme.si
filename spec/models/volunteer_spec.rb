@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Volunteer do
   let_it_be(:volunteer) { create(:volunteer, phone: '+420 666 666 666') }
 
-  context 'validations' do
+  describe 'validations' do
     subject { build(:volunteer) }
 
     it { is_expected.to validate_presence_of(:first_name) }
@@ -15,7 +15,7 @@ describe Volunteer do
     it { is_expected.to allow_values('test@example.com', '').for(:email) }
   end
 
-  context 'associations' do
+  describe 'associations' do
     it { should have_many(:addresses) }
     it { should have_many(:group_volunteers) }
     it { should have_many(:groups) }
@@ -26,7 +26,7 @@ describe Volunteer do
     it { should have_many(:messages) }
   end
 
-  context 'scopes' do
+  describe 'scopes' do
     shared_context 'volunteers with group' do
       let(:group) { create :group }
       let(:group_applifting) { create :group_applifting }
@@ -38,7 +38,7 @@ describe Volunteer do
       let!(:non_exclusive_volunteer) { group_non_exclusive_volunteer.volunteer }
     end
 
-    context 'with_calculated_distance' do
+    describe 'with_calculated_distance' do
       let(:coordinate_target) { Geography::Point.from_coordinates longitude: 14.4615350, latitude: 50.0952747 }
 
       it 'adds attribute to address model instance' do
@@ -52,7 +52,7 @@ describe Volunteer do
       end
     end
 
-    context 'with_labels' do
+    describe 'with_labels' do
       let(:label) { create :label }
       let!(:another_volunteer) { create :volunteer }
 
@@ -61,10 +61,9 @@ describe Volunteer do
         expect(Volunteer.with_labels([label.id]).to_a).to include volunteer
         expect(Volunteer.with_labels([label.id]).to_a).not_to include another_volunteer
       end
-
     end
 
-    context 'available_for' do
+    describe 'available_for' do
       include_context 'volunteers with group'
 
       it 'returns volunteers who has exclusive access to group' do
@@ -81,7 +80,7 @@ describe Volunteer do
       end
     end
 
-    context 'exclusive_for' do
+    describe 'exclusive_for' do
       include_context 'volunteers with group'
 
       it 'returns only volunteers exclusive to group' do
@@ -92,7 +91,7 @@ describe Volunteer do
       end
     end
 
-    context 'verified_by' do
+    describe 'verified_by' do
       include_context 'volunteers with group'
 
       it 'returns volunteers verified by specific group' do
@@ -102,7 +101,7 @@ describe Volunteer do
       end
     end
 
-    context 'not_recruited_by' do
+    describe 'not_recruited_by' do
       include_context 'volunteers with group'
 
       before do
@@ -123,7 +122,7 @@ describe Volunteer do
       end
     end
 
-    context 'assigned_to_request' do
+    describe 'assigned_to_request' do
       include_context 'volunteers with group'
 
       let(:request) { create :request }
@@ -137,7 +136,7 @@ describe Volunteer do
       end
     end
 
-    context 'blocked' do
+    describe 'blocked' do
       include_context 'volunteers with group'
 
       let(:request) { create :request, block_volunteer_until: 1.week.from_now }
@@ -154,7 +153,7 @@ describe Volunteer do
       end
     end
 
-    context 'not_blocked' do
+    describe 'not_blocked' do
       include_context 'volunteers with group'
 
       let(:request) { create :request, block_volunteer_until: 1.week.from_now }
@@ -170,7 +169,7 @@ describe Volunteer do
     end
   end
 
-  context '#with_existing_record' do
+  describe '#with_existing_record' do
     it 'returns self if the record with the provided phone does not exist' do
       phone = '+420 555 555 555'
       new_volunteer = described_class.new(phone: phone)
@@ -186,7 +185,7 @@ describe Volunteer do
     end
   end
 
-  context '#verify!' do
+  describe '#verify!' do
     it 'updates confirmed_at to current time if nil' do
       travel_to Time.zone.now do
         expect { volunteer.verify! }.to change { volunteer.reload.confirmed_at }.from(nil).to(Time.zone.now)
@@ -199,15 +198,58 @@ describe Volunteer do
     end
   end
 
-  context '#to_s' do
+  describe '#to_s' do
     it 'returns volunteers name' do
       expect(volunteer.to_s).to eq("#{volunteer.first_name} #{volunteer.last_name}")
     end
   end
 
-  context '#title' do
+  describe '#title' do
     it 'is alias for title' do
       expect(volunteer.to_s).to eq(volunteer.to_s)
+    end
+  end
+
+  describe '#prepare_partner_signup' do
+    let(:group)     { build :group, exclusive_volunteer_signup: true }
+    let(:volunteer) { Volunteer.new }
+
+    it 'builds the group volunteer object' do
+      expect(volunteer).to receive(:build_group_volunteer).with(group)
+
+      volunteer.prepare_partner_signup group
+    end
+
+    context 'when volunteer is new record and volunteer group has exclusive signup' do
+      let(:group) { build :group, exclusive_volunteer_signup: true }
+
+      it 'sets volunteer is_public status to false' do
+        volunteer.prepare_partner_signup group
+
+        expect(volunteer.is_public?).to be false
+      end
+    end
+
+    context 'when volunteer is new record and volunteer group does not have exclusive signup' do
+      let(:group)     { build :group, exclusive_volunteer_signup: false }
+      let(:volunteer) { Volunteer.new(is_public: true) }
+
+      it 'it leaves the default is_public status unchanged' do
+        volunteer.prepare_partner_signup group
+
+        expect(volunteer.is_public?).to be true
+      end
+    end
+
+    context 'when volunteer is not new record and volunteer group has exclusive signup' do
+      let(:group)     { build :group, exclusive_volunteer_signup: true }
+      let(:volunteer) { create :volunteer, is_public: true }
+
+      it 'it leaves the is_public status unchanged' do
+        volunteer.prepare_partner_signup group
+
+        expect(volunteer.is_public?).to be true
+      end
     end
   end
 

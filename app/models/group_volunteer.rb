@@ -25,4 +25,5 @@ class GroupVolunteer < ApplicationRecord
   scope :in_progress, -> { where(recruitment_status: IN_RECRUITMENT) }
   scope :closed, -> { where.not(recruitment_status: IN_RECRUITMENT) }
   scope :unassigned, -> { where(coordinator_id: nil) }
+  scope :exclusive, -> { where is_exclusive: true }
 end
