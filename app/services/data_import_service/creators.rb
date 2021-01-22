@@ -12,7 +12,9 @@ module DataImportService
     def request_creator(attribute, text)
       check_supported_attributes(__method__, attribute, :text)
 
-      request = Request.joins(:organisation).where(text: text, organisations: { name: @row['request_organisation'] }).take
+      request = Request.joins(:organisation)
+                       .where(text: text, organisations: { name: @row['request_organisation'] })
+                       .take
       request || save_model(request_builder)
     end
 

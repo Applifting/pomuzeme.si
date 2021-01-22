@@ -8,10 +8,10 @@ module DataImportService
 
     def request_builder
       request = build_instance(Request, @row.except('request_address', 'request_organisation', 'request_creator'))
-      request.assign_attributes required_volunteer_count: 1,
+      request.assign_attributes required_volunteer_count: request.required_volunteer_count || 1,
                                 address: Address.new_from_string(@row['request_address']),
                                 creator: find_or_create_by(User, :full_name, @row['request_creator']),
-                                coordinator: find_or_create_by(User, :full_name, @row['group_volunteer_coordinator']),
+                                coordinator: find_or_create_by(User, :full_name, @row['request_coordinator'] || @row['group_volunteer_coordinator']),
                                 organisation: find_or_create_by(Organisation, :name, @row['request_organisation'])
       request
     end
