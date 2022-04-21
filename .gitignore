@@ -45,3 +45,4 @@ yarn-debug.log*
 # ignore test coverage directory
 /coverage
 .envrc
+.pryrc
